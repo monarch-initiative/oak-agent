@@ -4,7 +4,7 @@ import requests
 from duckduckgo_search import DDGS
 from markdownify import markdownify
 
-from oak_agent.utils.pubmed_utils import get_pmcid_text, extract_doi_from_url, get_doi_text, doi_to_pmid, get_pmid_text
+from aurelian.utils.pubmed_utils import get_pmcid_text, extract_doi_from_url, get_doi_text, doi_to_pmid, get_pmid_text
 
 MAX_LENGTH_TRUNCATE_CONTENT = 20000
 

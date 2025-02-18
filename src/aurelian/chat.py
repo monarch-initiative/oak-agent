@@ -1,6 +1,6 @@
 from typing import Callable
 
-from oak_agent.utils.async_utils import run_sync
+from aurelian.utils.async_utils import run_sync
 
 
 def get_chatbot(query_func: Callable, **kwargs):

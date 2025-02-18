@@ -7,11 +7,11 @@ from linkml_store import Client
 from linkml_store.api import Collection
 from pydantic_ai import Agent, RunContext, AgentRunError
 
-from oak_agent.agents.uniprot_agent import normalize_uniprot_id
-from oak_agent.utils.async_utils import run_sync
-from oak_agent.utils.data_utils import flatten
-from oak_agent.utils.pubmed_utils import get_pmid_text
-from oak_agent.utils.search_utils import web_search
+from aurelian.agents.uniprot_agent import normalize_uniprot_id
+from aurelian.utils.async_utils import run_sync
+from aurelian.utils.data_utils import flatten
+from aurelian.utils.pubmed_utils import get_pmid_text
+from aurelian.utils.search_utils import web_search
 
 HANDLE = "mongodb://localhost:27017/gocams"
 DB_NAME = "gocams"
@@ -152,7 +152,7 @@ def retrieve_web_page(ctx: RunContext[GOCamDependencies], url: str) -> str:
         The contents of the web page.
     """
     print(f"Fetch URL: {url}")
-    import oak_agent.utils.search_utils as su
+    import aurelian.utils.search_utils as su
     return su.retrieve_web_page(url)
 
 

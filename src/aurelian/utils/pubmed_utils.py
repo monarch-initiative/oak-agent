@@ -4,7 +4,7 @@ from typing import Optional
 import requests
 from bs4 import BeautifulSoup
 
-from oak_agent.utils.doi_fetcher import DOIFetcher
+from aurelian.utils.doi_fetcher import DOIFetcher
 
 BIOC_URL = "https://www.ncbi.nlm.nih.gov/research/bionlp/RESTful/pmcoa.cgi/BioC_xml/{pmid}/ascii"
 PUBMED_EUTILS_URL = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id={pmid}&retmode=xml"

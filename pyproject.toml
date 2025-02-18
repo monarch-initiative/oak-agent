@@ -1,7 +1,7 @@
 [tool.poetry]
-name = "oak-agent"
+name = "aurelian"
 version = "0.1.0"
-description = "oak-agent"
+description = "aurelian"
 authors = ["Author 1 <author@org.org>"]
 license = "MIT"
 readme = "README.md"
@@ -25,11 +25,29 @@ bs4 = "^0.0.2"
 duckduckgo-search = "^7.3.2"
 markdownify = "^0.14.1"
 wikipedia = "^1.4.0"
+markitdown = "^0.0.1a4"
+pypaperbot = "^1.4.1"
+undetected-chromedriver = "^3.5.5"
 
 [tool.poetry.group.dev.dependencies]
 pytest = {version = ">=8.3.2"}
 tox = {version = ">=4.16.0"}
+mypy = {version = "*"}
+types-PyYAML = {version = "*"}
+jupyter = {version = "*"}
+papermill = {version = "*"}
+nbdime = {version = "*"}
+nbformat = {version = "*"}
 pre-commit = {version = ">=3.3.3"}
+mkdocs = "*"
+mkdocs-mermaid2-plugin = "*"
+mkdocstrings = {extras = ["crystal", "python"], version = "*"}
+mkdocs-gen-files = "*"
+mkdocs-literate-nav = "*"
+mknotebooks = "^0.8.0"
+mkdocs-windmill = "*"
+mkdocs-material = "*"
+mkdocs-click = "*"
 
 [tool.poetry.extras]
 rdkit = ["rdkit"]
@@ -49,7 +67,7 @@ sphinx-click = {version = ">=4.3.0"}
 myst-parser = {version = ">=0.18.1"}
 
 [tool.poetry.scripts]
-oak-agent = "oak_agent.cli:main"
+aurelian = "aurelian.cli:main"
 
 [tool.poetry-dynamic-versioning]
 enable = true

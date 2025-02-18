@@ -1,6 +1,6 @@
 import pytest
 
-from oak_agent.agents.ubergraph_agent import ubergraph_agent, Dependencies
+from aurelian.agents.ubergraph_agent import ubergraph_agent, Dependencies
 
 @pytest.fixture
 def model_name():

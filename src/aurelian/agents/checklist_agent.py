@@ -6,9 +6,9 @@ from dataclasses import dataclass
 import yaml
 from pydantic_ai import Agent, RunContext
 
-from oak_agent.agents.checklist import CONTENT_METADATA_PATH, CONTENT_DIR
-from oak_agent.utils.async_utils import run_sync
-from oak_agent.utils.pubmed_utils import get_doi_text, get_pmid_text
+from aurelian.agents.checklist import CONTENT_METADATA_PATH, CONTENT_DIR
+from aurelian.utils.async_utils import run_sync
+from aurelian.utils.pubmed_utils import get_doi_text, get_pmid_text
 
 def all_checklists() -> Dict:
     with open(CONTENT_METADATA_PATH) as f:

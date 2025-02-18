@@ -10,7 +10,7 @@ from oaklib.implementations import AmiGOImplementation
 from pydantic import BaseModel
 from pydantic_ai import Agent, RunContext
 
-from oak_agent.agents.uniprot_agent import normalize_uniprot_id
+from aurelian.agents.uniprot_agent import normalize_uniprot_id
 
 u = UniProt()
 

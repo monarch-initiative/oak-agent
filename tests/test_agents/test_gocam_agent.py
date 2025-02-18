@@ -1,6 +1,6 @@
 import pytest
 
-from oak_agent.agents.gocam_agent import GOCamDependencies, gocam_agent
+from aurelian.agents.gocam_agent import GOCamDependencies, gocam_agent
 
 
 def test_gocam_agent():

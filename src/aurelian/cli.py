@@ -5,7 +5,7 @@ from typing import Optional
 
 import click
 
-from oak_agent import __version__
+from aurelian import __version__
 
 __all__ = [
     "main",
@@ -66,7 +66,7 @@ def split_options(kwargs, agent_keys=["model"]):
 @main.command()
 def gocam_ui():
     """Start the GO-CAM UI."""
-    import oak_agent.agents.gocam_agent as gocam
+    import aurelian.agents.gocam_agent as gocam
     ui = gocam.ui()
     ui.launch()
 
@@ -76,7 +76,7 @@ def gocam_ui():
 @server_port_option
 def gocam(share: bool, server_port: Optional[int] = None, **kwargs):
     """Start the GO-CAM UI."""
-    import oak_agent.agents.gocam_agent as gocam
+    import aurelian.agents.gocam_agent as gocam
     ui = gocam.chat(**kwargs)
     ui.launch(share=share, server_port=server_port)
 
@@ -86,7 +86,7 @@ def gocam(share: bool, server_port: Optional[int] = None, **kwargs):
 @server_port_option
 def phenopackets(**kwargs):
     """Start the GO-CAM UI."""
-    import oak_agent.agents.phenopacket_agent as phenopackets
+    import aurelian.agents.phenopacket_agent as phenopackets
     agent_options, launch_options = split_options(kwargs)
     ui = phenopackets.chat(**agent_options)
     ui.launch(**launch_options)
@@ -98,7 +98,7 @@ def phenopackets(**kwargs):
 @server_port_option
 def aria(share: bool, server_port: Optional[int] = None, **kwargs):
     """Start the Checklist UI."""
-    import oak_agent.agents.checklist_agent as aria
+    import aurelian.agents.checklist_agent as aria
     ui = aria.chat(**kwargs)
     ui.launch(share=share, server_port=server_port)
 

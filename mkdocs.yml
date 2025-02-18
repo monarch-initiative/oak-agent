@@ -1,0 +1,38 @@
+site_name: "Aurelian"
+theme:
+  name: material
+  features:
+    - content.tabs.link
+  palette:
+    # Light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: pink
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    # Dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: blue
+      accent: amber
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+
+  font:
+    text: Roboto
+    code: Roboto Mono
+plugins:
+  - search
+#  - gen-files:
+#      scripts:
+#      - scripts/gen_ref_pages.py
+  - mkdocstrings
+  - mknotebooks:
+      execute: false
+nav:
+  - Home: index.md
+  - Agents:
+      - Phenopackets: agents/gocam_agent.md
