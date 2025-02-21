@@ -20,30 +20,41 @@ jobs:
         uses: actions/setup-python@v3
         with:
           python-version: ${{ matrix.python-version }}
-          cache: poetry
 
       - name: Install Poetry Manually
         run: |
           python -m pip install --upgrade pip
           python -m pip install --user poetry
           echo "$HOME/.local/bin" >> $GITHUB_PATH
+          echo "export PATH=$HOME/.local/bin:$PATH" >> ~/.bashrc
 
       - name: Verify Poetry Installation
         run: |
+          export PATH=$HOME/.local/bin:$PATH
           which poetry || echo "Poetry not found in PATH"
           poetry --version || echo "Poetry command failed"
 
       - name: Force Poetry to Use Correct Python Version
-        run: poetry env use python${{ matrix.python-version }}
+        run: |
+          export PATH=$HOME/.local/bin:$PATH
+          poetry env use python${{ matrix.python-version }}
 
       - name: Install dependencies
-        run: poetry install --no-interaction
+        run: |
+          export PATH=$HOME/.local/bin:$PATH
+          poetry install --no-interaction
 
       - name: Check common spelling errors
-        run: poetry run tox -e codespell
+        run: |
+          export PATH=$HOME/.local/bin:$PATH
+          poetry run tox -e codespell
 
       - name: Check code quality with flake8
-        run: poetry run tox -e lint
+        run: |
+          export PATH=$HOME/.local/bin:$PATH
+          poetry run tox -e lint
 
       - name: Test with pytest and generate coverage file
-        run: poetry run tox -e py
+        run: |
+          export PATH=$HOME/.local/bin:$PATH
+          poetry run tox -e py

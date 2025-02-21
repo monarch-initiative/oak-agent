@@ -15,24 +15,28 @@ jobs:
       uses: actions/setup-python@v3
       with:
         python-version: 3.9
-        cache: poetry
 
     - name: Install Poetry Manually
       run: |
         python -m pip install --upgrade pip
         python -m pip install --user poetry
         echo "$HOME/.local/bin" >> $GITHUB_PATH
+        echo "export PATH=$HOME/.local/bin:$PATH" >> ~/.bashrc
 
     - name: Verify Poetry Installation
       run: |
+        export PATH=$HOME/.local/bin:$PATH
         which poetry || echo "Poetry not found in PATH"
         poetry --version || echo "Poetry command failed"
 
     - name: Install dependencies
-      run: poetry install --with docs
+      run: |
+        export PATH=$HOME/.local/bin:$PATH
+        poetry install --with docs
 
     - name: Build documentation
       run: |
+        export PATH=$HOME/.local/bin:$PATH
         echo ${{ secrets.GH_TOKEN }} >> src/oak_agent/token.txt
         mkdir gh-pages
         touch gh-pages/.nojekyll
