@@ -1,20 +1,19 @@
 import pytest
 
-from aurelian.agents.ubergraph_agent import ubergraph_agent, Dependencies
+from aurelian.agents.diagnosis_agent import diagnosis_agent, DiagnosisDependencies
 
 @pytest.fixture
 def deps():
-    return Dependencies()
+    return DiagnosisDependencies()
 
 @pytest.mark.parametrize(
     "query,ideal",
     [
-        ("Find the ID in the cell ontology of the term for 'neuron'", "CL:0000540"),
-        ("Make a table with IDs of terms neuron, lymphocyte, and epithelial cell", ["CL:0000540"]),
+        ("Find the Mondo ID for Marfan syndrome", "MONDO:0007947"),
     ]
 )
 def test_ubergraph_agent(deps, query, ideal):
-    r = ubergraph_agent.run_sync(query,deps=deps)
+    r = diagnosis_agent.run_sync(query,deps=deps        )
     data = r.data
     assert data is not None
     if ideal is not None:

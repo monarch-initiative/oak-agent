@@ -1,4 +1,5 @@
 import os
+from tempfile import TemporaryFile, NamedTemporaryFile
 
 import logfire
 import requests
@@ -7,7 +8,6 @@ from bs4 import BeautifulSoup
 import re
 from typing import Optional, Dict, Any, List
 
-from easydev import TempFile
 from openai import BaseModel
 from pydantic import Field
 from markitdown import MarkItDown
@@ -241,10 +241,11 @@ class DOIFetcher:
         # Download the PDF
         response = session.get(pdf_url)
         response.raise_for_status()
-        # save to temp file
-        tmpf = TempFile()
-        with open(tmpf.name, 'wb') as f:
-            f.write(response.content)
-        md = MarkItDown()
-        return md.convert(tmpf.name).text_content
+        with NamedTemporaryFile(delete=False) as tmpf:
+            tmpf.write(response.content)
+            tmp_name = tmpf.name
+            with open(tmp_name, 'wb') as f:
+                f.write(response.content)
+            md = MarkItDown()
+            return md.convert(tmpf.name).text_content
 

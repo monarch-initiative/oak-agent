@@ -1,13 +1,11 @@
-from dataclasses import dataclass
-from typing import List, Dict, Union
+from typing import List, Dict
 
 from dataclasses import dataclass
+
+from aurelian.utils.data_utils import obj_to_dict
 from bioservices import UniProt
-from linkml_runtime.dumpers import json_dumper
-from linkml_runtime.utils.yamlutils import YAMLRoot
 from oaklib import get_adapter
 from oaklib.implementations import AmiGOImplementation
-from pydantic import BaseModel
 from pydantic_ai import Agent, RunContext
 
 from aurelian.agents.uniprot_agent import normalize_uniprot_id
@@ -21,16 +19,6 @@ class AmiGODependencies:
 amigo_agent = Agent(
     model="openai:gpt-4o",
 )
-
-def obj_to_dict(obj: Union[object, YAMLRoot, BaseModel, Dict]) -> Dict:
-    if isinstance(obj, YAMLRoot):
-        return json_dumper.to_dict(obj)
-    elif isinstance(obj, BaseModel):
-        return obj.model_dump()
-    elif isinstance(obj, dict):
-        return obj
-    else:
-        raise ValueError(f"Cannot convert object of type {type(obj)} to dict")
 
 
 def get_amigo_adapter(ctx: RunContext[AmiGODependencies]) -> AmiGOImplementation:

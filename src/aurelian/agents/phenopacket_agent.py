@@ -57,6 +57,7 @@ phenopackets_agent = Agent(
     )
 )
 
+
 @phenopackets_agent.tool
 def search(ctx: RunContext[PhenopacketsDependencies], query: str) -> List[Dict]:
     """
@@ -83,6 +84,7 @@ def search(ctx: RunContext[PhenopacketsDependencies], query: str) -> List[Dict]:
         objs.append(obj)
         print(f"RESULT: {obj}")
     return objs
+
 
 @phenopackets_agent.tool
 def lookup_phenopacket(ctx: RunContext[PhenopacketsDependencies], phenopacket_id: str) -> Dict:

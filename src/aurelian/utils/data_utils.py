@@ -1,4 +1,8 @@
-from typing import Dict, Optional, List
+from typing import Dict, Optional, List, Union
+
+from linkml_runtime.dumpers import json_dumper
+from linkml_runtime.utils.yamlutils import YAMLRoot
+from pydantic import BaseModel
 
 
 def flatten(d: Dict, preserve_keys: Optional[List] = None) -> Dict:
@@ -17,3 +21,14 @@ def flatten(d: Dict, preserve_keys: Optional[List] = None) -> Dict:
         else:
             out[k] = v
     return out
+
+
+def obj_to_dict(obj: Union[object, YAMLRoot, BaseModel, Dict]) -> Dict:
+    if isinstance(obj, YAMLRoot):
+        return json_dumper.to_dict(obj)
+    elif isinstance(obj, BaseModel):
+        return obj.model_dump()
+    elif isinstance(obj, dict):
+        return obj
+    else:
+        raise ValueError(f"Cannot convert object of type {type(obj)} to dict")
