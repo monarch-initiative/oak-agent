@@ -9,28 +9,24 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v3.0.2
       with:
-        fetch-depth: 0
+        fetch-depth: 0 # Ensures full history for deployment
 
-    - name: Set up Python 3.11
+    - name: Set up Python 3.9
       uses: actions/setup-python@v3
       with:
-        python-version: 3.11
+        python-version: 3.9
         cache: poetry
 
-    - name: Install Poetry
-      uses: snok/install-poetry@v1.3.1
-      with:
-        version: 1.7.1  # Explicitly install the latest stable version
-
-    - name: Ensure Poetry is available
+    - name: Install Poetry Manually
       run: |
-        echo "POETRY_HOME=$HOME/.local" >> $GITHUB_ENV
+        python -m pip install --upgrade pip
+        python -m pip install --user poetry
         echo "$HOME/.local/bin" >> $GITHUB_PATH
-        source $GITHUB_ENV
-        poetry --version  # Debugging step
 
-    - name: Force Poetry to Use Python 3.11
-      run: poetry env use python3.11
+    - name: Verify Poetry Installation
+      run: |
+        which poetry || echo "Poetry not found in PATH"
+        poetry --version || echo "Poetry command failed"
 
     - name: Install dependencies
       run: poetry install --with docs

@@ -22,17 +22,16 @@ jobs:
           python-version: ${{ matrix.python-version }}
           cache: poetry
 
-      - name: Install Poetry
-        uses: snok/install-poetry@v1.3.1
-        with:
-          version: 1.7.1  # Explicit latest version
-
-      - name: Ensure Poetry is available
+      - name: Install Poetry Manually
         run: |
-          echo "POETRY_HOME=$HOME/.local" >> $GITHUB_ENV
+          python -m pip install --upgrade pip
+          python -m pip install --user poetry
           echo "$HOME/.local/bin" >> $GITHUB_PATH
-          source $GITHUB_ENV
-          poetry --version  # Debugging step
+
+      - name: Verify Poetry Installation
+        run: |
+          which poetry || echo "Poetry not found in PATH"
+          poetry --version || echo "Poetry command failed"
 
       - name: Force Poetry to Use Correct Python Version
         run: poetry env use python${{ matrix.python-version }}
