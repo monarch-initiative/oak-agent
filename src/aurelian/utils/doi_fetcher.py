@@ -1,22 +1,21 @@
 import os
-from tempfile import TemporaryFile, NamedTemporaryFile
+import re
+from tempfile import NamedTemporaryFile
+from typing import Any, Dict, List, Optional
 
 import logfire
 import requests
 import requests_cache
 from bs4 import BeautifulSoup
-import re
-from typing import Optional, Dict, Any, List
-
+from markitdown import MarkItDown
 from openai import BaseModel
 from pydantic import Field
-from markitdown import MarkItDown
 
 
 class FullTextInfo(BaseModel):
+    """Data model for full text information.
     """
-    Data model for full text information.
-    """
+
     success: bool = True
     abstract: Optional[str] = Field(None, description="Abstract of the article")
     text: Optional[str] = Field(None, description="Full text of the article")
@@ -26,43 +25,39 @@ class FullTextInfo(BaseModel):
 
 
 class DOIFetcher:
+    """Fetch metadata and full text for a DOI using various APIs.
     """
-    Fetch metadata and full text for a DOI using various APIs.
-    """
+
     def __init__(self, email: Optional[str] = None, url_prefixes: Optional[List[str]] = None):
-        """
-        Initialize the DOI fetcher with a contact email (required by some APIs).
+        """Initialize the DOI fetcher with a contact email (required by some APIs).
 
         Args:
             email (str): Contact email for API access
             url_prefixes (List[str]): List of URL prefixes to check for full text
+
         """
-        self.email = email or os.getenv('EMAIL') or 'test@example.com'
-        self.url_prefixes = url_prefixes or os.getenv("DOI_FULL_TEXT_URLS", "").split(',')
-        self.headers = {
-            'User-Agent': f'DOIFetcher/1.0 (mailto:{email})',
-            'Accept': 'application/json'
-        }
+        self.email = email or os.getenv("EMAIL") or "test@example.com"
+        self.url_prefixes = url_prefixes or os.getenv("DOI_FULL_TEXT_URLS", "").split(",")
+        self.headers = {"User-Agent": f"DOIFetcher/1.0 (mailto:{email})", "Accept": "application/json"}
 
     def clean_text(self, text: str) -> str:
-        """
-        Clean extracted text by removing extra whitespace and normalized characters.
+        """Clean extracted text by removing extra whitespace and normalized characters.
 
         Args:
             text:
 
         Returns:
             str: The cleaned text
+
         """
         # Remove extra whitespace
-        text = re.sub(r'\s+', ' ', text)
+        text = re.sub(r"\s+", " ", text)
         # Remove non-printable characters
-        text = ''.join(char for char in text if char.isprintable())
+        text = "".join(char for char in text if char.isprintable())
         return text.strip()
 
     def get_metadata(self, doi: str, strict=False) -> Optional[Dict[str, Any]]:
-        """
-        Fetch metadata for a DOI using the Crossref API.
+        """Fetch metadata for a DOI using the Crossref API.
 
         Args:
             doi (str): The DOI to look up
@@ -70,12 +65,13 @@ class DOIFetcher:
 
         Returns:
             Optional[Dict[str, Any]]: Metadata dictionary if successful, None otherwise
+
         """
-        base_url = 'https://api.crossref.org/works/'
+        base_url = "https://api.crossref.org/works/"
         try:
-            response = requests.get(f'{base_url}{doi}', headers=self.headers)
+            response = requests.get(f"{base_url}{doi}", headers=self.headers)
             response.raise_for_status()
-            return response.json()['message']
+            return response.json()["message"]
         except Exception as e:
             if strict:
                 raise e
@@ -83,11 +79,9 @@ class DOIFetcher:
             return None
 
     def get_unpaywall_info(self, doi: str, strict=False) -> Optional[Dict[str, Any]]:
-        """
-        Check Unpaywall for open access versions.
+        """Check Unpaywall for open access versions.
 
         Example:
-
             >>> fetcher = DOIFetcher()
             >>> doi = "10.1038/nature12373"
             >>> unpaywall_data = fetcher.get_unpaywall_info(doi)
@@ -101,10 +95,11 @@ class DOIFetcher:
 
         Returns:
             Optional[Dict[str, Any]]: Unpaywall data if successful, None otherwise
+
         """
-        base_url = f'https://api.unpaywall.org/v2/{doi}'
+        base_url = f"https://api.unpaywall.org/v2/{doi}"
         try:
-            response = requests.get(f'{base_url}?email={self.email}')
+            response = requests.get(f"{base_url}?email={self.email}")
             response.raise_for_status()
             return response.json()
         except Exception as e:
@@ -114,11 +109,9 @@ class DOIFetcher:
             return None
 
     def get_full_text(self, doi: str, fallback_to_abstract=True) -> Optional[str]:
-        """
-        Get the full text of a paper using various methods.
+        """Get the full text of a paper using various methods.
 
-         Example:
-
+        Example:
             >>> fetcher = DOIFetcher()
             >>> doi = "10.1128/msystems.00045-18"
             >>> full_text = fetcher.get_full_text(doi)
@@ -130,6 +123,7 @@ class DOIFetcher:
 
         Returns:
             str: The full text if available, otherwise None
+
         """
         info = self.get_full_text_info(doi)
         if not info:
@@ -144,15 +138,13 @@ class DOIFetcher:
         message = "FULL TEXT NOT AVAILABLE"
         if fallback_to_abstract:
             metadata = info.metadata or {}
-            abstract = metadata.get('abstract')
+            abstract = metadata.get("abstract")
             if abstract:
                 return self.clean_text(abstract) + f"\n\n{message}"
         return message
 
-
     def get_full_text_info(self, doi: str) -> Optional[FullTextInfo]:
-        """
-        Attempt to get the full text of a paper using various methods.
+        """Attempt to get the full text of a paper using various methods.
 
             >>> fetcher = DOIFetcher()
             >>> doi = "10.1128/msystems.00045-18"
@@ -171,32 +163,27 @@ class DOIFetcher:
 
         Returns:
             FullTextInfo: Full text information
-        """
 
+        """
         # Get metadata
         metadata = self.get_metadata(doi)
 
         # Check Unpaywall
         unpaywall_data = self.get_unpaywall_info(doi)
-        if unpaywall_data and unpaywall_data.get('is_oa'):
-            locations = unpaywall_data.get('oa_locations', [])
-            if unpaywall_data.get('best_oa_location'):
-                best_oa_location = unpaywall_data.get('best_oa_location')
+        if unpaywall_data and unpaywall_data.get("is_oa"):
+            locations = unpaywall_data.get("oa_locations", [])
+            if unpaywall_data.get("best_oa_location"):
+                best_oa_location = unpaywall_data.get("best_oa_location")
                 locations = [best_oa_location] + locations
 
             # Find best open access location
             for location in locations:
-                pdf_url = location.get('url_for_pdf')
+                pdf_url = location.get("url_for_pdf")
                 if pdf_url:
-                    return FullTextInfo(
-                        text=None,
-                        pdf_url=pdf_url,
-                        source='unpaywall',
-                        metadata=metadata
-                    )
+                    return FullTextInfo(text=None, pdf_url=pdf_url, source="unpaywall", metadata=metadata)
 
         # Fallback
-        url_prefixes = os.getenv("DOI_FULL_TEXT_URLS", "").split(',')
+        url_prefixes = os.getenv("DOI_FULL_TEXT_URLS", "").split(",")
 
         for url_prefix in url_prefixes:
             url_prefix.rstrip("/")
@@ -204,28 +191,26 @@ class DOIFetcher:
             try:
                 response = requests.get(url)
                 if response.status_code == 200:
-                    soup = BeautifulSoup(response.text, 'html.parser')
-                    pdf_embed = soup.find('embed', id='pdf')
-                    if pdf_embed and pdf_embed.get('src'):
-                        pdf_url = pdf_embed['src']
+                    soup = BeautifulSoup(response.text, "html.parser")
+                    pdf_embed = soup.find("embed", id="pdf")
+                    if pdf_embed and pdf_embed.get("src"):
+                        pdf_url = pdf_embed["src"]
                         # Remove any URL parameters after #
-                        pdf_url = pdf_url.split('#')[0]
-                        if not pdf_url.startswith('http'):
-                            pdf_url = 'https:' + pdf_url
+                        pdf_url = pdf_url.split("#")[0]
+                        if not pdf_url.startswith("http"):
+                            pdf_url = "https:" + pdf_url
                         return FullTextInfo(
                             pdf_url=pdf_url,
                             source=url,
                             metadata=metadata,
                         )
-            except Exception as e:
+            except Exception:
                 continue
 
     def text_from_pdf_url(self, pdf_url: str) -> str:
-        """
-        Extract text from a PDF URL.
+        """Extract text from a PDF URL.
 
         Example:
-
             >>> fetcher = DOIFetcher()
             >>> pdf_url = "https://ceur-ws.org/Vol-1747/IT201_ICBO2016.pdf"
             >>> text = fetcher.text_from_pdf_url(pdf_url)
@@ -237,15 +222,14 @@ class DOIFetcher:
         Returns:
 
         """
-        session = requests_cache.CachedSession('pdf_cache')
+        session = requests_cache.CachedSession("pdf_cache")
         # Download the PDF
         response = session.get(pdf_url)
         response.raise_for_status()
         with NamedTemporaryFile(delete=False) as tmpf:
             tmpf.write(response.content)
             tmp_name = tmpf.name
-            with open(tmp_name, 'wb') as f:
+            with open(tmp_name, "wb") as f:
                 f.write(response.content)
             md = MarkItDown()
             return md.convert(tmpf.name).text_content
-

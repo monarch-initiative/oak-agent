@@ -1,18 +1,18 @@
 from dataclasses import dataclass
-from typing import List, Dict
-
-from dataclasses import dataclass
+from typing import Dict, List
 
 import yaml
 from pydantic_ai import Agent, RunContext
 
-from aurelian.agents.checklist import CONTENT_METADATA_PATH, CONTENT_DIR
+from aurelian.agents.checklist import CONTENT_DIR, CONTENT_METADATA_PATH
 from aurelian.utils.async_utils import run_sync
 from aurelian.utils.pubmed_utils import get_doi_text, get_pmid_text
+
 
 def all_checklists() -> Dict:
     with open(CONTENT_METADATA_PATH) as f:
         return yaml.safe_load(f)
+
 
 @dataclass
 class ChecklistDependencies:
@@ -36,15 +36,16 @@ checklist_agent = Agent(
     deps_type=ChecklistDependencies,
 )
 
+
 @checklist_agent.system_prompt
 def add_checklists(ctx: RunContext[ChecklistDependencies]) -> str:
     meta = all_checklists()
     return "\n".join([f"- {c['id']}: {c['title']}" for c in meta["checklists"]])
 
+
 @checklist_agent.tool
 def retrieve_text_from_pmid(ctx: RunContext[ChecklistDependencies], pmid: str) -> str:
-    """
-    Lookup the text of a PubMed ID, using its PMID.
+    """Lookup the text of a PubMed ID, using its PMID.
 
     Returns: full text if available, otherwise abstract
     """
@@ -54,8 +55,7 @@ def retrieve_text_from_pmid(ctx: RunContext[ChecklistDependencies], pmid: str) -
 
 @checklist_agent.tool
 def retrieve_text_from_doi(ctx: RunContext[ChecklistDependencies], doi: str) -> str:
-    """
-    Lookup the text of a DOI
+    """Lookup the text of a DOI
 
     Returns: full text if available, otherwise abstract
     """
@@ -65,11 +65,11 @@ def retrieve_text_from_doi(ctx: RunContext[ChecklistDependencies], doi: str) -> 
 
 @checklist_agent.tool
 def fetch_checklist(ctx: RunContext[ChecklistDependencies], checklist_id: str) -> str:
-    """
-    Lookup the checklist entry for a given checklist accession number
+    """Lookup the checklist entry for a given checklist accession number
 
     Args:
         checklist_id: E.g. STREAM, STORMS, ARRIVE
+
     """
     meta = all_checklists()
     selected_checklist = None
@@ -93,6 +93,7 @@ def fetch_checklist(ctx: RunContext[ChecklistDependencies], checklist_id: str) -
 
 def chat(**kwargs):
     import gradio as gr
+
     deps = ChecklistDependencies()
 
     def get_info(query: str, history: List[str]) -> str:
@@ -111,8 +112,11 @@ def chat(**kwargs):
         title="Checklist AI Assistant",
         examples=[
             ["Evaluate https://journals.asm.org/doi/10.1128/mra.01361-19 using STREAMS"],
-            [("Check the paper 'Exploration of the Biosynthetic Potential of the Populus Microbiome'"
-              " https://journals.asm.org/doi/10.1128/msystems.00045-18")
+            [
+                (
+                    "Check the paper 'Exploration of the Biosynthetic Potential of the Populus Microbiome'"
+                    " https://journals.asm.org/doi/10.1128/msystems.00045-18"
+                )
             ],
-        ]
+        ],
     )

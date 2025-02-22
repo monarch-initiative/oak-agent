@@ -1,13 +1,10 @@
-import asyncio
 from dataclasses import dataclass, field
-from typing import List, Dict, Optional
+from typing import Dict, List, Optional
 
-from bioservices import UniProt
 from linkml_store import Client
 from linkml_store.api import Collection
-from pydantic_ai import Agent, RunContext, AgentRunError
+from pydantic_ai import Agent, RunContext
 
-from aurelian.agents.uniprot_agent import normalize_uniprot_id
 from aurelian.utils.async_utils import run_sync
 from aurelian.utils.data_utils import flatten
 from aurelian.utils.pubmed_utils import get_pmid_text
@@ -32,6 +29,7 @@ class PhenopacketsDependencies:
             self._collection = db.get_collection(COLLECTION_NAME)
         return self._collection
 
+
 phenopackets_agent = Agent(
     model="openai:gpt-4o",
     deps_type=PhenopacketsDependencies,
@@ -54,14 +52,13 @@ phenopackets_agent = Agent(
         "tables are a good way of summarizing or comparing multiple patients, use markdown"
         " tables for this. Use your judgment in how to roll up tables, and whether values"
         " should be present/absent, increased/decreased, or more specific."
-    )
+    ),
 )
 
 
 @phenopackets_agent.tool
 def search(ctx: RunContext[PhenopacketsDependencies], query: str) -> List[Dict]:
-    """
-    Performs a retrieval search over the Phenopackets database.
+    """Performs a retrieval search over the Phenopackets database.
 
     The query can be any text, such as name of a disease, phenotype, gene, etc.
 
@@ -88,8 +85,7 @@ def search(ctx: RunContext[PhenopacketsDependencies], query: str) -> List[Dict]:
 
 @phenopackets_agent.tool
 def lookup_phenopacket(ctx: RunContext[PhenopacketsDependencies], phenopacket_id: str) -> Dict:
-    """
-    Performs a lookup of an individual Phenopackets model by its ID
+    """Performs a lookup of an individual Phenopackets model by its ID
 
     IDs are typically of the form PMID_nnn_PatientNumber, but this should be be assumed.
 
@@ -102,13 +98,13 @@ def lookup_phenopacket(ctx: RunContext[PhenopacketsDependencies], phenopacket_id
     if not qr.rows:
         print(f"Could not find model with ID {phenopacket_id}")
         return None
-        #raise ValueError(f"Could not find model with ID {phenopacket_id}")
+        # raise ValueError(f"Could not find model with ID {phenopacket_id}")
     return qr.rows[0]
+
 
 @phenopackets_agent.tool_plain
 def lookup_pmid(pmid: str) -> str:
-    """
-    Lookup the text of a PubMed ID, using its PMID.
+    """Lookup the text of a PubMed ID, using its PMID.
 
     A PMID should be of the form "PMID:nnnnnnn" (no underscores).
 
@@ -125,8 +121,7 @@ def lookup_pmid(pmid: str) -> str:
 
 @phenopackets_agent.tool_plain()
 def search_web(query: str) -> str:
-    """
-    Search the web using a text query.
+    """Search the web using a text query.
 
     Note, this will not retrieve the full content, for that you
     should use `retrieve_web_page`.
@@ -136,21 +131,24 @@ def search_web(query: str) -> str:
     print(f"Web Search: {query}")
     return web_search(query)
 
+
 @phenopackets_agent.tool_plain
 def retrieve_web_page(url: str) -> str:
-    """
-    Fetch the contents of a web page.
+    """Fetch the contents of a web page.
 
     Returns:
         The contents of the web page.
+
     """
     print(f"Fetch URL: {url}")
     import aurelian.utils.search_utils as su
+
     return su.retrieve_web_page(url)
 
 
 def chat(**kwargs):
     import gradio as gr
+
     deps = PhenopacketsDependencies()
 
     def get_info(query: str, history: List[str]) -> str:
@@ -172,5 +170,5 @@ def chat(**kwargs):
             ["What phenopackets involve genes from metabolic pathways"],
             ["How does the type of variant affect phenotype in peroxisomal disorders?"],
             ["Examine phenopackets for skeletal dysplasias, check them against publications"],
-        ]
+        ],
     )

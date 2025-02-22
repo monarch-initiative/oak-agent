@@ -1,4 +1,4 @@
-from typing import Dict, Optional, List, Union
+from typing import Dict, List, Optional, Union
 
 from linkml_runtime.dumpers import json_dumper
 from linkml_runtime.utils.yamlutils import YAMLRoot
@@ -6,8 +6,7 @@ from pydantic import BaseModel
 
 
 def flatten(d: Dict, preserve_keys: Optional[List] = None) -> Dict:
-    """
-    Flatten a dictionary
+    """Flatten a dictionary
     """
     out = {}
     for k, v in d.items():

@@ -1,9 +1,9 @@
 from dataclasses import dataclass, field
-from typing import List, Dict, Optional
+from typing import Dict, List, Optional
 
 from linkml_store import Client
 from linkml_store.api import Collection
-from pydantic_ai import Agent, RunContext, AgentRunError
+from pydantic_ai import Agent, RunContext
 
 from aurelian.utils.async_utils import run_sync
 from aurelian.utils.data_utils import flatten
@@ -29,6 +29,7 @@ class BiblioDependencies:
             self._collection = db.get_collection(COLLECTION_NAME)
         return self._collection
 
+
 biblio_agent = Agent(
     model="openai:gpt-4o",
     deps_type=BiblioDependencies,
@@ -51,13 +52,13 @@ biblio_agent = Agent(
         "tables are a good way of summarizing or comparing multiple patients, use markdown"
         " tables for this. Use your judgment in how to roll up tables, and whether values"
         " should be present/absent, increased/decreased, or more specific."
-    )
+    ),
 )
+
 
 @biblio_agent.tool
 def search_bibliography(ctx: RunContext[BiblioDependencies], query: str) -> List[Dict]:
-    """
-    Performs a retrieval search over the biblio database.
+    """Performs a retrieval search over the biblio database.
 
     The query can be any text, such as name of a disease, phenotype, gene, etc.
 
@@ -84,8 +85,7 @@ def search_bibliography(ctx: RunContext[BiblioDependencies], query: str) -> List
 
 @biblio_agent.tool_plain
 def lookup_pmid(pmid: str) -> str:
-    """
-    Lookup the text of a PubMed ID, using its PMID.
+    """Lookup the text of a PubMed ID, using its PMID.
 
     A PMID should be of the form "PMID:nnnnnnn" (no underscores).
 
@@ -102,8 +102,7 @@ def lookup_pmid(pmid: str) -> str:
 
 @biblio_agent.tool_plain()
 def search_web(query: str) -> str:
-    """
-    Search the web using a text query.
+    """Search the web using a text query.
 
     Note, this will not retrieve the full content, for that you
     should use `retrieve_web_page`.
@@ -113,21 +112,24 @@ def search_web(query: str) -> str:
     print(f"Web Search: {query}")
     return web_search(query)
 
+
 @biblio_agent.tool_plain
 def retrieve_web_page(url: str) -> str:
-    """
-    Fetch the contents of a web page.
+    """Fetch the contents of a web page.
 
     Returns:
         The contents of the web page.
+
     """
     print(f"Fetch URL: {url}")
     import aurelian.utils.search_utils as su
+
     return su.retrieve_web_page(url)
 
 
 def chat(**kwargs):
     import gradio as gr
+
     deps = BiblioDependencies()
 
     def get_info(query: str, history: List[str]) -> str:
@@ -149,5 +151,5 @@ def chat(**kwargs):
             ["What biblio involve genes from metabolic pathways"],
             ["How does the type of variant affect phenotype in peroxisomal disorders?"],
             ["Examine biblio for skeletal dysplasias, check them against publications"],
-        ]
+        ],
     )
