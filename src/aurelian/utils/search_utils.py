@@ -3,6 +3,7 @@ import re
 import requests
 from duckduckgo_search import DDGS
 from markdownify import markdownify
+from pydantic_ai import AgentRunError
 
 from aurelian.utils.pubmed_utils import doi_to_pmid, extract_doi_from_url, get_pmcid_text, get_pmid_text
 
@@ -28,7 +29,7 @@ def web_search(query: str, max_results=10, **kwargs) -> str:
     ddgs = DDGS(**kwargs)
     results = ddgs.text(query, max_results=max_results)
     if len(results) == 0:
-        raise Exception("No results found! Try a less restrictive/shorter query.")
+        return "No results found! Try a less restrictive/shorter query."
     postprocessed_results = [f"[{result['title']}]({result['href']})\n{result['body']}" for result in results]
     return "## Search Results\n\n" + "\n\n".join(postprocessed_results)
 

@@ -1,10 +1,46 @@
-from oaklib import BasicOntologyInterface
+import pystow
+from cachetools.func import lru_cache
+from linkml_store.api import Collection
+from linkml_store.api.stores.duckdb import DuckDBDatabase
+from linkml_store.index import LLMIndexer
+from oaklib import BasicOntologyInterface, get_adapter
 from oaklib.datamodels.search import create_search_configuration
-from oaklib.interfaces import SearchInterface
+from oaklib.implementations import SqlImplementation
+from oaklib.interfaces import OboGraphInterface, SearchInterface
+from sqlalchemy import text
+
+llm_indexer = LLMIndexer()
+
+
+@lru_cache
+def get_collection_for_adapter(handle: str, name: str) -> Collection:
+    """
+    Retrieve or create a cached ontology collection.
+
+    Args:
+        handle (str): The ontology handle (e.g., `sqlite:obo:uberon`).
+        name (str): The name of the ontology (e.g., `uberon`).
+
+    Returns:
+        Collection: The indexed ontology collection.
+    """
+    adapter = get_adapter(handle)
+    cache_dir = pystow.join("aurelian", "indexes")
+    duckdb_path = str(cache_dir / f"{name}.duckdb")
+    database = DuckDBDatabase(duckdb_path)
+    collection = database.get_collection(name, create_if_not_exists=True)
+
+    if collection.size() > 0:
+        return collection
+
+    objs = [{"id": id, "label": lbl} for id, lbl in adapter.labels(adapter.entities())]
+    collection.insert(objs)
+    return collection
 
 
 def search_ontology(adapter: BasicOntologyInterface, query: str, limit=10):
-    """Search the ontology for the given query term.
+    """
+    Search the ontology for the given query term.
 
     Example:
         >>> from oaklib import get_adapter
@@ -14,20 +50,19 @@ def search_ontology(adapter: BasicOntologyInterface, query: str, limit=10):
         >>> terms = search_ontology(adapter, "l~digit", limit=5)
         >>> assert len(terms) == 5
 
-    :param adapter: The ontology adapter.
-    :param query: The query term.
-    :param limit: The maximum number of search results to return.
-    :return: The search results.
+    Args:
+        adapter (BasicOntologyInterface): The ontology adapter.
+        query (str): The query term.
+        limit (int): The maximum number of search results to return.
 
+    Returns:
+        List[Tuple[str, str]]: A list of tuples containing ontology term IDs and labels.
     """
-    if not isinstance(adapter, SearchInterface):
-        raise ValueError(f"adapter must be an instance of SearchInterface, not {type(adapter)}")
-    cfg = create_search_configuration(query)
-    search_term = cfg.search_terms[0]
-    objs = []
-    for i, curie in enumerate(adapter.basic_search(search_term, config=cfg)):
-        if i >= limit:
-            break
-        objs.append({"id": curie, "label": adapter.label(curie), "description": adapter.definition(curie)})
+    scheme = adapter.resource.scheme
+    name = adapter.resource.slug
+    local_name = name.split(":")[-1]
+    handle = f"{scheme}:{name}"
 
-    return objs
+    collection = get_collection_for_adapter(handle, local_name)
+    qr = collection.search(query, limit=limit, index_name="llm")
+    return [(obj["id"], obj["label"]) for obj in qr.rows]
