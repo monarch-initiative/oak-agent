@@ -47,7 +47,7 @@ jobs:
       - name: Check common spelling errors
         run: |
           export PATH=$HOME/.local/bin:$PATH
-          poetry run tox -e codespell
+          poetry run codespell src/ tests/ -S "*.csv"
 
       - name: Check code quality with flake8
         run: |
