@@ -79,8 +79,7 @@ def search(ctx: RunContext[GOCamDependencies], query: str) -> List[Dict]:
 
 @gocam_agent.tool
 def lookup_gocam(ctx: RunContext[GOCamDependencies], model_id: str) -> Dict:
-    """Performs a lookup of a GO-CAM model by its ID, and returns the model.
-    """
+    """Performs a lookup of a GO-CAM model by its ID, and returns the model."""
     print(f"LOOKUP: {model_id}")
     if ":" in model_id:
         parts = model_id.split(":")

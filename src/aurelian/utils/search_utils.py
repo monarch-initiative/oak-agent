@@ -3,7 +3,6 @@ import re
 import requests
 from duckduckgo_search import DDGS
 from markdownify import markdownify
-from pydantic_ai import AgentRunError
 
 from aurelian.utils.pubmed_utils import doi_to_pmid, extract_doi_from_url, get_pmcid_text, get_pmid_text
 

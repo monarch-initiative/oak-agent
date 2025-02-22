@@ -89,6 +89,7 @@ def search_ontology(ontology: str, term: str):
     for id, label in objs:
         print(id, label)
 
+
 @main.command()
 @model_option
 @share_option
@@ -121,9 +122,11 @@ def phenopackets(**kwargs):
 def diagnosis(**kwargs):
     """Start the diagnosis agent."""
     import aurelian.agents.diagnosis_agent as diagnosis
+
     agent_options, launch_options = split_options(kwargs)
     ui = diagnosis.chat(**agent_options)
     ui.launch(**launch_options)
+
 
 @main.command()
 @model_option

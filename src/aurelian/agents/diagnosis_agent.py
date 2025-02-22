@@ -1,15 +1,13 @@
-import asyncio
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from functools import lru_cache
-from typing import List, Dict, Optional
+from typing import List, Dict
 
 from oaklib import get_adapter
-from oaklib.datamodels.search import create_search_configuration
 from oaklib.implementations import MonarchImplementation
 from pydantic_ai import Agent, RunContext, AgentRunError
 
 from aurelian.utils.async_utils import run_sync
-from aurelian.utils.data_utils import flatten, obj_to_dict
+from aurelian.utils.data_utils import obj_to_dict
 from aurelian.utils.ontology_utils import search_ontology
 from aurelian.utils.search_utils import web_search
 

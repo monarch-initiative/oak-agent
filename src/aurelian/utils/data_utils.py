@@ -6,8 +6,7 @@ from pydantic import BaseModel
 
 
 def flatten(d: Dict, preserve_keys: Optional[List] = None) -> Dict:
-    """Flatten a dictionary
-    """
+    """Flatten a dictionary"""
     out = {}
     for k, v in d.items():
         if isinstance(v, list):

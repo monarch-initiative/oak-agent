@@ -13,8 +13,7 @@ from pydantic import Field
 
 
 class FullTextInfo(BaseModel):
-    """Data model for full text information.
-    """
+    """Data model for full text information."""
 
     success: bool = True
     abstract: Optional[str] = Field(None, description="Abstract of the article")
@@ -25,8 +24,7 @@ class FullTextInfo(BaseModel):
 
 
 class DOIFetcher:
-    """Fetch metadata and full text for a DOI using various APIs.
-    """
+    """Fetch metadata and full text for a DOI using various APIs."""
 
     def __init__(self, email: Optional[str] = None, url_prefixes: Optional[List[str]] = None):
         """Initialize the DOI fetcher with a contact email (required by some APIs).

@@ -12,12 +12,16 @@ def deps():
     "query,ideal,model",
     [
         ("Find the Mondo ID for Marfan syndrome", "MONDO:0007947", None),
-        ("""Patient has growth failure, distinct facial features, alopecia, and skin aging.
+        (
+            """Patient has growth failure, distinct facial features, alopecia, and skin aging.
             Findings excluded: Pigmented nevi, cafe-au-lait spots, and photosensitivity.
             Onset was in infancy.
-            Return diagnosis with MONDO ID""", "MONDO:0008310", "openai:o3-mini"),
+            Return diagnosis with MONDO ID""",
+            "MONDO:0008310",
+            "openai:o3-mini",
+        ),
         ("All eye phenotypes for Marfan syndrome (include HPO IDs)", "HP:0000518", None),
-    ]
+    ],
 )
 def test_ubergraph_agent(deps, query, ideal, model):
     kwargs = {"model": model} if model else {}

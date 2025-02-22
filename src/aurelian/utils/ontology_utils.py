@@ -4,10 +4,6 @@ from linkml_store.api import Collection
 from linkml_store.api.stores.duckdb import DuckDBDatabase
 from linkml_store.index import LLMIndexer
 from oaklib import BasicOntologyInterface, get_adapter
-from oaklib.datamodels.search import create_search_configuration
-from oaklib.implementations import SqlImplementation
-from oaklib.interfaces import OboGraphInterface, SearchInterface
-from sqlalchemy import text
 
 llm_indexer = LLMIndexer()
 
