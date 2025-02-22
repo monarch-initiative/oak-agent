@@ -70,6 +70,24 @@ def gocam_ui():
     ui = gocam.ui()
     ui.launch()
 
+
+@main.command()
+@click.argument("ontology")
+@click.argument("term")
+def search_ontology(ontology: str, term: str):
+    """Search the ontology for the given query term.
+
+    Also has side effect of indexing
+    """
+    import aurelian.utils.ontology_utils as ontology_utils
+    from oaklib import get_adapter
+
+    handle = "sqlite:obo:" + ontology
+    adapter = get_adapter(handle)
+    objs = ontology_utils.search_ontology(adapter, term)
+    for id, label in objs:
+        print(id, label)
+
 @main.command()
 @model_option
 @share_option
@@ -91,6 +109,17 @@ def phenopackets(**kwargs):
     ui = phenopackets.chat(**agent_options)
     ui.launch(**launch_options)
 
+
+@main.command()
+@model_option
+@share_option
+@server_port_option
+def diagnosis(**kwargs):
+    """Start the diagnosis agent."""
+    import aurelian.agents.diagnosis_agent as diagnosis
+    agent_options, launch_options = split_options(kwargs)
+    ui = diagnosis.chat(**agent_options)
+    ui.launch(**launch_options)
 
 @main.command()
 @model_option

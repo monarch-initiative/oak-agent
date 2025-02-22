@@ -1,6 +1,32 @@
-from oaklib import BasicOntologyInterface
+import pystow
+from cachetools.func import lru_cache
+from linkml_store.api import Collection
+from linkml_store.api.stores.duckdb import DuckDBDatabase
+from linkml_store.index import LLMIndexer
+from oaklib import BasicOntologyInterface, get_adapter
 from oaklib.datamodels.search import create_search_configuration
+from oaklib.implementations import SqlImplementation
 from oaklib.interfaces import OboGraphInterface, SearchInterface
+from sqlalchemy import text
+
+llm_indexer = LLMIndexer()
+
+
+
+@lru_cache
+def get_collection_for_adapter(handle: str, name: str) -> Collection:
+    adapter = get_adapter(handle)
+    cache_dir = pystow.join('aurelian', 'indexes')
+    duckdb_path = str(cache_dir / f"{name}.duckdb")
+    database = DuckDBDatabase(duckdb_path)
+    collection = database.get_collection(name, create_if_not_exists=True)
+    if collection.size() > 0:
+        return collection
+    objs = []
+    for id, lbl in adapter.labels(adapter.entities()):
+        objs.append({"id": id, "label": lbl})
+    collection.insert(objs)
+    return collection
 
 
 def search_ontology(adapter: BasicOntologyInterface, query: str, limit=10):
@@ -10,25 +36,19 @@ def search_ontology(adapter: BasicOntologyInterface, query: str, limit=10):
     Example:
 
         >>> from oaklib import get_adapter
-        >>> adapter = get_adapter("sqlite:obo:uberon")
-        >>> terms = search_ontology(adapter, "manus")
-        >>> assert len(terms) > 1
-        >>> terms = search_ontology(adapter, "l~digit", limit=5)
-        >>> assert len(terms) == 5
+        >>> adapter = get_adapter("sqlite:obo:bfo")
+        >>> objs = search_ontology(adapter, "3D spatial")
+        >>> for id, label in objs:
+        ...     print(id, label)
+        BFO:0000028 three-dimensional spatial region
+        ...
 
-    :param adapter: The ontology adapter.
-    :param query: The query term.
-    :param limit: The maximum number of search results to return.
-    :return: The search results.
     """
-    if not isinstance(adapter, SearchInterface):
-        raise ValueError(f"adapter must be an instance of SearchInterface, not {type(adapter)}")
-    cfg = create_search_configuration(query)
-    search_term = cfg.search_terms[0]
-    objs = []
-    for i, curie in enumerate(adapter.basic_search(search_term, config=cfg)):
-        if i >= limit:
-            break
-        objs.append({"id": curie, "label": adapter.label(curie), "description": adapter.definition(curie)})
-
+    scheme = adapter.resource.scheme
+    name = adapter.resource.slug
+    local_name = name.split(":")[-1]
+    handle = f"{scheme}:{name}"
+    collection = get_collection_for_adapter(handle, local_name)
+    qr = collection.search(query, limit=limit, index_name="llm")
+    objs = [(obj["id"], obj["label"]) for obj in qr.rows]
     return objs
