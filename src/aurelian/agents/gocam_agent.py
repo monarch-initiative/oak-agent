@@ -1,11 +1,10 @@
-import asyncio
 from dataclasses import dataclass, field
-from typing import List, Dict, Optional
+from typing import Dict, List, Optional
 
 from bioservices import UniProt
 from linkml_store import Client
 from linkml_store.api import Collection
-from pydantic_ai import Agent, RunContext, AgentRunError
+from pydantic_ai import Agent, RunContext
 
 from aurelian.agents.uniprot_agent import normalize_uniprot_id
 from aurelian.utils.async_utils import run_sync
@@ -34,6 +33,7 @@ class GOCamDependencies:
             self._collection = db.get_collection(COLLECTION_NAME)
         return self._collection
 
+
 gocam_agent = Agent(
     model="openai:gpt-4o",
     deps_type=GOCamDependencies,
@@ -48,13 +48,13 @@ gocam_agent = Agent(
         "When providing results in markdown, you should generally include CURIEs/IDs, and you"
         " can hyperlink these as https://bioregistry.io/{curie}. Note that GO-CAM IDs"
         "should be hyperlinked as https://bioregistry.io/go.model:{uuid}."
-    )
+    ),
 )
+
 
 @gocam_agent.tool
 def search(ctx: RunContext[GOCamDependencies], query: str) -> List[Dict]:
-    """
-    Performs a retrieval search over the GO-CAM database.
+    """Performs a retrieval search over the GO-CAM database.
 
     The query can be any text, such as name of a pathway, genes, or
     a complex sentence.
@@ -76,11 +76,10 @@ def search(ctx: RunContext[GOCamDependencies], query: str) -> List[Dict]:
         print(f"RESULT: {obj}")
     return objs
 
+
 @gocam_agent.tool
 def lookup_gocam(ctx: RunContext[GOCamDependencies], model_id: str) -> Dict:
-    """
-    Performs a lookup of a GO-CAM model by its ID, and returns the model.
-    """
+    """Performs a lookup of a GO-CAM model by its ID, and returns the model."""
     print(f"LOOKUP: {model_id}")
     if ":" in model_id:
         parts = model_id.split(":")
@@ -91,15 +90,14 @@ def lookup_gocam(ctx: RunContext[GOCamDependencies], model_id: str) -> Dict:
     qr = ctx.deps.collection.find({"id": model_id})
     if not qr.rows:
         return None
-        #raise ValueError(f"Could not find model with ID {model_id}")
+        # raise ValueError(f"Could not find model with ID {model_id}")
     return qr.rows[0]
 
 
 # TODO: this is copy-pasted from uniprot_agent.py
 @gocam_agent.tool
 def lookup_uniprot_entry(ctx: RunContext[GOCamDependencies], uniprot_acc: str) -> str:
-    """
-    Lookup the Uniprot entry for a given Uniprot accession number.
+    """Lookup the Uniprot entry for a given Uniprot accession number.
 
     This can be used to obtain further information about a protein in
     a GO-CAM.
@@ -108,6 +106,7 @@ def lookup_uniprot_entry(ctx: RunContext[GOCamDependencies], uniprot_acc: str) -
         uniprot_acc: The Uniprot accession
     Returns:
         detailed functional and other info about the protein
+
     """
     uniprot_acc = normalize_uniprot_id(uniprot_acc)
     print(f"LOOKUP UNIPROT: {uniprot_acc}")
@@ -116,8 +115,7 @@ def lookup_uniprot_entry(ctx: RunContext[GOCamDependencies], uniprot_acc: str) -
 
 @gocam_agent.tool
 def lookup_pmid(ctx: RunContext[GOCamDependencies], pmid: str) -> str:
-    """
-    Lookup the text of a PubMed ID, using its PMID.
+    """Lookup the text of a PubMed ID, using its PMID.
 
     Note that assertions in GO-CAMs may reference PMIDs, so this tool
     is useful for validating assertions. A common task is to align
@@ -132,8 +130,7 @@ def lookup_pmid(ctx: RunContext[GOCamDependencies], pmid: str) -> str:
 
 @gocam_agent.tool
 def search_web(ctx: RunContext[GOCamDependencies], query: str) -> str:
-    """
-    Search the web using a text query.
+    """Search the web using a text query.
 
     Note, this will not retrieve the full content, for that you
     should use `retrieve_web_page`.
@@ -143,42 +140,48 @@ def search_web(ctx: RunContext[GOCamDependencies], query: str) -> str:
     print(f"Web Search: {query}")
     return web_search(query)
 
+
 @gocam_agent.tool
 def retrieve_web_page(ctx: RunContext[GOCamDependencies], url: str) -> str:
-    """
-    Fetch the contents of a web page.
+    """Fetch the contents of a web page.
 
     Returns:
         The contents of the web page.
+
     """
     print(f"Fetch URL: {url}")
     import aurelian.utils.search_utils as su
+
     return su.retrieve_web_page(url)
 
 
 def ui():
     import gradio as gr
+
     deps = GOCamDependencies()
 
     def get_info(query: str):
         print(f"QUERY: {query}")
-        #result = my_run_sync(query, deps)
-        #result = gocam_agent.run_sync(query, deps=deps)
+        # result = my_run_sync(query, deps)
+        # result = gocam_agent.run_sync(query, deps=deps)
         result = run_sync(lambda: gocam_agent.run_sync(query, deps=deps))
         return result.data
 
     demo = gr.Interface(
         fn=get_info,
-        inputs=gr.Textbox(label="Ask about any GO-CAMs",
-                          placeholder="What is the function of caspase genes in apoptosis pathways?"),
+        inputs=gr.Textbox(
+            label="Ask about any GO-CAMs", placeholder="What is the function of caspase genes in apoptosis pathways?"
+        ),
         outputs=gr.Textbox(label="GO-CAM Information"),
         title="GO-CAM AI Assistant",
         description="Ask me anything about GO-CAMs and I will try to provide you with the information you need.",
     )
     return demo
 
+
 def chat(**kwargs):
     import gradio as gr
+
     deps = GOCamDependencies()
 
     def get_info(query: str, history: List[str]) -> str:
@@ -198,12 +201,14 @@ def chat(**kwargs):
         examples=[
             ["What is the function of caspase genes in apoptosis pathways?"],
             ["What models involve autophagy?"],
-            [("find the wikipedia article on the integrated stress response pathway,"
-              " download it, and summarize the genes and what they do."
-              " then find similar GO-CAMs, look up their details,"
-              " and compare them to the reviews"
-              )
+            [
+                (
+                    "find the wikipedia article on the integrated stress response pathway,"
+                    " download it, and summarize the genes and what they do."
+                    " then find similar GO-CAMs, look up their details,"
+                    " and compare them to the reviews"
+                )
             ],
             ["Examine models for antimicrobial resistance, look for commonalities in genes"],
-        ]
+        ],
     )

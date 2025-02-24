@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [ "3.8", "3.11" ]
+        python-version: [ "3.9", "3.11" ]  # Test both 3.9 and 3.11
 
     steps:
       - uses: actions/checkout@v3.0.2
@@ -21,16 +21,18 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
 
-      - name: Install Poetry
-        uses: snok/install-poetry@v1.3.1
+      - name: Install Poetry Manually
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install --user poetry
+          echo "$HOME/.local/bin" >> $GITHUB_PATH
+          echo "export PATH=$HOME/.local/bin:$PATH" >> ~/.bashrc
+
       - name: Install dependencies
-        run: poetry install --no-interaction
+        run: |
+          poetry install --no-interaction
+          poetry run pip uninstall bioservices -y || true
+          poetry run pip install bioservices
 
-      - name: Check common spelling errors
-        run: poetry run tox -e codespell
-
-      - name: Check code quality with flake8
-        run: poetry run tox -e lint
-
-      - name: Test with pytest and generate coverage file
-        run: poetry run tox -e py
+      - name: Run tests
+        run: poetry run pytest

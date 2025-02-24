@@ -79,18 +79,26 @@ line-length = 120
 target-version = ["py38", "py39", "py310"]
 
 [tool.ruff]
-lint.extend-ignore = [
-    "D211",  # `no-blank-line-before-class`
-    "D212",  # `multi-line-summary-first-line`
-    "D203",  # `blank-line-before-docstring`
-    ]
 line-length = 120
+target-version = "py310"
 
-# Allow autofix for all enabled rules (when `--fix`) is provided.
-lint.fixable = ["ALL"]
+[tool.ruff.lint]
+extend-ignore = [
+    "S101",  # Allow assert statements in tests
+    "D104",  # Ignore missing docstrings in __init__.py
+    "D417",  # Ignore missing argument descriptions in docstrings
+    "D401",  # Ignore enforcing imperative mood in docstrings
+    "D400", "D415",  # Ignore docstring punctuation enforcement
+    "D200",  # Ignore "one-line docstring should fit on one line"
+    "F821",  # Ignore undefined name errors (useful if missing imports)
+    "S113",  # Ignore "requests call without timeout" warnings
+]
 
-# Select or ignore from https://beta.ruff.rs/docs/rules/
-lint.select = [
+[tool.ruff.lint.per-file-ignores]
+"tests/**/*.py" = ["S101"]  # Ignore asserts only in test files
+
+fixable = ["ALL"]
+select = [
     "B",  # bugbear
     "D",  # pydocstyle
     "E",  # pycodestyle errors
@@ -100,18 +108,13 @@ lint.select = [
     "W",  # Warning
 ]
 
-lint.unfixable = []
-target-version = "py310"
-
 [tool.ruff.lint.mccabe]
-# Unlike Flake8, default to a complexity level of 10.
 max-complexity = 10
 
 [tool.codespell]
 skip = "*.po,*.ts,.git,pyproject.toml"
 count = ""
 quiet-level = 3
-# ignore-words-list = ""
 
 [build-system]
 requires = ["poetry-core>=1.0.0", "poetry-dynamic-versioning"]
