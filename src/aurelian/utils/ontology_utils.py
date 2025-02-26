@@ -1,3 +1,4 @@
+import logfire
 import pystow
 from cachetools.func import lru_cache
 from linkml_store.api import Collection
@@ -60,5 +61,8 @@ def search_ontology(adapter: BasicOntologyInterface, query: str, limit=10):
     handle = f"{scheme}:{name}"
 
     collection = get_collection_for_adapter(handle, local_name)
-    qr = collection.search(query, limit=limit, index_name="llm")
-    return [(obj["id"], obj["label"]) for obj in qr.rows]
+    with logfire.span("search_ontology {name} {query}", name=name, query=query):
+        logfire.info(f"Searching {scheme}:{name} for {query}")
+        qr = collection.search(query, limit=limit, index_name="llm")
+        objs = [(obj["id"], obj["label"]) for obj in qr.rows]
+    return objs

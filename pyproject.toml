@@ -31,6 +31,8 @@ undetected-chromedriver = "^3.5.5"
 
 [tool.poetry.group.dev.dependencies]
 pytest = {version = ">=8.3.2"}
+pytest-reportlog = {version = "*"}
+pytest-metadata = {version = "*"}
 tox = {version = ">=4.16.0"}
 mypy = {version = "*"}
 types-PyYAML = {version = "*"}
