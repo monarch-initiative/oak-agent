@@ -127,5 +127,7 @@ def chat(**kwargs):
         type="messages",
         title="Data Sheets Metadata Agent",
         description="Enter a URL to a webpage describing a dataset. The agent will generate metadata in YAML format.",
+        examples=[
+            ["https://www.kaggle.com/datasets/asinow/car-price-dataset"]
+        ],
     )
-
