@@ -209,6 +209,7 @@ def chat(**kwargs):
                     " and compare them to the reviews"
                 )
             ],
+            ["Find models involving the NLRP3 inflammasome. Compare the GO-CAM model with information available from uniprot"],
             ["Examine models for antimicrobial resistance, look for commonalities in genes"],
         ],
     )

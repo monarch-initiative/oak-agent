@@ -31,6 +31,8 @@ jobs:
       - name: Install dependencies
         run: |
           poetry install --no-interaction
+          poetry run pip uninstall -y numpy pandas
+          poetry run pip install --no-cache-dir numpy pandas
           poetry run pip uninstall bioservices -y || true
           poetry run pip install bioservices
 

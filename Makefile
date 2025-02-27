@@ -44,3 +44,9 @@ tmp/docs/%.ipynb: docs/%.ipynb
 %-doctest: %
 	$(RUN) python -m doctest --option ELLIPSIS --option NORMALIZE_WHITESPACE $<
 
+
+rpt:
+	$(RUN) python src/aurelian/utils/pytest_report_to_markdown.py
+
+chat-%:
+	$(RUN) aurelian $*

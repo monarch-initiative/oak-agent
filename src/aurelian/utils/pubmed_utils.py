@@ -148,8 +148,32 @@ def get_pmid_text(pmid: str) -> str:
         pmid = pmid.split(":")[1]
     text = get_full_text_from_bioc(pmid)
     if not text:
+        doi = pmid_to_doi(pmid)
+        if doi:
+            text = doi_fetcher.get_full_text(doi)
+    if not text:
         text = get_abstract_from_pubmed(pmid)
     return text
+
+def pmid_to_doi(pmid: str) -> Optional[str]:
+    if ":" in pmid:
+        pmid = pmid.split(":")[1]
+    url = f"https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id={pmid}&retmode=json"
+    response = requests.get(url)
+    data = response.json()
+
+    try:
+        article_info = data["result"][str(pmid)]
+        for aid in article_info["articleids"]:
+            if aid["idtype"] == "doi":
+                return aid["value"]
+        elocationid = article_info.get("elocationid", "")
+        if elocationid.startswith("10."):  # DOI starts with "10."
+            return elocationid
+        else:
+            return None
+    except KeyError:
+        return None
 
 
 def get_full_text_from_bioc(pmid: str) -> str:
