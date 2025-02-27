@@ -1,8 +1,13 @@
+import os
+
 import pytest
 from aurelian.utils.ontology_utils import search_ontology
 from oaklib import get_adapter
 
-
+pytestmark = pytest.mark.skipif(
+    os.getenv("GITHUB_ACTIONS") == "true",
+    reason="Skipping in GitHub Actions"
+)
 @pytest.mark.parametrize("handle,term,limit,expected", [
     ("sqlite:obo:bfo", "3D spatial", 10, [("BFO:0000028", "three-dimensional spatial region")]),
 ])

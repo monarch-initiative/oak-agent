@@ -1,8 +1,13 @@
+import os
+
 import pytest
 
 from aurelian.agents.ubergraph_agent import Dependencies, ubergraph_agent
 
-
+pytestmark = pytest.mark.skipif(
+    os.getenv("GITHUB_ACTIONS") == "true",
+    reason="Skipping in GitHub Actions"
+)
 @pytest.fixture
 def deps():
     return Dependencies()

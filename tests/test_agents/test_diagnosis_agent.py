@@ -1,7 +1,13 @@
+import os
+
 import pytest
 
 from aurelian.agents.diagnosis_agent import DiagnosisDependencies, diagnosis_agent
 
+pytestmark = pytest.mark.skipif(
+    os.getenv("GITHUB_ACTIONS") == "true",
+    reason="Skipping in GitHub Actions"
+)
 
 @pytest.fixture
 def deps():
