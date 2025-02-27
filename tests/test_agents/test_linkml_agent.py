@@ -1,14 +1,13 @@
+import pytest
 import os
 
-import pytest
+if os.getenv("GITHUB_ACTIONS") == "true":
+    pytest.skip("Skipping in GitHub Actions", allow_module_level=True)
 
 from aurelian.agents.linkml_agent import Dependencies, linkml_agent
 from aurelian.dependencies.workdir import WorkDir
 
-pytestmark = pytest.mark.skipif(
-    os.getenv("GITHUB_ACTIONS") == "true",
-    reason="Skipping in GitHub Actions"
-)
+
 @pytest.fixture
 def deps() -> Dependencies:
     dep = Dependencies()

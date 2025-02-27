@@ -1,12 +1,12 @@
-import os
 import pytest
+import os
+
+if os.getenv("GITHUB_ACTIONS") == "true":
+    pytest.skip("Skipping in GitHub Actions", allow_module_level=True)
+
 from aurelian.agents.amigo_agent import gene_associations_for_pmid, AmiGODependencies, amigo_agent
 from oaklib import get_adapter
 
-pytestmark = pytest.mark.skipif(
-    os.getenv("GITHUB_ACTIONS") == "true",
-    reason="Skipping in GitHub Actions"
-)
 
 def test_pmid():
     """

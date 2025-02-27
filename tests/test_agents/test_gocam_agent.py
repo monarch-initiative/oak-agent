@@ -1,13 +1,12 @@
+import pytest
 import os
 
-import pytest
+if os.getenv("GITHUB_ACTIONS") == "true":
+    pytest.skip("Skipping in GitHub Actions", allow_module_level=True)
 
 from aurelian.agents.gocam_agent import GOCamDependencies, gocam_agent
 
-pytestmark = pytest.mark.skipif(
-    os.getenv("GITHUB_ACTIONS") == "true",
-    reason="Skipping in GitHub Actions"
-)
+
 @pytest.fixture
 def deps():
     return GOCamDependencies()
