@@ -125,9 +125,9 @@ def chat(**kwargs):
     return gr.ChatInterface(
         fn=get_info,
         type="messages",
-        title="Data Sheets Metadata Agent",
+        title="Datasheets4datasets Metadata Agent",
         description="Enter a URL to a webpage describing a dataset. The agent will generate metadata in YAML format.",
         examples=[
-            ["https://www.kaggle.com/datasets/asinow/car-price-dataset"]
+            "https://www.kaggle.com/datasets/asinow/car-price-dataset"
         ],
     )
