@@ -1,112 +1,68 @@
 import asyncio
 import gradio as gr
+import requests
 from pydantic_ai import Agent, RunContext
 from aurelian.utils.search_utils import retrieve_web_page
 
-# Create the agent with your system prompt.
+
+def get_full_schema(
+        url="https://raw.githubusercontent.com/monarch-initiative/ontogpt/main/src/ontogpt/templates/data_sheets_schema.yaml"
+    ) -> str:
+    """
+    Load the full datasheets for datasets schema from GitHub.
+    We use the raw URL so that we get plain text.
+    """
+    url = url
+    response = requests.get(url)
+    if response.status_code == 200:
+        return response.text
+    else:
+        return "Error: Unable to load full schema."
+
+
+FULL_SCHEMA = get_full_schema()
+
+# Create the agent using the full schema in the system prompt.
 data_sheets_agent = Agent(
-    model="openai:gpt-4o",
-    system_prompt="""
-You are an expert data modeler. When given the content of a webpage that describes a dataset, your task is to extract its metadata and output a YAML document that exactly follows this template:
+    model="openai:o1",
+    system_prompt=f"""
+Below is the complete datasheets for datasets schema:
 
----
-id: <dataset URL>
-name: <dataset name>
-title: <dataset title>
-description: |-
-  <detailed description extracted from the webpage>
-license: MIT
-see_also:
-  - <related URL>
+{FULL_SCHEMA}
 
-prefixes:
-  rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns#
-  biolink: https://w3id.org/biolink/
-  csvw: http://www.w3.org/ns/csvw#
-  data_sheets_schema: https://w3id.org/bridge2ai/data-sheets-schema/
-  datasets: https://w3id.org/linkml/report
-  dcat: http://www.w3.org/ns/dcat#
-  example: https://example.org/
-  formats: http://www.w3.org/ns/formats/
-  frictionless: https://specs.frictionlessdata.io/
-  linkml: https://w3id.org/linkml/
-  mediatypes: https://www.iana.org/assignments/media-types/
-  pav: http://purl.org/pav/
-  schema: http://schema.org/
-  sh: https://w3id.org/shacl/
-  skos: http://www.w3.org/2004/02/skos/core#
-  void: http://rdfs.org/ns/void#
-default_prefix: data_sheets_schema
-default_range: string
-
-imports:
-  - linkml:types
-
-When provided with a URL, fetch the webpage, extract the metadata, and output only the YAML document.
+When provided with a URL to a webpage describing a dataset, your task is to fetch the 
+webpage, extract all the relevant metadata, and output a YAML document that exactly 
+conforms to the above schema. The output must be valid YAML with all required fields 
+filled in, following the schema exactly.
 """,
 )
 
 
 def safe_run(prompt: str):
     """
-    Ensure an event loop is available, then call data_sheets_agent.run_sync.
+    Ensure an event loop is available and then call the agent's synchronous method.
     """
     try:
-        # Try to get the current event loop.
         loop = asyncio.get_running_loop()
     except RuntimeError:
-        # If there is no current loop, create one and set it.
         loop = asyncio.new_event_loop()
         asyncio.set_event_loop(loop)
-    # Now call run_sync; since we're inside a worker thread,
-    # our agent's run_sync should find the loop we just set.
     return data_sheets_agent.run_sync(prompt)
 
 
 def process_website(url: str) -> str:
-    # Retrieve the webpage content.
+    """
+    Retrieve the webpage content from the given URL, construct a prompt that
+    instructs the agent to extract metadata following the full schema, and return the YAML output.
+    """
     page_content = retrieve_web_page(url)
 
-    # Construct a prompt that embeds the page content.
     prompt = f"""
 The following is the content of a webpage describing a dataset:
 
 {page_content}
 
-Using the template below, extract the metadata and generate a YAML document. Fill in the placeholders with information from the webpage.
-
----
-id: {url}
-name: <dataset name>
-title: <dataset title>
-description: |-
-  <detailed description extracted from the webpage>
-license: MIT
-see_also:
-  - <related URL>
-
-prefixes:
-  rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns#
-  biolink: https://w3id.org/biolink/
-  csvw: http://www.w3.org/ns/csvw#
-  data_sheets_schema: https://w3id.org/bridge2ai/data-sheets-schema/
-  datasets: https://w3id.org/linkml/report
-  dcat: http://www.w3.org/ns/dcat#
-  example: https://example.org/
-  formats: http://www.w3.org/ns/formats/
-  frictionless: https://specs.frictionlessdata.io/
-  linkml: https://w3id.org/linkml/
-  mediatypes: https://www.iana.org/assignments/media-types/
-  pav: http://purl.org/pav/
-  schema: http://schema.org/
-  sh: https://w3id.org/shacl/
-  skos: http://www.w3.org/2004/02/skos/core#
-  void: http://rdfs.org/ns/void#
-default_prefix: data_sheets_schema
-default_range: string
-
-imports:
-  - linkml:types
+Using the complete datasheets for datasets schema provided above, extract all the metadata from the webpage and generate a YAML document that exactly conforms to that schema. Ensure that all required fields are present and the output is valid YAML. The dataset URL is: {url}
 
 Generate only the YAML document.
 """
@@ -117,6 +73,7 @@ Generate only the YAML document.
 def chat(**kwargs):
     """
     Return a Gradio ChatInterface that accepts a URL and outputs the YAML metadata.
+    An example URL is provided.
     """
 
     def get_info(url: str, history: list) -> str:
@@ -125,9 +82,7 @@ def chat(**kwargs):
     return gr.ChatInterface(
         fn=get_info,
         type="messages",
-        title="Datasheets4datasets Metadata Agent",
-        description="Enter a URL to a webpage describing a dataset. The agent will generate metadata in YAML format.",
-        examples=[
-            "https://www.kaggle.com/datasets/asinow/car-price-dataset"
-        ],
+        title="Datasheets for datasets agent",
+        description="Enter a URL to a webpage describing a dataset. The agent will generate metadata in YAML format according to the complete datasheets for datasets schema.",
+        examples=["https://www.kaggle.com/datasets/asinow/car-price-dataset"]
     )
