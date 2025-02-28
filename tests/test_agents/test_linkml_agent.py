@@ -1,13 +1,11 @@
 import pytest
-from unittest.mock import patch, MagicMock
+import os
 
-# Mock `Agent` before importing `linkml_agent`
-mock_agent = MagicMock()
-mock_agent.run_sync.return_value = MagicMock(data="Mocked response")
+if os.getenv("GITHUB_ACTIONS") == "true":
+    pytest.skip("Skipping in GitHub Actions", allow_module_level=True)
 
-with patch("pydantic_ai.Agent", return_value=mock_agent):
-    from aurelian.agents.linkml_agent import Dependencies, linkml_agent
-    from aurelian.dependencies.workdir import WorkDir
+from aurelian.agents.linkml_agent import Dependencies, linkml_agent
+from aurelian.dependencies.workdir import WorkDir
 
 
 @pytest.fixture
@@ -38,14 +36,14 @@ def test_linkml_agent(record_property, deps, query, files, ideal):
                 content = content.strip()
             deps.workdir.write_file(fn, content)
             record_property("file", f"{fn}:\n```json\n{content}\n```")
-
-    # Run the mocked agent
-    with patch.object(linkml_agent, "run_sync", return_value=MagicMock(data="Mocked response")) as mock_run:
-        r = linkml_agent.run_sync(query, deps=deps)
-        data = r.data
-
+    r = linkml_agent.run_sync(query, deps=deps)
+    data = r.data
     record_property("result", str(data))
     record_property("expected", str(ideal))
-
     assert data is not None
-    assert data == "Mocked response"  # Ensure the mock is working
+    if ideal is not None:
+        if isinstance(ideal, (list, tuple)):
+            for i in ideal:
+                assert i in data
+        else:
+            assert ideal in data
