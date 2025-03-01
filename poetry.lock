@@ -204,15 +204,15 @@ files = [
 
 [[package]]
 name = "anthropic"
-version = "0.48.0"
+version = "0.49.0"
 description = "The official Python library for the anthropic API"
 optional = false
 python-versions = ">=3.8"
 groups = ["main"]
 markers = "python_version == \"3.11\" or python_version >= \"3.12\""
 files = [
-    {file = "anthropic-0.48.0-py3-none-any.whl", hash = "sha256:e2495a07d14484f3219a5c0b902a63f9df8c2b3bd358f68b5ee86f1e89d1ba81"},
-    {file = "anthropic-0.48.0.tar.gz", hash = "sha256:5e94b571a3874295b6c8600d3797875abdca18946a9ade68b6aa0408caa31cad"},
+    {file = "anthropic-0.49.0-py3-none-any.whl", hash = "sha256:bbc17ad4e7094988d2fa86b87753ded8dce12498f4b85fe5810f208f454a8375"},
+    {file = "anthropic-0.49.0.tar.gz", hash = "sha256:c09e885b0f674b9119b4f296d8508907f6cff0009bc20d5cf6b35936c40b4398"},
 ]
 
 [package.dependencies]
@@ -1030,15 +1030,15 @@ files = [
 
 [[package]]
 name = "cohere"
-version = "5.13.12"
+version = "5.14.0"
 description = ""
 optional = false
 python-versions = "<4.0,>=3.9"
 groups = ["main"]
 markers = "python_version == \"3.11\" or python_version >= \"3.12\""
 files = [
-    {file = "cohere-5.13.12-py3-none-any.whl", hash = "sha256:2a043591a3e5280b47716a6b311e4c7f58e799364113a9cb81b50cd4f6c95f7e"},
-    {file = "cohere-5.13.12.tar.gz", hash = "sha256:97bb9ac107e580780b941acbabd3aa5e71960e6835398292c46aaa8a0a4cab88"},
+    {file = "cohere-5.14.0-py3-none-any.whl", hash = "sha256:286b4ff66f9a59c06a30b8819fb8b2aee3354dc2f7dc83f19519da771e598a5e"},
+    {file = "cohere-5.14.0.tar.gz", hash = "sha256:fdbf2d4c54049b74c8f79ff8ed6fd149c4c2055d3b5eae57b9c70716e65c78fd"},
 ]
 
 [package.dependencies]
@@ -1667,20 +1667,20 @@ tests = ["asttokens (>=2.1.0)", "coverage", "coverage-enable-subprocess", "ipyth
 
 [[package]]
 name = "fastapi"
-version = "0.115.9"
+version = "0.115.10"
 description = "FastAPI framework, high performance, easy to learn, fast to code, ready for production"
 optional = true
 python-versions = ">=3.8"
 groups = ["main"]
 markers = "(python_version == \"3.11\" or python_version >= \"3.12\") and extra == \"gradio\""
 files = [
-    {file = "fastapi-0.115.9-py3-none-any.whl", hash = "sha256:4a439d7923e4de796bcc88b64e9754340fcd1574673cbd865ba8a99fe0d28c56"},
-    {file = "fastapi-0.115.9.tar.gz", hash = "sha256:9d7da3b196c5eed049bc769f9475cd55509a112fbe031c0ef2f53768ae68d13f"},
+    {file = "fastapi-0.115.10-py3-none-any.whl", hash = "sha256:47346c5437e933e68909a835cf63890a9bd52fb6091b2499b996c08a01ca43a5"},
+    {file = "fastapi-0.115.10.tar.gz", hash = "sha256:920cdc95c1c6ca073656deae80ad254512d131031c2d7759c87ae469572911ee"},
 ]
 
 [package.dependencies]
 pydantic = ">=1.7.4,<1.8 || >1.8,<1.8.1 || >1.8.1,<2.0.0 || >2.0.0,<2.0.1 || >2.0.1,<2.1.0 || >2.1.0,<3.0.0"
-starlette = ">=0.40.0,<0.46.0"
+starlette = ">=0.40.0,<0.47.0"
 typing-extensions = ">=4.8.0"
 
 [package.extras]
@@ -2463,14 +2463,14 @@ grpc = ["grpcio (>=1.44.0,<2.0.0.dev0)"]
 
 [[package]]
 name = "gradio"
-version = "5.19.0"
+version = "5.20.0"
 description = "Python library for easily interacting with trained machine learning models"
 optional = true
 python-versions = ">=3.10"
 groups = ["main"]
 markers = "(python_version == \"3.11\" or python_version >= \"3.12\") and extra == \"gradio\""
 files = [
-    {file = "gradio-5.19.0-py3-none-any.whl", hash = "sha256:e72af9ddf5889eb48c898426c56b175c76603ae720328db3e86896bfb18cf355"},
+    {file = "gradio-5.20.0-py3-none-any.whl", hash = "sha256:85e649611c343fa6c2cff50e3f6a662046158bf592eb954dffdca24e896185e5"},
 ]
 
 [package.dependencies]
@@ -2480,6 +2480,7 @@ audioop-lts = {version = "<1.0", markers = "python_version >= \"3.13\""}
 fastapi = ">=0.115.2,<1.0"
 ffmpy = "*"
 gradio-client = "1.7.2"
+groovy = ">=0.1,<1.0"
 httpx = ">=0.24.1"
 huggingface-hub = ">=0.28.1"
 jinja2 = "<4.0"
@@ -2665,6 +2666,22 @@ files = [
 
 [package.dependencies]
 colorama = ">=0.4"
+
+[[package]]
+name = "groovy"
+version = "0.1.2"
+description = "A small Python library created to help developers protect their applications from Server Side Request Forgery (SSRF) attacks."
+optional = true
+python-versions = ">3.9"
+groups = ["main"]
+markers = "(python_version == \"3.11\" or python_version >= \"3.12\") and extra == \"gradio\""
+files = [
+    {file = "groovy-0.1.2-py3-none-any.whl", hash = "sha256:7f7975bab18c729a257a8b1ae9dcd70b7cafb1720481beae47719af57c35fa64"},
+    {file = "groovy-0.1.2.tar.gz", hash = "sha256:25c1dc09b3f9d7e292458aa762c6beb96ea037071bf5e917fc81fb78d2231083"},
+]
+
+[package.extras]
+dev = ["pytest", "ruff (==0.9.3)"]
 
 [[package]]
 name = "groq"
@@ -3066,20 +3083,21 @@ test = ["flaky", "ipyparallel", "pre-commit", "pytest (>=7.0)", "pytest-asyncio 
 
 [[package]]
 name = "ipython"
-version = "8.32.0"
+version = "9.0.0"
 description = "IPython: Productive Interactive Computing"
 optional = false
-python-versions = ">=3.10"
+python-versions = ">=3.11"
 groups = ["dev"]
 markers = "python_version == \"3.11\" or python_version >= \"3.12\""
 files = [
-    {file = "ipython-8.32.0-py3-none-any.whl", hash = "sha256:cae85b0c61eff1fc48b0a8002de5958b6528fa9c8defb1894da63f42613708aa"},
-    {file = "ipython-8.32.0.tar.gz", hash = "sha256:be2c91895b0b9ea7ba49d33b23e2040c352b33eb6a519cca7ce6e0c743444251"},
+    {file = "ipython-9.0.0-py3-none-any.whl", hash = "sha256:2cce23069b830a54a5b9d3d66ccd6433047c1503a7b9a3b34593c0b5c2c08477"},
+    {file = "ipython-9.0.0.tar.gz", hash = "sha256:9368d65b3d4a471e9a698fed3ea486bbf6737e45111e915279c971b77f974397"},
 ]
 
 [package.dependencies]
 colorama = {version = "*", markers = "sys_platform == \"win32\""}
 decorator = "*"
+ipython-pygments-lexers = "*"
 jedi = ">=0.16"
 matplotlib-inline = "*"
 pexpect = {version = ">4.3", markers = "sys_platform != \"win32\" and sys_platform != \"emscripten\""}
@@ -3090,18 +3108,28 @@ traitlets = ">=5.13.0"
 typing_extensions = {version = ">=4.6", markers = "python_version < \"3.12\""}
 
 [package.extras]
-all = ["ipython[black,doc,kernel,matplotlib,nbconvert,nbformat,notebook,parallel,qtconsole]", "ipython[test,test-extra]"]
+all = ["ipython[doc,matplotlib,test,test-extra]"]
 black = ["black"]
-doc = ["docrepr", "exceptiongroup", "intersphinx_registry", "ipykernel", "ipython[test]", "matplotlib", "setuptools (>=18.5)", "sphinx (>=1.3)", "sphinx-rtd-theme", "sphinxcontrib-jquery", "tomli", "typing_extensions"]
-kernel = ["ipykernel"]
+doc = ["docrepr", "exceptiongroup", "intersphinx_registry", "ipykernel", "ipython[test]", "matplotlib", "setuptools (>=18.5)", "sphinx (>=1.3)", "sphinx-rtd-theme", "sphinx_toml (==0.0.4)", "typing_extensions"]
 matplotlib = ["matplotlib"]
-nbconvert = ["nbconvert"]
-nbformat = ["nbformat"]
-notebook = ["ipywidgets", "notebook"]
-parallel = ["ipyparallel"]
-qtconsole = ["qtconsole"]
-test = ["packaging", "pickleshare", "pytest", "pytest-asyncio (<0.22)", "testpath"]
+test = ["packaging", "pytest", "pytest-asyncio (<0.22)", "testpath"]
 test-extra = ["curio", "ipython[test]", "matplotlib (!=3.2.0)", "nbformat", "numpy (>=1.23)", "pandas", "trio"]
+
+[[package]]
+name = "ipython-pygments-lexers"
+version = "1.1.1"
+description = "Defines a variety of Pygments lexers for highlighting IPython code."
+optional = false
+python-versions = ">=3.8"
+groups = ["dev"]
+markers = "python_version == \"3.11\" or python_version >= \"3.12\""
+files = [
+    {file = "ipython_pygments_lexers-1.1.1-py3-none-any.whl", hash = "sha256:a9462224a505ade19a605f71f8fa63c2048833ce50abc86768a0d81d876dc81c"},
+    {file = "ipython_pygments_lexers-1.1.1.tar.gz", hash = "sha256:09c0138009e56b6854f9535736f4171d855c8c08a563a0dcd8022f78355c7e81"},
+]
+
+[package.dependencies]
+pygments = "*"
 
 [[package]]
 name = "ipywidgets"
@@ -4235,15 +4263,15 @@ validation = ["linkml (>=1.8.0)"]
 
 [[package]]
 name = "llm"
-version = "0.22"
-description = "A CLI utility and Python library for interacting with Large Language Models, including OpenAI, PaLM and local models installed on your own machine."
+version = "0.23"
+description = "CLI utility and Python library for interacting with Large Language Models from organizations like OpenAI, Anthropic and Gemini plus local models installed on your own machine."
 optional = false
 python-versions = ">=3.9"
 groups = ["main"]
 markers = "python_version == \"3.11\" or python_version >= \"3.12\""
 files = [
-    {file = "llm-0.22-py3-none-any.whl", hash = "sha256:ea0448a848e19a0965b04711b97f93173d7ec1c84a1f5d9e352d471d59d9e3f5"},
-    {file = "llm-0.22.tar.gz", hash = "sha256:3b52cfa6048092df3c6ddd375353b636166bf2d1028b454951865eae4c63d38b"},
+    {file = "llm-0.23-py3-none-any.whl", hash = "sha256:3c6fe7ee80104e0e5dee0eb98a1b2ad00d4874535bbf6fe9578380062cf1ee6d"},
+    {file = "llm-0.23.tar.gz", hash = "sha256:552e549a46cbcae6f3414b8f5952d6651a7f8b60b5f09444057a7a52793a6c8e"},
 ]
 
 [package.dependencies]
@@ -4253,7 +4281,7 @@ openai = ">=1.55.3"
 pip = "*"
 pluggy = "*"
 puremagic = "*"
-pydantic = ">=1.10.2"
+pydantic = ">=2.0.0"
 pyreadline3 = {version = "*", markers = "sys_platform == \"win32\""}
 python-ulid = "*"
 PyYAML = "*"
@@ -4571,15 +4599,15 @@ six = ">=1.15,<2"
 
 [[package]]
 name = "markitdown"
-version = "0.0.1a4"
+version = "0.0.1a5"
 description = "Utility tool for converting various files to Markdown"
 optional = false
 python-versions = ">=3.10"
 groups = ["main"]
 markers = "python_version == \"3.11\" or python_version >= \"3.12\""
 files = [
-    {file = "markitdown-0.0.1a4-py3-none-any.whl", hash = "sha256:9fc78bb7b83dee13852d8a4b262066dcc7a5a1aac88924f0f29aa239ec9fbfec"},
-    {file = "markitdown-0.0.1a4.tar.gz", hash = "sha256:8bf738cf3d2a26efb0edde9eb109a53886a4550c0df12b17418182cd30ab1dde"},
+    {file = "markitdown-0.0.1a5-py3-none-any.whl", hash = "sha256:f04d772ebde72eda7765bca4522f39dc56cb2f5120a47d11922e2e01aa15b534"},
+    {file = "markitdown-0.0.1a5.tar.gz", hash = "sha256:c78bdd3b3f11b2188e864b3fe2c7d15355fabcebcda7957f378fb88d4c779152"},
 ]
 
 [package.dependencies]
@@ -6962,35 +6990,35 @@ timezone = ["tzdata"]
 
 [[package]]
 name = "pydantic-ai"
-version = "0.0.29"
+version = "0.0.30"
 description = "Agent Framework / shim to use Pydantic with LLMs"
 optional = false
 python-versions = ">=3.9"
 groups = ["main"]
 markers = "python_version == \"3.11\" or python_version >= \"3.12\""
 files = [
-    {file = "pydantic_ai-0.0.29-py3-none-any.whl", hash = "sha256:8402bb90e7eb3cb596e10f785dae86d96e4629b9fd9b38add1062ab1c782ca40"},
-    {file = "pydantic_ai-0.0.29.tar.gz", hash = "sha256:094d561d95aa0f224cae0016e72f55f9bfdb5b9c875433677123e3ed700fc6ef"},
+    {file = "pydantic_ai-0.0.30-py3-none-any.whl", hash = "sha256:fcda4e2fa00130b9c1bcd6b119b7ea1ec25658260bcbb7b7468121fe9db9001d"},
+    {file = "pydantic_ai-0.0.30.tar.gz", hash = "sha256:9e6bf61d4865a7afa7e53476f8ffb98ef659e685ed8939fc2fcb463571e5a8c6"},
 ]
 
 [package.dependencies]
-pydantic-ai-slim = {version = "0.0.29", extras = ["anthropic", "cohere", "groq", "mistral", "openai", "vertexai"]}
+pydantic-ai-slim = {version = "0.0.30", extras = ["anthropic", "cohere", "groq", "mistral", "openai", "vertexai"]}
 
 [package.extras]
-examples = ["pydantic-ai-examples (==0.0.29)"]
+examples = ["pydantic-ai-examples (==0.0.30)"]
 logfire = ["logfire (>=2.3)"]
 
 [[package]]
 name = "pydantic-ai-slim"
-version = "0.0.29"
+version = "0.0.30"
 description = "Agent Framework / shim to use Pydantic with LLMs, slim package"
 optional = false
 python-versions = ">=3.9"
 groups = ["main"]
 markers = "python_version == \"3.11\" or python_version >= \"3.12\""
 files = [
-    {file = "pydantic_ai_slim-0.0.29-py3-none-any.whl", hash = "sha256:9ad37bf65538b357a811b12cd228bea223b6b137c4a0eac27a08b5d3eb831e00"},
-    {file = "pydantic_ai_slim-0.0.29.tar.gz", hash = "sha256:7d318ca1ae3361c167ae9eb401d9b43998d4164756a9b4915ef0064edbb1aaba"},
+    {file = "pydantic_ai_slim-0.0.30-py3-none-any.whl", hash = "sha256:5637f9c8e7744601684cca9a050f7c7f68885afa63e0e2efd943f52b775e4ddc"},
+    {file = "pydantic_ai_slim-0.0.30.tar.gz", hash = "sha256:6059664dac332020a163fa4930f99695a9843a13bc5a6d8f86b19faea392862e"},
 ]
 
 [package.dependencies]
@@ -7003,9 +7031,9 @@ groq = {version = ">=0.12.0", optional = true, markers = "extra == \"groq\""}
 httpx = ">=0.27"
 logfire-api = ">=1.2.0"
 mistralai = {version = ">=1.2.5", optional = true, markers = "extra == \"mistral\""}
-openai = {version = ">=1.61.0", optional = true, markers = "extra == \"openai\""}
+openai = {version = ">=1.65.1", optional = true, markers = "extra == \"openai\""}
 pydantic = ">=2.10"
-pydantic-graph = "0.0.29"
+pydantic-graph = "0.0.30"
 requests = {version = ">=2.32.3", optional = true, markers = "extra == \"vertexai\""}
 
 [package.extras]
@@ -7015,7 +7043,7 @@ duckduckgo = ["duckduckgo-search (>=7.0.0)"]
 groq = ["groq (>=0.12.0)"]
 logfire = ["logfire (>=2.3)"]
 mistral = ["mistralai (>=1.2.5)"]
-openai = ["openai (>=1.61.0)"]
+openai = ["openai (>=1.65.1)"]
 tavily = ["tavily-python (>=0.5.0)"]
 vertexai = ["google-auth (>=2.36.0)", "requests (>=2.32.3)"]
 
@@ -7135,15 +7163,15 @@ typing-extensions = ">=4.6.0,<4.7.0 || >4.7.0"
 
 [[package]]
 name = "pydantic-graph"
-version = "0.0.29"
+version = "0.0.30"
 description = "Graph and state machine library"
 optional = false
 python-versions = ">=3.9"
 groups = ["main"]
 markers = "python_version == \"3.11\" or python_version >= \"3.12\""
 files = [
-    {file = "pydantic_graph-0.0.29-py3-none-any.whl", hash = "sha256:41e9e92d93cf3ac20e9dd934284e20c2cb5453d8999f5db701e775e65f26c86e"},
-    {file = "pydantic_graph-0.0.29.tar.gz", hash = "sha256:791d24e85d728c15db737426fd6821043f645446cfd79947c35d0acd8fd4c7e2"},
+    {file = "pydantic_graph-0.0.30-py3-none-any.whl", hash = "sha256:af224c71ada4c658279cbc2f636d37616d3ecace7322772816155087cf23bf0f"},
+    {file = "pydantic_graph-0.0.30.tar.gz", hash = "sha256:e4494cc6a17da430eddb107e237c5684fa64275ed0c63097854d1a8334d1dab0"},
 ]
 
 [package.dependencies]
@@ -8063,7 +8091,7 @@ description = "A collection of chemoinformatics and machine-learning software wr
 optional = true
 python-versions = "*"
 groups = ["main"]
-markers = "(python_version == \"3.11\" or python_version >= \"3.12\") and extra == \"rdkit\""
+markers = "(extra == \"rdkit\" or extra == \"chem\") and (python_version == \"3.11\" or python_version >= \"3.12\")"
 files = [
     {file = "rdkit-2024.9.5-cp310-cp310-macosx_10_15_x86_64.whl", hash = "sha256:8adc3293cfa88856b7fc029e5f530796c0821e83e07ed5f54aec5e0561777d0b"},
     {file = "rdkit-2024.9.5-cp310-cp310-macosx_11_0_arm64.whl", hash = "sha256:c5908f60a613a124abc4b2ba50cf04d3a7a0672adb37a62dc1b9f8a3033d1ed2"},
@@ -8615,31 +8643,31 @@ files = [
 
 [[package]]
 name = "ruff"
-version = "0.9.8"
+version = "0.9.9"
 description = "An extremely fast Python linter and code formatter, written in Rust."
 optional = true
 python-versions = ">=3.7"
 groups = ["main"]
 markers = "extra == \"gradio\" and sys_platform != \"emscripten\" and (python_version == \"3.11\" or python_version >= \"3.12\")"
 files = [
-    {file = "ruff-0.9.8-py3-none-linux_armv6l.whl", hash = "sha256:d236f0ce0190bbc6fa9b4c4b85e916fb4c50fd087e6558af1bf5a45eb20e374d"},
-    {file = "ruff-0.9.8-py3-none-macosx_10_12_x86_64.whl", hash = "sha256:59fac6922b336d0c38df199761ade561563e1b7636e3a2b767b9ee5a68aa9cbf"},
-    {file = "ruff-0.9.8-py3-none-macosx_11_0_arm64.whl", hash = "sha256:a82082ec72bde2166ec138055307396c4d4e543fd97266dc2bfa24284cb30af6"},
-    {file = "ruff-0.9.8-py3-none-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:e06635d12321605d1d11226c7d3c6b1245a0df498099868d14b4e353b3f0ac22"},
-    {file = "ruff-0.9.8-py3-none-manylinux_2_17_armv7l.manylinux2014_armv7l.whl", hash = "sha256:65961815bb35d427e957940d13b2a1d0a67d8b245d3a7e0b5a4a2058536d3532"},
-    {file = "ruff-0.9.8-py3-none-manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:c18356beaef174797ad83f11debc5569e96afa73a549b2d073912565cfc4cfd1"},
-    {file = "ruff-0.9.8-py3-none-manylinux_2_17_ppc64.manylinux2014_ppc64.whl", hash = "sha256:a1dfc443bee0288ea926a4d9ecfd858bf94ddf0a03a256c63e81b2b6dccdfc7d"},
-    {file = "ruff-0.9.8-py3-none-manylinux_2_17_ppc64le.manylinux2014_ppc64le.whl", hash = "sha256:bc86d5a85cd5ab1d5aff1650f038aa34681d0692cc2467aa9ddef37bd56ea3f9"},
-    {file = "ruff-0.9.8-py3-none-manylinux_2_17_s390x.manylinux2014_s390x.whl", hash = "sha256:66662aa19535d58fe6d04e5b59a39e495b102f2f5a2a1b9698e240eb78f429ef"},
-    {file = "ruff-0.9.8-py3-none-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:733647b2fe9367e1aa049c0eba296363746f3bc0dbfd454b0bc4b7b46cdf0146"},
-    {file = "ruff-0.9.8-py3-none-musllinux_1_2_aarch64.whl", hash = "sha256:100031be9777f67af7f61b4d4eea2a0531ed6788940aca4360f6b9aae317c53b"},
-    {file = "ruff-0.9.8-py3-none-musllinux_1_2_armv7l.whl", hash = "sha256:2f090758d58b4667d9022eee1085a854db93d800279e5a177ebda5adc1faf639"},
-    {file = "ruff-0.9.8-py3-none-musllinux_1_2_i686.whl", hash = "sha256:f774998b9c9a062510533aba9b53085de6be6d41e13a7a0bd086af8a40e838c3"},
-    {file = "ruff-0.9.8-py3-none-musllinux_1_2_x86_64.whl", hash = "sha256:6ef7cc80626264ab8ab4d68b359ba867b8a52b0830a9643cd31289146dd40892"},
-    {file = "ruff-0.9.8-py3-none-win32.whl", hash = "sha256:54b57b623a683e696a1ede99db95500763c1badafe105b6ad8d8e9d96e385ae2"},
-    {file = "ruff-0.9.8-py3-none-win_amd64.whl", hash = "sha256:b0878103b2fb8af55ad701308a69ce713108ad346c3a3a143ebcd1e13829c9a7"},
-    {file = "ruff-0.9.8-py3-none-win_arm64.whl", hash = "sha256:e459a4fc4150fcc60da26c59a6a4b70878c60a99df865a71cf6f958dc68c419a"},
-    {file = "ruff-0.9.8.tar.gz", hash = "sha256:12d455f2be6fe98accbea2487bbb8eaec716c760bf60b45e7e13f76f913f56e9"},
+    {file = "ruff-0.9.9-py3-none-linux_armv6l.whl", hash = "sha256:628abb5ea10345e53dff55b167595a159d3e174d6720bf19761f5e467e68d367"},
+    {file = "ruff-0.9.9-py3-none-macosx_10_12_x86_64.whl", hash = "sha256:b6cd1428e834b35d7493354723543b28cc11dc14d1ce19b685f6e68e07c05ec7"},
+    {file = "ruff-0.9.9-py3-none-macosx_11_0_arm64.whl", hash = "sha256:5ee162652869120ad260670706f3cd36cd3f32b0c651f02b6da142652c54941d"},
+    {file = "ruff-0.9.9-py3-none-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:3aa0f6b75082c9be1ec5a1db78c6d4b02e2375c3068438241dc19c7c306cc61a"},
+    {file = "ruff-0.9.9-py3-none-manylinux_2_17_armv7l.manylinux2014_armv7l.whl", hash = "sha256:584cc66e89fb5f80f84b05133dd677a17cdd86901d6479712c96597a3f28e7fe"},
+    {file = "ruff-0.9.9-py3-none-manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:abf3369325761a35aba75cd5c55ba1b5eb17d772f12ab168fbfac54be85cf18c"},
+    {file = "ruff-0.9.9-py3-none-manylinux_2_17_ppc64.manylinux2014_ppc64.whl", hash = "sha256:3403a53a32a90ce929aa2f758542aca9234befa133e29f4933dcef28a24317be"},
+    {file = "ruff-0.9.9-py3-none-manylinux_2_17_ppc64le.manylinux2014_ppc64le.whl", hash = "sha256:18454e7fa4e4d72cffe28a37cf6a73cb2594f81ec9f4eca31a0aaa9ccdfb1590"},
+    {file = "ruff-0.9.9-py3-none-manylinux_2_17_s390x.manylinux2014_s390x.whl", hash = "sha256:0fadfe2c88724c9617339f62319ed40dcdadadf2888d5afb88bf3adee7b35bfb"},
+    {file = "ruff-0.9.9-py3-none-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:6df104d08c442a1aabcfd254279b8cc1e2cbf41a605aa3e26610ba1ec4acf0b0"},
+    {file = "ruff-0.9.9-py3-none-musllinux_1_2_aarch64.whl", hash = "sha256:d7c62939daf5b2a15af48abbd23bea1efdd38c312d6e7c4cedf5a24e03207e17"},
+    {file = "ruff-0.9.9-py3-none-musllinux_1_2_armv7l.whl", hash = "sha256:9494ba82a37a4b81b6a798076e4a3251c13243fc37967e998efe4cce58c8a8d1"},
+    {file = "ruff-0.9.9-py3-none-musllinux_1_2_i686.whl", hash = "sha256:4efd7a96ed6d36ef011ae798bf794c5501a514be369296c672dab7921087fa57"},
+    {file = "ruff-0.9.9-py3-none-musllinux_1_2_x86_64.whl", hash = "sha256:ab90a7944c5a1296f3ecb08d1cbf8c2da34c7e68114b1271a431a3ad30cb660e"},
+    {file = "ruff-0.9.9-py3-none-win32.whl", hash = "sha256:6b4c376d929c25ecd6d87e182a230fa4377b8e5125a4ff52d506ee8c087153c1"},
+    {file = "ruff-0.9.9-py3-none-win_amd64.whl", hash = "sha256:837982ea24091d4c1700ddb2f63b7070e5baec508e43b01de013dc7eff974ff1"},
+    {file = "ruff-0.9.9-py3-none-win_arm64.whl", hash = "sha256:3ac78f127517209fe6d96ab00f3ba97cafe38718b23b1db3e96d8b2d39e37ddf"},
+    {file = "ruff-0.9.9.tar.gz", hash = "sha256:0062ed13f22173e85f8f7056f9a24016e692efeea8704d1a5e8011b8aa850933"},
 ]
 
 [[package]]
@@ -9505,15 +9533,15 @@ files = [
 
 [[package]]
 name = "starlette"
-version = "0.45.3"
+version = "0.46.0"
 description = "The little ASGI library that shines."
 optional = true
 python-versions = ">=3.9"
 groups = ["main"]
 markers = "(python_version == \"3.11\" or python_version >= \"3.12\") and extra == \"gradio\""
 files = [
-    {file = "starlette-0.45.3-py3-none-any.whl", hash = "sha256:dfb6d332576f136ec740296c7e8bb8c8a7125044e7c6da30744718880cdd059d"},
-    {file = "starlette-0.45.3.tar.gz", hash = "sha256:2cbcba2a75806f8a41c722141486f37c28e30a0921c5f6fe4346cb0dcee1302f"},
+    {file = "starlette-0.46.0-py3-none-any.whl", hash = "sha256:913f0798bd90ba90a9156383bcf1350a17d6259451d0d8ee27fc0cf2db609038"},
+    {file = "starlette-0.46.0.tar.gz", hash = "sha256:b359e4567456b28d473d0193f34c0de0ed49710d75ef183a74a5ce0499324f50"},
 ]
 
 [package.dependencies]
@@ -10654,6 +10682,7 @@ testing = ["coverage[toml]", "zope.event", "zope.testing"]
 
 [extras]
 bioservices = ["bioservices"]
+chem = ["rdkit"]
 gocam = ["gocam"]
 gradio = ["gradio"]
 linkml = ["linkml"]
@@ -10662,4 +10691,4 @@ rdkit = ["rdkit"]
 [metadata]
 lock-version = "2.1"
 python-versions = "^3.11"
-content-hash = "3bfc5dc757bae5476ce971f2499fabbbcfe0c1fa0b0192465d27c053aa87f653"
+content-hash = "e1f09d821791ba5a597ad22acdc6c13c8546da490b2ac288ae659ad952cdcb99"
