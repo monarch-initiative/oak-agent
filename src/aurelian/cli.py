@@ -4,6 +4,7 @@ import logging
 from typing import Optional, List
 
 import click
+from sqlalchemy.orm.collections import collection
 
 from aurelian import __version__
 
@@ -43,6 +44,16 @@ server_port_option = click.option(
     show_default=True,
     help="The port to run the gradio server on.",
 )
+db_path_option = click.option(
+    "--db-path",
+    "-d",
+    help="The path to the database.",
+)
+collection_name_option = click.option(
+    "--collection-name",
+    "-c",
+    help="The name of the collection.",
+)
 
 
 @click.group()
@@ -71,7 +82,7 @@ def main(verbose: int, quiet: bool):
 def split_options(kwargs, agent_keys: Optional[List]=None, extra_agent_keys: Optional[List] = None):
     """Split options into model and agent options."""
     if agent_keys is None:
-        agent_keys = ["model", "workdir", "ontologies"]
+        agent_keys = ["model", "workdir", "ontologies", "db_path", "collection_name"]
     if extra_agent_keys is not None:
         agent_keys += extra_agent_keys
     agent_options = {k: v for k, v in kwargs.items() if k in agent_keys}
@@ -177,6 +188,20 @@ def linkml(**kwargs):
 def amigo(**kwargs):
     """Start the AmiGO agent."""
     import aurelian.agents.amigo_agent as agent
+    agent_options, launch_options = split_options(kwargs)
+    ui = agent.chat(**agent_options)
+    ui.launch(**launch_options)
+
+
+@main.command()
+@model_option
+@share_option
+@db_path_option
+@collection_name_option
+@server_port_option
+def rag(**kwargs):
+    """Start the AmiGO agent."""
+    import aurelian.agents.rag_agent as agent
     agent_options, launch_options = split_options(kwargs)
     ui = agent.chat(**agent_options)
     ui.launch(**launch_options)
