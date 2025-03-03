@@ -25,7 +25,7 @@ Ensure you have the following installed:
    poetry run aurelian --help
    ```
 
-### Authentication Setup
+### Setting up up Logfire
 
 Aurelian uses [Logfire](https://logfire.pydantic.dev/docs/why/) for logging (an observability platform that 
 provides logging, tracing, and metrics), which requires 
@@ -47,17 +47,23 @@ Follow these steps:
    export LOGFIRE_TOKEN=your_token_here
    ```
 
+### Get OpenAI key
+
+In order to use OpenAI models, you'll need an API key. Follow the instructions 
+[here](https://platform.openai.com/docs/quickstart). After you have an OpenAI key,
+set the environment variable `OPENAI_API_KEY` to this key, for example like this:
+
+```
+export OPENAI_API_KEY="your_api_key_here"
+```
+
 ### Running Aurelian
 
 Once authenticated, you can use Aurelian's CLI:
 
-1. **Run the mapper tool:**
+**Run the mapper tool:**
    ```sh
    poetry run aurelian mapper
-   ```
-2. **Explore available commands:**
-   ```sh
-   poetry run aurelian --help
    ```
 
 For more details, refer to the project documentation.
