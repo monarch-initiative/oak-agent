@@ -18,7 +18,7 @@ Ensure you have the following installed:
    ```
 2. **Install dependencies:**
    ```sh
-   poetry install
+   poetry install --optional gradio
    ```
 3. **Verify installation:**
    ```sh
@@ -67,4 +67,8 @@ Once authenticated, you can use Aurelian's CLI:
    ```
 
 For more details, refer to the project documentation.
+
+
+### Troubleshooting 
+
 
