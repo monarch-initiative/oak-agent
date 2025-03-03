@@ -47,7 +47,7 @@ Follow these steps:
    export LOGFIRE_TOKEN=your_token_here
    ```
 
-### Get OpenAI key
+### Getting an OpenAI key
 
 In order to use OpenAI models, you'll need an API key. Follow the instructions 
 [here](https://platform.openai.com/docs/quickstart). After you have an OpenAI key,
