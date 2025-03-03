@@ -27,7 +27,9 @@ Ensure you have the following installed:
 
 ### Authentication Setup
 
-Aurelian uses Logfire for logging, which requires authentication. If you encounter the following error:
+Aurelian uses [Logfire](https://logfire.pydantic.dev/docs/why/) for logging (an observability platform that 
+provides logging, tracing, and metrics capabilities), which requires 
+authentication. If you encounter the following error:
 
 ```
 No Logfire project credentials found.
