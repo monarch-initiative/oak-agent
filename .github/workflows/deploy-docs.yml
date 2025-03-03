@@ -26,6 +26,10 @@ jobs:
     - name: Install Poetry
       uses: snok/install-poetry@v1
 
+    - name: Configure Poetry to Use Python 3.11
+      run: |
+        poetry env use python3.11
+
     - name: Verify Poetry Installation
       run: |
         export PATH=$HOME/.local/bin:$PATH
