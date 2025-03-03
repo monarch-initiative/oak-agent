@@ -28,7 +28,7 @@ Ensure you have the following installed:
 ### Authentication Setup
 
 Aurelian uses [Logfire](https://logfire.pydantic.dev/docs/why/) for logging (an observability platform that 
-provides logging, tracing, and metrics capabilities), which requires 
+provides logging, tracing, and metrics), which requires 
 authentication. If you encounter the following error:
 
 ```
