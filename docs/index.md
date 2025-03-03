@@ -18,7 +18,7 @@ Ensure you have the following installed:
    ```
 2. **Install dependencies:**
    ```sh
-   poetry install --optional gradio
+   poetry install --extras=gradio
    ```
 3. **Verify installation:**
    ```sh
