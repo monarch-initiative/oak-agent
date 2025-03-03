@@ -13,7 +13,7 @@ Ensure you have the following installed:
 
 1. **Clone the repository:**
    ```sh
-   git clone https://github.com/your-org/aurelian.git
+   git clone https://github.com/monarch-initiative/aurelian.git
    cd aurelian
    ```
 2. **Install dependencies:**
