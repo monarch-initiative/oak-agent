@@ -11,10 +11,14 @@ jobs:
       with:
         fetch-depth: 0 # Ensures full history for deployment
 
-    - name: Set up Python 3.9
+    - name: Set up Python 3.11
       uses: actions/setup-python@v3
       with:
-        python-version: 3.9
+        python-version: 3.11
+
+    - name: Configure Poetry to Use Python 3.11
+      run: |
+        poetry env use python3.11
 
     - name: Install Poetry Manually
       run: |
