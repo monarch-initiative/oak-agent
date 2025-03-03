@@ -2,9 +2,6 @@ name: Auto-deployment of Documentation
 on:
   push:
     branches: [ main ]
-  pull_request:
-    branches: [ main ]
-
 jobs:
   build-docs:
     runs-on: ubuntu-latest
@@ -14,27 +11,27 @@ jobs:
       with:
         fetch-depth: 0 # Ensures full history for deployment
 
-    - name: Set up Python 3.11
+    - name: Set up Python 3.9
       uses: actions/setup-python@v3
       with:
-        python-version: 3.11
+        python-version: 3.9
 
-    - name: Configure Poetry to Use Python 3.11
+    - name: Install Poetry Manually
       run: |
-        poetry env use python3.11
-
-    - name: Install Poetry
-      uses: snok/install-poetry@v1
-
-    - name: Configure Poetry to Use Python 3.11
-      run: |
-        poetry env use python3.11
+        python -m pip install --upgrade pip
+        python -m pip install --user poetry
+        echo "$HOME/.local/bin" >> $GITHUB_PATH
+        echo "export PATH=$HOME/.local/bin:$PATH" >> ~/.bashrc
 
     - name: Verify Poetry Installation
       run: |
         export PATH=$HOME/.local/bin:$PATH
         which poetry || echo "Poetry not found in PATH"
         poetry --version || echo "Poetry command failed"
+
+    - name: Configure Poetry to Use Python 3.11
+      run: |
+        poetry env use python3.11
 
     - name: Install dependencies
       run: |
