@@ -43,6 +43,7 @@ jobs:
 
     - name: Build documentation
       run: |
+        mkdir -p src/oak_agent        
         export PATH=$HOME/.local/bin:$PATH
         echo ${{ secrets.GH_TOKEN }} >> src/oak_agent/token.txt
         mkdir gh-pages
