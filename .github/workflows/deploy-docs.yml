@@ -49,7 +49,7 @@ jobs:
         mkdir gh-pages
         touch gh-pages/.nojekyll
         cd docs/
-        poetry run sphinx-apidoc -o . ../src/oak_agent/ --ext-autodoc -f
+        poetry run sphinx-apidoc -o . ../src/aurelian/ --ext-autodoc -f
         poetry run sphinx-build -b html . _build
         cp -r _build/* ../gh-pages/
 
