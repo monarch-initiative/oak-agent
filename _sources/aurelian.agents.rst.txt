@@ -45,6 +45,14 @@ aurelian.agents.chemistry\_agent module
    :show-inheritance:
    :undoc-members:
 
+aurelian.agents.d4d\_agent module
+---------------------------------
+
+.. automodule:: aurelian.agents.d4d_agent
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
 aurelian.agents.diagnosis\_agent module
 ---------------------------------------
 

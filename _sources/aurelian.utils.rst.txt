@@ -36,6 +36,14 @@ aurelian.utils.ontology\_utils module
    :show-inheritance:
    :undoc-members:
 
+aurelian.utils.pdf\_fetcher module
+----------------------------------
+
+.. automodule:: aurelian.utils.pdf_fetcher
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
 aurelian.utils.process\_logs module
 -----------------------------------
 
