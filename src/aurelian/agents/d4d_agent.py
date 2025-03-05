@@ -1,8 +1,6 @@
 import asyncio
 import gradio as gr
 import requests
-import tempfile
-from pdfminer.high_level import extract_text
 from pydantic_ai import Agent, RunContext
 from aurelian.utils.search_utils import retrieve_web_page
 
@@ -49,26 +47,6 @@ def safe_run(prompt: str):
         loop = asyncio.new_event_loop()
         asyncio.set_event_loop(loop)
     return data_sheets_agent.run_sync(prompt)
-
-
-def extract_text_from_pdf(pdf_url: str) -> str:
-    """
-    Download and extract text from a PDF given its URL, using a temporary file.
-    """
-    response = requests.get(pdf_url)
-    if response.status_code != 200:
-        return "Error: Unable to retrieve PDF."
-
-    try:
-        with tempfile.NamedTemporaryFile(suffix=".pdf", delete=True) as temp_pdf:
-            temp_pdf.write(response.content)
-            temp_pdf.flush()  # Ensure all data is written before reading
-
-            text = extract_text(temp_pdf.name)
-            return text.strip() if text else "Error: No text extracted from PDF."
-
-    except Exception as e:
-        return f"Error extracting PDF text: {e}"
 
 
 def process_website_or_pdf(url: str) -> str:
