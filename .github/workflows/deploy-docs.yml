@@ -2,6 +2,9 @@ name: Auto-deployment of Documentation
 on:
   push:
     branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
 jobs:
   build-docs:
     runs-on: ubuntu-latest
@@ -11,10 +14,10 @@ jobs:
       with:
         fetch-depth: 0 # Ensures full history for deployment
 
-    - name: Set up Python 3.9
+    - name: Set up Python 3.11
       uses: actions/setup-python@v3
       with:
-        python-version: 3.9
+        python-version: 3.11
 
     - name: Install Poetry Manually
       run: |
@@ -29,6 +32,10 @@ jobs:
         which poetry || echo "Poetry not found in PATH"
         poetry --version || echo "Poetry command failed"
 
+    - name: Configure Poetry to Use Python 3.11
+      run: |
+        poetry env use python3.11
+
     - name: Install dependencies
       run: |
         export PATH=$HOME/.local/bin:$PATH
@@ -36,12 +43,13 @@ jobs:
 
     - name: Build documentation
       run: |
+        mkdir -p src/oak_agent        
         export PATH=$HOME/.local/bin:$PATH
-        echo ${{ secrets.GH_TOKEN }} >> src/oak_agent/token.txt
+        echo ${{ secrets.GITHUB_TOKEN }} >> src/oak_agent/token.txt
         mkdir gh-pages
         touch gh-pages/.nojekyll
         cd docs/
-        poetry run sphinx-apidoc -o . ../src/oak_agent/ --ext-autodoc -f
+        poetry run sphinx-apidoc -o . ../src/aurelian/ --ext-autodoc -f
         poetry run sphinx-build -b html . _build
         cp -r _build/* ../gh-pages/
 
@@ -52,4 +60,4 @@ jobs:
         branch: gh-pages
         force: true
         folder: gh-pages
-        token: ${{ secrets.GH_TOKEN }}
+        token: ${{ secrets.GITHUB_TOKEN }}
