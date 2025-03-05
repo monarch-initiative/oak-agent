@@ -1,3 +1,6 @@
+"""
+Agent for working with phenopacket store.
+"""
 from dataclasses import dataclass, field
 from typing import Dict, List, Optional
 

@@ -1,3 +1,6 @@
+"""
+Agent for working with uniprot API endpoint
+"""
 from dataclasses import dataclass
 from typing import Dict, List
 

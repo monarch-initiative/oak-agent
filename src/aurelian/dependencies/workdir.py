@@ -55,6 +55,11 @@ class WorkDir:
         with open(file_path, "w") as f:
             f.write(content)
 
+    def delete_file(self, file_path: str) -> None:
+        self._ensure_location()
+        file_path = self.get_file_path(file_path)
+        file_path.unlink()
+
     def list_file_names(self) -> List[str]:
         """
         List the names of all files in the working directory.

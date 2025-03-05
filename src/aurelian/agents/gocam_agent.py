@@ -1,3 +1,6 @@
+"""
+Agent for working with GO-CAMs.
+"""
 from dataclasses import dataclass, field
 from typing import Dict, List, Optional
 

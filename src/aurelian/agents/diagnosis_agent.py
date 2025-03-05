@@ -1,3 +1,6 @@
+"""
+Agent for performing diagnoses, validated against Monarch KG
+"""
 from dataclasses import dataclass
 from functools import lru_cache
 from typing import List, Dict

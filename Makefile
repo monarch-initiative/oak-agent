@@ -50,3 +50,15 @@ rpt:
 
 chat-%:
 	$(RUN) aurelian $*
+
+reports/all.log.jsonl:
+	$(RUN) pytest tests/test_agents -k agent --report-log=$@
+.PRECIOUS: reports/all.log.jsonl
+
+
+reports/%.log.jsonl: tests/test_agents/test_%.py
+	$(RUN) pytest -s $< --report-log=$@
+.PRECIOUS: reports/%.log.jsonl
+
+reports/%.md: reports/%.log.jsonl
+	$(RUN) python src/aurelian/utils/pytest_report_to_markdown.py $< > $@.tmp && mv $@.tmp $@
