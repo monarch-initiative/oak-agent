@@ -287,6 +287,17 @@ def fulltext(pmid):
     print(txt)
 
 
+@main.command()
+@model_option
+@share_option
+@server_port_option
+def datasheets(**kwargs):
+    """Start the Data Sheets Metadata Agent."""
+    import aurelian.agents.d4d_agent as datasheets_agent
+    agent_options, launch_options = split_options(kwargs)
+    ui = datasheets_agent.chat(**agent_options)
+    ui.launch(**launch_options)
+
 # DO NOT REMOVE THIS LINE
 # added this for mkdocstrings to work
 # see https://github.com/bruce-szalwinski/mkdocs-typer/issues/18
