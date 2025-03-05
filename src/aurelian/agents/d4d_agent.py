@@ -6,6 +6,7 @@ from pdfminer.high_level import extract_text
 from pydantic_ai import Agent, RunContext
 from aurelian.utils.search_utils import retrieve_web_page
 
+
 def get_full_schema(
         url="https://raw.githubusercontent.com/monarch-initiative/ontogpt/main/src/ontogpt/templates/data_sheets_schema.yaml"
     ) -> str:
@@ -68,7 +69,6 @@ def extract_text_from_pdf(pdf_url: str) -> str:
 
     except Exception as e:
         return f"Error extracting PDF text: {e}"
-
 
 
 def process_website_or_pdf(url: str) -> str:
