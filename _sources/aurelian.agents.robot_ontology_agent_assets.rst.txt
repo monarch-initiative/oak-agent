@@ -1,0 +1,10 @@
+aurelian.agents.robot\_ontology\_agent\_assets package
+======================================================
+
+Module contents
+---------------
+
+.. automodule:: aurelian.agents.robot_ontology_agent_assets
+   :members:
+   :show-inheritance:
+   :undoc-members:

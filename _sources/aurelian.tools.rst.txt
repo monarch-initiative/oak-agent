@@ -1,0 +1,10 @@
+aurelian.tools package
+======================
+
+Module contents
+---------------
+
+.. automodule:: aurelian.tools
+   :members:
+   :show-inheritance:
+   :undoc-members:

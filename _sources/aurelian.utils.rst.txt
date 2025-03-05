@@ -60,6 +60,14 @@ aurelian.utils.pytest\_report\_to\_markdown module
    :show-inheritance:
    :undoc-members:
 
+aurelian.utils.robot\_ontology\_utils module
+--------------------------------------------
+
+.. automodule:: aurelian.utils.robot_ontology_utils
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
 aurelian.utils.search\_utils module
 -----------------------------------
 

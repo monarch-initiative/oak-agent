@@ -8,6 +8,7 @@ Subpackages
    :maxdepth: 4
 
    aurelian.agents.checklist
+   aurelian.agents.robot_ontology_agent_assets
 
 Submodules
 ----------
@@ -96,6 +97,14 @@ aurelian.agents.rag\_agent module
 ---------------------------------
 
 .. automodule:: aurelian.agents.rag_agent
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+aurelian.agents.robot\_ontology\_agent module
+---------------------------------------------
+
+.. automodule:: aurelian.agents.robot_ontology_agent
    :members:
    :show-inheritance:
    :undoc-members:

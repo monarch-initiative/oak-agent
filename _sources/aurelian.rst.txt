@@ -9,6 +9,7 @@ Subpackages
 
    aurelian.agents
    aurelian.dependencies
+   aurelian.tools
    aurelian.utils
 
 Submodules
