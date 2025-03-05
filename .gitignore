@@ -1,5 +1,7 @@
 .idea
 .gradio
+pdf_cache.sqlite
+docs/examples/output/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

@@ -10,18 +10,17 @@ readme = "README.md"
 python = "^3.11"
 click = "*"
 importlib-metadata = ">=8.2.0"
-oaklib = "^0.6.19"
+oaklib = ">=0.6.19"
 tabulate = "^0.9.0"
-linkml-store = {extras = ["llm", "mongodb"], version = "^0.2.4"}
-bioregistry = "^0.11.35"
+linkml-store = {extras = ["llm", "mongodb"], version = ">=0.2.4"}
 rdkit = {optional=true, version="*"}
 gocam = {optional=true, version="*"}
 linkml = {optional=true, version="*"}
 gradio = {optional=true, version=">=4.0.0"}
-pydantic-ai = "^0.0.23"
+pydantic-ai = ">=0.0.29"
 logfire = "^3.5.3"
-bs4 = "^0.0.2"
-duckduckgo-search = "^7.3.2"
+bs4 = ">=0.0.2"
+duckduckgo-search = ">=7.3.2"
 markdownify = "^0.14.1"
 wikipedia = "^1.4.0"
 markitdown = "^0.0.1a4"
@@ -58,6 +57,7 @@ gocam = ["gocam"]
 gradio = ["gradio"]
 bioservices = ["bioservices"]
 linkml = ["linkml"]
+chem = ["rdkit"]
 
 [tool.poetry.group.docs]
 optional = true
