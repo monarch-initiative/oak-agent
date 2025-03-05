@@ -12,7 +12,16 @@ __all__ = [
     "main",
 ]
 
+from typer.cli import callback
+
 logger = logging.getLogger(__name__)
+
+
+def parse_multivalued(ctx, param, value: Optional[str]) -> Optional[List]:
+    if not value:
+        return None
+    return value.split(',') if isinstance(value, str) and ',' in value else [value]
+
 
 model_option = click.option(
     "--model",
@@ -35,6 +44,7 @@ share_option = click.option(
 ontologies_option = click.option(
     "--ontologies",
     "-i",
+    callback=parse_multivalued,
     help="Comma-separated list of ontologies to use for the agent.",
 )
 server_port_option = click.option(
@@ -61,7 +71,15 @@ collection_name_option = click.option(
 @click.option("-q", "--quiet")
 @click.version_option(__version__)
 def main(verbose: int, quiet: bool):
-    """CLI for ubergraph-agent.
+    """Main command for Aurelian.
+
+    THIS CLI MAY CHANGE.
+
+    Currently there are multiple sub-commands,
+    each of which starts a UI for an agent.
+
+    However, there are a few other utility commands,
+    e.g. for indexing an ontology or downloading a PMID
 
     :param verbose: Verbosity while running.
     :param quiet: Boolean to be quiet or verbose.
@@ -80,7 +98,7 @@ def main(verbose: int, quiet: bool):
 
 
 def split_options(kwargs, agent_keys: Optional[List]=None, extra_agent_keys: Optional[List] = None):
-    """Split options into model and agent options."""
+    """Split options into agent and launch options."""
     if agent_keys is None:
         agent_keys = ["model", "workdir", "ontologies", "db_path", "collection_name"]
     if extra_agent_keys is not None:
@@ -90,9 +108,23 @@ def split_options(kwargs, agent_keys: Optional[List]=None, extra_agent_keys: Opt
     return agent_options, launch_options
 
 
+def split_options3(kwargs, agent_keys: Optional[List]=None, extra_agent_keys: Optional[List] = None, launch_keys: Optional[List] = None):
+    """Split options into deps, agent, and agent options."""
+    if launch_keys is None:
+        launch_keys = ["server_port", "share"]
+    if agent_keys is None:
+        agent_keys = ["model"]
+    if extra_agent_keys is not None:
+        agent_keys += extra_agent_keys
+    agent_options = {k: v for k, v in kwargs.items() if k in agent_keys}
+    launch_options = {k: v for k, v in kwargs.items() if k in launch_keys}
+    deps_options = {k: v for k, v in kwargs.items() if k not in agent_keys and k not in launch_keys}
+    return deps_options, agent_options, launch_options
+
+
 @main.command()
 def gocam_ui():
-    """Start the GO-CAM UI."""
+    """Start the GO-CAM Chat UI."""
     import aurelian.agents.gocam_agent as gocam
 
     ui = gocam.ui()
@@ -106,7 +138,8 @@ def gocam_ui():
 def search_ontology(ontology: str, term: str, **kwargs):
     """Search the ontology for the given query term.
 
-    Also has side effect of indexing
+    Also has side effect of indexing. You may want to pre-index before
+    starting an individual UI.
     """
     import aurelian.utils.ontology_utils as ontology_utils
     from oaklib import get_adapter
@@ -123,7 +156,7 @@ def search_ontology(ontology: str, term: str, **kwargs):
 @share_option
 @server_port_option
 def gocam(share: bool, server_port: Optional[int] = None, **kwargs):
-    """Start the GO-CAM UI."""
+    """Start the GO-CAM Chat UI."""
     import aurelian.agents.gocam_agent as gocam
 
     ui = gocam.chat(**kwargs)
@@ -147,6 +180,7 @@ def phenopackets(**kwargs):
 @model_option
 @share_option
 @server_port_option
+@click.argument("query", nargs=-1)
 def diagnosis(**kwargs):
     """Start the diagnosis agent."""
     import aurelian.agents.diagnosis_agent as diagnosis
@@ -183,6 +217,19 @@ def linkml(**kwargs):
 
 @main.command()
 @model_option
+@workdir_option
+@share_option
+@server_port_option
+def robot(**kwargs):
+    """Start the robot ontology agent."""
+    import aurelian.agents.robot_ontology_agent as agent
+    agent_options, launch_options = split_options(kwargs)
+    ui = agent.chat(**agent_options)
+    ui.launch(**launch_options)
+
+
+@main.command()
+@model_option
 @share_option
 @server_port_option
 def amigo(**kwargs):
@@ -211,12 +258,24 @@ def rag(**kwargs):
 @share_option
 @server_port_option
 @ontologies_option
-def mapper(**kwargs):
+@click.argument("query", nargs=-1)
+def mapper(query, ontologies, **kwargs):
     """Start the Ontology Mapper agent."""
     import aurelian.agents.ontology_mapper_agent as agent
-    agent_options, launch_options = split_options(kwargs)
-    ui = agent.chat(**agent_options)
-    ui.launch(**launch_options)
+    from aurelian.agents.ontology_mapper_agent import OntologyDependencies
+    if ontologies:
+        if isinstance(ontologies, str):
+            ontologies = [ontologies]
+        deps = OntologyDependencies(ontologies=ontologies)
+    else:
+        deps = OntologyDependencies()
+    deps_options, agent_options, launch_options = split_options3(kwargs)
+    if query:
+        r = agent.ontology_mapper_agent.run_sync("\n".join(query), deps=deps)
+        print(r.data)
+    else:
+        ui = agent.chat(deps, **agent_options)
+        ui.launch(**launch_options)
 
 
 @main.command()
@@ -227,6 +286,12 @@ def fulltext(pmid):
     txt = get_pmid_text(pmid)
     print(txt)
 
+
+# DO NOT REMOVE THIS LINE
+# added this for mkdocstrings to work
+# see https://github.com/bruce-szalwinski/mkdocs-typer/issues/18
+#click_app = get_command(app)
+#click_app.name = "aurelian"
 
 if __name__ == "__main__":
     main()

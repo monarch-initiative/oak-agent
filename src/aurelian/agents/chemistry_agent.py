@@ -1,3 +1,8 @@
+"""
+Agent for working with chemical structures.
+
+Currently this is largely geared around interpreting chemical structures.
+"""
 import io
 from dataclasses import dataclass, field
 from functools import lru_cache

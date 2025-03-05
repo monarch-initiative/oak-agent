@@ -1,0 +1,5 @@
+ID,Label,Type,Definition
+ID,LABEL,TYPE,A IAO:0000115
+IAO:0000115,definition,owl:AnnotationProperty
+BFO:0000050,part_of,owl:ObjectProperty
+SNK:0000001,main ingredient,owl:ObjectProperty

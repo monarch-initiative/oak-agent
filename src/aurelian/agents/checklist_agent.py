@@ -1,3 +1,6 @@
+"""
+Agent for validating papers against checklists, e.g STREAMS
+"""
 from dataclasses import dataclass
 from typing import Dict, List
 
