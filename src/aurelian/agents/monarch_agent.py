@@ -1,3 +1,6 @@
+"""
+Agent for interacting with Monarch knowledge base
+"""
 from dataclasses import dataclass
 from typing import Dict, List
 

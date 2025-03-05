@@ -24,6 +24,17 @@ theme:
   font:
     text: Roboto
     code: Roboto Mono
+markdown_extensions:
+  - admonition
+  - codehilite
+  - mkdocs-click
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
 plugins:
   - search
 #  - gen-files:
@@ -35,4 +46,21 @@ plugins:
 nav:
   - Home: index.md
   - Agents:
-      - Phenopackets: agents/gocam_agent.md
+      - amigo_agent: agents/amigo_agent.md
+      - biblio_agent: agents/biblio_agent.md
+      - checklist_agent: agents/checklist_agent.md
+      - chemistry_agent: agents/chemistry_agent.md
+      - diagnosis_agent: agents/diagnosis_agent.md
+      - gocam_agent: agents/gocam_agent.md
+      - linkml_agent: agents/linkml_agent.md
+      - monarch_agent: agents/monarch_agent.md
+      - ontology_mapper_agent: agents/ontology_mapper_agent.md
+      - phenopacket_agent: agents/phenopacket_agent.md
+      - rag_agent: agents/rag_agent.md
+      - ubergraph_agent: agents/ubergraph_agent.md
+      - uniprot_agent: agents/uniprot_agent.md
+
+  - Command Line: cli.md
+  - Test Results: test_results.md
+  - Examples:
+      - Chemistry: examples/Terpenoids.ipynb

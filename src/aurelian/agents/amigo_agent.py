@@ -1,3 +1,6 @@
+"""
+Agent for interacting with GO KnowledgeBase via AmiGO solr endpoint.
+"""
 from dataclasses import dataclass
 from typing import Dict, List
 
@@ -81,7 +84,7 @@ def gene_associations_for_pmid(amigo: AmiGOImplementation, pmid: str) -> List[Di
     Find gene associations for a given PMID
 
     Args:
-        ctx:
+        amigo: OAK AmiGO endpoint
         pmid: The PMID
 
     Returns:

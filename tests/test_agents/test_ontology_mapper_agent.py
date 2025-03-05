@@ -18,9 +18,12 @@ def deps() -> OntologyDependencies:
 #        ("Best terms to use for the middle 3 fingers", ("UBERON:0006050", "UBERON:0006049"), None),
     ]
 )
-def test_ontology_mapper_agent(deps, query, ideal, ontologies):
+def test_ontology_mapper_agent(record_property, deps, query, ideal, ontologies):
+    record_property("agent", str(ontology_mapper_agent))
+    record_property("query", query)
     r = ontology_mapper_agent.run_sync(query, deps=deps)
     data = r.data
+    record_property("result", str(data))
     assert data is not None
     if ideal is not None:
         if isinstance(ideal, (tuple, set, list)):

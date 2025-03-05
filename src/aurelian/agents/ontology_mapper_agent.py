@@ -1,3 +1,5 @@
+"""Agent for creating ontology mappings.
+"""
 from dataclasses import dataclass, field
 from functools import lru_cache
 from typing import List, Dict, Union
@@ -25,7 +27,8 @@ class OntologyDependencies:
     this can easily be changed e.g. in command line
     """
     max_search_results: int = 30
-    allowed_ontologies: List[str] = field(default_factory=lambda: ["mondo", "hp", "go", "uberon", "cl", "mp", "envo"])
+    ontologies: List[str] = field(default_factory=lambda: ["mondo", "hp", "go", "uberon", "cl", "mp", "envo"])
+
 
 ontology_mapper_agent = Agent(
     model="openai:gpt-4o",
@@ -56,7 +59,7 @@ ontology_mapper_agent = Agent(
 
 @ontology_mapper_agent.system_prompt
 def add_ontologies(ctx: RunContext[OntologyDependencies]) -> str:
-    allowed_ontologies = ctx.deps.allowed_ontologies
+    allowed_ontologies = ctx.deps.ontologies
     if allowed_ontologies:
         return f"Allowed ontologies: {allowed_ontologies}"
     return "Use any ontology (ideally in OBO repository)"
@@ -118,14 +121,8 @@ def retrieve_web_page(url: str) -> str:
     return su.retrieve_web_page(url)
 
 
-def chat(ontologies: Union[str, List[str]], **kwargs):
+def chat(deps: OntologyDependencies, **kwargs):
     import gradio as gr
-    if ontologies:
-        if isinstance(ontologies, str):
-            ontologies = [ontologies]
-        deps = OntologyDependencies(allowed_ontologies=ontologies)
-    else:
-        deps = OntologyDependencies()
 
     def get_info(query: str, history: List[str]) -> str:
         print(f"QUERY: {query}")

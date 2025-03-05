@@ -45,7 +45,7 @@ jobs:
       run: |
         mkdir -p src/oak_agent        
         export PATH=$HOME/.local/bin:$PATH
-        echo ${{ secrets.GH_TOKEN }} >> src/oak_agent/token.txt
+        echo ${{ secrets.GITHUB_TOKEN }} >> src/oak_agent/token.txt
         mkdir gh-pages
         touch gh-pages/.nojekyll
         cd docs/
@@ -60,4 +60,4 @@ jobs:
         branch: gh-pages
         force: true
         folder: gh-pages
-        token: ${{ secrets.GH_TOKEN }}
+        token: ${{ secrets.GITHUB_TOKEN }}
