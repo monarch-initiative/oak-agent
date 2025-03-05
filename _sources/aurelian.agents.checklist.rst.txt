@@ -1,0 +1,10 @@
+aurelian.agents.checklist package
+=================================
+
+Module contents
+---------------
+
+.. automodule:: aurelian.agents.checklist
+   :members:
+   :show-inheritance:
+   :undoc-members:

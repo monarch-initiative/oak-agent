@@ -1,0 +1,77 @@
+aurelian.utils package
+======================
+
+Submodules
+----------
+
+aurelian.utils.async\_utils module
+----------------------------------
+
+.. automodule:: aurelian.utils.async_utils
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+aurelian.utils.data\_utils module
+---------------------------------
+
+.. automodule:: aurelian.utils.data_utils
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+aurelian.utils.doi\_fetcher module
+----------------------------------
+
+.. automodule:: aurelian.utils.doi_fetcher
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+aurelian.utils.ontology\_utils module
+-------------------------------------
+
+.. automodule:: aurelian.utils.ontology_utils
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+aurelian.utils.process\_logs module
+-----------------------------------
+
+.. automodule:: aurelian.utils.process_logs
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+aurelian.utils.pubmed\_utils module
+-----------------------------------
+
+.. automodule:: aurelian.utils.pubmed_utils
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+aurelian.utils.pytest\_report\_to\_markdown module
+--------------------------------------------------
+
+.. automodule:: aurelian.utils.pytest_report_to_markdown
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+aurelian.utils.search\_utils module
+-----------------------------------
+
+.. automodule:: aurelian.utils.search_utils
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+Module contents
+---------------
+
+.. automodule:: aurelian.utils
+   :members:
+   :show-inheritance:
+   :undoc-members:
