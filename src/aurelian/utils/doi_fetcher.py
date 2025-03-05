@@ -120,7 +120,8 @@ class DOIFetcher:
             fallback_to_abstract:
 
         Returns:
-            str: The full text if available, otherwise None
+            str: The full text if available, else abstract text if fallback_to_abstract,
+              else None
 
         """
         info = self.get_full_text_info(doi)
