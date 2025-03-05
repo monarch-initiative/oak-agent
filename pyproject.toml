@@ -28,6 +28,7 @@ markitdown = "^0.0.1a4"
 pypaperbot = "^1.4.1"
 undetected-chromedriver = "^3.5.5"
 bioservices = "^1.12.0"
+pdfminer = "^20191125"
 
 [tool.poetry.group.dev.dependencies]
 pytest = {version = ">=8.3.2"}
