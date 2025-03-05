@@ -27,7 +27,7 @@ markitdown = "^0.0.1a4"
 pypaperbot = "^1.4.1"
 undetected-chromedriver = "^3.5.5"
 bioservices = "^1.12.0"
-pdfminer.six = {optional=true, version="*"}
+pdfminer-six = {optional=true, version="*"}
 
 [tool.poetry.group.dev.dependencies]
 pytest = {version = ">=8.3.2"}
@@ -58,7 +58,7 @@ gradio = ["gradio"]
 bioservices = ["bioservices"]
 linkml = ["linkml"]
 chem = ["rdkit"]
-pdfminer = ["pdfminer.six"]
+pdfminer = ["pdfminer-six"]
 
 [tool.poetry.group.docs]
 optional = true
