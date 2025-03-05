@@ -1,3 +1,6 @@
+"""
+Agent for creating LinkML schemas and example datasets
+"""
 from dataclasses import dataclass, field
 from typing import List
 
@@ -8,7 +11,7 @@ from linkml.generators import JsonSchemaGenerator
 from linkml_runtime.loaders import yaml_loader
 from linkml_runtime.linkml_model import SchemaDefinition
 from linkml.validator import validate
-from pydantic_ai import Agent, RunContext, AgentRunError
+from pydantic_ai import Agent, RunContext, AgentRunError, ModelRetry
 
 from aurelian.dependencies.workdir import WorkDir
 
@@ -61,12 +64,12 @@ def add_checklists(ctx: RunContext[Dependencies]) -> str:
     return "No files currently in the working directory"
 
 @linkml_agent.tool
-def validate_schema(ctx: RunContext[Dependencies], schema: str, save_to_file="schema.yaml") -> str:
+def validate_schema(ctx: RunContext[Dependencies], schema: str, save_to_file: str="schema.yaml") -> str:
     """
     Validate a LinkML schema.
 
     Args:
-        ctx:
+        ctx: context
         schema: schema (as yaml) to validate. Do not truncate, always pass the whole schema.
         save_to_file: optional file name to save the schema to. Defaults to schema.yaml
 
@@ -81,7 +84,7 @@ def validate_schema(ctx: RunContext[Dependencies], schema: str, save_to_file="sc
         if save_to_file and schema:
             ctx.deps.workdir.write_file(save_to_file, schema)
     except Exception as e:
-        return f"Schema does not validate: {e}"
+        raise ModelRetry(f"Schema does not validate: {e}")
     return "VALIDATES"
 
 @linkml_agent.tool
@@ -91,7 +94,7 @@ def inspect_file(ctx: RunContext[Dependencies], data_file: str) -> str:
 
     Args:
         ctx:
-        data_file:
+        data_file: name of file
 
     Returns:
 

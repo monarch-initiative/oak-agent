@@ -1,3 +1,6 @@
+"""
+Agent for working with ontologies via UberGraph endpoint.
+"""
 from dataclasses import dataclass, field
 from typing import Any, Dict, List
 

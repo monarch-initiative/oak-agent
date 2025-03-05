@@ -4,6 +4,8 @@ from collections import defaultdict
 import re
 from typing import Iterator
 
+import click
+
 
 def report_md(log_path: str) -> str:
     return '\n'.join(list(report_md_iter(log_path)))
@@ -20,6 +22,8 @@ def report_md_iter(log_path: str) -> Iterator[str]:
     """
 
     with open(log_path) as f:
+        outcome = None
+        duration = None
         for line in f:
             entry = json.loads(line)
 
@@ -28,11 +32,15 @@ def report_md_iter(log_path: str) -> Iterator[str]:
                 continue
 
             nodeid = entry['nodeid']
+            outcome = entry.get('outcome')
+            duration = entry.get('duration')
+
+            if not outcome:
+                continue
 
             yield f"## {nodeid}\n"
 
-            outcome = entry.get('outcome')
-            duration = entry.get('duration')
+
 
             for p in entry.get('user_properties', []):
                 k = p[0]
@@ -48,14 +56,12 @@ def report_md_iter(log_path: str) -> Iterator[str]:
             yield f"* Duration: {duration}\n"
 
 
-# Example usage:
-if __name__ == '__main__':
-    # Assume report.jsonl exists from running:
-    # pytest test_examples.py --report-log=report.jsonl
 
-    log_path = Path('report.jsonl')
+@click.command()
+@click.argument("log_path", type=click.Path(exists=True))
+def main(log_path: str):
     markdown = report_md(log_path)
+    print(markdown)
 
-    # Write markdown to file
-    with open('docs/unit_tests.md', 'w') as f:
-        f.write(markdown)
+if __name__ == "__main__":
+    main()
