@@ -12,8 +12,6 @@ __all__ = [
     "main",
 ]
 
-from typer.cli import callback
-
 logger = logging.getLogger(__name__)
 
 
