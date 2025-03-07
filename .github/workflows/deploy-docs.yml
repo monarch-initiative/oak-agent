@@ -43,15 +43,11 @@ jobs:
 
     - name: Build documentation
       run: |
-        mkdir -p src/oak_agent        
         export PATH=$HOME/.local/bin:$PATH
-        echo ${{ secrets.GITHUB_TOKEN }} >> src/oak_agent/token.txt
         mkdir gh-pages
         touch gh-pages/.nojekyll
-        cd docs/
-        poetry run sphinx-apidoc -o . ../src/aurelian/ --ext-autodoc -f
-        poetry run sphinx-build -b html . _build
-        cp -r _build/* ../gh-pages/
+        poetry run mkdocs build
+        cp -r site/* gh-pages/
 
     - name: Deploy documentation
       if: ${{ github.event_name == 'push' }}
