@@ -5,7 +5,7 @@ all: test
 test: pytest doctest
 test-full: test all-nb
 
-CLI = $(RUN) oak-agent
+CLI = $(RUN) aurelian
 
 ui:
 	$(CLI) ui
