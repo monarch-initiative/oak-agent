@@ -1,0 +1,1916 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../../cli/">
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.7">
+    
+    
+      
+        <title>Chemistry - Aurelian</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.8608ea7d.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/_mkdocstrings.css">
+    
+      <link rel="stylesheet" href="../../css/ansi-colours.css">
+    
+      <link rel="stylesheet" href="../../css/jupyter-cells.css">
+    
+      <link rel="stylesheet" href="../../css/pandas-dataframe.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="pink">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Aurelian" class="md-header__button md-logo" aria-label="Aurelian" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Aurelian
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Chemistry
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="pink"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="amber"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Aurelian" class="md-nav__button md-logo" aria-label="Aurelian" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Aurelian
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Agents
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Agents
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agents/amigo_agent.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    amigo_agent
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agents/biblio_agent.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    biblio_agent
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agents/checklist_agent.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    checklist_agent
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agents/chemistry_agent.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    chemistry_agent
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agents/diagnosis_agent.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    diagnosis_agent
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agents/gocam_agent/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    gocam_agent
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agents/linkml_agent.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    linkml_agent
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agents/monarch_agent.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    monarch_agent
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agents/ontology_mapper_agent.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ontology_mapper_agent
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agents/phenopacket_agent.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    phenopacket_agent
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agents/rag_agent.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    rag_agent
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agents/ubergraph_agent.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ubergraph_agent
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../agents/uniprot_agent.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    uniprot_agent
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cli/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Command Line
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../test_results.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Test Results
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Examples
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Examples
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Chemistry
+    
+  </span>
+  
+
+      </a>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+  <h1>Chemistry</h1>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script>
+(function() {
+  function addWidgetsRenderer() {
+    var requireJsScript = document.createElement('script');
+    requireJsScript.src = 'https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js';
+
+    var mimeElement = document.querySelector('script[type="application/vnd.jupyter.widget-view+json"]');
+    var jupyterWidgetsScript = document.createElement('script');
+    var widgetRendererSrc = 'https://unpkg.com/@jupyter-widgets/html-manager@*/dist/embed-amd.js';
+    var widgetState;
+
+    // Fallback for older version:
+    try {
+      widgetState = mimeElement && JSON.parse(mimeElement.innerHTML);
+
+      if (widgetState && (widgetState.version_major < 2 || !widgetState.version_major)) {
+        widgetRendererSrc = 'jupyter-js-widgets@*/dist/embed.js';
+      }
+    } catch(e) {}
+
+    jupyterWidgetsScript.src = widgetRendererSrc;
+
+    document.body.appendChild(requireJsScript);
+    document.body.appendChild(jupyterWidgetsScript);
+  }
+
+  document.addEventListener('DOMContentLoaded', addWidgetsRenderer);
+}());
+</script>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">aurelian.agents.chemistry_agent</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_chebi_adapter</span><span class="p">,</span> <span class="n">ChemicalStructure</span>
+
+<span class="n">CLASSES</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;monoterpenoid&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="s2">&quot;sesquiterpenoid&quot;</span><span class="p">:</span> <span class="mi">15</span><span class="p">,</span>
+    <span class="s2">&quot;diterpenoid&quot;</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
+    <span class="s2">&quot;sesterterpenoid&quot;</span><span class="p">:</span> <span class="mi">25</span><span class="p">,</span>
+    <span class="s2">&quot;triterpenoid&quot;</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span>
+    <span class="s2">&quot;other&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">}</span>
+</code></pre></div>
+
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="highlight"><pre><span></span><code><span class="n">chebi</span> <span class="o">=</span> <span class="n">get_chebi_adapter</span><span class="p">()</span>
+<span class="n">session</span> <span class="o">=</span> <span class="n">chebi</span><span class="o">.</span><span class="n">session</span>
+</code></pre></div>
+
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">get_formula</span><span class="p">(</span><span class="n">curie</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">chebi</span><span class="o">.</span><span class="n">entity_metadata_map</span><span class="p">(</span><span class="n">curie</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;obo:chebi/formula&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+</code></pre></div>
+
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">semsql.sqla.semsql</span><span class="w"> </span><span class="kn">import</span> <span class="n">Statements</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">oaklib.datamodels.vocabulary</span><span class="w"> </span><span class="kn">import</span> <span class="n">IS_A</span>
+
+<span class="n">suspects</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">c</span><span class="p">,</span> <span class="n">expected_carbons</span> <span class="ow">in</span> <span class="n">CLASSES</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">expected_carbons</span><span class="p">:</span>
+        <span class="k">continue</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Searching for </span><span class="si">{</span><span class="n">c</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">curies</span> <span class="o">=</span> <span class="n">chebi</span><span class="o">.</span><span class="n">curies_by_label</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+    <span class="n">curie</span> <span class="o">=</span> <span class="n">curies</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="n">curies</span> <span class="k">else</span> <span class="kc">None</span>
+    <span class="n">structures</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">chebi</span><span class="o">.</span><span class="n">descendants</span><span class="p">(</span><span class="n">curie</span><span class="p">,</span> <span class="p">[</span><span class="n">IS_A</span><span class="p">]))</span>
+    <span class="n">q</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">Statements</span><span class="o">.</span><span class="n">subject</span><span class="p">,</span> <span class="n">Statements</span><span class="o">.</span><span class="n">value</span><span class="p">)</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">Statements</span><span class="o">.</span><span class="n">subject</span><span class="o">.</span><span class="n">in_</span><span class="p">(</span><span class="n">structures</span><span class="p">))</span>
+    <span class="n">q</span> <span class="o">=</span> <span class="n">q</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">Statements</span><span class="o">.</span><span class="n">predicate</span> <span class="o">==</span> <span class="s2">&quot;obo:chebi/formula&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">s</span><span class="p">,</span> <span class="n">formula</span> <span class="ow">in</span> <span class="n">q</span><span class="p">:</span>
+        <span class="c1"># split into atoms; e.g. C10H16 =&amp;gt; {&quot;C&quot;: 10, &quot;H&quot;: 16}</span>
+        <span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
+        <span class="n">atom_counts</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;([A-Z][a-z]*)(\d*)&#39;</span><span class="p">,</span> <span class="n">formula</span><span class="p">))</span>
+        <span class="n">ac</span> <span class="o">=</span> <span class="n">atom_counts</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;C&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">cc</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">ac</span><span class="p">)</span> <span class="k">if</span> <span class="n">ac</span> <span class="k">else</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">cc</span> <span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span><span class="o">=</span> <span class="n">expected_carbons</span> <span class="o">*</span> <span class="mi">2</span> <span class="ow">or</span> <span class="n">cc</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="o">=</span> <span class="n">expected_carbons</span><span class="p">:</span>
+            <span class="c1">#print(s, formula)</span>
+            <span class="n">suspects</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">c</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">cc</span><span class="p">,</span> <span class="n">formula</span><span class="p">))</span>
+</code></pre></div>
+
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>
+<code>Searching for monoterpenoid
+Searching for sesquiterpenoid
+Searching for diterpenoid
+Searching for sesterterpenoid
+Searching for triterpenoid
+</code>
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="highlight"><pre><span></span><code><span class="nb">len</span><span class="p">(</span><span class="n">suspects</span><span class="p">)</span>
+</code></pre></div>
+
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="output_text output_subarea output_execute_result">
+<pre>
+<code>775</code>
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="highlight"><pre><span></span><code><span class="nb">len</span><span class="p">([</span><span class="n">s</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">suspects</span> <span class="k">if</span> <span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;triterpenoid&quot;</span><span class="p">])</span>
+</code></pre></div>
+
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="output_text output_subarea output_execute_result">
+<pre>
+<code>51</code>
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="highlight"><pre><span></span><code><span class="n">suspects</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
+</code></pre></div>
+
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">pydantic</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaseModel</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pydantic_ai</span><span class="w"> </span><span class="kn">import</span> <span class="n">Agent</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Classification</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+    <span class="n">chemical_class</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">explanation</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">confidence</span><span class="p">:</span> <span class="nb">str</span>
+
+<span class="n">agent</span> <span class="o">=</span> <span class="n">Agent</span><span class="p">(</span>
+    <span class="n">model</span><span class="o">=</span><span class="s1">&#39;openai:gpt-4o&#39;</span><span class="p">,</span>
+      <span class="n">system_prompt</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;&quot;&quot;You are an expert chemist, able to interpret</span>
+<span class="s2">      chemical structure diagrams and classify them.</span>
+<span class="s2">      Look at the provided structure and classify it in one of the following categories:</span>
+<span class="s2">      </span><span class="si">{</span><span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">CLASSES</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span><span class="si">}</span><span class="s2">.</span>
+<span class="s2">      When providing the explanation, show your full reasoning, explaining any anomalies in the structure.</span>
+<span class="s2">      Actually look at the structure, and describe it, rather than just counting carbons.</span>
+<span class="s2">      I want a detailed description of what you see.</span>
+<span class="s2">      If you don&#39;t know, say so. Give a confidence level for all classifications, LOW, MEDIUM, or HIGH.</span>
+<span class="s2">      &quot;&quot;&quot;</span><span class="p">,</span>
+    <span class="n">result_type</span><span class="o">=</span><span class="n">Classification</span><span class="p">)</span>
+</code></pre></div>
+
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">pydantic_ai</span><span class="w"> </span><span class="kn">import</span> <span class="n">ImageUrl</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">nest_asyncio</span>
+
+<span class="n">nest_asyncio</span><span class="o">.</span><span class="n">apply</span><span class="p">()</span>
+
+<span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">c</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">cc</span><span class="p">,</span> <span class="n">formula</span> <span class="ow">in</span> <span class="n">suspects</span><span class="p">:</span>
+
+    <span class="n">structure</span> <span class="o">=</span> <span class="n">ChemicalStructure</span><span class="o">.</span><span class="n">from_id</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+    <span class="n">structure</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">chebi</span><span class="o">.</span><span class="n">label</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+    <span class="n">img_url</span> <span class="o">=</span> <span class="n">ImageUrl</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">structure</span><span class="o">.</span><span class="n">chebi_image_url</span><span class="p">)</span>
+    <span class="n">q</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="sa">f</span><span class="s2">&quot;This structure is classified in CHEBI as a </span><span class="si">{</span><span class="n">c</span><span class="si">}</span><span class="s2">, yet it has </span><span class="si">{</span><span class="n">cc</span><span class="si">}</span><span class="s2"> carbons.&quot;</span>
+        <span class="sa">f</span><span class="s2">&quot; Its formula is </span><span class="si">{</span><span class="n">formula</span><span class="si">}</span><span class="s2">.&quot;</span>
+        <span class="sa">f</span><span class="s2">&quot; And its name is </span><span class="si">{</span><span class="n">structure</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">.&quot;</span>
+        <span class="sa">f</span><span class="s2">&quot; Give the correct classification.&quot;</span>
+    <span class="p">)</span>
+    <span class="n">q</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;What is the correct classification for this structure?</span>
+<span class="s2">    I suspect it is a terpenoid, in one of the following categories:</span>
+<span class="s2">    </span><span class="si">{</span><span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">CLASSES</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span><span class="si">}</span><span class="s2">.</span>
+<span class="s2">    &quot;&quot;&quot;</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">agent</span><span class="o">.</span><span class="n">run_sync</span><span class="p">([</span><span class="n">q</span><span class="p">,</span> <span class="n">img_url</span><span class="p">])</span>
+    <span class="n">agrees</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">chemical_class</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="n">c</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">agrees</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">cc</span><span class="p">,</span> <span class="n">formula</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+    <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">agrees</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">result</span><span class="p">))</span>
+</code></pre></div>
+
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>
+<code>True triterpenoid CHEBI:9771 63 C63H98O29
+chemical_class='triterpenoid' explanation='The chemical structure in the image shows a large carbon skeleton with six isoprene units (30 carbon atoms organized into rings). The structure includes a multi-ring system typical for a triterpene, specifically resembling a cucurbitane skeleton in its core, characteristic of triterpenes. Additionally, there are multiple glycosidic linkages (the sugar moieties attached) which are common modifications on triterpenoid aglycones, often seen in triterpenoid saponins. These features match the classification of a triterpenoid.' confidence='HIGH'
+True triterpenoid CHEBI:9110 70 C70H104O32
+chemical_class='triterpenoid' explanation='The structure displayed consists of 30 carbon atoms forming a series of interconnected rings. This configuration is characteristic of triterpenoids, which are comprised of six isoprene units. The additional functional groups and ring configurations are common in complex triterpenoids, which can include various functional modifications. Monoterpenoids, sesquiterpenoids, diterpenoids, and sesterterpenoids consist of fewer carbon atoms (10, 15, 20, and 25 respectively), making this structure consistent with that of a triterpenoid.' confidence='HIGH'
+True triterpenoid CHEBI:74453 74 C74H110O35
+chemical_class='triterpenoid' explanation='The structure displayed contains a series of six isoprene units (C5H8) arranged into a polycyclic framework, characteristic of a triterpenoid. The core structure consists of three interconnected cyclohexane rings and a cyclopentane ring, common in many triterpenoids. Additionally, the structure includes multiple hydroxyl (OH) groups and glycosidic linkages attached to the triterpene skeleton, further indicating a complex triterpenoid configuration, possibly a glycoside.' confidence='HIGH'
+True triterpenoid CHEBI:74448 69 C69H102O31
+chemical_class='triterpenoid' explanation='This chemical structure can be classified as a triterpenoid based on its features. The backbone consists of six isoprene units, forming a complex carbon structure typical of triterpenoids. The structure includes multiple rings, hydroxyl groups, and some double bonds, which is characteristic of triterpenoids. Triterpenoids are typically composed of 30 carbon atoms, derived from the combination of six isoprene units, forming complex ring systems and often carrying diverse substituents and functional groups as seen here. The presence of these features strongly supports its classification as a triterpenoid.' confidence='HIGH'
+True triterpenoid CHEBI:69373 64 C64H104O30
+chemical_class='triterpenoid' explanation="The structure provided is quite complex, featuring multiple hexagonal rings typically associated with steroid frameworks. The core is a large structure with multiple isoprene units bonded together, forming a long carbon chain. The structure displays hydroxyl groups (-OH) indicative of triterpenoids, which typically have 30 carbon atoms arranged in a four-ring structure that can be further derivatized with hydroxyl groups, sugars, etc. With the dense carbon framework and the attached functional groups like -OH, it's consistent with triterpenoid structures like saponins or glycosides." confidence='HIGH'
+True triterpenoid CHEBI:69372 65 C65H106O31
+chemical_class='triterpenoid' explanation='The chemical structure displayed consists of a backbone of 30 carbon atoms, organized into a structure typical of triterpenoids. This includes multiple interconnected rings that are characteristic of this class of compounds. The presence of several hydroxyl groups (OH) attached to the rings indicates functional modifications often found in triterpenoids. The visual complexity, large size, and specific ring structures are consistent with structures derived from six isoprene units, aligning with the triterpenoid classification.' confidence='HIGH'
+True triterpenoid CHEBI:66653 69 C69H112O36
+chemical_class='triterpenoid' explanation='The structure consists of a long carbon chain with multiple rings typical of triterpenoids. It appears to have six isoprene units (total of 30 carbon atoms distributed in a complex structure), indicating it is a triterpenoid. The presence of multiple hydroxyl groups (OH) and glycosidic linkages is also a common feature of many triterpenoid glycosides, enhancing the complexity of the structure.' confidence='HIGH'
+True triterpenoid CHEBI:66652 69 C69H112O34
+chemical_class='triterpenoid' explanation='The structure depicted contains six isoprene units, which is characteristic of a triterpenoid. It consists of thirty carbon atoms arranged in a complex cyclic formation, a hallmark of the triterpenoid class. The multiple rings and the extensive branching and hydroxyl groups further indicate its complexity, aligning with known structures of triterpenoids.' confidence='HIGH'
+True triterpenoid CHEBI:66469 75 C75H112O35
+chemical_class='triterpenoid' explanation='The chemical structure consists of six isoprene units, which is characteristic of a triterpenoid. Triterpenoids generally have 30 carbon atoms arranged in this way. The structure also features a complex multi-ring system typical of steroids or other terpene-derived compounds, which aligns with the triterpenoid classification. Additional functional groups and side chains are present, indicating a potentially complex modification of the typical triterpene skeleton.' confidence='HIGH'
+True triterpenoid CHEBI:66467 69 C69H102O31
+chemical_class='triterpenoid' explanation='The structure shown has a characteristic arrangement of three six-membered rings and one five-membered ring, which is typical of a triterpenoid structure derived from squalene. Additionally, the complexity and size of the structure align with the typical size of triterpenoids, which are composed of 30 carbon atoms. The molecular structure further includes various functional groups such as hydroxyl (OH) groups, which are common in oxygenated derivatives of triterpenoids, often seen in steroidal structures. The presence of additional glycosidic attachments indicates possible steroidal saponins, a subclass of triterpenoids.' confidence='HIGH'
+True triterpenoid CHEBI:66466 69 C69H102O31
+chemical_class='triterpenoid' explanation='The structure in the image is a complex molecule containing multiple six-membered rings with hydroxyl groups and methyl groups attached. It appears to be a large compound with a backbone characteristic of a triterpenoid, based on the presence of 30 carbon atoms arranged in a cyclized structure typical for triterpenes. The presence of multiple rings and specific substituents aligns well with triterpenoid structures, which are known to be diverse and complex.' confidence='HIGH'
+True triterpenoid CHEBI:66465 74 C74H110O35
+chemical_class='triterpenoid' explanation='The structure consists of a large carbon skeleton that can be broken down into six isoprene units (each with five carbon atoms). This is indicative of a triterpenoid, as triterpenoids are composed of thirty carbon atoms. Additionally, the presence of multiple rings and oxygen functionalities is characteristic of triterpenoids. The attached sugar moieties are typical in glycosylated triterpenoids.' confidence='HIGH'
+True triterpenoid CHEBI:66464 74 C74H110O35
+chemical_class='triterpenoid' explanation='The structure shows a complex polycyclic framework characteristic of triterpenoids, which typically consist of six isoprene units (30 carbons). This molecule includes a fused ring system, common in triterpenoids, and additional sugar units do not alter this basic classification. The presence of multiple rings and a 30-carbon core aligns with the structure of known triterpenoids.' confidence='HIGH'
+True triterpenoid CHEBI:66173 62 C62H102N2O27
+chemical_class='triterpenoid' explanation='The structure shown is a complex molecule with multiple ring systems, indicative of a highly functionalized organic compound. There are six-membered rings visible, which are characteristic of steroidal frameworks. It appears to have multiple sugar moieties attached, suggesting glycosylation, but the core structure shows a typical tetracyclic triterpenoid pattern with a total carbon count consistent with triterpenoids (C30). The presence of hydroxyl and other functional groups suggests modifications typical in natural triterpenoids.' confidence='HIGH'
+True triterpenoid CHEBI:65993 71 C71H112O36
+chemical_class='triterpenoid' explanation='The structure is based on a 30-carbon backbone typical of triterpenoids. It has a pentacyclic structure with multiple hydroxyl groups and sugar moieties attached, which is common in terpenoid glycosides. The core structure exhibits rings and functional groups characteristic of triterpenoids.' confidence='HIGH'
+True triterpenoid CHEBI:65992 74 C74H116O40
+chemical_class='triterpenoid' explanation='The structure consists of a basic C30 backbone typical of triterpenoids. The central part of the molecule displays five fused six-membered rings, which is a characteristic pattern found in many triterpenoids such as steroids. Additionally, the presence of multiple hydroxyl groups and sugar moieties further indicates that it is a complex triterpenoid glycoside, common in saponins. These structural features are consistent with known triterpenoid compounds.' confidence='HIGH'
+False triterpenoid CHEBI:65988 113 C113H178O50
+chemical_class='other' explanation="The structure appears to be a complex molecule with multiple sugar residues and possibly various functional groups, indicating it's not a simple terpenoid chain or ring structure. Terpenoids typically consist of isoprene units forming specific structures, like monoterpenes (10 carbons), sesquiterpenes (15 carbons), diterpenes (20 carbons), sesterterpenes (25 carbons), and triterpenes (30 carbons). This structure seems more complex and doesn't fit neatly into these categories, suggesting it might be a glycoside or a complex natural product other than a straightforward terpenoid." confidence='HIGH'
+True triterpenoid CHEBI:65987 102 C102H162O48
+chemical_class='triterpenoid' explanation='The structure shown is a large complex of interconnected rings. Terpenoids are classified based on the number of isoprene units, each containing 5 carbons. In this structure, I observe six isoprene units (30 carbons), indicating a triterpenoid structure. The rings and branching patterns are consistent with typical triterpenoids, characterized by multiple fused rings. Additionally, the complexity and carbon count align with known triterpenoids.' confidence='HIGH'
+True triterpenoid CHEBI:65986 102 C102H162O48
+chemical_class='triterpenoid' explanation='The structure is a complex organic molecule composed of several six-membered rings and multiple branches. There is a network of 30 carbon atoms that form a backbone typical of triterpenoids, which are derived from a C30 precursor. The presence of multiple hydroxyl groups and possibly other functional groups further indicates it is a triterpenoid. The overall structural complexity with multiple rings and side chains aligns with what is typically observed in triterpenoids.' confidence='HIGH'
+True triterpenoid CHEBI:65759 60 C60H96O31
+chemical_class='triterpenoid' explanation='The chemical structure here contains six isoprene units, which is characteristic of a triterpenoid. The fundamental backbone of the structure follows the typical tetracyclic triterpene framework, often found in steroids or triterpenoid compounds. Moreover, this structure has additional sugar moieties attached, which are common in glycosylated triterpenoids. Each cyclic unit is saturated, showing a triterpenoid nucleus, coupled with multiple glycosidic bonds, giving it a complex appearance. The presence of 30 carbons specifically in the main carbon skeleton confirms its classification as a triterpenoid.' confidence='HIGH'
+True triterpenoid CHEBI:65758 60 C60H94O29
+chemical_class='triterpenoid' explanation="The structure consists of a set of four cyclohexane rings A, B, C, D and a cyclopentane ring E fused together, characteristic of a steroid backbone. This forms a perhydrocyclopentanophenanthrene base. The extended set of rings in conjunction with several oxygen-containing substituent groups and glycosidic linkages attached to this backbone is a signature of a saponin, which is typically derived from triterpenes. With 30 carbon atoms in the backbone, it fits the classification of a triterpenoid. The presence of additional sugar moieties linked to the structure is a common feature but doesn't alter the terpenoid classification." confidence='HIGH'
+True triterpenoid CHEBI:65757 66 C66H104O34
+chemical_class='triterpenoid' explanation='The structure features a cyclic backbone with 30 carbon atoms forming a large fused ring system. This is characteristic of triterpenoids, which are composed of six isoprene units (each contributing five carbons). The presence of additional functional groups, such as carbonyl (C=O) and hydroxyl (OH) groups, is common in many triterpenoids and contributes to their biological activity. The large structure and the nature of the carbon framework confirm the classification as a triterpenoid.' confidence='HIGH'
+True triterpenoid CHEBI:65756 60 C60H94O30
+chemical_class='triterpenoid' explanation='The structure depicted is a large molecule with a characteristic steroid nucleus made up of three hexane rings and one pentane ring, which is the typical backbone of a triterpenoid. These compounds are typically made up of six isoprene units, totaling 30 carbon atoms. The additional substituents and modifications such as glycosides do not alter the fundamental classification, as they are common in triterpenoid derivatives. The core structure is clearly that of a steroidal triterpenoid.' confidence='HIGH'
+True triterpenoid CHEBI:65755 60 C60H94O30
+chemical_class='triterpenoid' explanation='The structure features a classic pentacyclic triterpenoid framework with a total of thirty carbon atoms forming multiple six-membered rings and one five-membered ring. This arrangement is characteristic of the triterpenoid class. Furthermore, there are multiple glycosidic linkages attached to the core triterpenoid structure, indicative of complex triterpenoid glycosides often found in nature.' confidence='HIGH'
+True triterpenoid CHEBI:65426 64 C64H106O31
+chemical_class='triterpenoid' explanation='The structure features a steroid-like backbone which is characteristic of triterpenoids, consisting of six isoprene units, corresponding to 30 carbon atoms forming the main structure. Additionally, there are multiple sugar moieties attached to the core, indicating that this is a glycosylated triterpenoid known as a saponin. The steroid-like core includes three six-membered rings and one five-membered ring, typical of many triterpenoids.' confidence='HIGH'
+True triterpenoid CHEBI:65425 70 C70H116O36
+chemical_class='triterpenoid' explanation='The structure depicts a complex molecule with a steroid-like core, which is characteristic of triterpenoids. Triterpenoids are C30 compounds derived from the isoprene rule. In this image, you can see the steroidal core - four fused rings, commonly found in triterpenoids like saponins, sterols, or steroids. The presence of sugar moieties attached to the core further supports the classification as a saponin, which is a subclass of triterpenoids. The complex structure, including multiple hydroxyl groups, aligns with triterpenoid structures.' confidence='HIGH'
+True triterpenoid CHEBI:52551 68 C68H110O32
+chemical_class='triterpenoid' explanation="The structure exhibits a core of six isoprene units, which is a characteristic feature of triterpenoids. Triterpenoids are derivatives of squalene, typically with 30 carbon atoms forming a C30 structure. The presence of multiple hydroxyl and sugar group attachments suggests it's a complex triterpenoid structure often seen in saponins. The intricate pattern of ring formation and substituents is consistent with triterpenoids rather than other terpenoid classes." confidence='HIGH'
+True triterpenoid CHEBI:229202 63 C63H98O30
+chemical_class='triterpenoid' explanation='The structure depicted is quite complex, featuring multiple six-membered rings fused together, typical for steroids and related compounds. It includes a large number of carbon atoms arranged in a manner typical of triterpenoids, which are derived from the fusion of six isoprene units (C30). The presence of numerous oxygen atoms suggests that it could be a glycosylated derivative, which is common in natural products of this class like saponins or glycosides. The core structure and the complex substitution pattern, likely including multiple sugar moieties, supports the classification as a triterpenoid.' confidence='HIGH'
+False triterpenoid CHEBI:223501 65 C65H86O20
+chemical_class='other' explanation='The structure depicted is an ellagitannin, a polyphenolic compound, which is not a terpenoid. Terpenoids are typically composed of isoprene units (C5) and categorized based on the number of these units: monoterpenoids (C10), sesquiterpenoids (C15), diterpenoids (C20), sesterterpenoids (C25), triterpenoids (C30), etc. The structure shown is a polymeric polyphenol, characterized by multiple aromatic rings and is distinct from the isoprene-based structures of terpenoids.' confidence='HIGH'
+False triterpenoid CHEBI:223289 77 C77H106O30
+chemical_class='other' explanation='The structure is not a typical terpenoid structure. It appears to be a cyclic oligomer, specifically a cyclodextrin, consisting of multiple glucopyranose units. Terpenoids typically consist of isoprene units and are categorized based on the number of these units, such as monoterpenoids (2 units), sesquiterpenoids (3 units), diterpenoids (4 units), etc. This structure is carbohydrate-based, not formed from isoprene units, hence it falls outside the terpenoid classification.' confidence='HIGH'
+False triterpenoid CHEBI:222543 77 C77H98O30
+chemical_class='other' explanation='The structure depicted is not a traditional linear or cyclic carbon backbone characteristic of terpenoids. Instead, it seems to be a larger, complex molecule likely composed of multiple repeated units. Terpenoids are typically classified based on their isoprene units (C5H8)n. Monoterpenoids contain two isoprene units, sesquiterpenoids have three, diterpenoids have four, sesterterpenoids have five, and triterpenoids have six. The presence of numerous oxygens and more complex ring structures suggests that this molecule likely does not fall into these traditional terpenoid categories. This appears to be a macrocyclic structure, possibly a polysaccharide or a cyclic oligosaccharide, as it has a regular repeating pattern and seems to include sugar-like rings. The extensive use of oxygen indicates glycosidic linkages or possibly ester groups, which are not characteristic of simple terpenes. Therefore, it is classified as "other."' confidence='HIGH'
+True triterpenoid CHEBI:221737 61 C61H94O18
+chemical_class='triterpenoid' explanation='The structure features extensive cyclic systems and a large carbon backbone that appears to contain six isoprene units, characteristic of triterpenoids. The complex ring structure and numerous oxygen-containing functional groups present are typical motifs found in triterpenoids derived from squalene precursor structures, which contain 30 carbon atoms in total. The arrangement and size align with a triterpenoid classification.' confidence='HIGH'
+True triterpenoid CHEBI:221384 61 C61H88O17
+chemical_class='triterpenoid' explanation='The structure shown has a long carbon chain characteristic of terpenoids. This compound specifically exhibits six isoprene units (each isoprene unit having five carbon atoms) as evidenced by the presence of 30 carbon atoms structured in a polycyclic arrangement. Such a framework fits the definition of a triterpenoid, which consists of six isoprene units. Furthermore, the multi-ring system with attached oxygen-containing functional groups suggests modifications typical of many triterpenoids.' confidence='HIGH'
+False triterpenoid CHEBI:221237 77 C77H104O30
+chemical_class='other' explanation='The structure shown is a large, cyclic molecule with repeating glucose units. It appears to be a cyclic oligosaccharide known as a cyclodextrin. Terpenoids are usually not structured as large cyclic glucans but rather as chains with varying numbers of isoprene units. Therefore, the structure does not fit into the typical terpenoid categories of monoterpenoids, sesquiterpenoids, diterpenoids, sesterterpenoids, or triterpenoids. Instead, it is classified as a cyclodextrin, which falls under carbohydrates, not terpenoids.' confidence='HIGH'
+False triterpenoid CHEBI:218295 61 C61H94O17
+chemical_class='Other' explanation='The structure depicted shows a complex arrangement with multiple rings, oxygen-containing functional groups, and several carbohydrate-like moieties. This does not resemble the typical structures of standard terpenoids, such as the cyclic hydrocarbons found in monoterpenoids, sesquiterpenoids, diterpenoids, sesterterpenoids, or triterpenoids. Instead, the presence of multiple sugar rings suggests it may belong to a class like glycosides or a complex natural product with multiple functional components. Such a structure does not align with the typical isoprene unit-based classification of terpenes.' confidence='HIGH'
+False triterpenoid CHEBI:204918 65 C65H82O20
+chemical_class='other' explanation="The structure in the image is not of a typical linear or cyclic terpene, but instead appears to be a large macrocyclic compound with multiple repeating units. The compound contains numerous hydroxyl (OH) and carbonyl (C=O) functional groups, and it is highly oxidized with many oxygen atoms. Such structures are commonly found in polyketides or macrolides rather than in terpene categories like monoterpenoids, sesquiterpenoids, diterpenoids, sesterterpenoids, or triterpenoids. Therefore, its classification would be better suited to 'other.'" confidence='HIGH'
+False triterpenoid CHEBI:197805 65 C65H84O20
+chemical_class='other' explanation='The structure depicted is a large macrocyclic molecule with multiple sugar-like rings and an extensive cyclic backbone. It does not fit the typical linear or cyclic carbon skeleton pattern seen in terpenoids (such as monoterpenoids, sesquiterpenoids, diterpenoids, sesterterpenoids, or triterpenoids), which are typically made from isoprene units (C5H8). This molecule appears to be more structurally complex and contains many oxygens in the form of hydroxyl groups and carbonyls, indicative of sugars or polysaccharide components rather than a terpenoid structure. The symmetrical and repeating units suggest a macrocyclic oligosaccharide, possibly a cyclodextrin or similar compound, which is outside the classification of terpenoids.' confidence='HIGH'
+True triterpenoid CHEBI:194571 60 C60H88O10
+chemical_class='triterpenoid' explanation='The structure presented is quite complex with several repeating isoprene units. Upon analyzing the structure, there are 30 carbon atoms available, arranged into multiple rings and chains. This is characteristic of a triterpenoid, which is composed of six isoprene units. The complex ring structure and the number of carbons indicate this categorization as a triterpenoid, distinguishing it from smaller terpenoid classes such as monoterpenoids, sesquiterpenoids, or diterpenoids.' confidence='HIGH'
+False triterpenoid CHEBI:188312 1 C46H64O6.CH4
+chemical_class='other' explanation="The structure in the image depicts ubiquinone, also known as coenzyme Q, which is not a conventional terpene. It consists of a long isoprenoid (polyisoprenyl) tail attached to a quinone moiety. While the tail is composed of several isoprene units, these structures are usually discussed in the context of biological quinones rather than the terpene classification system. Therefore, it fits into the category of 'other,' as it is not exclusively any of the standard terpenoid classifications listed (monoterpenoid, sesquiterpenoid, etc.)." confidence='HIGH'
+True triterpenoid CHEBI:186598 82 C82H154O6
+chemical_class='triterpenoid' explanation='This structure consists of 30 carbon atoms and appears to be highly cyclic, typical of triterpenoids. The presence of several interconnected cyclohexane rings or similar structures also supports this classification. Triterpenoids are characterized by their large, complex ring structures, which this structure exhibits. Additionally, the distinct arrangement and number of rings suggest a complex and large terpenoid type, fitting into the triterpenoid category.' confidence='HIGH'
+True triterpenoid CHEBI:185292 64 C64H116O2
+chemical_class='triterpenoid' explanation='The structure depicted is a cholesterol molecule, which is a common triterpenoid. Triterpenoids are based on a 30-carbon backbone derived from six isoprene units. Observing the backbone of the structure, the typical four-ring steroid core, including three cyclohexane rings and one cyclopentane ring, is present, along with the aliphatic side chain. This satisfies the requirement of a triterpenoid structure.' confidence='HIGH'
+True triterpenoid CHEBI:183959 63 C63H98O29
+chemical_class='triterpenoid' explanation='The displayed structure consists of multiple fused six-membered rings forming a steroid-like backbone. This is indicative of a triterpenoid structure, which is built upon a C30 precursor commonly forming complex structures with multiple ring fusions. Additionally, the various oxygen atoms (likely as hydroxyl groups or ethers) and glycosidic linkages are modifications often seen in triterpenoid glycosides.' confidence='HIGH'
+True triterpenoid CHEBI:145175 70 C70H110O35
+chemical_class='triterpenoid' explanation='The structure consists of a 30-carbon skeleton which is indicative of a triterpenoid. It is built from six isoprene units. The core consists of four six-membered rings, a typical feature of triterpenoids such as steroids. This classification is made clear by the presence of these typical features. Additionally, there are multiple sugar moieties attached, showing it may be a glycosylated form, common in natural triterpenoids.' confidence='HIGH'
+True triterpenoid CHEBI:145174 64 C64H100O31
+chemical_class='triterpenoid' explanation='The structure is based on a core framework that resembles lanosterol or similar triterpenoid backbones, commonly containing 30 carbon atoms. There is a characteristic four-ring fused structure, indicating a sterol-type framework often found in triterpenoids. Additionally, the presence of multiple sugar moieties attached suggests a glycoside form, which is typical for certain triterpenoids. The structure does not fit into smaller terpenoids like monoterpenoids, sesquiterpenoids, or diterpenoids due to the size and complexity of the core.' confidence='HIGH'
+True triterpenoid CHEBI:145169 65 C65H102O31
+chemical_class='triterpenoid' explanation='The structure shown has a steroid-like backbone consisting of four connected rings typical for triterpenoids, with additional sugar moieties attached, which is common in glycosides of steroidal triterpenes. Triterpenoids have a carbon skeleton of C30, and this structure is consistent with that classification. The presence of the characteristic rings, along with the carbon count and arrangement, support this classification.' confidence='HIGH'
+True triterpenoid CHEBI:145168 70 C70H110O35
+chemical_class='triterpenoid' explanation='The structure shown contains a six-membered polycyclic core, which suggests a triterpene skeleton. Triterpenes typically have a structure based on a 30-carbon skeleton, often derived from the cyclization of squalene. This molecule also includes multiple hydroxyl and glycosidic linkages that are common in complex triterpenoid glycosides. Since it follows with the basic structure of a triterpene, this is a triterpenoid.' confidence='HIGH'
+True triterpenoid CHEBI:145159 70 C70H110O36
+chemical_class='triterpenoid' explanation='This structure appears to be based on a pentacyclic triterpene backbone, which is common in triterpenoids. The structure contains three six-membered rings and two five-membered rings fused together, forming the core characteristic of triterpenes. This core is followed by a series of sugars making it a glycoside of a triterpene, often referred to as a saponin. The presence of 30 carbon atoms in the triterpene framework further confirms this classification. The additional sugar moiety and functional groups are typical for complex naturally occurring triterpenoids.' confidence='HIGH'
+True triterpenoid CHEBI:145154 65 C65H102O32
+chemical_class='triterpenoid' explanation='The structure in the image consists of a core made up of six isoprene units that form a steroid-like structure, which is characteristic of the triterpenoid class. Triterpenoids are composed of thirty carbon atoms arranged into six isoprene units. In the structure, a three-ring system, similar to steroids, is present, along with various functional groups such as hydroxyls and glycosidic linkages. These features are indicative of triterpenoid saponins, often found in complex plant-derived substances.' confidence='HIGH'
+True triterpenoid CHEBI:145146 70 C70H110O36
+chemical_class='triterpenoid' explanation='The structure consists of a characteristic four-ring core common to steroids and triterpenes, which is derived from the cyclization of squalene. This includes three six-membered rings and one five-membered ring. The structure also features multiple sugar moieties attached to the main triterpene core, typical of glycosylated triterpenoids. The presence of these distinct features supports its classification as a triterpenoid.' confidence='HIGH'
+True triterpenoid CHEBI:145145 69 C69H110O36
+chemical_class='triterpenoid' explanation='The structure shown has a core consisting of a series of six-membered carbon rings, typical of the lupane, oleanane, or ursane triterpene skeletons. Triterpenes are composed of six isoprene units, leading to a total of 30 carbon atoms in the core part. This structure also features multiple hydroxyl and carbonyl groups, which are common in many natural triterpenoids. The rings and attached groups are complex and indicate a high level of functionalization typical of these compounds.' confidence='HIGH'
+True triterpenoid CHEBI:145144 75 C75H118O40
+chemical_class='triterpenoid' explanation='The structure is composed of 30 carbon atoms forming six isoprene units, characteristic of a triterpenoid. The core structure includes three six-membered rings and a five-membered ring, typical of steroidal triterpenoids. Additionally, there are various sugar moieties attached, which are not part of the core terpenoid structure but are common in glycosylated triterpenoids.' confidence='HIGH'
+False sesterterpenoid CHEBI:227322 61 C61H90N2O23
+chemical_class='other' explanation='The structure exhibits complex steroid-like features, intricate ring systems, and it deviates significantly from the typical carbon arrangements and functionalities seen in terpenoids. Terpenoids are typically constructed from isoprene units with a base formula of (C5H8)n. This complex structure features diverse functional groups and ring systems that do not align with traditional terpenoid categories such as monoterpenoids, sesquiterpenoids, diterpenoids, sesterterpenoids, or triterpenoids. It appears more aligned with a polyketide structure or another complex biosynthetic class rather than a simple terpenoid.' confidence='HIGH'
+False sesterterpenoid CHEBI:227316 61 C61H90N2O22
+chemical_class='other' explanation='The given structure is a complex organic molecule that does not correspond to any of the classical categories of terpenoids (monoterpenoid, sesquiterpenoid, diterpenoid, sesterterpenoid, or triterpenoid). Terpenoids are generally characterized by their multiple isoprene units (C5H8) organized into specific groupings: monoterpenoids (C10), sesquiterpenoids (C15), diterpenoids (C20), sesterterpenoids (C25), and triterpenoids (C30).\\n\\nThis structure has a more intricate arrangement, with multiple rings of various sizes and several heteroatoms, including nitrogen and oxygen, along with functionality that is not typical of simple terpenoid structures. It appears to have polyketide or other biosynthetic origin, indicating it may be a natural product from a different class.\\n\\nThe presence of lactone rings, ether linkages, and possibly other non-terpenoid elements suggests that it belongs to another category of natural compounds, likely a macrolide or similar complex structure often seen in bioactive natural products.' confidence='HIGH'
+False sesterterpenoid CHEBI:227311 61 C61H91NO20
+chemical_class='diterpenoid' explanation='The structure shown is a complex natural product featuring a diterpenoid core, as indicated by a carbon skeleton containing a series of repeating isoprene units (each containing five carbon atoms). Specifically, it is made up of 20 carbon atoms, typical for diterpenoids. Additionally, the presence of fused rings and several oxygen-containing functional groups are common in diterpenoids. Although the structure is more elaborate due to additional functionalization and ring systems, the terpenoid core is the key structural element.' confidence='HIGH'
+False sesterterpenoid CHEBI:225151 61 C61H86N2O22
+chemical_class='triterpenoid' explanation='The structure shown in the image appears to have a large carbon framework typical of a triterpenoid. Triterpenoids are composed of six isoprene units which contribute to 30 carbon atoms forming a complex base skeleton. The structure in the image exhibits multiple cyclic formations and a significant quantity of carbon, consistent with the characteristics of triterpenoids. No anomalies in ring structure suggest deviation from this classification. There is also no indication of smaller, distinct terpene units that would suggest a classification as a different type of terpenoid.' confidence='HIGH'
+False sesterterpenoid CHEBI:225057 55 C55H76N2O19
+chemical_class='diterpenoid' explanation='The structure shown is typical of a diterpenoid. Diterpenes are composed of four isoprene units, resulting in a C20 backbone. The image depicts a complex ring structure with multiple substituents, which is common in diterpenoids. Additional functional groups, such as oxygens, are present, further showcasing the complexity often found in this class of compounds.' confidence='HIGH'
+False sesterterpenoid CHEBI:223179 53 C53H90O20
+chemical_class='triterpenoid' explanation='The chemical structure is complex with multi-ring formations, extended carbon chains, and oxygen-containing functional groups. It consists of a large number of carbon atoms, which suggests a triterpenoid structure, as these typically contain around 30 carbon atoms forming six isoprene units. The presence of multiple rings and oxygen atoms may also indicate functional group substitutions on the typical backbone seen in many terpenoids.' confidence='HIGH'
+False sesterterpenoid CHEBI:222849 61 C61H92N2O19
+chemical_class='other' explanation="The depicted structure is highly complex, featuring several sugar moieties attached to a core section that resembles a larger macrolide ring structure. However, the presence of multiple oxygen atoms, several ring structures, and a general appearance resembling macrolide antibiotics suggests that this compound is not a typical terpenoid but rather fits better in categories of complex natural compounds like antibiotics. Terpenoids are typically classified based on the number of isoprene units, and this structure doesn't align with those categories." confidence='HIGH'
+False sesterterpenoid CHEBI:220902 61 C61H113NO24
+chemical_class='other' explanation='The structure shown is a large macrocyclic compound with multiple pyrrole rings linked by methylene bridges and ester linkages, characteristic of porphyrin derivatives rather than terpenoids. The core structure is not based on the isoprene units typical of terpenoids. Instead, this molecule has a highly conjugated cyclic backbone typical of chlorophylls or heme groups.' confidence='HIGH'
+False sesterterpenoid CHEBI:220305 61 C61H90N2O21
+chemical_class='other' explanation='The structure depicted features several complex fused rings and other non-terpenoid structures, indicating that this is not a simple terpenoid. Terpenoids are typically categorized by their isoprene units (C5H8). Monoterpenoids have 2 isoprene units, sesquiterpenoids have 3, diterpenoids have 4, sesterterpenoids have 5, and triterpenoids have 6. The image, however, shows more complexity and deviations that include nitrogen atoms and glycosidic linkages that are not characteristic of basic terpenoid structures. Therefore, this structure falls outside the typical classification of terpenoids.' confidence='HIGH'
+False sesterterpenoid CHEBI:219654 67 C67H96N2O24
+chemical_class='other' explanation='The structure depicted is complex, showing several distinct ring systems and functional groups outside the typical classifications for simple terpenoids. It appears to contain multiple aromatic and heterocyclic rings, elaborate oxygen-containing groups, and appears too intricate for typical terpenoid categories like monoterpenoid, sesquiterpenoid, diterpenoid, sesterterpenoid, or triterpenoid. Instead, the complexity suggests it could be a structure belonging to a class of complex natural products or alkaloids, perhaps a type of macrocycle or polyketide.' confidence='HIGH'
+False sesterterpenoid CHEBI:217436 57 C57H72N2O13
+chemical_class='diterpenoid' explanation='The structure contains four isoprene units, each consisting of five carbon atoms, resulting in a total of 20 carbon atoms, as is characteristic of diterpenoids. The presence of multiple cyclic ring systems and several hydroxyl and ketone functional groups further supports this classification. The arrangement and number of isoprene units match with that of a diterpenoid. Additional features, such as the complex ring systems and functional groups, align with known diterpenoids in nature.' confidence='HIGH'
+False sesterterpenoid CHEBI:217428 57 C57H72N2O13
+chemical_class='triterpenoid' explanation='The structure contains six isoprene units, identified by the arrangement of carbons and the characteristic grouping pattern typical for terpenoids. It forms a complex polycyclic structure with multiple fused six-membered rings. The presence of various functional groups (hydroxyls and carbonyls) does not alter its classification as a triterpenoid. Triterpenoids typically have 30 carbons, aligning with the presence of six isoprene units observed here.' confidence='HIGH'
+False sesterterpenoid CHEBI:217361 51 C51H72N4O16
+chemical_class='other' explanation="The structure in the image is complex, featuring multiple rings and heteroatoms (notably oxygen and nitrogen). Typical terpenoids such as monoterpenoids, sesquiterpenoids, diterpenoids, sesterterpenoids, and triterpenoids primarily consist of hydrocarbon chains and rings forming isoprene units (C5H8)n. In this structure, the presence of additional ring systems and functional groups deviates from the typical isoprene rule. This suggests it is not a typical terpenoid but rather belongs to a different class of natural compounds or complex molecules. The configuration and the nature of rings (especially if aromatic or heterocyclic) imply it may be an alkaloid or another kind of secondary metabolite. The structure has distinct characteristics that separate it from the typical terpenoid constructs.\nTherefore, this molecule likely falls into the 'other' category for classification purposes." confidence='HIGH'
+False sesterterpenoid CHEBI:217355 51 C51H76N4O12
+chemical_class='diterpenoid' explanation='The structure consists of a fused ring system that includes four six-membered rings with various oxygen-containing functional groups attached. The molecule falls into the diterpenoid category, which typically comprises structures with 20 carbon atoms arranged in multiple rings. The complexity and the number of functional groups further support this classification.' confidence='HIGH'
+False sesterterpenoid CHEBI:217349 51 C51H76N4O13
+chemical_class='triterpenoid' explanation='The structure is quite complex, featuring six isoprene units which are indicative of a triterpenoid structure. This class is composed of 30 carbon atoms and often forms a steroid-like or squalene structure, as seen here. The multiple rings and the complexity of the structure are characteristic of triterpenoids, often utilized in various biological applications. Additionally, the presence of various functional groups and modifications, further implies the complex nature and functional use often seen in triterpenoids.' confidence='HIGH'
+False sesterterpenoid CHEBI:217342 51 C51H74N4O14
+chemical_class='diterpenoid' explanation='The structure appears to be a macrolide, which is a class of natural products that often includes terpenoid compounds. Given the size and complexity of the structure, including multiple ring systems and oxygen-containing functional groups, it is consistent with a diterpenoid, which typically has 20 carbon atoms derived from four isoprene units. Other terpenoid classes like monoterpenoids or sesquiterpenoids are generally smaller, while triterpenoids are larger. The complexity and size point to the diterpenoid classification.' confidence='MEDIUM'
+False sesterterpenoid CHEBI:217337 51 C51H74N4O15
+chemical_class='other' explanation="The structure in the image consists of fused rings and multiple ester and hydroxyl functional groups. The backbone features a macrocyclic ring (a large ring structure) with additional pendant lactone rings and sugar moieties. This complex structure does not match the typical structural patterns of terpenoids, which are primarily based on the isoprene unit pattern (C5H8)n. Instead, this structure is more consistent with a macrolide antibiotic, which is a class of compounds known for these characteristics. Hence, it is classified as 'other', not fitting the standard terpenoid categories." confidence='HIGH'
+False sesterterpenoid CHEBI:216346 69 C69H102N2O22
+chemical_class='other' explanation='Upon analyzing the structure, it is evident that this molecule is more complex than typical terpenoids which are built from isoprene units. Terpenoids are generally categorized based on the number of isoprene (C5H8) units they contain: monoterpenoids (C10), sesquiterpenoids (C15), diterpenoids (C20), sesterterpenoids (C25), triterpenoids (C30), etc. This structure contains additional functional groups and ring systems that make it atypical for a straightforward classification as one of the terpenoid categories mentioned. The structure seems to have a more complex framework, possibly including steroidal or alkaloid features, common in natural products with diverse functional modifications. This structure is likely beyond the simple categorization into terpenoid classes based solely on carbon count and arrangement as it may not directly follow the isoprene rule.' confidence='HIGH'
+False sesterterpenoid CHEBI:215901 50 C50H64O14
+chemical_class='diterpenoid' explanation='The structure presented exhibits a complex arrangement of rings and substituents, characteristic of diterpenoids. Typically, diterpenoids contain 20 carbon atoms, often arranged in four isoprene units. This molecule has features that align well with these criteria, including the presence of multiple isoprenoid units forming a polycyclic compound. The characteristic diterpenoid backbone, along with additional oxygenated functional groups, indicates its classification as a diterpenoid.' confidence='HIGH'
+False sesterterpenoid CHEBI:213623 61 C61H90N2O20
+chemical_class='other' explanation='The provided chemical structure is complex, containing multiple rings and functional groups. It does not fit the typical isoprene unit multiples seen in monoterpenoids (C10), sesquiterpenoids (C15), diterpenoids (C20), sesterterpenoids (C25), or triterpenoids (C30). The structure also includes nitrogen atoms, suggesting the presence of alkaloid-like features which are not typical for pure terpenoids. Overall, it appears to be a complex natural product that does not conform to standard terpenoid classifications.' confidence='HIGH'
+False sesterterpenoid CHEBI:213524 61 C61H88N2O21
+chemical_class='other' explanation='The chemical structure depicted in the image is not a straightforward terpenoid compound. Terpenoids are typically categorized based on the number of isoprene units (C5H8) they contain, such as monoterpenoids (10 carbons), sesquiterpenoids (15 carbons), diterpenoids (20 carbons), and so on. This structure, however, is much more complex and does not fit these categories due to the presence of several non-hydrocarbon functional groups and multiple ring systems. The presence of lactone rings, amide groups, and extensive cyclic structures suggests it belongs to another class of complex organic compounds, likely a larger macrocyclic compound.' confidence='HIGH'
+False sesterterpenoid CHEBI:213314 56 C56H75ClO19
+chemical_class='triterpenoid' explanation='The structure displayed appears to be a triterpenoid. Triterpenoids typically contain 30 carbon atoms, arranged in a structure based on six isoprene units. The intricate ring system and the presence of numerous hydroxyl, ketone, and ester groups further indicate a complex triterpene structure. This molecule also has polycyclic frameworks common in triterpenoids. Given these observations, the classification as a triterpenoid is made with high confidence.' confidence='HIGH'
+False sesterterpenoid CHEBI:213281 68 C68H96N2O26
+chemical_class='triterpenoid' explanation='The structure shown is composed of six isoprene units, indicating that it belongs to the class of triterpenoids, which are characterized by having 30 carbon atoms derived from the combination of six isoprene units. The structure appears complex with multiple ring systems and functional groups, typical of triterpenoids. These are often involved in forming more complex structures with various pharmacological activities.' confidence='HIGH'
+False sesterterpenoid CHEBI:212785 61 C61H92N2O19
+chemical_class='other' explanation='The structure shown is a complex glycoside and does not fit neatly into the typical categories of terpenoids. It contains multiple sugar moieties and appears to be a cardenolide or steroidal glycoside rather than a simple terpenoid structure. The presence of multiple sugar rings, oxygen heteroatoms, and a distinctive lactone ring with a steroid-like framework excludes it from monoterpenoid, sesquiterpenoid, diterpenoid, sesterterpenoid, or triterpenoid classes.' confidence='HIGH'
+False sesterterpenoid CHEBI:212621 61 C61H92N2O20
+chemical_class='other' explanation='The structure is complex and appears to contain multiple aromatic rings and numerous oxygen-containing functional groups. It does not resemble typical linear or cyclic arrangements of monoterpenoids, sesquiterpenoids, diterpenoids, sesterterpenoids, or triterpenoids, which are generally built from isoprene units arranged in simple patterns. This structure likely belongs to a different class of natural compounds, possibly involving aromatic scaffolds with glycosidic linkages.' confidence='HIGH'
+False sesterterpenoid CHEBI:211548 62 C62H115NO24
+chemical_class='other' explanation="The structure shown is not a common terpenoid. It consists of a long chain with multiple alternating double and single bonds, along with several oxygen atoms (possibly indicating hydroxyl groups), and a terminal nitrogen-containing group, implying it is likely a polyketide or another type of compound rather than a simple terpenoid. Terpenoids typically have isoprene units (multiples of 5 carbons). This compound has a far longer and more complex carbon backbone and doesn't fit the standard terpenoid categories." confidence='HIGH'
+False sesterterpenoid CHEBI:208447 56 C56H75ClO18
+chemical_class='triterpenoid' explanation='The structure shown is highly complex with multiple fused rings and a large number of oxygen-containing functional groups. It has a steroid backbone indicative of many triterpenoids. Specifically, it seems to be glycyrrhizin, a well-known triterpenoid saponin. The characteristic cyclopentanoperhydrophenanthrene ring system, along with additional glycosidic attachments, confirms its classification as a triterpenoid.' confidence='HIGH'
+False sesterterpenoid CHEBI:207568 61 C61H88N2O20
+chemical_class='other' explanation='The chemical structure depicts a complex molecule with multiple ring systems, including aromatic and various heterocyclic rings, along with several oxygen substituents and possible nitrogen elements. The presence of numerous functional groups such as lactones and potential glycosidic linkages deviates from typical simple terpenoid structures. Terpenoids are usually classified by multiples of 5-carbon isoprene units, leading to monoterpenoids (10 carbons), sesquiterpenoids (15 carbons), diterpenoids (20 carbons), etc. This structure does not match those categories due to its complex multi-ring system and functional diversity, which extend beyond typical terpenoid features.' confidence='HIGH'
+False sesterterpenoid CHEBI:207562 64 C64H92N2O21
+chemical_class='Other' explanation='The structure in the image features complex fused ring systems, multiple oxygen atoms, and appears to contain both aromatic and non-aromatic rings. It includes functional groups such as ethers, lactones, and possibly amide groups, which indicate a highly functionalized structure. It does not conform to the typical structural units found in monoterpenoids, sesquiterpenoids, diterpenoids, sesterterpenoids, or triterpenoids, which are usually based on isoprene units and have distinct carbon skeletons such as C10, C15, C20, C25, and C30. The presence of these diverse functional groups suggests it is more likely classified as a complex natural product not falling within basic terpenoid classes.' confidence='HIGH'
+False sesterterpenoid CHEBI:207554 64 C64H92N2O20
+chemical_class='other' explanation='The structure contains multiple rings and functional groups, including oxygen-containing functional groups, which are typical in complex organic molecules. It does not fit the typical pattern of terpenoids, which are constructed from isoprene units (C5H8). The core structure does not resemble the typical backbone of common terpenoid types like monoterpenoids (C10), sesquiterpenoids (C15), diterpenoids (C20), etc. This particular structure appears to be a complex organic compound that likely does not belong to the standard terpenoid classification and is more likely a different type of natural product.' confidence='HIGH'
+False sesterterpenoid CHEBI:207548 70 C70H102N2O22
+chemical_class='triterpenoid' explanation='The structure is characterized by six cyclohexane rings interconnected, and it appears to have a complex polycyclic skeleton typical of triterpenoids. The scaffold exhibits multiple six-membered rings with additional functional groups like hydroxyl (OH) and ester groups. This type of fused ring system with approximately 30 carbon atoms corresponds well to a triterpenoid. Additionally, it exhibits functional complexity and diverse attachments, including oxygens and a nitrogen which are common in modified triterpenoids.' confidence='HIGH'
+False sesterterpenoid CHEBI:207543 64 C64H90N2O23
+chemical_class='other' explanation='The molecule depicted in the image is not clearly identifiable as a typical terpenoid structure like monoterpenoids, sesquiterpenoids, diterpenoids, sesterterpenoids, or triterpenoids. Traditional terpenes are built from isoprene units (C5H8) and typically show a defined carbon skeleton. The structure in the image features complex ring systems, multiple carbonyl groups, and nitrogen-containing moieties, which suggest it is likely a more complex structure, possibly an alkaloid or another class.\n\nThe cyclohexane and aromatic benzene-like rings, along with ester and amide linkages, indicate a complex and diverse functionality, which is not typical for simple terpenoids. Therefore, it belongs to a different chemical class.' confidence='HIGH'
+False sesterterpenoid CHEBI:207538 64 C64H90N2O22
+chemical_class='other' explanation='The structure in the image represents a complex molecule with multiple aromatic rings, lactone functionalities, and sugar moieties attached. It does not follow the classical C5n (where n is an integer) carbon skeleton typical of the terpenoid family. Terpenoids classically have isoprene units, and this structure looks more like a complex macrocyclic or polycyclic compound, possibly a natural product of a different class such as an anthracycline or a glycoside.' confidence='HIGH'
+False sesterterpenoid CHEBI:207531 70 C70H100N2O24
+chemical_class='other' explanation="The structure is highly complex and consists of multiple distinct parts. It includes several hexose moieties (sugar units), complex polycyclic structures, and a diverse array of functional groups including ethers and hydroxyls. This is characteristic of a macrolide or a related large macromolecule rather than a simple terpenoid structure, which are usually organized in chains or rings of isoprene units (multiples of C5). There is no repeated pattern of isoprene units typically seen in terpenoids. Therefore, it falls under 'other' rather than being classified within the provided terpenoid categories." confidence='HIGH'
+False sesterterpenoid CHEBI:205724 61 C61H91NO17
+chemical_class='triterpenoid' explanation='The structure shown is a complex ring system typical of triterpenoids, which are characterized by having thirty carbon atoms. This structure features multiple six-membered and five-membered rings, indicative of a steroidal framework, which is common in triterpenoid compounds. Additionally, the presence of multiple hydroxyl groups and other functional modifications are typical derivations found in natural triterpenoids. Based on the complexity and carbon count, it does not fit into the smaller categories of monoterpenoids, sesquiterpenoids, diterpenoids, or sesterterpenoids. Therefore, the classification as a triterpenoid is appropriate.' confidence='HIGH'
+False sesterterpenoid CHEBI:205610 61 C61H90N2O22
+chemical_class='other' explanation='The structure depicted is complex, featuring multiple aromatic rings, likely indicating a non-terpenoid chemical such as an alkaloid or a complex polycyclic compound. The presence of nitrogen atoms also suggests it is not a standard terpenoid, which are typically hydrocarbons or contain only oxygen as a heteroatom. The diverse functional groups and complexity move it away from basic terpenoid structures, which are simple isoprene derivatives categorized by carbon skeleton size such as monoterpenoids (C10), sesquiterpenoids (C15), diterpenoids (C20), sesterterpenoids (C25), and triterpenoids (C30).' confidence='HIGH'
+False sesterterpenoid CHEBI:205609 67 C67H100N2O24
+chemical_class='Other' explanation='The structure depicted contains several fused non-aromatic rings and contains heteroatoms such as oxygen and nitrogen, which suggests the presence of multiple different functionalities. The complexity of the structure, along with multiple specialized ring systems and heteroatoms, indicates that this compound is more likely an alkaloid or another specialized class of natural products, rather than a simple terpenoid like those classified as monoterpenoids, sesquiterpenoids, diterpenoids, sesterterpenoids, or triterpenoids. Terpenoids typically have isoprene units and more uniform ring systems without the incorporation of nitrogen in the core structure.' confidence='HIGH'
+False sesterterpenoid CHEBI:205410 62 C62H93NO17
+chemical_class='triterpenoid' explanation='The structure presented is characterized by six isoprene units, as deduced from its ring formations and carbon count. This indicates that the compound falls in the category of triterpenoids, which typically have 30 carbon atoms. The structure includes multiple ring systems, some of which contain oxygen and nitrogen atoms, typical of complex sterol-type structures. The presence of a sterol backbone alongside various functional groups supports its classification as a triterpenoid.' confidence='HIGH'
+False sesterterpenoid CHEBI:204520 50 C50H65NO13
+chemical_class='triterpenoid' explanation='The structure contains six isoprene units (C5H8 each), which collectively form a trisaccharide core typical of triterpenoids. The presence of three six-membered rings and one five-membered ring connected in a steroidal framework is a distinguishing feature of triterpenoids. Additionally, the various functional groups and modifications like epoxides and hydroxyls add complexity typical of this class.' confidence='HIGH'
+False sesterterpenoid CHEBI:203431 54 C54H78N2O17
+chemical_class='other' explanation='The structure depicted is not a straightforward terpenoid. Terpenoids typically consist of repeating isoprene (C5H8) units arranged in a characteristic pattern. Monoterpenoids have 10 carbons, sesquiterpenoids have 15, diterpenoids have 20, sesterterpenoids have 25, and triterpenoids have 30. The provided structure is more complex, resembling a macrolide with multiple lactone rings and functional groups, which do not conform to the simple isoprene rule of standard terpenoids.' confidence='HIGH'
+False sesterterpenoid CHEBI:203312 68 C68H103NO19
+chemical_class='triterpenoid' explanation='The chemical structure shown depicts a complex molecule made up of six isoprene units, as observed in the terpenoid class known as triterpenoids. This structure has a polycyclic backbone with noticeable carbon-carbon double bonds and substituents typical of oxidative forms, such as the presence of an ether linkage and a nitrogen-containing functional group (in blue). Given the number of cyclohexane and cyclopentane rings, which are typical of steroid and triterpenoid skeletons, along with an extended chain of rings and functional groups, it fits the triterpenoid category. This detailed observation of the rings and linkages leads to a confident classification.' confidence='HIGH'
+False sesterterpenoid CHEBI:203131 61 C61H92N2O19
+chemical_class='other' explanation='The structure is complex with multiple fused rings and several functional groups, such as hydroxyl (-OH) and carboxyl (C=O) groups, connected to sugar-like subunits. These features are characteristic of macrolides or polyether compounds, rather than simple terpenoids, which are typically classified by multiples of isoprene units. The presence of polysaccharide-like chains further supports this classification beyond standard terpenoid categories.' confidence='HIGH'
+False sesterterpenoid CHEBI:202825 93 C93H178O3
+chemical_class='other' explanation='The structure shown is a large, branched hydrocarbon with oxygen atoms present, likely indicating ether linkages or similar functional groups. It consists of significantly more than 30 carbon atoms, breaking it down from the terpenoid classification. Terpenoids typically adhere to isoprene units with classifications based on multiples of five carbon atoms (10 for monoterpenoids, 15 for sesquiterpenoids, etc.). This structure, with its complexity and branching, does not fit into the classic terpenoid categories and is instead likely representing a different class of compounds such as a polyether or a synthetic polymer.' confidence='HIGH'
+False sesterterpenoid CHEBI:202112 61 C61H88N2O21
+chemical_class='other' explanation="The structure depicted is a complex macrolide with multiple ring systems and ester linkages. It appears to be an intricate organic molecule rather than a typical terpenoid, as it does not follow the isoprene rule or exhibit the typical carbon skeletons associated with monoterpenoids (C10), sesquiterpenoids (C15), diterpenoids (C20), sesterterpenoids (C25), or triterpenoids (C30). The presence of heteroatoms such as oxygen and nitrogen, along with the structural intricacy, suggests that this is classified as 'other' rather than fitting into conventional terpenoid categories." confidence='HIGH'
+False sesterterpenoid CHEBI:201795 67 C67H101NO20
+chemical_class='other' explanation="The structure in the image appears to be a complex polycyclic compound with multiple aromatic rings and various functional groups including keto groups and ether linkages. It doesn't fit comfortably into the typical terpenoid categories, which are primarily characterized by repeating isoprene units (n C5H8 units), distinctive hydrocarbon chains, and rings. \n\nThis compound has unusual branching and rings that signify it may belong to a different class or specific family outside the standard terpenoid classification (e.g., complex plant secondary metabolites). Therefore, it's classified as 'other' and not as a monoterpenoid, sesquiterpenoid, diterpenoid, sesterterpenoid, or triterpenoid with HIGH confidence." confidence='HIGH'
+False sesterterpenoid CHEBI:201335 69 C69H100N2O24
+chemical_class='other' explanation='The structure shown contains multiple rings, including a complex array of oxygen heterocycles and a lactone ring, which do not conform to typical terpenoid structures. Terpenoids are generally classified by isoprene units (C5H8), such as monoterpenoids (C10), sesquiterpenoids (C15), etc., but this structure appears to contain more diversity and complexity beyond simple hydrocarbon chains or rings. It likely represents a polyketide or other complex natural product class rather than a simple terpenoid type.' confidence='HIGH'
+False sesterterpenoid CHEBI:200655 67 C67H101NO19
+chemical_class='other' explanation='The structure displayed is highly complex, containing multiple fused rings, heteroatoms, and a significant level of branching. While the terpenoid classification commonly involves repeating isoprene units leading to structures typically composed of multiples of five carbon atoms (e.g., C10 for monoterpenoids, C15 for sesquiterpenoids, etc.), this molecule features atypical structural components that do not suggest it fits into the simple classifications of monoterpenoids, sesquiterpenoids, diterpenoids, sesterterpenoids, or triterpenoids.' confidence='HIGH'
+False diterpenoid CHEBI:94606 43 C43H53NO14
+chemical_class='other' explanation='The chemical structure depicted is complex with multiple rings, including aromatic rings and various functional groups such as esters and hydroxyl groups. Terpenoids typically have a repetitive isoprene unit pattern, but this structure lacks the classical isoprene-derived modular appearance. Instead, it shows a combination of aromatic and non-aromatic rings with several substituent groups, suggesting it is not a simple terpenoid structure. It closely resembles more complex organic compounds, likely falling outside the typical basic terpenoid classifications of monoterpenoid, sesquiterpenoid, diterpenoid, etc.' confidence='HIGH'
+False diterpenoid CHEBI:94460 41 C41H74O7
+chemical_class='triterpenoid' explanation="The structure in the image consists of 30 carbon atoms arranged in a cyclic and acyclic hydrocarbon chain typical of triterpenoids. Triterpenoids are derived from the repetitive isoprene unit which can be seen in the cyclic arrangements and linear chains. The five six-membered rings are part of the structure's distinctive characteristics resembling the triterpenoid class. Additional functional groups and the specific placement of carbons help confirm the classification as a triterpenoid." confidence='HIGH'
+False diterpenoid CHEBI:93763 43 C43H53NO14
+chemical_class='other' explanation='This structure includes a complex polycyclic core with multiple oxygen functionalities, phenyl groups, and other ring systems that are not typical of simple terpenoids. It contains various functional groups like esters, lactones, and aromatic rings that suggest a more complex structure rather than a simple terpenoid. Therefore, it does not fit clearly into the common terpenoid categories such as monoterpenoid, sesquiterpenoid, or diterpenoid. The presence of the polycyclic structure with oxygen bridges is uncommon for these categories, aligning it more with complex alkaloids or other classes.' confidence='HIGH'
+False diterpenoid CHEBI:91594 47 C47H51NO14
+chemical_class='Other' explanation='The structure shown is complex with multiple aromatic rings, hydroxyl groups, and ester linkages, but it does not exhibit the typical branched carbon backbone structure characteristic of terpenoids based on isoprene units. Terpenoids typically consist of isoprene units (C5H8)n, which are not evident in this structure. Instead, this molecule features structural motifs suggesting it is more likely an alkaloid or other type of natural product.' confidence='HIGH'
+False diterpenoid CHEBI:8046 65 C65H104O31
+chemical_class='triterpenoid' explanation='The structure in the image is a complex molecule that features a steroid-like backbone which is characteristic of triterpenoids. This class typically consists of 30 carbon atoms, arranged in a structure derived from six isoprene units, and possesses a four-ring structure. In addition, the structure is attached to several glucose moieties, indicating a glycosidic form which is common in natural triterpenoids. The complexity and the distinct steroid-like framework suggest that this is a triterpenoid with a high confidence level.' confidence='HIGH'
+False diterpenoid CHEBI:80196 40 C40H48
+chemical_class='other' explanation='The structure in the image is of beta-carotene, which is a tetraterpenoid. It consists of eight isoprene units forming a long chain with alternating double bonds, typical of carotenoids. Terpenoids typically fall into categories of monoterpenoids (C10), sesquiterpenoids (C15), diterpenoids (C20), sesterterpenoids (C25), or triterpenoids (C30). Vitamin A precursors like beta-carotene are often classified as tetraterpenoids (C40), which does not fit into the traditional terpenoid categories listed.' confidence='HIGH'
+False diterpenoid CHEBI:80117 43 C43H70O11
+chemical_class='triterpenoid' explanation='The structure is a large molecule consisting of thirty carbon atoms, a characteristic of triterpenoids, formed by the polymerization of six isoprene units. It showcases multiple fused rings typical of triterpenoids with complex oxygen functionalities added, including carbonyls and ethers, which is common in biologically active triterpenoids.' confidence='HIGH'
+False diterpenoid CHEBI:79068 44 C44H64O24
+chemical_class='other' explanation='The structure shown is not a typical terpenoid. It consists of a central long-chain polyene structure with conjugated double bonds and terminal hexose sugars. This arrangement is characteristic of a carotenoid, specifically a xanthophyll due to the presence of oxygen-containing functional groups (multiple hydroxyl groups and carbonyl groups). Carotenoids like xanthophylls are classified separately from typical terpenoids due to their unique structure and function, even though they share a common isoprene derivation pathway. Hence, it falls into the "other" category rather than the specific terpenoid classes listed.' confidence='HIGH'
+True diterpenoid CHEBI:74030 40 C40H47NO12
+chemical_class='diterpenoid' explanation='The chemical structure displayed contains four isoprene units, consistent with diterpenoids, which are typically composed of 20 carbon atoms arranged in a structure derived from geranylgeranyl pyrophosphate. The core structure appears to be a complex carbocycle, a typical feature of diterpenoids, often observed in naturally occurring compounds derived from plants. The additional functional groups do not alter the classification as they are modifications often seen in natural product derivatives.' confidence='HIGH'
+</code>
+</pre>
+</div>
+</div>
+<div class="output_area">
+<div class="output_subarea output_text output_error">
+<pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">BadRequestError</span>                           Traceback (most recent call last)
+File <span class="ansi-green-fg">~/Library/Caches/pypoetry/virtualenvs/aurelian-JldJeJhF-py3.11/lib/python3.11/site-packages/pydantic_ai/models/openai.py:228</span>, in <span class="ansi-cyan-fg">OpenAIModel._completions_create</span><span class="ansi-blue-fg">(self, messages, stream, model_settings, model_request_parameters)</span>
+<span class="ansi-green-intense-fg ansi-bold">    227</span> <span class="ansi-bold" style="color: rgb(0,135,0)">try</span>:
+<span class="ansi-green-fg">--&gt; 228</span>     <span class="ansi-bold" style="color: rgb(0,135,0)">return</span> <span class="ansi-bold" style="color: rgb(0,135,0)">await</span> <span style="color: rgb(0,135,0)">self</span><span style="color: rgb(98,98,98)">.</span>client<span style="color: rgb(98,98,98)">.</span>chat<span style="color: rgb(98,98,98)">.</span>completions<span style="color: rgb(98,98,98)">.</span>create(
+<span class="ansi-green-intense-fg ansi-bold">    229</span>         model<span style="color: rgb(98,98,98)">=</span><span style="color: rgb(0,135,0)">self</span><span style="color: rgb(98,98,98)">.</span>_model_name,
+<span class="ansi-green-intense-fg ansi-bold">    230</span>         messages<span style="color: rgb(98,98,98)">=</span>openai_messages,
+<span class="ansi-green-intense-fg ansi-bold">    231</span>         n<span style="color: rgb(98,98,98)">=</span><span style="color: rgb(98,98,98)">1</span>,
+<span class="ansi-green-intense-fg ansi-bold">    232</span>         parallel_tool_calls<span style="color: rgb(98,98,98)">=</span>model_settings<span style="color: rgb(98,98,98)">.</span>get(<span style="color: rgb(175,0,0)">'</span><span style="color: rgb(175,0,0)">parallel_tool_calls</span><span style="color: rgb(175,0,0)">'</span>, NOT_GIVEN),
+<span class="ansi-green-intense-fg ansi-bold">    233</span>         tools<span style="color: rgb(98,98,98)">=</span>tools <span class="ansi-bold" style="color: rgb(175,0,255)">or</span> NOT_GIVEN,
+<span class="ansi-green-intense-fg ansi-bold">    234</span>         tool_choice<span style="color: rgb(98,98,98)">=</span>tool_choice <span class="ansi-bold" style="color: rgb(175,0,255)">or</span> NOT_GIVEN,
+<span class="ansi-green-intense-fg ansi-bold">    235</span>         stream<span style="color: rgb(98,98,98)">=</span>stream,
+<span class="ansi-green-intense-fg ansi-bold">    236</span>         stream_options<span style="color: rgb(98,98,98)">=</span>{<span style="color: rgb(175,0,0)">'</span><span style="color: rgb(175,0,0)">include_usage</span><span style="color: rgb(175,0,0)">'</span>: <span class="ansi-bold" style="color: rgb(0,135,0)">True</span>} <span class="ansi-bold" style="color: rgb(0,135,0)">if</span> stream <span class="ansi-bold" style="color: rgb(0,135,0)">else</span> NOT_GIVEN,
+<span class="ansi-green-intense-fg ansi-bold">    237</span>         max_tokens<span style="color: rgb(98,98,98)">=</span>model_settings<span style="color: rgb(98,98,98)">.</span>get(<span style="color: rgb(175,0,0)">'</span><span style="color: rgb(175,0,0)">max_tokens</span><span style="color: rgb(175,0,0)">'</span>, NOT_GIVEN),
+<span class="ansi-green-intense-fg ansi-bold">    238</span>         temperature<span style="color: rgb(98,98,98)">=</span>model_settings<span style="color: rgb(98,98,98)">.</span>get(<span style="color: rgb(175,0,0)">'</span><span style="color: rgb(175,0,0)">temperature</span><span style="color: rgb(175,0,0)">'</span>, NOT_GIVEN),
+<span class="ansi-green-intense-fg ansi-bold">    239</span>         top_p<span style="color: rgb(98,98,98)">=</span>model_settings<span style="color: rgb(98,98,98)">.</span>get(<span style="color: rgb(175,0,0)">'</span><span style="color: rgb(175,0,0)">top_p</span><span style="color: rgb(175,0,0)">'</span>, NOT_GIVEN),
+<span class="ansi-green-intense-fg ansi-bold">    240</span>         timeout<span style="color: rgb(98,98,98)">=</span>model_settings<span style="color: rgb(98,98,98)">.</span>get(<span style="color: rgb(175,0,0)">'</span><span style="color: rgb(175,0,0)">timeout</span><span style="color: rgb(175,0,0)">'</span>, NOT_GIVEN),
+<span class="ansi-green-intense-fg ansi-bold">    241</span>         seed<span style="color: rgb(98,98,98)">=</span>model_settings<span style="color: rgb(98,98,98)">.</span>get(<span style="color: rgb(175,0,0)">'</span><span style="color: rgb(175,0,0)">seed</span><span style="color: rgb(175,0,0)">'</span>, NOT_GIVEN),
+<span class="ansi-green-intense-fg ansi-bold">    242</span>         presence_penalty<span style="color: rgb(98,98,98)">=</span>model_settings<span style="color: rgb(98,98,98)">.</span>get(<span style="color: rgb(175,0,0)">'</span><span style="color: rgb(175,0,0)">presence_penalty</span><span style="color: rgb(175,0,0)">'</span>, NOT_GIVEN),
+<span class="ansi-green-intense-fg ansi-bold">    243</span>         frequency_penalty<span style="color: rgb(98,98,98)">=</span>model_settings<span style="color: rgb(98,98,98)">.</span>get(<span style="color: rgb(175,0,0)">'</span><span style="color: rgb(175,0,0)">frequency_penalty</span><span style="color: rgb(175,0,0)">'</span>, NOT_GIVEN),
+<span class="ansi-green-intense-fg ansi-bold">    244</span>         logit_bias<span style="color: rgb(98,98,98)">=</span>model_settings<span style="color: rgb(98,98,98)">.</span>get(<span style="color: rgb(175,0,0)">'</span><span style="color: rgb(175,0,0)">logit_bias</span><span style="color: rgb(175,0,0)">'</span>, NOT_GIVEN),
+<span class="ansi-green-intense-fg ansi-bold">    245</span>         reasoning_effort<span style="color: rgb(98,98,98)">=</span>model_settings<span style="color: rgb(98,98,98)">.</span>get(<span style="color: rgb(175,0,0)">'</span><span style="color: rgb(175,0,0)">openai_reasoning_effort</span><span style="color: rgb(175,0,0)">'</span>, NOT_GIVEN),
+<span class="ansi-green-intense-fg ansi-bold">    246</span>     )
+<span class="ansi-green-intense-fg ansi-bold">    247</span> <span class="ansi-bold" style="color: rgb(0,135,0)">except</span> APIStatusError <span class="ansi-bold" style="color: rgb(0,135,0)">as</span> e:
+
+File <span class="ansi-green-fg">~/Library/Caches/pypoetry/virtualenvs/aurelian-JldJeJhF-py3.11/lib/python3.11/site-packages/openai/resources/chat/completions/completions.py:1927</span>, in <span class="ansi-cyan-fg">AsyncCompletions.create</span><span class="ansi-blue-fg">(self, messages, model, audio, frequency_penalty, function_call, functions, logit_bias, logprobs, max_completion_tokens, max_tokens, metadata, modalities, n, parallel_tool_calls, prediction, presence_penalty, reasoning_effort, response_format, seed, service_tier, stop, store, stream, stream_options, temperature, tool_choice, tools, top_logprobs, top_p, user, extra_headers, extra_query, extra_body, timeout)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1926</span> validate_response_format(response_format)
+<span class="ansi-green-fg">-&gt; 1927</span> <span class="ansi-bold" style="color: rgb(0,135,0)">return</span> <span class="ansi-bold" style="color: rgb(0,135,0)">await</span> <span style="color: rgb(0,135,0)">self</span><span style="color: rgb(98,98,98)">.</span>_post(
+<span class="ansi-green-intense-fg ansi-bold">   1928</span>     <span style="color: rgb(175,0,0)">"</span><span style="color: rgb(175,0,0)">/chat/completions</span><span style="color: rgb(175,0,0)">"</span>,
+<span class="ansi-green-intense-fg ansi-bold">   1929</span>     body<span style="color: rgb(98,98,98)">=</span><span class="ansi-bold" style="color: rgb(0,135,0)">await</span> async_maybe_transform(
+<span class="ansi-green-intense-fg ansi-bold">   1930</span>         {
+<span class="ansi-green-intense-fg ansi-bold">   1931</span>             <span style="color: rgb(175,0,0)">"</span><span style="color: rgb(175,0,0)">messages</span><span style="color: rgb(175,0,0)">"</span>: messages,
+<span class="ansi-green-intense-fg ansi-bold">   1932</span>             <span style="color: rgb(175,0,0)">"</span><span style="color: rgb(175,0,0)">model</span><span style="color: rgb(175,0,0)">"</span>: model,
+<span class="ansi-green-intense-fg ansi-bold">   1933</span>             <span style="color: rgb(175,0,0)">"</span><span style="color: rgb(175,0,0)">audio</span><span style="color: rgb(175,0,0)">"</span>: audio,
+<span class="ansi-green-intense-fg ansi-bold">   1934</span>             <span style="color: rgb(175,0,0)">"</span><span style="color: rgb(175,0,0)">frequency_penalty</span><span style="color: rgb(175,0,0)">"</span>: frequency_penalty,
+<span class="ansi-green-intense-fg ansi-bold">   1935</span>             <span style="color: rgb(175,0,0)">"</span><span style="color: rgb(175,0,0)">function_call</span><span style="color: rgb(175,0,0)">"</span>: function_call,
+<span class="ansi-green-intense-fg ansi-bold">   1936</span>             <span style="color: rgb(175,0,0)">"</span><span style="color: rgb(175,0,0)">functions</span><span style="color: rgb(175,0,0)">"</span>: functions,
+<span class="ansi-green-intense-fg ansi-bold">   1937</span>             <span style="color: rgb(175,0,0)">"</span><span style="color: rgb(175,0,0)">logit_bias</span><span style="color: rgb(175,0,0)">"</span>: logit_bias,
+<span class="ansi-green-intense-fg ansi-bold">   1938</span>             <span style="color: rgb(175,0,0)">"</span><span style="color: rgb(175,0,0)">logprobs</span><span style="color: rgb(175,0,0)">"</span>: logprobs,
+<span class="ansi-green-intense-fg ansi-bold">   1939</span>             <span style="color: rgb(175,0,0)">"</span><span style="color: rgb(175,0,0)">max_completion_tokens</span><span style="color: rgb(175,0,0)">"</span>: max_completion_tokens,
+<span class="ansi-green-intense-fg ansi-bold">   1940</span>             <span style="color: rgb(175,0,0)">"</span><span style="color: rgb(175,0,0)">max_tokens</span><span style="color: rgb(175,0,0)">"</span>: max_tokens,
+<span class="ansi-green-intense-fg ansi-bold">   1941</span>             <span style="color: rgb(175,0,0)">"</span><span style="color: rgb(175,0,0)">metadata</span><span style="color: rgb(175,0,0)">"</span>: metadata,
+<span class="ansi-green-intense-fg ansi-bold">   1942</span>             <span style="color: rgb(175,0,0)">"</span><span style="color: rgb(175,0,0)">modalities</span><span style="color: rgb(175,0,0)">"</span>: modalities,
+<span class="ansi-green-intense-fg ansi-bold">   1943</span>             <span style="color: rgb(175,0,0)">"</span><span style="color: rgb(175,0,0)">n</span><span style="color: rgb(175,0,0)">"</span>: n,
+<span class="ansi-green-intense-fg ansi-bold">   1944</span>             <span style="color: rgb(175,0,0)">"</span><span style="color: rgb(175,0,0)">parallel_tool_calls</span><span style="color: rgb(175,0,0)">"</span>: parallel_tool_calls,
+<span class="ansi-green-intense-fg ansi-bold">   1945</span>             <span style="color: rgb(175,0,0)">"</span><span style="color: rgb(175,0,0)">prediction</span><span style="color: rgb(175,0,0)">"</span>: prediction,
+<span class="ansi-green-intense-fg ansi-bold">   1946</span>             <span style="color: rgb(175,0,0)">"</span><span style="color: rgb(175,0,0)">presence_penalty</span><span style="color: rgb(175,0,0)">"</span>: presence_penalty,
+<span class="ansi-green-intense-fg ansi-bold">   1947</span>             <span style="color: rgb(175,0,0)">"</span><span style="color: rgb(175,0,0)">reasoning_effort</span><span style="color: rgb(175,0,0)">"</span>: reasoning_effort,
+<span class="ansi-green-intense-fg ansi-bold">   1948</span>             <span style="color: rgb(175,0,0)">"</span><span style="color: rgb(175,0,0)">response_format</span><span style="color: rgb(175,0,0)">"</span>: response_format,
+<span class="ansi-green-intense-fg ansi-bold">   1949</span>             <span style="color: rgb(175,0,0)">"</span><span style="color: rgb(175,0,0)">seed</span><span style="color: rgb(175,0,0)">"</span>: seed,
+<span class="ansi-green-intense-fg ansi-bold">   1950</span>             <span style="color: rgb(175,0,0)">"</span><span style="color: rgb(175,0,0)">service_tier</span><span style="color: rgb(175,0,0)">"</span>: service_tier,
+<span class="ansi-green-intense-fg ansi-bold">   1951</span>             <span style="color: rgb(175,0,0)">"</span><span style="color: rgb(175,0,0)">stop</span><span style="color: rgb(175,0,0)">"</span>: stop,
+<span class="ansi-green-intense-fg ansi-bold">   1952</span>             <span style="color: rgb(175,0,0)">"</span><span style="color: rgb(175,0,0)">store</span><span style="color: rgb(175,0,0)">"</span>: store,
+<span class="ansi-green-intense-fg ansi-bold">   1953</span>             <span style="color: rgb(175,0,0)">"</span><span style="color: rgb(175,0,0)">stream</span><span style="color: rgb(175,0,0)">"</span>: stream,
+<span class="ansi-green-intense-fg ansi-bold">   1954</span>             <span style="color: rgb(175,0,0)">"</span><span style="color: rgb(175,0,0)">stream_options</span><span style="color: rgb(175,0,0)">"</span>: stream_options,
+<span class="ansi-green-intense-fg ansi-bold">   1955</span>             <span style="color: rgb(175,0,0)">"</span><span style="color: rgb(175,0,0)">temperature</span><span style="color: rgb(175,0,0)">"</span>: temperature,
+<span class="ansi-green-intense-fg ansi-bold">   1956</span>             <span style="color: rgb(175,0,0)">"</span><span style="color: rgb(175,0,0)">tool_choice</span><span style="color: rgb(175,0,0)">"</span>: tool_choice,
+<span class="ansi-green-intense-fg ansi-bold">   1957</span>             <span style="color: rgb(175,0,0)">"</span><span style="color: rgb(175,0,0)">tools</span><span style="color: rgb(175,0,0)">"</span>: tools,
+<span class="ansi-green-intense-fg ansi-bold">   1958</span>             <span style="color: rgb(175,0,0)">"</span><span style="color: rgb(175,0,0)">top_logprobs</span><span style="color: rgb(175,0,0)">"</span>: top_logprobs,
+<span class="ansi-green-intense-fg ansi-bold">   1959</span>             <span style="color: rgb(175,0,0)">"</span><span style="color: rgb(175,0,0)">top_p</span><span style="color: rgb(175,0,0)">"</span>: top_p,
+<span class="ansi-green-intense-fg ansi-bold">   1960</span>             <span style="color: rgb(175,0,0)">"</span><span style="color: rgb(175,0,0)">user</span><span style="color: rgb(175,0,0)">"</span>: user,
+<span class="ansi-green-intense-fg ansi-bold">   1961</span>         },
+<span class="ansi-green-intense-fg ansi-bold">   1962</span>         completion_create_params<span style="color: rgb(98,98,98)">.</span>CompletionCreateParams,
+<span class="ansi-green-intense-fg ansi-bold">   1963</span>     ),
+<span class="ansi-green-intense-fg ansi-bold">   1964</span>     options<span style="color: rgb(98,98,98)">=</span>make_request_options(
+<span class="ansi-green-intense-fg ansi-bold">   1965</span>         extra_headers<span style="color: rgb(98,98,98)">=</span>extra_headers, extra_query<span style="color: rgb(98,98,98)">=</span>extra_query, extra_body<span style="color: rgb(98,98,98)">=</span>extra_body, timeout<span style="color: rgb(98,98,98)">=</span>timeout
+<span class="ansi-green-intense-fg ansi-bold">   1966</span>     ),
+<span class="ansi-green-intense-fg ansi-bold">   1967</span>     cast_to<span style="color: rgb(98,98,98)">=</span>ChatCompletion,
+<span class="ansi-green-intense-fg ansi-bold">   1968</span>     stream<span style="color: rgb(98,98,98)">=</span>stream <span class="ansi-bold" style="color: rgb(175,0,255)">or</span> <span class="ansi-bold" style="color: rgb(0,135,0)">False</span>,
+<span class="ansi-green-intense-fg ansi-bold">   1969</span>     stream_cls<span style="color: rgb(98,98,98)">=</span>AsyncStream[ChatCompletionChunk],
+<span class="ansi-green-intense-fg ansi-bold">   1970</span> )
+
+File <span class="ansi-green-fg">~/Library/Caches/pypoetry/virtualenvs/aurelian-JldJeJhF-py3.11/lib/python3.11/site-packages/openai/_base_client.py:1862</span>, in <span class="ansi-cyan-fg">AsyncAPIClient.post</span><span class="ansi-blue-fg">(self, path, cast_to, body, files, options, stream, stream_cls)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1859</span> opts <span style="color: rgb(98,98,98)">=</span> FinalRequestOptions<span style="color: rgb(98,98,98)">.</span>construct(
+<span class="ansi-green-intense-fg ansi-bold">   1860</span>     method<span style="color: rgb(98,98,98)">=</span><span style="color: rgb(175,0,0)">"</span><span style="color: rgb(175,0,0)">post</span><span style="color: rgb(175,0,0)">"</span>, url<span style="color: rgb(98,98,98)">=</span>path, json_data<span style="color: rgb(98,98,98)">=</span>body, files<span style="color: rgb(98,98,98)">=</span><span class="ansi-bold" style="color: rgb(0,135,0)">await</span> async_to_httpx_files(files), <span style="color: rgb(98,98,98)">*</span><span style="color: rgb(98,98,98)">*</span>options
+<span class="ansi-green-intense-fg ansi-bold">   1861</span> )
+<span class="ansi-green-fg">-&gt; 1862</span> <span class="ansi-bold" style="color: rgb(0,135,0)">return</span> <span class="ansi-bold" style="color: rgb(0,135,0)">await</span> <span style="color: rgb(0,135,0)">self</span><span style="color: rgb(98,98,98)">.</span>request(cast_to, opts, stream<span style="color: rgb(98,98,98)">=</span>stream, stream_cls<span style="color: rgb(98,98,98)">=</span>stream_cls)
+
+File <span class="ansi-green-fg">~/Library/Caches/pypoetry/virtualenvs/aurelian-JldJeJhF-py3.11/lib/python3.11/site-packages/openai/_base_client.py:1556</span>, in <span class="ansi-cyan-fg">AsyncAPIClient.request</span><span class="ansi-blue-fg">(self, cast_to, options, stream, stream_cls, remaining_retries)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1554</span>     retries_taken <span style="color: rgb(98,98,98)">=</span> <span style="color: rgb(98,98,98)">0</span>
+<span class="ansi-green-fg">-&gt; 1556</span> <span class="ansi-bold" style="color: rgb(0,135,0)">return</span> <span class="ansi-bold" style="color: rgb(0,135,0)">await</span> <span style="color: rgb(0,135,0)">self</span><span style="color: rgb(98,98,98)">.</span>_request(
+<span class="ansi-green-intense-fg ansi-bold">   1557</span>     cast_to<span style="color: rgb(98,98,98)">=</span>cast_to,
+<span class="ansi-green-intense-fg ansi-bold">   1558</span>     options<span style="color: rgb(98,98,98)">=</span>options,
+<span class="ansi-green-intense-fg ansi-bold">   1559</span>     stream<span style="color: rgb(98,98,98)">=</span>stream,
+<span class="ansi-green-intense-fg ansi-bold">   1560</span>     stream_cls<span style="color: rgb(98,98,98)">=</span>stream_cls,
+<span class="ansi-green-intense-fg ansi-bold">   1561</span>     retries_taken<span style="color: rgb(98,98,98)">=</span>retries_taken,
+<span class="ansi-green-intense-fg ansi-bold">   1562</span> )
+
+File <span class="ansi-green-fg">~/Library/Caches/pypoetry/virtualenvs/aurelian-JldJeJhF-py3.11/lib/python3.11/site-packages/openai/_base_client.py:1657</span>, in <span class="ansi-cyan-fg">AsyncAPIClient._request</span><span class="ansi-blue-fg">(self, cast_to, options, stream, stream_cls, retries_taken)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1656</span>     log<span style="color: rgb(98,98,98)">.</span>debug(<span style="color: rgb(175,0,0)">"</span><span style="color: rgb(175,0,0)">Re-raising status error</span><span style="color: rgb(175,0,0)">"</span>)
+<span class="ansi-green-fg">-&gt; 1657</span>     <span class="ansi-bold" style="color: rgb(0,135,0)">raise</span> <span style="color: rgb(0,135,0)">self</span><span style="color: rgb(98,98,98)">.</span>_make_status_error_from_response(err<span style="color: rgb(98,98,98)">.</span>response) <span class="ansi-bold" style="color: rgb(0,135,0)">from</span><span style="color: rgb(188,188,188)"> </span><span class="ansi-bold" style="color: rgb(0,135,0)">None</span>
+<span class="ansi-green-intense-fg ansi-bold">   1659</span> <span class="ansi-bold" style="color: rgb(0,135,0)">return</span> <span class="ansi-bold" style="color: rgb(0,135,0)">await</span> <span style="color: rgb(0,135,0)">self</span><span style="color: rgb(98,98,98)">.</span>_process_response(
+<span class="ansi-green-intense-fg ansi-bold">   1660</span>     cast_to<span style="color: rgb(98,98,98)">=</span>cast_to,
+<span class="ansi-green-intense-fg ansi-bold">   1661</span>     options<span style="color: rgb(98,98,98)">=</span>options,
+<span class="ansi-green-fg">   (...)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1665</span>     retries_taken<span style="color: rgb(98,98,98)">=</span>retries_taken,
+<span class="ansi-green-intense-fg ansi-bold">   1666</span> )
+
+<span class="ansi-red-fg">BadRequestError</span>: Error code: 400 - {'error': {'message': 'Timeout while downloading https://www.ebi.ac.uk/chebi/displayImage.do?defaultImage=true&amp;imageIndex=0&amp;chebiId=71980.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_image_url'}}
+
+The above exception was the direct cause of the following exception:
+
+<span class="ansi-red-fg">ModelHTTPError</span>                            Traceback (most recent call last)
+Cell <span class="ansi-green-fg">In[46], line 22</span>
+<span class="ansi-green-intense-fg ansi-bold">     12</span> q <span style="color: rgb(98,98,98)">=</span> (
+<span class="ansi-green-intense-fg ansi-bold">     13</span>     <span style="color: rgb(175,0,0)">f</span><span style="color: rgb(175,0,0)">"</span><span style="color: rgb(175,0,0)">This structure is classified in CHEBI as a </span><span class="ansi-bold" style="color: rgb(175,95,135)">{</span>c<span class="ansi-bold" style="color: rgb(175,95,135)">}</span><span style="color: rgb(175,0,0)">, yet it has </span><span class="ansi-bold" style="color: rgb(175,95,135)">{</span>cc<span class="ansi-bold" style="color: rgb(175,95,135)">}</span><span style="color: rgb(175,0,0)"> carbons.</span><span style="color: rgb(175,0,0)">"</span>
+<span class="ansi-green-intense-fg ansi-bold">     14</span>     <span style="color: rgb(175,0,0)">f</span><span style="color: rgb(175,0,0)">"</span><span style="color: rgb(175,0,0)"> Its formula is </span><span class="ansi-bold" style="color: rgb(175,95,135)">{</span>formula<span class="ansi-bold" style="color: rgb(175,95,135)">}</span><span style="color: rgb(175,0,0)">.</span><span style="color: rgb(175,0,0)">"</span>
+<span class="ansi-green-intense-fg ansi-bold">     15</span>     <span style="color: rgb(175,0,0)">f</span><span style="color: rgb(175,0,0)">"</span><span style="color: rgb(175,0,0)"> And its name is </span><span class="ansi-bold" style="color: rgb(175,95,135)">{</span>structure<span style="color: rgb(98,98,98)">.</span>name<span class="ansi-bold" style="color: rgb(175,95,135)">}</span><span style="color: rgb(175,0,0)">.</span><span style="color: rgb(175,0,0)">"</span>
+<span class="ansi-green-intense-fg ansi-bold">     16</span>     <span style="color: rgb(175,0,0)">f</span><span style="color: rgb(175,0,0)">"</span><span style="color: rgb(175,0,0)"> Give the correct classification.</span><span style="color: rgb(175,0,0)">"</span>
+<span class="ansi-green-intense-fg ansi-bold">     17</span> )
+<span class="ansi-green-intense-fg ansi-bold">     18</span> q <span style="color: rgb(98,98,98)">=</span> <span style="color: rgb(175,0,0)">f</span><span style="color: rgb(175,0,0)">"""</span><span style="color: rgb(175,0,0)">What is the correct classification for this structure?</span>
+<span class="ansi-green-intense-fg ansi-bold">     19</span> <span style="color: rgb(175,0,0)">I suspect it is a terpenoid, in one of the following categories:</span>
+<span class="ansi-green-intense-fg ansi-bold">     20</span> <span class="ansi-bold" style="color: rgb(175,95,135)">{</span><span style="color: rgb(175,0,0)">"</span><span style="color: rgb(175,0,0)">, </span><span style="color: rgb(175,0,0)">"</span><span style="color: rgb(98,98,98)">.</span>join(CLASSES<span style="color: rgb(98,98,98)">.</span>keys())<span class="ansi-bold" style="color: rgb(175,95,135)">}</span><span style="color: rgb(175,0,0)">.</span>
+<span class="ansi-green-intense-fg ansi-bold">     21</span> <span style="color: rgb(175,0,0)">"""</span>
+<span class="ansi-green-fg">---&gt; 22</span> result <span style="color: rgb(98,98,98)">=</span> <span class="ansi-yellow-bg">agent</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">.</span><span class="ansi-yellow-bg">run_sync</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">[</span><span class="ansi-yellow-bg">q</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">img_url</span><span class="ansi-yellow-bg">]</span><span class="ansi-yellow-bg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">     23</span> agrees <span style="color: rgb(98,98,98)">=</span> result<span style="color: rgb(98,98,98)">.</span>data<span style="color: rgb(98,98,98)">.</span>chemical_class<span style="color: rgb(98,98,98)">.</span>lower() <span style="color: rgb(98,98,98)">==</span> c<span style="color: rgb(98,98,98)">.</span>lower()
+<span class="ansi-green-intense-fg ansi-bold">     24</span> <span style="color: rgb(0,135,0)">print</span>(agrees, c, s, cc, formula)
+
+File <span class="ansi-green-fg">~/Library/Caches/pypoetry/virtualenvs/aurelian-JldJeJhF-py3.11/lib/python3.11/site-packages/pydantic_ai/agent.py:541</span>, in <span class="ansi-cyan-fg">Agent.run_sync</span><span class="ansi-blue-fg">(self, user_prompt, result_type, message_history, model, deps, model_settings, usage_limits, usage, infer_name)</span>
+<span class="ansi-green-intense-fg ansi-bold">    539</span> <span class="ansi-bold" style="color: rgb(0,135,0)">if</span> infer_name <span class="ansi-bold" style="color: rgb(175,0,255)">and</span> <span style="color: rgb(0,135,0)">self</span><span style="color: rgb(98,98,98)">.</span>name <span class="ansi-bold" style="color: rgb(175,0,255)">is</span> <span class="ansi-bold" style="color: rgb(0,135,0)">None</span>:
+<span class="ansi-green-intense-fg ansi-bold">    540</span>     <span style="color: rgb(0,135,0)">self</span><span style="color: rgb(98,98,98)">.</span>_infer_name(inspect<span style="color: rgb(98,98,98)">.</span>currentframe())
+<span class="ansi-green-fg">--&gt; 541</span> <span class="ansi-bold" style="color: rgb(0,135,0)">return</span> <span class="ansi-yellow-bg">get_event_loop</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">)</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">.</span><span class="ansi-yellow-bg">run_until_complete</span><span class="ansi-yellow-bg">(</span>
+<span class="ansi-green-intense-fg ansi-bold">    542</span> <span class="ansi-yellow-bg">    </span><span class="ansi-yellow-bg" style="color: rgb(0,135,0)">self</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">.</span><span class="ansi-yellow-bg">run</span><span class="ansi-yellow-bg">(</span>
+<span class="ansi-green-intense-fg ansi-bold">    543</span> <span class="ansi-yellow-bg">        </span><span class="ansi-yellow-bg">user_prompt</span><span class="ansi-yellow-bg">,</span>
+<span class="ansi-green-intense-fg ansi-bold">    544</span> <span class="ansi-yellow-bg">        </span><span class="ansi-yellow-bg">result_type</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">=</span><span class="ansi-yellow-bg">result_type</span><span class="ansi-yellow-bg">,</span>
+<span class="ansi-green-intense-fg ansi-bold">    545</span> <span class="ansi-yellow-bg">        </span><span class="ansi-yellow-bg">message_history</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">=</span><span class="ansi-yellow-bg">message_history</span><span class="ansi-yellow-bg">,</span>
+<span class="ansi-green-intense-fg ansi-bold">    546</span> <span class="ansi-yellow-bg">        </span><span class="ansi-yellow-bg">model</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">=</span><span class="ansi-yellow-bg">model</span><span class="ansi-yellow-bg">,</span>
+<span class="ansi-green-intense-fg ansi-bold">    547</span> <span class="ansi-yellow-bg">        </span><span class="ansi-yellow-bg">deps</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">=</span><span class="ansi-yellow-bg">deps</span><span class="ansi-yellow-bg">,</span>
+<span class="ansi-green-intense-fg ansi-bold">    548</span> <span class="ansi-yellow-bg">        </span><span class="ansi-yellow-bg">model_settings</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">=</span><span class="ansi-yellow-bg">model_settings</span><span class="ansi-yellow-bg">,</span>
+<span class="ansi-green-intense-fg ansi-bold">    549</span> <span class="ansi-yellow-bg">        </span><span class="ansi-yellow-bg">usage_limits</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">=</span><span class="ansi-yellow-bg">usage_limits</span><span class="ansi-yellow-bg">,</span>
+<span class="ansi-green-intense-fg ansi-bold">    550</span> <span class="ansi-yellow-bg">        </span><span class="ansi-yellow-bg">usage</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">=</span><span class="ansi-yellow-bg">usage</span><span class="ansi-yellow-bg">,</span>
+<span class="ansi-green-intense-fg ansi-bold">    551</span> <span class="ansi-yellow-bg">        </span><span class="ansi-yellow-bg">infer_name</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">=</span><span class="ansi-yellow-bg ansi-bold" style="color: rgb(0,135,0)">False</span><span class="ansi-yellow-bg">,</span>
+<span class="ansi-green-intense-fg ansi-bold">    552</span> <span class="ansi-yellow-bg">    </span><span class="ansi-yellow-bg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    553</span> <span class="ansi-yellow-bg">)</span>
+
+File <span class="ansi-green-fg">~/Library/Caches/pypoetry/virtualenvs/aurelian-JldJeJhF-py3.11/lib/python3.11/site-packages/nest_asyncio.py:98</span>, in <span class="ansi-cyan-fg">_patch_loop.&lt;locals&gt;.run_until_complete</span><span class="ansi-blue-fg">(self, future)</span>
+<span class="ansi-green-intense-fg ansi-bold">     95</span> <span class="ansi-bold" style="color: rgb(0,135,0)">if</span> <span class="ansi-bold" style="color: rgb(175,0,255)">not</span> f<span style="color: rgb(98,98,98)">.</span>done():
+<span class="ansi-green-intense-fg ansi-bold">     96</span>     <span class="ansi-bold" style="color: rgb(0,135,0)">raise</span> <span class="ansi-bold" style="color: rgb(215,95,95)">RuntimeError</span>(
+<span class="ansi-green-intense-fg ansi-bold">     97</span>         <span style="color: rgb(175,0,0)">'</span><span style="color: rgb(175,0,0)">Event loop stopped before Future completed.</span><span style="color: rgb(175,0,0)">'</span>)
+<span class="ansi-green-fg">---&gt; 98</span> <span class="ansi-bold" style="color: rgb(0,135,0)">return</span> <span class="ansi-yellow-bg">f</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">.</span><span class="ansi-yellow-bg">result</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">)</span>
+
+File <span class="ansi-green-fg">/opt/homebrew/Cellar/python@3.11/3.11.9/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/futures.py:203</span>, in <span class="ansi-cyan-fg">Future.result</span><span class="ansi-blue-fg">(self)</span>
+<span class="ansi-green-intense-fg ansi-bold">    201</span> <span style="color: rgb(0,135,0)">self</span><span style="color: rgb(98,98,98)">.</span>__log_traceback <span style="color: rgb(98,98,98)">=</span> <span class="ansi-bold" style="color: rgb(0,135,0)">False</span>
+<span class="ansi-green-intense-fg ansi-bold">    202</span> <span class="ansi-bold" style="color: rgb(0,135,0)">if</span> <span style="color: rgb(0,135,0)">self</span><span style="color: rgb(98,98,98)">.</span>_exception <span class="ansi-bold" style="color: rgb(175,0,255)">is</span> <span class="ansi-bold" style="color: rgb(175,0,255)">not</span> <span class="ansi-bold" style="color: rgb(0,135,0)">None</span>:
+<span class="ansi-green-fg">--&gt; 203</span>     <span class="ansi-bold" style="color: rgb(0,135,0)">raise</span> <span style="color: rgb(0,135,0)">self</span><span style="color: rgb(98,98,98)">.</span>_exception<span style="color: rgb(98,98,98)">.</span>with_traceback(<span style="color: rgb(0,135,0)">self</span><span style="color: rgb(98,98,98)">.</span>_exception_tb)
+<span class="ansi-green-intense-fg ansi-bold">    204</span> <span class="ansi-bold" style="color: rgb(0,135,0)">return</span> <span style="color: rgb(0,135,0)">self</span><span style="color: rgb(98,98,98)">.</span>_result
+
+File <span class="ansi-green-fg">/opt/homebrew/Cellar/python@3.11/3.11.9/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/tasks.py:277</span>, in <span class="ansi-cyan-fg">Task.__step</span><span class="ansi-blue-fg">(***failed resolving arguments***)</span>
+<span class="ansi-green-intense-fg ansi-bold">    273</span> <span class="ansi-bold" style="color: rgb(0,135,0)">try</span>:
+<span class="ansi-green-intense-fg ansi-bold">    274</span>     <span class="ansi-bold" style="color: rgb(0,135,0)">if</span> exc <span class="ansi-bold" style="color: rgb(175,0,255)">is</span> <span class="ansi-bold" style="color: rgb(0,135,0)">None</span>:
+<span class="ansi-green-intense-fg ansi-bold">    275</span>         <span style="color: rgb(95,135,135)"># We use the `send` method directly, because coroutines</span>
+<span class="ansi-green-intense-fg ansi-bold">    276</span>         <span style="color: rgb(95,135,135)"># don't have `__iter__` and `__next__` methods.</span>
+<span class="ansi-green-fg">--&gt; 277</span>         result <span style="color: rgb(98,98,98)">=</span> coro<span style="color: rgb(98,98,98)">.</span>send(<span class="ansi-bold" style="color: rgb(0,135,0)">None</span>)
+<span class="ansi-green-intense-fg ansi-bold">    278</span>     <span class="ansi-bold" style="color: rgb(0,135,0)">else</span>:
+<span class="ansi-green-intense-fg ansi-bold">    279</span>         result <span style="color: rgb(98,98,98)">=</span> coro<span style="color: rgb(98,98,98)">.</span>throw(exc)
+
+File <span class="ansi-green-fg">~/Library/Caches/pypoetry/virtualenvs/aurelian-JldJeJhF-py3.11/lib/python3.11/site-packages/pydantic_ai/agent.py:307</span>, in <span class="ansi-cyan-fg">Agent.run</span><span class="ansi-blue-fg">(self, user_prompt, result_type, message_history, model, deps, model_settings, usage_limits, usage, infer_name)</span>
+<span class="ansi-green-intense-fg ansi-bold">    296</span>     <span style="color: rgb(0,135,0)">self</span><span style="color: rgb(98,98,98)">.</span>_infer_name(inspect<span style="color: rgb(98,98,98)">.</span>currentframe())
+<span class="ansi-green-intense-fg ansi-bold">    297</span> <span class="ansi-bold" style="color: rgb(0,135,0)">with</span> <span style="color: rgb(0,135,0)">self</span><span style="color: rgb(98,98,98)">.</span>iter(
+<span class="ansi-green-intense-fg ansi-bold">    298</span>     user_prompt<span style="color: rgb(98,98,98)">=</span>user_prompt,
+<span class="ansi-green-intense-fg ansi-bold">    299</span>     result_type<span style="color: rgb(98,98,98)">=</span>result_type,
+<span class="ansi-green-fg">   (...)</span>
+<span class="ansi-green-intense-fg ansi-bold">    305</span>     usage<span style="color: rgb(98,98,98)">=</span>usage,
+<span class="ansi-green-intense-fg ansi-bold">    306</span> ) <span class="ansi-bold" style="color: rgb(0,135,0)">as</span> agent_run:
+<span class="ansi-green-fg">--&gt; 307</span>     <span class="ansi-bold" style="color: rgb(0,135,0)">async</span> <span class="ansi-bold" style="color: rgb(0,135,0)">for</span> _ <span class="ansi-bold" style="color: rgb(175,0,255)">in</span> agent_run:
+<span class="ansi-green-intense-fg ansi-bold">    308</span>         <span class="ansi-bold" style="color: rgb(0,135,0)">pass</span>
+<span class="ansi-green-intense-fg ansi-bold">    310</span> <span class="ansi-bold" style="color: rgb(0,135,0)">assert</span> (final_result <span style="color: rgb(98,98,98)">:=</span> agent_run<span style="color: rgb(98,98,98)">.</span>result) <span class="ansi-bold" style="color: rgb(175,0,255)">is</span> <span class="ansi-bold" style="color: rgb(175,0,255)">not</span> <span class="ansi-bold" style="color: rgb(0,135,0)">None</span>, <span style="color: rgb(175,0,0)">'</span><span style="color: rgb(175,0,0)">The graph run did not finish properly</span><span style="color: rgb(175,0,0)">'</span>
+
+File <span class="ansi-green-fg">~/Library/Caches/pypoetry/virtualenvs/aurelian-JldJeJhF-py3.11/lib/python3.11/site-packages/pydantic_ai/agent.py:1298</span>, in <span class="ansi-cyan-fg">AgentRun.__anext__</span><span class="ansi-blue-fg">(self)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1287</span> <span class="ansi-bold" style="color: rgb(0,135,0)">async</span> <span class="ansi-bold" style="color: rgb(0,135,0)">def</span><span style="color: rgb(188,188,188)"> </span><span style="color: rgb(0,0,255)">__anext__</span>(
+<span class="ansi-green-intense-fg ansi-bold">   1288</span>     <span style="color: rgb(0,135,0)">self</span>,
+<span class="ansi-green-intense-fg ansi-bold">   1289</span> ) <span style="color: rgb(98,98,98)">-</span><span style="color: rgb(98,98,98)">&gt;</span> (
+<span class="ansi-green-fg">   (...)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1295</span>     <span style="color: rgb(98,98,98)">|</span> End[FinalResult[ResultDataT]]
+<span class="ansi-green-intense-fg ansi-bold">   1296</span> ):
+<span class="ansi-green-intense-fg ansi-bold">   1297</span> <span style="color: rgb(188,188,188)">    </span><span style="color: rgb(175,0,0)">"""Advance to the next node automatically based on the last returned node."""</span>
+<span class="ansi-green-fg">-&gt; 1298</span>     <span class="ansi-bold" style="color: rgb(0,135,0)">return</span> <span class="ansi-bold" style="color: rgb(0,135,0)">await</span> <span style="color: rgb(0,135,0)">self</span><span style="color: rgb(98,98,98)">.</span>_graph_run<span style="color: rgb(98,98,98)">.</span><span style="color: rgb(0,0,255)">__anext__</span>()
+
+File <span class="ansi-green-fg">~/Library/Caches/pypoetry/virtualenvs/aurelian-JldJeJhF-py3.11/lib/python3.11/site-packages/pydantic_graph/graph.py:737</span>, in <span class="ansi-cyan-fg">GraphRun.__anext__</span><span class="ansi-blue-fg">(self)</span>
+<span class="ansi-green-intense-fg ansi-bold">    735</span> <span class="ansi-bold" style="color: rgb(0,135,0)">if</span> <span style="color: rgb(0,135,0)">isinstance</span>(<span style="color: rgb(0,135,0)">self</span><span style="color: rgb(98,98,98)">.</span>_next_node, End):
+<span class="ansi-green-intense-fg ansi-bold">    736</span>     <span class="ansi-bold" style="color: rgb(0,135,0)">raise</span> <span class="ansi-bold" style="color: rgb(215,95,95)">StopAsyncIteration</span>
+<span class="ansi-green-fg">--&gt; 737</span> <span class="ansi-bold" style="color: rgb(0,135,0)">return</span> <span class="ansi-bold" style="color: rgb(0,135,0)">await</span> <span style="color: rgb(0,135,0)">self</span><span style="color: rgb(98,98,98)">.</span>next(<span style="color: rgb(0,135,0)">self</span><span style="color: rgb(98,98,98)">.</span>_next_node)
+
+File <span class="ansi-green-fg">~/Library/Caches/pypoetry/virtualenvs/aurelian-JldJeJhF-py3.11/lib/python3.11/site-packages/pydantic_graph/graph.py:726</span>, in <span class="ansi-cyan-fg">GraphRun.next</span><span class="ansi-blue-fg">(self, node)</span>
+<span class="ansi-green-intense-fg ansi-bold">    723</span> state <span style="color: rgb(98,98,98)">=</span> <span style="color: rgb(0,135,0)">self</span><span style="color: rgb(98,98,98)">.</span>state
+<span class="ansi-green-intense-fg ansi-bold">    724</span> deps <span style="color: rgb(98,98,98)">=</span> <span style="color: rgb(0,135,0)">self</span><span style="color: rgb(98,98,98)">.</span>deps
+<span class="ansi-green-fg">--&gt; 726</span> <span style="color: rgb(0,135,0)">self</span><span style="color: rgb(98,98,98)">.</span>_next_node <span style="color: rgb(98,98,98)">=</span> <span class="ansi-bold" style="color: rgb(0,135,0)">await</span> <span style="color: rgb(0,135,0)">self</span><span style="color: rgb(98,98,98)">.</span>graph<span style="color: rgb(98,98,98)">.</span>next(node, history, state<span style="color: rgb(98,98,98)">=</span>state, deps<span style="color: rgb(98,98,98)">=</span>deps, infer_name<span style="color: rgb(98,98,98)">=</span><span class="ansi-bold" style="color: rgb(0,135,0)">False</span>)
+<span class="ansi-green-intense-fg ansi-bold">    728</span> <span class="ansi-bold" style="color: rgb(0,135,0)">return</span> <span style="color: rgb(0,135,0)">self</span><span style="color: rgb(98,98,98)">.</span>_next_node
+
+File <span class="ansi-green-fg">~/Library/Caches/pypoetry/virtualenvs/aurelian-JldJeJhF-py3.11/lib/python3.11/site-packages/pydantic_graph/graph.py:305</span>, in <span class="ansi-cyan-fg">Graph.next</span><span class="ansi-blue-fg">(self, node, history, state, deps, infer_name)</span>
+<span class="ansi-green-intense-fg ansi-bold">    303</span>     start_ts <span style="color: rgb(98,98,98)">=</span> _utils<span style="color: rgb(98,98,98)">.</span>now_utc()
+<span class="ansi-green-intense-fg ansi-bold">    304</span>     start <span style="color: rgb(98,98,98)">=</span> perf_counter()
+<span class="ansi-green-fg">--&gt; 305</span>     next_node <span style="color: rgb(98,98,98)">=</span> <span class="ansi-bold" style="color: rgb(0,135,0)">await</span> node<span style="color: rgb(98,98,98)">.</span>run(ctx)
+<span class="ansi-green-intense-fg ansi-bold">    306</span>     duration <span style="color: rgb(98,98,98)">=</span> perf_counter() <span style="color: rgb(98,98,98)">-</span> start
+<span class="ansi-green-intense-fg ansi-bold">    308</span> history<span style="color: rgb(98,98,98)">.</span>append(
+<span class="ansi-green-intense-fg ansi-bold">    309</span>     NodeStep(state<span style="color: rgb(98,98,98)">=</span>state, node<span style="color: rgb(98,98,98)">=</span>node, start_ts<span style="color: rgb(98,98,98)">=</span>start_ts, duration<span style="color: rgb(98,98,98)">=</span>duration, snapshot_state<span style="color: rgb(98,98,98)">=</span><span style="color: rgb(0,135,0)">self</span><span style="color: rgb(98,98,98)">.</span>snapshot_state)
+<span class="ansi-green-intense-fg ansi-bold">    310</span> )
+
+File <span class="ansi-green-fg">~/Library/Caches/pypoetry/virtualenvs/aurelian-JldJeJhF-py3.11/lib/python3.11/site-packages/pydantic_ai/_agent_graph.py:237</span>, in <span class="ansi-cyan-fg">ModelRequestNode.run</span><span class="ansi-blue-fg">(self, ctx)</span>
+<span class="ansi-green-intense-fg ansi-bold">    232</span> <span class="ansi-bold" style="color: rgb(0,135,0)">if</span> <span style="color: rgb(0,135,0)">self</span><span style="color: rgb(98,98,98)">.</span>_did_stream:
+<span class="ansi-green-intense-fg ansi-bold">    233</span>     <span style="color: rgb(95,135,135)"># `self._result` gets set when exiting the `stream` contextmanager, so hitting this</span>
+<span class="ansi-green-intense-fg ansi-bold">    234</span>     <span style="color: rgb(95,135,135)"># means that the stream was started but not finished before `run()` was called</span>
+<span class="ansi-green-intense-fg ansi-bold">    235</span>     <span class="ansi-bold" style="color: rgb(0,135,0)">raise</span> exceptions<span style="color: rgb(98,98,98)">.</span>AgentRunError(<span style="color: rgb(175,0,0)">'</span><span style="color: rgb(175,0,0)">You must finish streaming before calling run()</span><span style="color: rgb(175,0,0)">'</span>)
+<span class="ansi-green-fg">--&gt; 237</span> <span class="ansi-bold" style="color: rgb(0,135,0)">return</span> <span class="ansi-bold" style="color: rgb(0,135,0)">await</span> <span style="color: rgb(0,135,0)">self</span><span style="color: rgb(98,98,98)">.</span>_make_request(ctx)
+
+File <span class="ansi-green-fg">~/Library/Caches/pypoetry/virtualenvs/aurelian-JldJeJhF-py3.11/lib/python3.11/site-packages/pydantic_ai/_agent_graph.py:275</span>, in <span class="ansi-cyan-fg">ModelRequestNode._make_request</span><span class="ansi-blue-fg">(self, ctx)</span>
+<span class="ansi-green-intense-fg ansi-bold">    273</span> model_settings, model_request_parameters <span style="color: rgb(98,98,98)">=</span> <span class="ansi-bold" style="color: rgb(0,135,0)">await</span> <span style="color: rgb(0,135,0)">self</span><span style="color: rgb(98,98,98)">.</span>_prepare_request(ctx)
+<span class="ansi-green-intense-fg ansi-bold">    274</span> <span class="ansi-bold" style="color: rgb(0,135,0)">with</span> _logfire<span style="color: rgb(98,98,98)">.</span>span(<span style="color: rgb(175,0,0)">'</span><span style="color: rgb(175,0,0)">model request</span><span style="color: rgb(175,0,0)">'</span>, run_step<span style="color: rgb(98,98,98)">=</span>ctx<span style="color: rgb(98,98,98)">.</span>state<span style="color: rgb(98,98,98)">.</span>run_step) <span class="ansi-bold" style="color: rgb(0,135,0)">as</span> span:
+<span class="ansi-green-fg">--&gt; 275</span>     model_response, request_usage <span style="color: rgb(98,98,98)">=</span> <span class="ansi-bold" style="color: rgb(0,135,0)">await</span> ctx<span style="color: rgb(98,98,98)">.</span>deps<span style="color: rgb(98,98,98)">.</span>model<span style="color: rgb(98,98,98)">.</span>request(
+<span class="ansi-green-intense-fg ansi-bold">    276</span>         ctx<span style="color: rgb(98,98,98)">.</span>state<span style="color: rgb(98,98,98)">.</span>message_history, model_settings, model_request_parameters
+<span class="ansi-green-intense-fg ansi-bold">    277</span>     )
+<span class="ansi-green-intense-fg ansi-bold">    278</span>     ctx<span style="color: rgb(98,98,98)">.</span>state<span style="color: rgb(98,98,98)">.</span>usage<span style="color: rgb(98,98,98)">.</span>incr(_usage<span style="color: rgb(98,98,98)">.</span>Usage(), requests<span style="color: rgb(98,98,98)">=</span><span style="color: rgb(98,98,98)">1</span>)
+<span class="ansi-green-intense-fg ansi-bold">    279</span>     span<span style="color: rgb(98,98,98)">.</span>set_attribute(<span style="color: rgb(175,0,0)">'</span><span style="color: rgb(175,0,0)">response</span><span style="color: rgb(175,0,0)">'</span>, model_response)
+
+File <span class="ansi-green-fg">~/Library/Caches/pypoetry/virtualenvs/aurelian-JldJeJhF-py3.11/lib/python3.11/site-packages/pydantic_ai/models/openai.py:156</span>, in <span class="ansi-cyan-fg">OpenAIModel.request</span><span class="ansi-blue-fg">(self, messages, model_settings, model_request_parameters)</span>
+<span class="ansi-green-intense-fg ansi-bold">    149</span> <span class="ansi-bold" style="color: rgb(0,135,0)">async</span> <span class="ansi-bold" style="color: rgb(0,135,0)">def</span><span style="color: rgb(188,188,188)"> </span><span style="color: rgb(0,0,255)">request</span>(
+<span class="ansi-green-intense-fg ansi-bold">    150</span>     <span style="color: rgb(0,135,0)">self</span>,
+<span class="ansi-green-intense-fg ansi-bold">    151</span>     messages: <span style="color: rgb(0,135,0)">list</span>[ModelMessage],
+<span class="ansi-green-intense-fg ansi-bold">    152</span>     model_settings: ModelSettings <span style="color: rgb(98,98,98)">|</span> <span class="ansi-bold" style="color: rgb(0,135,0)">None</span>,
+<span class="ansi-green-intense-fg ansi-bold">    153</span>     model_request_parameters: ModelRequestParameters,
+<span class="ansi-green-intense-fg ansi-bold">    154</span> ) <span style="color: rgb(98,98,98)">-</span><span style="color: rgb(98,98,98)">&gt;</span> <span style="color: rgb(0,135,0)">tuple</span>[ModelResponse, usage<span style="color: rgb(98,98,98)">.</span>Usage]:
+<span class="ansi-green-intense-fg ansi-bold">    155</span>     check_allow_model_requests()
+<span class="ansi-green-fg">--&gt; 156</span>     response <span style="color: rgb(98,98,98)">=</span> <span class="ansi-bold" style="color: rgb(0,135,0)">await</span> <span style="color: rgb(0,135,0)">self</span><span style="color: rgb(98,98,98)">.</span>_completions_create(
+<span class="ansi-green-intense-fg ansi-bold">    157</span>         messages, <span class="ansi-bold" style="color: rgb(0,135,0)">False</span>, cast(OpenAIModelSettings, model_settings <span class="ansi-bold" style="color: rgb(175,0,255)">or</span> {}), model_request_parameters
+<span class="ansi-green-intense-fg ansi-bold">    158</span>     )
+<span class="ansi-green-intense-fg ansi-bold">    159</span>     <span class="ansi-bold" style="color: rgb(0,135,0)">return</span> <span style="color: rgb(0,135,0)">self</span><span style="color: rgb(98,98,98)">.</span>_process_response(response), _map_usage(response)
+
+File <span class="ansi-green-fg">~/Library/Caches/pypoetry/virtualenvs/aurelian-JldJeJhF-py3.11/lib/python3.11/site-packages/pydantic_ai/models/openai.py:249</span>, in <span class="ansi-cyan-fg">OpenAIModel._completions_create</span><span class="ansi-blue-fg">(self, messages, stream, model_settings, model_request_parameters)</span>
+<span class="ansi-green-intense-fg ansi-bold">    247</span> <span class="ansi-bold" style="color: rgb(0,135,0)">except</span> APIStatusError <span class="ansi-bold" style="color: rgb(0,135,0)">as</span> e:
+<span class="ansi-green-intense-fg ansi-bold">    248</span>     <span class="ansi-bold" style="color: rgb(0,135,0)">if</span> (status_code <span style="color: rgb(98,98,98)">:=</span> e<span style="color: rgb(98,98,98)">.</span>status_code) <span style="color: rgb(98,98,98)">&gt;</span><span style="color: rgb(98,98,98)">=</span> <span style="color: rgb(98,98,98)">400</span>:
+<span class="ansi-green-fg">--&gt; 249</span>         <span class="ansi-bold" style="color: rgb(0,135,0)">raise</span> ModelHTTPError(status_code<span style="color: rgb(98,98,98)">=</span>status_code, model_name<span style="color: rgb(98,98,98)">=</span><span style="color: rgb(0,135,0)">self</span><span style="color: rgb(98,98,98)">.</span>model_name, body<span style="color: rgb(98,98,98)">=</span>e<span style="color: rgb(98,98,98)">.</span>body) <span class="ansi-bold" style="color: rgb(0,135,0)">from</span><span style="color: rgb(188,188,188)"> </span><span class="ansi-bold" style="color: rgb(0,0,255)">e</span>
+<span class="ansi-green-intense-fg ansi-bold">    250</span>     <span class="ansi-bold" style="color: rgb(0,135,0)">raise</span>
+
+<span class="ansi-red-fg">ModelHTTPError</span>: status_code: 400, model_name: gpt-4o, body: {'message': 'Timeout while downloading https://www.ebi.ac.uk/chebi/displayImage.do?defaultImage=true&amp;imageIndex=0&amp;chebiId=71980.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_image_url'}</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="highlight"><pre><span></span><code><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Done&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>
+<code>Done
+</code>
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="highlight"><pre><span></span><code><span class="nb">len</span><span class="p">([</span><span class="n">r</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">results</span> <span class="k">if</span> <span class="n">r</span><span class="p">[</span><span class="mi">0</span><span class="p">]])</span>
+</code></pre></div>
+
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="output_text output_subarea output_execute_result">
+<pre>
+<code>43</code>
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+</code></pre></div>
+
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="highlight"><pre><span></span><code><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;agrees&quot;</span><span class="p">,</span> <span class="s2">&quot;expected&quot;</span><span class="p">,</span> <span class="s2">&quot;structure&quot;</span><span class="p">,</span> <span class="s2">&quot;question&quot;</span><span class="p">,</span> <span class="s2">&quot;result&quot;</span><span class="p">])</span>
+</code></pre></div>
+
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="highlight"><pre><span></span><code><span class="n">df</span>
+</code></pre></div>
+
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>agrees</th>
+<th>expected</th>
+<th>structure</th>
+<th>question</th>
+<th>result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>0</th>
+<td>True</td>
+<td>triterpenoid</td>
+<td>CHEBI:9771</td>
+<td>What is the correct classification for this st...</td>
+<td>AgentRunResult(data=Classification(chemical_cl...</td>
+</tr>
+<tr>
+<th>1</th>
+<td>True</td>
+<td>triterpenoid</td>
+<td>CHEBI:9110</td>
+<td>What is the correct classification for this st...</td>
+<td>AgentRunResult(data=Classification(chemical_cl...</td>
+</tr>
+<tr>
+<th>2</th>
+<td>True</td>
+<td>triterpenoid</td>
+<td>CHEBI:74453</td>
+<td>What is the correct classification for this st...</td>
+<td>AgentRunResult(data=Classification(chemical_cl...</td>
+</tr>
+<tr>
+<th>3</th>
+<td>True</td>
+<td>triterpenoid</td>
+<td>CHEBI:74448</td>
+<td>What is the correct classification for this st...</td>
+<td>AgentRunResult(data=Classification(chemical_cl...</td>
+</tr>
+<tr>
+<th>4</th>
+<td>True</td>
+<td>triterpenoid</td>
+<td>CHEBI:69373</td>
+<td>What is the correct classification for this st...</td>
+<td>AgentRunResult(data=Classification(chemical_cl...</td>
+</tr>
+<tr>
+<th>...</th>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr>
+<th>102</th>
+<td>False</td>
+<td>diterpenoid</td>
+<td>CHEBI:8046</td>
+<td>What is the correct classification for this st...</td>
+<td>AgentRunResult(data=Classification(chemical_cl...</td>
+</tr>
+<tr>
+<th>103</th>
+<td>False</td>
+<td>diterpenoid</td>
+<td>CHEBI:80196</td>
+<td>What is the correct classification for this st...</td>
+<td>AgentRunResult(data=Classification(chemical_cl...</td>
+</tr>
+<tr>
+<th>104</th>
+<td>False</td>
+<td>diterpenoid</td>
+<td>CHEBI:80117</td>
+<td>What is the correct classification for this st...</td>
+<td>AgentRunResult(data=Classification(chemical_cl...</td>
+</tr>
+<tr>
+<th>105</th>
+<td>False</td>
+<td>diterpenoid</td>
+<td>CHEBI:79068</td>
+<td>What is the correct classification for this st...</td>
+<td>AgentRunResult(data=Classification(chemical_cl...</td>
+</tr>
+<tr>
+<th>106</th>
+<td>True</td>
+<td>diterpenoid</td>
+<td>CHEBI:74030</td>
+<td>What is the correct classification for this st...</td>
+<td>AgentRunResult(data=Classification(chemical_cl...</td>
+</tr>
+</tbody>
+</table>
+<p>107 rows × 5 columns</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="highlight"><pre><span></span><code><span class="n">IMG_URL_TMPL</span> <span class="o">=</span> <span class="s2">&quot;https://www.ebi.ac.uk/chebi/displayImage.do?defaultImage=true&amp;amp;imageIndex=0&amp;amp;chebiId=</span><span class="si">{n}</span><span class="s2">&quot;</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">img_url</span><span class="p">(</span><span class="n">chebi_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="n">IMG_URL_TMPL</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="n">chebi_id</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;CHEBI:&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">))</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;&lt;img alt=&quot;No description has been provided for this image&quot; onerror=&quot;this.style.display=</span><span class="se">\&#39;</span><span class="s1">none</span><span class="se">\&#39;</span><span class="s1">;&quot; src=&quot;</span><span class="si">{</span><span class="n">url</span><span class="si">}</span><span class="s1">&quot; style=&quot;max-height: 100px; object-fit: contain; display: block; margin: auto;&quot; width=&quot;120&quot;/&gt;&#39;</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">cell_div</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">img</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">        &lt;div style=&quot;display: flex; flex-direction: column; align-items: center; text-align: center;&quot;&gt;</span>
+<span class="s1">&lt;span style=&quot;font-size: 12px; margin-bottom: 5px;&quot;&gt;</span><span class="si">{</span><span class="n">text</span><span class="si">}</span><span class="s1">&lt;/span&gt;</span>
+<span class="s1">            </span><span class="si">{</span><span class="n">img</span><span class="si">}</span>
+<span class="s1">        &lt;/div&gt;</span>
+<span class="s1">        &#39;&#39;&#39;</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">cell_from_row</span><span class="p">(</span><span class="n">row</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">cell_div</span><span class="p">(</span><span class="n">chebi</span><span class="o">.</span><span class="n">label</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s2">&quot;structure&quot;</span><span class="p">]),</span> <span class="n">img_url</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s2">&quot;structure&quot;</span><span class="p">]))</span>
+</code></pre></div>
+
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="highlight"><pre><span></span><code><span class="n">df</span><span class="p">[</span><span class="s2">&quot;img&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">cell_from_row</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</code></pre></div>
+
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="highlight"><pre><span></span><code><span class="n">df</span><span class="p">[</span><span class="s2">&quot;llm_classification&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;result&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">r</span><span class="p">:</span> <span class="n">r</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">chemical_class</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="s2">&quot;llm_explanation&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;result&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">r</span><span class="p">:</span> <span class="n">r</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">explanation</span><span class="p">)</span>
+</code></pre></div>
+
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="highlight"><pre><span></span><code><span class="n">df</span>
+</code></pre></div>
+
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>agrees</th>
+<th>expected</th>
+<th>structure</th>
+<th>question</th>
+<th>result</th>
+<th>img</th>
+<th>llm_classification</th>
+<th>llm_explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>0</th>
+<td>True</td>
+<td>triterpenoid</td>
+<td>CHEBI:9771</td>
+<td>What is the correct classification for this st...</td>
+<td>AgentRunResult(data=Classification(chemical_cl...</td>
+<td>\n        &lt;div style="display: flex; flex-dire...</td>
+<td>triterpenoid</td>
+<td>The chemical structure in the image shows a la...</td>
+</tr>
+<tr>
+<th>1</th>
+<td>True</td>
+<td>triterpenoid</td>
+<td>CHEBI:9110</td>
+<td>What is the correct classification for this st...</td>
+<td>AgentRunResult(data=Classification(chemical_cl...</td>
+<td>\n        &lt;div style="display: flex; flex-dire...</td>
+<td>triterpenoid</td>
+<td>The structure displayed consists of 30 carbon ...</td>
+</tr>
+<tr>
+<th>2</th>
+<td>True</td>
+<td>triterpenoid</td>
+<td>CHEBI:74453</td>
+<td>What is the correct classification for this st...</td>
+<td>AgentRunResult(data=Classification(chemical_cl...</td>
+<td>\n        &lt;div style="display: flex; flex-dire...</td>
+<td>triterpenoid</td>
+<td>The structure displayed contains a series of s...</td>
+</tr>
+<tr>
+<th>3</th>
+<td>True</td>
+<td>triterpenoid</td>
+<td>CHEBI:74448</td>
+<td>What is the correct classification for this st...</td>
+<td>AgentRunResult(data=Classification(chemical_cl...</td>
+<td>\n        &lt;div style="display: flex; flex-dire...</td>
+<td>triterpenoid</td>
+<td>This chemical structure can be classified as a...</td>
+</tr>
+<tr>
+<th>4</th>
+<td>True</td>
+<td>triterpenoid</td>
+<td>CHEBI:69373</td>
+<td>What is the correct classification for this st...</td>
+<td>AgentRunResult(data=Classification(chemical_cl...</td>
+<td>\n        &lt;div style="display: flex; flex-dire...</td>
+<td>triterpenoid</td>
+<td>The structure provided is quite complex, featu...</td>
+</tr>
+<tr>
+<th>...</th>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr>
+<th>102</th>
+<td>False</td>
+<td>diterpenoid</td>
+<td>CHEBI:8046</td>
+<td>What is the correct classification for this st...</td>
+<td>AgentRunResult(data=Classification(chemical_cl...</td>
+<td>\n        &lt;div style="display: flex; flex-dire...</td>
+<td>triterpenoid</td>
+<td>The structure in the image is a complex molecu...</td>
+</tr>
+<tr>
+<th>103</th>
+<td>False</td>
+<td>diterpenoid</td>
+<td>CHEBI:80196</td>
+<td>What is the correct classification for this st...</td>
+<td>AgentRunResult(data=Classification(chemical_cl...</td>
+<td>\n        &lt;div style="display: flex; flex-dire...</td>
+<td>other</td>
+<td>The structure in the image is of beta-carotene...</td>
+</tr>
+<tr>
+<th>104</th>
+<td>False</td>
+<td>diterpenoid</td>
+<td>CHEBI:80117</td>
+<td>What is the correct classification for this st...</td>
+<td>AgentRunResult(data=Classification(chemical_cl...</td>
+<td>\n        &lt;div style="display: flex; flex-dire...</td>
+<td>triterpenoid</td>
+<td>The structure is a large molecule consisting o...</td>
+</tr>
+<tr>
+<th>105</th>
+<td>False</td>
+<td>diterpenoid</td>
+<td>CHEBI:79068</td>
+<td>What is the correct classification for this st...</td>
+<td>AgentRunResult(data=Classification(chemical_cl...</td>
+<td>\n        &lt;div style="display: flex; flex-dire...</td>
+<td>other</td>
+<td>The structure shown is not a typical terpenoid...</td>
+</tr>
+<tr>
+<th>106</th>
+<td>True</td>
+<td>diterpenoid</td>
+<td>CHEBI:74030</td>
+<td>What is the correct classification for this st...</td>
+<td>AgentRunResult(data=Classification(chemical_cl...</td>
+<td>\n        &lt;div style="display: flex; flex-dire...</td>
+<td>diterpenoid</td>
+<td>The chemical structure displayed contains four...</td>
+</tr>
+</tbody>
+</table>
+<p>107 rows × 8 columns</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="highlight"><pre><span></span><code><span class="err">!</span><span class="n">mkdir</span> <span class="o">-</span><span class="n">p</span> <span class="n">output</span>
+</code></pre></div>
+
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="highlight"><pre><span></span><code><span class="n">df</span><span class="p">[[</span>
+    <span class="s2">&quot;agrees&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;expected&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;structure&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;img&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;llm_classification&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;llm_explanation&quot;</span><span class="p">,</span>
+<span class="p">]]</span><span class="o">.</span><span class="n">to_html</span><span class="p">(</span><span class="s2">&quot;output/terpenoids.html&quot;</span><span class="p">,</span> <span class="n">escape</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">render_links</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</code></pre></div>
+
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="highlight"><pre><span></span><code><span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;output/terpenoids.csv&quot;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</code></pre></div>
+
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="highlight"><pre><span></span><code><span class="n">df</span><span class="o">.</span><span class="n">to_markdown</span><span class="p">(</span><span class="s2">&quot;output/terpenoids.md&quot;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">tablefmt</span><span class="o">=</span><span class="s2">&quot;github&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="highlight"><pre><span></span><code><span class="n">orig_results</span> <span class="o">=</span> <span class="n">results</span>
+</code></pre></div>
+
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="highlight"><pre><span></span><code>
+</code></pre></div>
+
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["content.tabs.link"], "search": "../../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.c8b220af.min.js"></script>
+      
+    
+  </body>
+</html>

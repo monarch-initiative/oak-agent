@@ -9,23 +9,25 @@
       
       
       
+        <link rel="prev" href="../agents/gocam_agent/">
       
-        <link rel="next" href="agents/gocam_agent/">
+      
+        <link rel="next" href="../examples/Terpenoids/">
       
       
-      <link rel="icon" href="assets/images/favicon.png">
+      <link rel="icon" href="../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.7">
     
     
       
-        <title>Aurelian</title>
+        <title>Command Line - Aurelian</title>
       
     
     
-      <link rel="stylesheet" href="assets/stylesheets/main.8608ea7d.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.8608ea7d.min.css">
       
         
-        <link rel="stylesheet" href="assets/stylesheets/palette.06af60db.min.css">
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
       
       
 
@@ -44,15 +46,15 @@
       
     
     
-      <link rel="stylesheet" href="assets/_mkdocstrings.css">
+      <link rel="stylesheet" href="../assets/_mkdocstrings.css">
     
-      <link rel="stylesheet" href="css/ansi-colours.css">
+      <link rel="stylesheet" href="../css/ansi-colours.css">
     
-      <link rel="stylesheet" href="css/jupyter-cells.css">
+      <link rel="stylesheet" href="../css/jupyter-cells.css">
     
-      <link rel="stylesheet" href="css/pandas-dataframe.css">
+      <link rel="stylesheet" href="../css/pandas-dataframe.css">
     
-    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -78,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#aurelian-agentic-universal-research-engine-for-literature-integration-annotation-and-navigation" class="md-skip">
+        <a href="#cli-reference" class="md-skip">
           Skip to content
         </a>
       
@@ -94,7 +96,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="." title="Aurelian" class="md-header__button md-logo" aria-label="Aurelian" data-md-component="logo">
+    <a href=".." title="Aurelian" class="md-header__button md-logo" aria-label="Aurelian" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -114,7 +116,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Home
+              Command Line
             
           </span>
         </div>
@@ -215,7 +217,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="." title="Aurelian" class="md-nav__button md-logo" aria-label="Aurelian" data-md-component="logo">
+    <a href=".." title="Aurelian" class="md-nav__button md-logo" aria-label="Aurelian" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -230,31 +232,10 @@
       
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  <span class="md-ellipsis">
-    Home
-    
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="." class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -264,95 +245,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#getting-started" class="md-nav__link">
-    <span class="md-ellipsis">
-      Getting Started
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Getting Started">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#prerequisites" class="md-nav__link">
-    <span class="md-ellipsis">
-      Prerequisites
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#installation" class="md-nav__link">
-    <span class="md-ellipsis">
-      Installation
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#setting-up-up-logfire" class="md-nav__link">
-    <span class="md-ellipsis">
-      Setting up up Logfire
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#getting-an-openai-key" class="md-nav__link">
-    <span class="md-ellipsis">
-      Getting an OpenAI key
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#running-aurelian" class="md-nav__link">
-    <span class="md-ellipsis">
-      Running Aurelian
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#troubleshooting" class="md-nav__link">
-    <span class="md-ellipsis">
-      Troubleshooting
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -400,7 +292,7 @@
   
   
     <li class="md-nav__item">
-      <a href="agents/amigo_agent.md" class="md-nav__link">
+      <a href="../agents/amigo_agent.md" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -422,7 +314,7 @@
   
   
     <li class="md-nav__item">
-      <a href="agents/biblio_agent.md" class="md-nav__link">
+      <a href="../agents/biblio_agent.md" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -444,7 +336,7 @@
   
   
     <li class="md-nav__item">
-      <a href="agents/checklist_agent.md" class="md-nav__link">
+      <a href="../agents/checklist_agent.md" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -466,7 +358,7 @@
   
   
     <li class="md-nav__item">
-      <a href="agents/chemistry_agent.md" class="md-nav__link">
+      <a href="../agents/chemistry_agent.md" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -488,7 +380,7 @@
   
   
     <li class="md-nav__item">
-      <a href="agents/diagnosis_agent.md" class="md-nav__link">
+      <a href="../agents/diagnosis_agent.md" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -510,7 +402,7 @@
   
   
     <li class="md-nav__item">
-      <a href="agents/gocam_agent/" class="md-nav__link">
+      <a href="../agents/gocam_agent/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -532,7 +424,7 @@
   
   
     <li class="md-nav__item">
-      <a href="agents/linkml_agent.md" class="md-nav__link">
+      <a href="../agents/linkml_agent.md" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -554,7 +446,7 @@
   
   
     <li class="md-nav__item">
-      <a href="agents/monarch_agent.md" class="md-nav__link">
+      <a href="../agents/monarch_agent.md" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -576,7 +468,7 @@
   
   
     <li class="md-nav__item">
-      <a href="agents/ontology_mapper_agent.md" class="md-nav__link">
+      <a href="../agents/ontology_mapper_agent.md" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -598,7 +490,7 @@
   
   
     <li class="md-nav__item">
-      <a href="agents/phenopacket_agent.md" class="md-nav__link">
+      <a href="../agents/phenopacket_agent.md" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -620,7 +512,7 @@
   
   
     <li class="md-nav__item">
-      <a href="agents/rag_agent.md" class="md-nav__link">
+      <a href="../agents/rag_agent.md" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -642,7 +534,7 @@
   
   
     <li class="md-nav__item">
-      <a href="agents/ubergraph_agent.md" class="md-nav__link">
+      <a href="../agents/ubergraph_agent.md" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -664,7 +556,7 @@
   
   
     <li class="md-nav__item">
-      <a href="agents/uniprot_agent.md" class="md-nav__link">
+      <a href="../agents/uniprot_agent.md" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -690,10 +582,19 @@
       
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="cli/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
@@ -703,6 +604,7 @@
   
 
       </a>
+      
     </li>
   
 
@@ -714,7 +616,7 @@
   
   
     <li class="md-nav__item">
-      <a href="test_results.md" class="md-nav__link">
+      <a href="../test_results.md" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -771,7 +673,7 @@
   
   
     <li class="md-nav__item">
-      <a href="examples/Terpenoids/" class="md-nav__link">
+      <a href="../examples/Terpenoids/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -813,83 +715,6 @@
     
   
   
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#getting-started" class="md-nav__link">
-    <span class="md-ellipsis">
-      Getting Started
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Getting Started">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#prerequisites" class="md-nav__link">
-    <span class="md-ellipsis">
-      Prerequisites
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#installation" class="md-nav__link">
-    <span class="md-ellipsis">
-      Installation
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#setting-up-up-logfire" class="md-nav__link">
-    <span class="md-ellipsis">
-      Setting up up Logfire
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#getting-an-openai-key" class="md-nav__link">
-    <span class="md-ellipsis">
-      Getting an OpenAI key
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#running-aurelian" class="md-nav__link">
-    <span class="md-ellipsis">
-      Running Aurelian
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#troubleshooting" class="md-nav__link">
-    <span class="md-ellipsis">
-      Troubleshooting
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
 </nav>
                   </div>
                 </div>
@@ -904,56 +729,190 @@
 
 
 
-<h1 id="aurelian-agentic-universal-research-engine-for-literature-integration-annotation-and-navigation">Aurelian: Agentic Universal Research Engine for Literature, Integration, Annotation, and Navigation</h1>
-<h2 id="getting-started">Getting Started</h2>
-<h3 id="prerequisites">Prerequisites</h3>
-<p>Ensure you have the following installed:</p>
-<ul>
-<li><a href="https://python-poetry.org/docs/#installation">Poetry</a> (for managing dependencies)</li>
-<li>Python 3.11 or later</li>
-</ul>
-<h3 id="installation">Installation</h3>
-<ol>
-<li><strong>Clone the repository:</strong>
-   <div class="highlight"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/monarch-initiative/aurelian.git
-<span class="nb">cd</span><span class="w"> </span>aurelian
-</code></pre></div></li>
-<li><strong>Install dependencies:</strong>
-   <div class="highlight"><pre><span></span><code>poetry<span class="w"> </span>install<span class="w"> </span>--extras<span class="o">=</span>gradio
-</code></pre></div></li>
-<li><strong>Verify installation:</strong>
-   <div class="highlight"><pre><span></span><code>poetry<span class="w"> </span>run<span class="w"> </span>aurelian<span class="w"> </span>--help
-</code></pre></div></li>
-</ol>
-<h3 id="setting-up-up-logfire">Setting up up Logfire</h3>
-<p>Aurelian uses <a href="https://logfire.pydantic.dev/docs/why/">Logfire</a> for logging (an observability platform that 
-provides logging, tracing, and metrics), which requires 
-authentication. If you encounter the following error:</p>
-<div class="highlight"><pre><span></span><code>No Logfire project credentials found.
-You are not authenticated. Please run `logfire auth` to authenticate.
+<h1 id="cli-reference">CLI Reference</h1>
+<h1 id="main">main</h1>
+<p>Main command for Aurelian.</p>
+<p>THIS CLI MAY CHANGE.</p>
+<p>Currently there are multiple sub-commands,
+each of which starts a UI for an agent.</p>
+<p>However, there are a few other utility commands,
+e.g. for indexing an ontology or downloading a PMID</p>
+<p>:param verbose: Verbosity while running.
+:param quiet: Boolean to be quiet or verbose.</p>
+<p><strong>Usage:</strong></p>
+<div class="highlight"><pre><span></span><code>main [OPTIONS] COMMAND [ARGS]...
 </code></pre></div>
-<p>Follow these steps:</p>
-<ol>
-<li><strong>Authenticate with Logfire:</strong>
-   <div class="highlight"><pre><span></span><code>poetry<span class="w"> </span>run<span class="w"> </span>logfire<span class="w"> </span>auth
-</code></pre></div></li>
-<li><strong>(Optional) Set a production token:</strong> If running in a production environment, set the <code>LOGFIRE_TOKEN</code> environment variable:
-   <div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">LOGFIRE_TOKEN</span><span class="o">=</span>your_token_here
-</code></pre></div></li>
-</ol>
-<h3 id="getting-an-openai-key">Getting an OpenAI key</h3>
-<p>In order to use OpenAI models, you'll need an API key. Follow the instructions 
-<a href="https://platform.openai.com/docs/quickstart">here</a>. After you have an OpenAI key,
-set the environment variable <code>OPENAI_API_KEY</code> to this key, for example like this:</p>
-<div class="highlight"><pre><span></span><code>export OPENAI_API_KEY=&quot;your_api_key_here&quot;
+<p><strong>Options:</strong></p>
+<div class="highlight"><pre><span></span><code>  -v, --verbose
+  -q, --quiet TEXT
+  --version         Show the version and exit.
+  --help            Show this message and exit.
 </code></pre></div>
-<h3 id="running-aurelian">Running Aurelian</h3>
-<p>Once authenticated, you can use Aurelian's CLI:</p>
-<p><strong>Run the mapper tool:</strong>
-   <div class="highlight"><pre><span></span><code>poetry<span class="w"> </span>run<span class="w"> </span>aurelian<span class="w"> </span>mapper
-</code></pre></div></p>
-<p>For more details, refer to the project documentation.</p>
-<h3 id="troubleshooting">Troubleshooting</h3>
+<h2 id="amigo">amigo</h2>
+<p>Start the AmiGO agent.</p>
+<p><strong>Usage:</strong></p>
+<div class="highlight"><pre><span></span><code>main amigo [OPTIONS]
+</code></pre></div>
+<p><strong>Options:</strong></p>
+<div class="highlight"><pre><span></span><code>  -m, --model TEXT           The model to use for the agent.
+  --share / --no-share       Share the agent GradIO chat via URL.  [default:
+                             no-share]
+  -p, --server-port INTEGER  The port to run the gradio server on.  [default:
+                             7860]
+  --help                     Show this message and exit.
+</code></pre></div>
+<h2 id="aria">aria</h2>
+<p>Start the Checklist UI.</p>
+<p><strong>Usage:</strong></p>
+<div class="highlight"><pre><span></span><code>main aria [OPTIONS]
+</code></pre></div>
+<p><strong>Options:</strong></p>
+<div class="highlight"><pre><span></span><code>  -m, --model TEXT           The model to use for the agent.
+  --share / --no-share       Share the agent GradIO chat via URL.  [default:
+                             no-share]
+  -p, --server-port INTEGER  The port to run the gradio server on.  [default:
+                             7860]
+  --help                     Show this message and exit.
+</code></pre></div>
+<h2 id="datasheets">datasheets</h2>
+<p>Start the Data Sheets Metadata Agent.</p>
+<p><strong>Usage:</strong></p>
+<div class="highlight"><pre><span></span><code>main datasheets [OPTIONS]
+</code></pre></div>
+<p><strong>Options:</strong></p>
+<div class="highlight"><pre><span></span><code>  -m, --model TEXT           The model to use for the agent.
+  --share / --no-share       Share the agent GradIO chat via URL.  [default:
+                             no-share]
+  -p, --server-port INTEGER  The port to run the gradio server on.  [default:
+                             7860]
+  --help                     Show this message and exit.
+</code></pre></div>
+<h2 id="diagnosis">diagnosis</h2>
+<p>Start the diagnosis agent.</p>
+<p><strong>Usage:</strong></p>
+<div class="highlight"><pre><span></span><code>main diagnosis [OPTIONS] [QUERY]...
+</code></pre></div>
+<p><strong>Options:</strong></p>
+<div class="highlight"><pre><span></span><code>  -m, --model TEXT           The model to use for the agent.
+  --share / --no-share       Share the agent GradIO chat via URL.  [default:
+                             no-share]
+  -p, --server-port INTEGER  The port to run the gradio server on.  [default:
+                             7860]
+  --help                     Show this message and exit.
+</code></pre></div>
+<h2 id="fulltext">fulltext</h2>
+<p>Download full text.</p>
+<p><strong>Usage:</strong></p>
+<div class="highlight"><pre><span></span><code>main fulltext [OPTIONS] PMID
+</code></pre></div>
+<p><strong>Options:</strong></p>
+<div class="highlight"><pre><span></span><code>  --help  Show this message and exit.
+</code></pre></div>
+<h2 id="gocam">gocam</h2>
+<p>Start the GO-CAM Chat UI.</p>
+<p><strong>Usage:</strong></p>
+<div class="highlight"><pre><span></span><code>main gocam [OPTIONS]
+</code></pre></div>
+<p><strong>Options:</strong></p>
+<div class="highlight"><pre><span></span><code>  -m, --model TEXT           The model to use for the agent.
+  --share / --no-share       Share the agent GradIO chat via URL.  [default:
+                             no-share]
+  -p, --server-port INTEGER  The port to run the gradio server on.  [default:
+                             7860]
+  --help                     Show this message and exit.
+</code></pre></div>
+<h2 id="gocam-ui">gocam-ui</h2>
+<p>Start the GO-CAM Chat UI.</p>
+<p><strong>Usage:</strong></p>
+<div class="highlight"><pre><span></span><code>main gocam-ui [OPTIONS]
+</code></pre></div>
+<p><strong>Options:</strong></p>
+<div class="highlight"><pre><span></span><code>  --help  Show this message and exit.
+</code></pre></div>
+<h2 id="linkml">linkml</h2>
+<p>Start the LinkML agent.</p>
+<p><strong>Usage:</strong></p>
+<div class="highlight"><pre><span></span><code>main linkml [OPTIONS]
+</code></pre></div>
+<p><strong>Options:</strong></p>
+<div class="highlight"><pre><span></span><code>  -m, --model TEXT           The model to use for the agent.
+  -w, --workdir TEXT         The working directory for the agent.  [default:
+                             workdir]
+  --share / --no-share       Share the agent GradIO chat via URL.  [default:
+                             no-share]
+  -p, --server-port INTEGER  The port to run the gradio server on.  [default:
+                             7860]
+  --help                     Show this message and exit.
+</code></pre></div>
+<h2 id="mapper">mapper</h2>
+<p>Start the Ontology Mapper agent.</p>
+<p><strong>Usage:</strong></p>
+<div class="highlight"><pre><span></span><code>main mapper [OPTIONS] [QUERY]...
+</code></pre></div>
+<p><strong>Options:</strong></p>
+<div class="highlight"><pre><span></span><code>  -m, --model TEXT           The model to use for the agent.
+  --share / --no-share       Share the agent GradIO chat via URL.  [default:
+                             no-share]
+  -p, --server-port INTEGER  The port to run the gradio server on.  [default:
+                             7860]
+  -i, --ontologies TEXT      Comma-separated list of ontologies to use for the
+                             agent.
+  --help                     Show this message and exit.
+</code></pre></div>
+<h2 id="phenopackets">phenopackets</h2>
+<p>Start the GO-CAM UI.</p>
+<p><strong>Usage:</strong></p>
+<div class="highlight"><pre><span></span><code>main phenopackets [OPTIONS]
+</code></pre></div>
+<p><strong>Options:</strong></p>
+<div class="highlight"><pre><span></span><code>  -m, --model TEXT           The model to use for the agent.
+  --share / --no-share       Share the agent GradIO chat via URL.  [default:
+                             no-share]
+  -p, --server-port INTEGER  The port to run the gradio server on.  [default:
+                             7860]
+  --help                     Show this message and exit.
+</code></pre></div>
+<h2 id="rag">rag</h2>
+<p>Start the AmiGO agent.</p>
+<p><strong>Usage:</strong></p>
+<div class="highlight"><pre><span></span><code>main rag [OPTIONS]
+</code></pre></div>
+<p><strong>Options:</strong></p>
+<div class="highlight"><pre><span></span><code>  -m, --model TEXT            The model to use for the agent.
+  --share / --no-share        Share the agent GradIO chat via URL.  [default:
+                              no-share]
+  -d, --db-path TEXT          The path to the database.
+  -c, --collection-name TEXT  The name of the collection.
+  -p, --server-port INTEGER   The port to run the gradio server on.  [default:
+                              7860]
+  --help                      Show this message and exit.
+</code></pre></div>
+<h2 id="robot">robot</h2>
+<p>Start the robot ontology agent.</p>
+<p><strong>Usage:</strong></p>
+<div class="highlight"><pre><span></span><code>main robot [OPTIONS]
+</code></pre></div>
+<p><strong>Options:</strong></p>
+<div class="highlight"><pre><span></span><code>  -m, --model TEXT           The model to use for the agent.
+  -w, --workdir TEXT         The working directory for the agent.  [default:
+                             workdir]
+  --share / --no-share       Share the agent GradIO chat via URL.  [default:
+                             no-share]
+  -p, --server-port INTEGER  The port to run the gradio server on.  [default:
+                             7860]
+  --help                     Show this message and exit.
+</code></pre></div>
+<h2 id="search-ontology">search-ontology</h2>
+<p>Search the ontology for the given query term.</p>
+<p>Also has side effect of indexing. You may want to pre-index before
+starting an individual UI.</p>
+<p><strong>Usage:</strong></p>
+<div class="highlight"><pre><span></span><code>main search-ontology [OPTIONS] ONTOLOGY TERM
+</code></pre></div>
+<p><strong>Options:</strong></p>
+<div class="highlight"><pre><span></span><code>  -l, --limit INTEGER  Number of results to return.  [default: 10]
+  --help               Show this message and exit.
+</code></pre></div>
 
 
 
@@ -1002,10 +961,10 @@ set the environment variable <code>OPENAI_API_KEY</code> to this key, for exampl
     </div>
     
     
-    <script id="__config" type="application/json">{"base": ".", "features": ["content.tabs.link"], "search": "assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["content.tabs.link"], "search": "../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="assets/javascripts/bundle.c8b220af.min.js"></script>
+      <script src="../assets/javascripts/bundle.c8b220af.min.js"></script>
       
     
   </body>

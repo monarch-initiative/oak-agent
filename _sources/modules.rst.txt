@@ -1,7 +1,0 @@
-aurelian
-========
-
-.. toctree::
-   :maxdepth: 4
-
-   aurelian
