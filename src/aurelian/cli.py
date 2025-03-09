@@ -4,7 +4,6 @@ import logging
 from typing import Optional, List
 
 import click
-from sqlalchemy.orm.collections import collection
 
 from aurelian import __version__
 
@@ -207,7 +206,7 @@ def aria(share: bool, server_port: Optional[int] = None, **kwargs):
 @server_port_option
 def linkml(**kwargs):
     """Start the LinkML agent."""
-    import aurelian.agents.linkml_agent as agent
+    import aurelian.agents.linkml.linkml_agent as agent
     agent_options, launch_options = split_options(kwargs)
     ui = agent.chat(**agent_options)
     ui.launch(**launch_options)
@@ -220,7 +219,7 @@ def linkml(**kwargs):
 @server_port_option
 def robot(**kwargs):
     """Start the robot ontology agent."""
-    import aurelian.agents.robot_ontology_agent as agent
+    import aurelian.agents.robot.robot_ontology_agent as agent
     agent_options, launch_options = split_options(kwargs)
     ui = agent.chat(**agent_options)
     ui.launch(**launch_options)
@@ -260,13 +259,13 @@ def rag(**kwargs):
 def mapper(query, ontologies, **kwargs):
     """Start the Ontology Mapper agent."""
     import aurelian.agents.ontology_mapper_agent as agent
-    from aurelian.agents.ontology_mapper_agent import OntologyDependencies
+    from aurelian.agents.ontology_mapper_agent import OntologyMapperDependencies
     if ontologies:
         if isinstance(ontologies, str):
             ontologies = [ontologies]
-        deps = OntologyDependencies(ontologies=ontologies)
+        deps = OntologyMapperDependencies(ontologies=ontologies)
     else:
-        deps = OntologyDependencies()
+        deps = OntologyMapperDependencies()
     deps_options, agent_options, launch_options = split_options3(kwargs)
     if query:
         r = agent.ontology_mapper_agent.run_sync("\n".join(query), deps=deps)

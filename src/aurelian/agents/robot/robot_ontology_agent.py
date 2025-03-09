@@ -2,16 +2,16 @@
 Agent for creating ROBOT templates and compiling to ontologies.
 """
 from dataclasses import dataclass, field
-from typing import List, Dict, Optional
+from typing import List, Dict
 
-import logfire
-from aurelian.agents.robot_ontology_agent_assets import ROBOT_ONTOLOGY_AGENT_CONTENTS_DIR
+from aurelian.agents.filesystem.filesystem_tools import inspect_file, download_url_as_markdown, list_files
+from aurelian.agents.robot.robot_config import RobotDependencies
+from aurelian.agents.robot.robot_tools import write_and_compile_template, fetch_documentation
 from aurelian.utils.async_utils import run_sync
-from aurelian.utils.robot_ontology_utils import run_robot_template_command
 from aurelian.utils.search_utils import web_search
-from pydantic_ai import Agent, RunContext, AgentRunError, ModelRetry
+from pydantic_ai import Agent, RunContext, Tool
 
-from aurelian.dependencies.workdir import WorkDir
+from aurelian.dependencies.workdir import WorkDir, HasWorkdir
 
 SYSTEM = """
 Background:
@@ -77,20 +77,23 @@ Use scientific language as far as possible. For IDs, these should be numeric cur
 
 
 
-@dataclass
-class Dependencies:
-    workdir: WorkDir = field(default_factory=lambda: WorkDir())
-    prefix_map: Dict[str, str] = field(default_factory=lambda: {"ex": "http://example.org/"})
-
 
 robot_ontology_agent = Agent(
     model="openai:gpt-4o",
+    deps_type=RobotDependencies,
     system_prompt=SYSTEM,
+    tools=[
+        Tool(write_and_compile_template, max_retries=2),
+        Tool(fetch_documentation),
+        Tool(inspect_file),
+        Tool(list_files),
+        Tool(download_url_as_markdown),
+    ]
 )
 
 
 @robot_ontology_agent.system_prompt
-def include_templates_in_prompt(ctx: RunContext[Dependencies]) -> str:
+def include_templates_in_prompt(ctx: RunContext[RobotDependencies]) -> str:
     files_names = ctx.deps.workdir.list_file_names()
     s = "Working directory files/templates:"
     if files_names:
@@ -102,157 +105,18 @@ def include_templates_in_prompt(ctx: RunContext[Dependencies]) -> str:
 
 
 @robot_ontology_agent.system_prompt
-def include_prefixes_in_prompt(ctx: RunContext[Dependencies]) -> str:
+def include_prefixes_in_prompt(ctx: RunContext[RobotDependencies]) -> str:
     pmap = ctx.deps.prefix_map
     return f"Prefixes: {pmap}"
 
 
-@robot_ontology_agent.tool
-def write_and_compile_template(ctx: RunContext[Dependencies], template: str, save_to_file: str="core.csv", import_ontologies: Optional[List[str]] = None) -> str:
-    """
-    Adds a template to the file system and compile it to OWL
-
-    Args:
-        ctx: context
-        template: robot template as string. Do not truncate, always pass the whole template, including header.
-        save_to_file: file name to save the templates to. Defaults to core.csv. Only written if file compiles to OWL
-        import_ontologies: list of ontologies to import. These should be files in the working directory.
-
-    Returns:
-
-    """
-    print(f"Validating template: {template}")
-    try:
-        ctx.deps.workdir.write_file(save_to_file, template)
-        output_path = run_robot_template_command(
-            ctx.deps.workdir,
-            save_to_file,
-            import_ontologies=import_ontologies,
-            prefix_map=ctx.deps.prefix_map,
-            output_path=None,
-        ),
-        if save_to_file and template:
-            ctx.deps.workdir.write_file(save_to_file, template)
-    except Exception as e:
-        raise ModelRetry(f"Template does not compile: {e}")
-    return f"Template compiled to {output_path}"
-
-
-@robot_ontology_agent.tool_plain()
-def fetch_documentation() -> str:
-    """
-    Fetch the documentation for the robot ontology agent.
-
-    Returns:
-        str: documentation
-    """
-    return open(ROBOT_ONTOLOGY_AGENT_CONTENTS_DIR / "template.md").read()
-
-
-@robot_ontology_agent.tool
-def inspect_file(ctx: RunContext[Dependencies], data_file: str) -> str:
-    """
-    Inspect a file in the working directory.
-
-    Args:
-        ctx:
-        data_file: name of file
-
-    Returns:
-
-    """
-    print(f"Inspecting file: {data_file}")
-    return ctx.deps.workdir.read_file(data_file)
-
-
-@robot_ontology_agent.tool
-def list_files(ctx: RunContext[Dependencies]) -> str:
-    """
-    List files in the working directory.
-
-    Args:
-        ctx:
-
-    Returns:
-
-    """
-    return "\n".join(ctx.deps.workdir.list_file_names())
-
-@robot_ontology_agent.tool
-def write_to_file(ctx: RunContext[Dependencies], data: str, file_name: str) -> str:
-    """
-    Write data to a file in the working directory.
-
-    Args:
-        ctx:
-        data: contents of the file
-        file_name: local file path
-
-    Returns:
-
-    """
-    print(f"Writing data to file: {file_name}")
-    ctx.deps.workdir.write_file(file_name, data)
-    return f"Data written to {file_name}"
-
-
-@robot_ontology_agent.tool_plain()
-def search_web(query: str) -> str:
-    """
-    Search the web using a text query.
-
-    Note, this will not retrieve the full content, for that you
-    should use `retrieve_web_page`.
-
-    Args:
-        query: Text query
-
-    Returns: matching web pages plus summaries
-    """
-    print(f"Web Search: {query}")
-    return web_search(query)
-
-@robot_ontology_agent.tool_plain
-def retrieve_web_page(url: str) -> str:
-    """
-    Fetch the contents of a web page.
-
-    Args:
-        url: URL of the web page
-
-    Returns:
-        The contents of the web page.
-    """
-    print(f"Fetch URL: {url}")
-    import aurelian.utils.search_utils as su
-    return su.retrieve_web_page(url)
-
-
-@robot_ontology_agent.tool
-def download_web_page(ctx: RunContext[Dependencies], url: str, local_file_name: str) -> str:
-    """
-    Download contents of a web page.
-
-    Args:
-        ctx:
-        url: URL of the web page
-        local_file_name: Name of the local file to save the
-
-    Returns:
-        str: messaage
-    """
-    print(f"Fetch URL: {url}")
-    import aurelian.utils.search_utils as su
-    data = su.retrieve_web_page(url)
-    ctx.deps.workdir.write_file(local_file_name, data)
-    return f"Data written to {local_file_name}"
 
 
 
 
 def chat(workdir: str, **kwargs):
     import gradio as gr
-    deps = Dependencies()
+    deps = RobotDependencies()
     deps.workdir.location = workdir
 
     def get_info(query: str, history: List[str]) -> str:

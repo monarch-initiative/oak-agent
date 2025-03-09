@@ -19,7 +19,7 @@ def get_ontology_adapter(ont: str):
 
 
 @dataclass
-class OntologyDependencies:
+class OntologyMapperDependencies:
     """
     Configuration for the ontology mapper agent.
 
@@ -32,7 +32,7 @@ class OntologyDependencies:
 
 ontology_mapper_agent = Agent(
     model="openai:gpt-4o",
-    deps_type=OntologyDependencies,
+    deps_type=OntologyMapperDependencies,
     result_type=str,
     system_prompt=(
         "You are an expert on OBO ontologies."
@@ -58,7 +58,7 @@ ontology_mapper_agent = Agent(
 )
 
 @ontology_mapper_agent.system_prompt
-def add_ontologies(ctx: RunContext[OntologyDependencies]) -> str:
+def add_ontologies(ctx: RunContext[OntologyMapperDependencies]) -> str:
     allowed_ontologies = ctx.deps.ontologies
     if allowed_ontologies:
         return f"Allowed ontologies: {allowed_ontologies}"
@@ -66,7 +66,7 @@ def add_ontologies(ctx: RunContext[OntologyDependencies]) -> str:
 
 
 @ontology_mapper_agent.tool
-def search_terms(ctx: RunContext[OntologyDependencies], ontology_id: str, query: str) -> List[Dict]:
+def search_terms(ctx: RunContext[OntologyMapperDependencies], ontology_id: str, query: str) -> List[Dict]:
     """
     Finds similar ontology terms to the search query.
 
@@ -121,7 +121,7 @@ def retrieve_web_page(url: str) -> str:
     return su.retrieve_web_page(url)
 
 
-def chat(deps: OntologyDependencies, **kwargs):
+def chat(deps: OntologyMapperDependencies, **kwargs):
     import gradio as gr
 
     def get_info(query: str, history: List[str]) -> str:
