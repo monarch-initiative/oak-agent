@@ -295,6 +295,19 @@ def datasheets(**kwargs):
     ui = datasheets_agent.chat(**agent_options)
     ui.launch(**launch_options)
 
+
+@main.command()
+@model_option
+@workdir_option
+@share_option
+@server_port_option
+def chemistry(**kwargs):
+    """Start the Chemistry Agent for working with chemical structures."""
+    from aurelian.agents.chemistry.chemistry_gradio import chat
+    agent_options, launch_options = split_options(kwargs)
+    ui = chat(**agent_options)
+    ui.launch(**launch_options)
+
 # DO NOT REMOVE THIS LINE
 # added this for mkdocstrings to work
 # see https://github.com/bruce-szalwinski/mkdocs-typer/issues/18
