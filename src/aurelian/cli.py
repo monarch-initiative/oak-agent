@@ -308,6 +308,19 @@ def chemistry(**kwargs):
     ui = chat(**agent_options)
     ui.launch(**launch_options)
 
+
+@main.command()
+@model_option
+@workdir_option
+@share_option
+@server_port_option
+def literature(**kwargs):
+    """Start the Literature Agent for working with scientific publications."""
+    from aurelian.agents.literature.literature_gradio import chat
+    agent_options, launch_options = split_options(kwargs)
+    ui = chat(**agent_options)
+    ui.launch(**launch_options)
+
 # DO NOT REMOVE THIS LINE
 # added this for mkdocstrings to work
 # see https://github.com/bruce-szalwinski/mkdocs-typer/issues/18
