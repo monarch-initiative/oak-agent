@@ -4,7 +4,7 @@ MCP tools for creating LinkML schemas and example datasets
 from linkml.generators import JsonSchemaGenerator
 from mcp.server.fastmcp import FastMCP
 
-from aurelian.agents.linkml.linkml_agent import Dependencies
+from aurelian.agents.linkml.linkml_agent import LinkMLDependencies
 
 # Initialize FastMCP server
 mcp = FastMCP("linkml")
@@ -17,13 +17,13 @@ from pydantic_ai import RunContext, ModelRetry
 
 from aurelian.dependencies.workdir import WorkDir
 
-def deps() -> Dependencies:
-    deps = Dependencies()
+def deps() -> LinkMLDependencies:
+    deps = LinkMLDependencies()
     deps.workdir = WorkDir("/tmp/linkml")
     return deps
 
-def ctx() -> RunContext[Dependencies]:
-    rc: RunContext[Dependencies] = RunContext[Dependencies](deps=deps())
+def ctx() -> RunContext[LinkMLDependencies]:
+    rc: RunContext[LinkMLDependencies] = RunContext[LinkMLDependencies](deps=deps())
     return rc
 
 

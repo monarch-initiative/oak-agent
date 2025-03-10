@@ -8,7 +8,7 @@ from oaklib import get_adapter
 from oaklib.implementations import AmiGOImplementation
 
 from aurelian.dependencies.workdir import HasWorkdir
-from aurelian.agents.uniprot_agent import normalize_uniprot_id
+from aurelian.agents.uniprot.uniprot_tools import normalize_uniprot_id
 
 # Initialize UniProt service
 uniprot_service = UniProt(verbose=False)

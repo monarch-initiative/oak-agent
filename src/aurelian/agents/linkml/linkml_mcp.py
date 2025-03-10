@@ -9,6 +9,7 @@ import aurelian.agents.filesystem.filesystem_tools as fst
 from aurelian.agents.linkml.linkml_agent import SYSTEM
 from aurelian.agents.linkml.linkml_config import LinkMLDependencies
 from aurelian.agents.linkml.linkml_tools import validate_then_save_schema, ValidationResult
+from aurelian.utils.search_utils import web_search
 
 # Initialize FastMCP server
 mcp = FastMCP("linkml", instructions=SYSTEM)

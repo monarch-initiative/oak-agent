@@ -59,22 +59,8 @@ Args:
         
 Returns:
     str: Full text if available, otherwise abstract"""),
-        Tool(search_literature_web, name="search_web",
-             description="""Search the web using a text query.
-    
-Args:
-    query: The search query
-        
-Returns:
-    str: Search results with summaries"""),
-        Tool(retrieve_literature_page, name="retrieve_web_page",
-             description="""Fetch the contents of a web page.
-    
-Args:
-    url: The URL to fetch
-        
-Returns:
-    str: The contents of the web page"""),
+        Tool(search_literature_web),
+        Tool(retrieve_literature_page),
         Tool(inspect_file),
         Tool(list_files),
     ]
