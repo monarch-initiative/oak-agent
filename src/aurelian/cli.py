@@ -321,6 +321,36 @@ def literature(**kwargs):
     ui = chat(**agent_options)
     ui.launch(**launch_options)
 
+
+@main.command()
+@model_option
+@share_option
+@server_port_option
+@click.argument("query", nargs=-1)
+def monarch(query, **kwargs):
+    """Start the Monarch Agent for biomedical knowledge exploration.
+    
+    The Monarch Agent provides access to relationships between genes, diseases, 
+    phenotypes, and other biomedical entities through the Monarch Knowledge Base.
+    
+    If a query is provided, it will be run directly; otherwise, the chat interface will be launched.
+    """
+    from aurelian.agents.monarch.monarch_gradio import chat
+    from aurelian.agents.monarch.monarch_agent import monarch_agent
+    from aurelian.agents.monarch.monarch_config import get_config
+    
+    agent_options, launch_options = split_options(kwargs)
+    
+    if query:
+        deps = get_config()
+        if 'workdir' in agent_options and agent_options['workdir']:
+            deps.workdir.location = agent_options['workdir']
+        r = monarch_agent.run_sync(" ".join(query), deps=deps, **{k: v for k, v in agent_options.items() if k != 'workdir'})
+        print(r.data)
+    else:
+        ui = chat(**agent_options)
+        ui.launch(**launch_options)
+
 # DO NOT REMOVE THIS LINE
 # added this for mkdocstrings to work
 # see https://github.com/bruce-szalwinski/mkdocs-typer/issues/18
