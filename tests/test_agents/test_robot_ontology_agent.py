@@ -6,7 +6,8 @@ from aurelian.dependencies.workdir import WorkDir
 if os.getenv("GITHUB_ACTIONS") == "true":
     pytest.skip("Skipping in GitHub Actions", allow_module_level=True)
 
-from aurelian.agents.robot_ontology_agent import robot_ontology_agent, Dependencies
+from aurelian.agents.robot.robot_ontology_agent import robot_ontology_agent
+from aurelian.agents.robot.robot_config import RobotDependencies
 
 IMPORTS_CSV = """ID,Label,Type,Definition
 ID,LABEL,TYPE,A IAO:0000115
@@ -25,7 +26,7 @@ SNACK:0000005,flour,ingredient,
 
 @pytest.fixture
 def deps():
-    dep = Dependencies(prefix_map={"SNACK": "http://example.org/snack#"})
+    dep = RobotDependencies(prefix_map={"SNACK": "http://example.org/snack#"})
     dep.workdir = WorkDir.create_temporary_workdir()
     dep.workdir.write_file("properties.csv", IMPORTS_CSV)
     dep.import_ontology = "properties.csv"

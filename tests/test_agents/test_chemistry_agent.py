@@ -4,7 +4,8 @@ import os
 if os.getenv("GITHUB_ACTIONS") == "true":
     pytest.skip("Skipping in GitHub Actions", allow_module_level=True)
 
-from aurelian.agents.chemistry_agent import Dependencies, chemistry_agent
+from aurelian.agents.chemistry.chemistry_config import ChemistryDependencies as Dependencies
+from aurelian.agents.chemistry.chemistry_agent import chemistry_agent
 
 
 @pytest.fixture

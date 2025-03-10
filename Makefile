@@ -62,3 +62,7 @@ reports/%.log.jsonl: tests/test_agents/test_%.py
 
 reports/%.md: reports/%.log.jsonl
 	$(RUN) python src/aurelian/utils/pytest_report_to_markdown.py $< > $@.tmp && mv $@.tmp $@
+
+
+requirements.txt:
+	poetry export -f requirements.txt --output requirements.txt --without-hashes --dev

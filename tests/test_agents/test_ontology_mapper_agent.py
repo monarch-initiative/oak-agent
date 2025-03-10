@@ -4,12 +4,12 @@ import os
 if os.getenv("GITHUB_ACTIONS") == "true":
     pytest.skip("Skipping in GitHub Actions", allow_module_level=True)
 
-from aurelian.agents.ontology_mapper_agent import OntologyDependencies, ontology_mapper_agent
+from aurelian.agents.ontology_mapper_agent import OntologyMapperDependencies, ontology_mapper_agent
 
 
 @pytest.fixture
-def deps() -> OntologyDependencies:
-    return OntologyDependencies()
+def deps() -> OntologyMapperDependencies:
+    return OntologyMapperDependencies()
 
 @pytest.mark.parametrize(
     "query,ideal,ontologies",

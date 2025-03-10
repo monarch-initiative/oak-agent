@@ -4,7 +4,6 @@ import logging
 from typing import Optional, List
 
 import click
-from sqlalchemy.orm.collections import collection
 
 from aurelian import __version__
 
@@ -122,11 +121,11 @@ def split_options3(kwargs, agent_keys: Optional[List]=None, extra_agent_keys: Op
 
 @main.command()
 def gocam_ui():
-    """Start the GO-CAM Chat UI."""
-    import aurelian.agents.gocam_agent as gocam
-
-    ui = gocam.ui()
-    ui.launch()
+    """Start the GO-CAM UI (non-chat interface)."""
+    from aurelian.agents.gocam.gocam_gradio import ui
+    
+    gocam_ui = ui()
+    gocam_ui.launch()
 
 
 @main.command()
@@ -155,10 +154,11 @@ def search_ontology(ontology: str, term: str, **kwargs):
 @server_port_option
 def gocam(share: bool, server_port: Optional[int] = None, **kwargs):
     """Start the GO-CAM Chat UI."""
-    import aurelian.agents.gocam_agent as gocam
-
-    ui = gocam.chat(**kwargs)
-    ui.launch(share=share, server_port=server_port)
+    from aurelian.agents.gocam.gocam_gradio import chat
+    
+    agent_options, launch_options = split_options(kwargs)
+    ui = chat(**agent_options)
+    ui.launch(**launch_options)
 
 
 @main.command()
@@ -166,11 +166,10 @@ def gocam(share: bool, server_port: Optional[int] = None, **kwargs):
 @share_option
 @server_port_option
 def phenopackets(**kwargs):
-    """Start the GO-CAM UI."""
-    import aurelian.agents.phenopacket_agent as phenopackets
-
+    """Start the Phenopackets Agent for exploring phenopacket databases."""
+    from aurelian.agents.phenopackets.phenopackets_gradio import chat
     agent_options, launch_options = split_options(kwargs)
-    ui = phenopackets.chat(**agent_options)
+    ui = chat(**agent_options)
     ui.launch(**launch_options)
 
 
@@ -179,25 +178,74 @@ def phenopackets(**kwargs):
 @share_option
 @server_port_option
 @click.argument("query", nargs=-1)
-def diagnosis(**kwargs):
-    """Start the diagnosis agent."""
-    import aurelian.agents.diagnosis_agent as diagnosis
-
+def diagnosis(query, **kwargs):
+    """Start the Diagnosis agent for rare disease diagnosis.
+    
+    The Diagnosis agent assists in diagnosing rare diseases by leveraging the 
+    Monarch Knowledge Base. It helps clinical geneticists evaluate potential 
+    conditions based on patient phenotypes.
+    
+    If a query is provided, it will be run directly; otherwise, the chat interface will be launched.
+    """
+    from aurelian.agents.diagnosis.diagnosis_gradio import chat
+    from aurelian.agents.diagnosis.diagnosis_agent import diagnosis_agent
+    from aurelian.agents.diagnosis.diagnosis_config import get_config
+    
     agent_options, launch_options = split_options(kwargs)
-    ui = diagnosis.chat(**agent_options)
-    ui.launch(**launch_options)
+    
+    if query:
+        deps = get_config()
+        r = diagnosis_agent.run_sync(" ".join(query), deps=deps, **agent_options)
+        print(r.data)
+    else:
+        ui = chat(**agent_options)
+        ui.launch(**launch_options)
 
 
+@main.command()
+@model_option
+@workdir_option
+@share_option
+@server_port_option
+@click.argument("query", nargs=-1)
+def checklist(query, **kwargs):
+    """Start the Checklist Agent for paper evaluation.
+    
+    The Checklist Agent evaluates scientific papers against established checklists 
+    such as STREAMS, STORMS, and ARRIVE. It helps ensure that papers conform to 
+    relevant reporting guidelines and best practices.
+    
+    If a query is provided, it will be run directly; otherwise, the chat interface will be launched.
+    """
+    from aurelian.agents.checklist.checklist_gradio import chat
+    from aurelian.agents.checklist.checklist_agent import checklist_agent
+    from aurelian.agents.checklist.checklist_config import get_config
+    
+    agent_options, launch_options = split_options(kwargs)
+    
+    if query:
+        deps = get_config()
+        if 'workdir' in agent_options and agent_options['workdir']:
+            deps.workdir.location = agent_options['workdir']
+        r = checklist_agent.run_sync(" ".join(query), deps=deps, **{k: v for k, v in agent_options.items() if k != 'workdir'})
+        print(r.data)
+    else:
+        ui = chat(**agent_options)
+        ui.launch(**launch_options)
+
+
+# Keep backward compatibility
 @main.command()
 @model_option
 @share_option
 @server_port_option
 def aria(share: bool, server_port: Optional[int] = None, **kwargs):
-    """Start the Checklist UI."""
-    import aurelian.agents.checklist_agent as aria
-
-    ui = aria.chat(**kwargs)
-    ui.launch(share=share, server_port=server_port)
+    """Start the Checklist UI (deprecated, use 'checklist' instead)."""
+    from aurelian.agents.checklist.checklist_gradio import chat
+    
+    agent_options, launch_options = split_options(kwargs)
+    ui = chat(**agent_options)
+    ui.launch(**launch_options)
 
 
 @main.command()
@@ -207,7 +255,7 @@ def aria(share: bool, server_port: Optional[int] = None, **kwargs):
 @server_port_option
 def linkml(**kwargs):
     """Start the LinkML agent."""
-    import aurelian.agents.linkml_agent as agent
+    import aurelian.agents.linkml.linkml_agent as agent
     agent_options, launch_options = split_options(kwargs)
     ui = agent.chat(**agent_options)
     ui.launch(**launch_options)
@@ -220,7 +268,7 @@ def linkml(**kwargs):
 @server_port_option
 def robot(**kwargs):
     """Start the robot ontology agent."""
-    import aurelian.agents.robot_ontology_agent as agent
+    import aurelian.agents.robot.robot_ontology_agent as agent
     agent_options, launch_options = split_options(kwargs)
     ui = agent.chat(**agent_options)
     ui.launch(**launch_options)
@@ -231,10 +279,10 @@ def robot(**kwargs):
 @share_option
 @server_port_option
 def amigo(**kwargs):
-    """Start the AmiGO agent."""
-    import aurelian.agents.amigo_agent as agent
+    """Start the AmiGO agent for working with Gene Ontology."""
+    from aurelian.agents.amigo.amigo_gradio import chat
     agent_options, launch_options = split_options(kwargs)
-    ui = agent.chat(**agent_options)
+    ui = chat(**agent_options)
     ui.launch(**launch_options)
 
 
@@ -244,12 +292,34 @@ def amigo(**kwargs):
 @db_path_option
 @collection_name_option
 @server_port_option
-def rag(**kwargs):
-    """Start the AmiGO agent."""
-    import aurelian.agents.rag_agent as agent
+@click.argument("query", nargs=-1)
+def rag(query, db_path, collection_name, **kwargs):
+    """Start the RAG Agent for document retrieval and generation.
+    
+    The RAG (Retrieval-Augmented Generation) Agent provides a natural language 
+    interface for exploring and searching document collections. It uses RAG 
+    techniques to combine search capabilities with generative AI to produce 
+    relevant, context-aware responses based on document content.
+    
+    If a query is provided, it will be run directly; otherwise, the chat interface will be launched.
+    """
+    from aurelian.agents.rag.rag_gradio import chat
+    from aurelian.agents.rag.rag_agent import rag_agent
+    from aurelian.agents.rag.rag_config import get_config
+    
     agent_options, launch_options = split_options(kwargs)
-    ui = agent.chat(**agent_options)
-    ui.launch(**launch_options)
+    
+    if not db_path:
+        click.echo("Error: --db-path is required")
+        return
+    
+    if query:
+        deps = get_config(db_path=db_path, collection_name=collection_name)
+        r = rag_agent.run_sync(" ".join(query), deps=deps, **agent_options)
+        print(r.data)
+    else:
+        ui = chat(db_path=db_path, collection_name=collection_name, **agent_options)
+        ui.launch(**launch_options)
 
 @main.command()
 @model_option
@@ -259,20 +329,25 @@ def rag(**kwargs):
 @click.argument("query", nargs=-1)
 def mapper(query, ontologies, **kwargs):
     """Start the Ontology Mapper agent."""
-    import aurelian.agents.ontology_mapper_agent as agent
-    from aurelian.agents.ontology_mapper_agent import OntologyDependencies
+    from aurelian.agents.ontology_mapper.ontology_mapper_agent import ontology_mapper_agent
+    from aurelian.agents.ontology_mapper.ontology_mapper_config import OntologyMapperDependencies, get_config
+    from aurelian.agents.ontology_mapper.ontology_mapper_gradio import chat
+    
+    # Create appropriate dependencies
     if ontologies:
         if isinstance(ontologies, str):
             ontologies = [ontologies]
-        deps = OntologyDependencies(ontologies=ontologies)
+        deps = get_config(ontologies=ontologies)
     else:
-        deps = OntologyDependencies()
+        deps = get_config()
+        
     deps_options, agent_options, launch_options = split_options3(kwargs)
+    
     if query:
-        r = agent.ontology_mapper_agent.run_sync("\n".join(query), deps=deps)
+        r = ontology_mapper_agent.run_sync("\n".join(query), deps=deps)
         print(r.data)
     else:
-        ui = agent.chat(deps, **agent_options)
+        ui = chat(deps, **agent_options)
         ui.launch(**launch_options)
 
 
@@ -289,12 +364,146 @@ def fulltext(pmid):
 @model_option
 @share_option
 @server_port_option
-def datasheets(**kwargs):
-    """Start the Data Sheets Metadata Agent."""
-    import aurelian.agents.d4d_agent as datasheets_agent
+@click.argument("url", required=False)
+def datasheets(url, **kwargs):
+    """Start the Datasheets for Datasets Agent.
+    
+    The D4D Agent (Datasheets for Datasets) extracts structured metadata from dataset 
+    documentation according to the Datasheets for Datasets schema. It can analyze 
+    both web pages and PDF documents describing datasets and generate standardized 
+    YAML metadata.
+    
+    If a URL is provided, it will be processed directly; otherwise, the chat interface will be launched.
+    """
+    from aurelian.agents.d4d.d4d_gradio import chat
+    from aurelian.agents.d4d.d4d_agent import data_sheets_agent
+    from aurelian.agents.d4d.d4d_config import get_config
+    
     agent_options, launch_options = split_options(kwargs)
-    ui = datasheets_agent.chat(**agent_options)
+    
+    if url:
+        deps = get_config()
+        r = data_sheets_agent.run_sync(url, deps=deps, **agent_options)
+        print(r.data)
+    else:
+        ui = chat(**agent_options)
+        ui.launch(**launch_options)
+
+
+@main.command()
+@model_option
+@workdir_option
+@share_option
+@server_port_option
+def chemistry(**kwargs):
+    """Start the Chemistry Agent for working with chemical structures."""
+    from aurelian.agents.chemistry.chemistry_gradio import chat
+    agent_options, launch_options = split_options(kwargs)
+    ui = chat(**agent_options)
     ui.launch(**launch_options)
+
+
+@main.command()
+@model_option
+@share_option
+@server_port_option
+def literature(**kwargs):
+    """Start the Literature Agent for working with scientific publications."""
+    from aurelian.agents.literature.literature_gradio import chat
+    agent_options, launch_options = split_options(kwargs)
+    ui = chat(**agent_options)
+    ui.launch(**launch_options)
+
+
+@main.command()
+@model_option
+@share_option
+@server_port_option
+@click.argument("query", nargs=-1)
+def biblio(query, **kwargs):
+    """Start the Biblio Agent for working with bibliographic data.
+    
+    The Biblio Agent helps organize and search bibliographic data and citations. 
+    It provides tools for searching a bibliography database, retrieving scientific 
+    publications, and accessing web content.
+    
+    If a query is provided, it will be run directly; otherwise, the chat interface will be launched.
+    """
+    from aurelian.agents.biblio.biblio_gradio import chat
+    from aurelian.agents.biblio.biblio_agent import biblio_agent
+    from aurelian.agents.biblio.biblio_config import get_config
+    
+    agent_options, launch_options = split_options(kwargs)
+    
+    if query:
+        deps = get_config()
+        r = biblio_agent.run_sync(" ".join(query), deps=deps, **agent_options)
+        print(r.data)
+    else:
+        ui = chat(**agent_options)
+        ui.launch(**launch_options)
+
+
+@main.command()
+@model_option
+@share_option
+@server_port_option
+@click.argument("query", nargs=-1)
+def monarch(query, **kwargs):
+    """Start the Monarch Agent for biomedical knowledge exploration.
+    
+    The Monarch Agent provides access to relationships between genes, diseases, 
+    phenotypes, and other biomedical entities through the Monarch Knowledge Base.
+    
+    If a query is provided, it will be run directly; otherwise, the chat interface will be launched.
+    """
+    from aurelian.agents.monarch.monarch_gradio import chat
+    from aurelian.agents.monarch.monarch_agent import monarch_agent
+    from aurelian.agents.monarch.monarch_config import get_config
+    
+    agent_options, launch_options = split_options(kwargs)
+    
+    if query:
+        deps = get_config()
+        if 'workdir' in agent_options and agent_options['workdir']:
+            deps.workdir.location = agent_options['workdir']
+        r = monarch_agent.run_sync(" ".join(query), deps=deps, **{k: v for k, v in agent_options.items() if k != 'workdir'})
+        print(r.data)
+    else:
+        ui = chat(**agent_options)
+        ui.launch(**launch_options)
+
+
+@main.command()
+@model_option
+@share_option
+@server_port_option
+@click.argument("query", nargs=-1)
+def ubergraph(query, **kwargs):
+    """Start the UberGraph Agent for SPARQL-based ontology queries.
+    
+    The UberGraph Agent provides a natural language interface to query ontologies 
+    using SPARQL through the UberGraph endpoint. It helps users formulate and execute
+    SPARQL queries without needing to know the full SPARQL syntax.
+    
+    If a query is provided, it will be run directly; otherwise, the chat interface will be launched.
+    """
+    from aurelian.agents.ubergraph.ubergraph_gradio import chat
+    from aurelian.agents.ubergraph.ubergraph_agent import ubergraph_agent
+    from aurelian.agents.ubergraph.ubergraph_config import get_config
+    
+    agent_options, launch_options = split_options(kwargs)
+    
+    if query:
+        deps = get_config()
+        if 'workdir' in agent_options and agent_options['workdir']:
+            deps.workdir.location = agent_options['workdir']
+        r = ubergraph_agent.run_sync(" ".join(query), deps=deps, **{k: v for k, v in agent_options.items() if k != 'workdir'})
+        print(r.data)
+    else:
+        ui = chat(**agent_options)
+        ui.launch(**launch_options)
+
 
 # DO NOT REMOVE THIS LINE
 # added this for mkdocstrings to work
