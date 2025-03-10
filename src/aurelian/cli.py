@@ -204,14 +204,48 @@ def diagnosis(query, **kwargs):
 
 @main.command()
 @model_option
+@workdir_option
+@share_option
+@server_port_option
+@click.argument("query", nargs=-1)
+def checklist(query, **kwargs):
+    """Start the Checklist Agent for paper evaluation.
+    
+    The Checklist Agent evaluates scientific papers against established checklists 
+    such as STREAMS, STORMS, and ARRIVE. It helps ensure that papers conform to 
+    relevant reporting guidelines and best practices.
+    
+    If a query is provided, it will be run directly; otherwise, the chat interface will be launched.
+    """
+    from aurelian.agents.checklist.checklist_gradio import chat
+    from aurelian.agents.checklist.checklist_agent import checklist_agent
+    from aurelian.agents.checklist.checklist_config import get_config
+    
+    agent_options, launch_options = split_options(kwargs)
+    
+    if query:
+        deps = get_config()
+        if 'workdir' in agent_options and agent_options['workdir']:
+            deps.workdir.location = agent_options['workdir']
+        r = checklist_agent.run_sync(" ".join(query), deps=deps, **{k: v for k, v in agent_options.items() if k != 'workdir'})
+        print(r.data)
+    else:
+        ui = chat(**agent_options)
+        ui.launch(**launch_options)
+
+
+# Keep backward compatibility
+@main.command()
+@model_option
 @share_option
 @server_port_option
 def aria(share: bool, server_port: Optional[int] = None, **kwargs):
-    """Start the Checklist UI."""
-    import aurelian.agents.checklist_agent as aria
-
-    ui = aria.chat(**kwargs)
-    ui.launch(share=share, server_port=server_port)
+    """Start the Checklist UI (deprecated, use 'checklist' instead)."""
+    from aurelian.agents.checklist.checklist_gradio import chat
+    
+    agent_options, launch_options = split_options(kwargs)
+    ui = chat(**agent_options)
+    ui.launch(**launch_options)
 
 
 @main.command()
@@ -339,6 +373,35 @@ def literature(**kwargs):
     agent_options, launch_options = split_options(kwargs)
     ui = chat(**agent_options)
     ui.launch(**launch_options)
+
+
+@main.command()
+@model_option
+@share_option
+@server_port_option
+@click.argument("query", nargs=-1)
+def biblio(query, **kwargs):
+    """Start the Biblio Agent for working with bibliographic data.
+    
+    The Biblio Agent helps organize and search bibliographic data and citations. 
+    It provides tools for searching a bibliography database, retrieving scientific 
+    publications, and accessing web content.
+    
+    If a query is provided, it will be run directly; otherwise, the chat interface will be launched.
+    """
+    from aurelian.agents.biblio.biblio_gradio import chat
+    from aurelian.agents.biblio.biblio_agent import biblio_agent
+    from aurelian.agents.biblio.biblio_config import get_config
+    
+    agent_options, launch_options = split_options(kwargs)
+    
+    if query:
+        deps = get_config()
+        r = biblio_agent.run_sync(" ".join(query), deps=deps, **agent_options)
+        print(r.data)
+    else:
+        ui = chat(**agent_options)
+        ui.launch(**launch_options)
 
 
 @main.command()
