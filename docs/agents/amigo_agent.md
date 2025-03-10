@@ -1,4 +1,4 @@
 # amigo_agent
 
-::: aurelian.agents.amigo_agent
+::: aurelian.agents.amigo.amigo_agent
 

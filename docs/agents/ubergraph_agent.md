@@ -1,5 +1,7 @@
 # UberGraph Agent
 
+::: aurelian.agents.ubergraph.ubergraph_agent
+
 The UberGraph agent provides a natural language interface to query ontologies using SPARQL through the UberGraph endpoint. It helps users formulate and execute SPARQL queries without needing to know the full SPARQL syntax.
 
 ## Features

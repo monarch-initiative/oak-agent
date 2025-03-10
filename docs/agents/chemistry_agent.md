@@ -1,4 +1,4 @@
 # chemistry_agent
 
-::: aurelian.agents.chemistry_agent
+::: aurelian.agents.chemistry.chemistry_agent
 
