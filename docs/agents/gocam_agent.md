@@ -1,3 +1,3 @@
 # GO-CAM Agent
 
-::: aurelian.agents.gocam_agent
+::: aurelian.agents.gocam.gocam_agent

@@ -1,5 +1,7 @@
 # UniProt Agent
 
+::: aurelian.agents.uniprot.uniprot_agent
+
 The UniProt agent provides an interface to the UniProt database, allowing you to search for proteins, retrieve detailed information about specific proteins, and map between different database identifiers.
 
 ## Features
