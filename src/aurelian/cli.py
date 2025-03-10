@@ -230,10 +230,10 @@ def robot(**kwargs):
 @share_option
 @server_port_option
 def amigo(**kwargs):
-    """Start the AmiGO agent."""
-    import aurelian.agents.amigo_agent as agent
+    """Start the AmiGO agent for working with Gene Ontology."""
+    from aurelian.agents.amigo.amigo_gradio import chat
     agent_options, launch_options = split_options(kwargs)
-    ui = agent.chat(**agent_options)
+    ui = chat(**agent_options)
     ui.launch(**launch_options)
 
 
