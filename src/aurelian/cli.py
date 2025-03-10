@@ -165,11 +165,10 @@ def gocam(share: bool, server_port: Optional[int] = None, **kwargs):
 @share_option
 @server_port_option
 def phenopackets(**kwargs):
-    """Start the GO-CAM UI."""
-    import aurelian.agents.phenopacket_agent as phenopackets
-
+    """Start the Phenopackets Agent for exploring phenopacket databases."""
+    from aurelian.agents.phenopackets.phenopackets_gradio import chat
     agent_options, launch_options = split_options(kwargs)
-    ui = phenopackets.chat(**agent_options)
+    ui = chat(**agent_options)
     ui.launch(**launch_options)
 
 
