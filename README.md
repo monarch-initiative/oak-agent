@@ -1,3 +1,10 @@
+---
+title: STREAMS
+app_file: app.py
+sdk: gradio
+sdk_version: 5.19.0
+python_version: 3.11
+---
 # Aurelian: Agentic Universal Research Engine for Literature, Integration, Annotation, and Navigation
 
 | [Documentation](https://monarch-initiative.github.io/aurelian) |

@@ -206,7 +206,7 @@ class DOIFetcher:
             except Exception:
                 continue
 
-    def text_from_pdf_url(self, pdf_url: str) -> str:
+    def text_from_pdf_url(self, pdf_url: str, raise_for_status=False) -> Optional[str]:
         """Extract text from a PDF URL.
 
         Example:
@@ -217,6 +217,7 @@ class DOIFetcher:
 
         Args:
             pdf_url:
+            raise_for_status:
 
         Returns:
 
@@ -224,7 +225,10 @@ class DOIFetcher:
         session = requests_cache.CachedSession("pdf_cache")
         # Download the PDF
         response = session.get(pdf_url)
-        response.raise_for_status()
+        if raise_for_status:
+            response.raise_for_status()
+        if response.status_code != 200:
+            return None
         with NamedTemporaryFile(delete=False) as tmpf:
             tmpf.write(response.content)
             tmp_name = tmpf.name

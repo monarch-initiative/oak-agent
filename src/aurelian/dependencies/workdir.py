@@ -1,4 +1,5 @@
 import tempfile
+from abc import ABC
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import List
@@ -72,3 +73,6 @@ class WorkDir:
         self._ensure_location()
         return [f.name for f in Path(self.location).iterdir() if f.is_file()]
 
+@dataclass
+class HasWorkdir(ABC):
+    workdir: WorkDir = field(default_factory=lambda: WorkDir())
