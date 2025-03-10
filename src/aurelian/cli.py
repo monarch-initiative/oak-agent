@@ -178,13 +178,28 @@ def phenopackets(**kwargs):
 @share_option
 @server_port_option
 @click.argument("query", nargs=-1)
-def diagnosis(**kwargs):
-    """Start the diagnosis agent."""
-    import aurelian.agents.diagnosis_agent as diagnosis
-
+def diagnosis(query, **kwargs):
+    """Start the Diagnosis agent for rare disease diagnosis.
+    
+    The Diagnosis agent assists in diagnosing rare diseases by leveraging the 
+    Monarch Knowledge Base. It helps clinical geneticists evaluate potential 
+    conditions based on patient phenotypes.
+    
+    If a query is provided, it will be run directly; otherwise, the chat interface will be launched.
+    """
+    from aurelian.agents.diagnosis.diagnosis_gradio import chat
+    from aurelian.agents.diagnosis.diagnosis_agent import diagnosis_agent
+    from aurelian.agents.diagnosis.diagnosis_config import get_config
+    
     agent_options, launch_options = split_options(kwargs)
-    ui = diagnosis.chat(**agent_options)
-    ui.launch(**launch_options)
+    
+    if query:
+        deps = get_config()
+        r = diagnosis_agent.run_sync(" ".join(query), deps=deps, **agent_options)
+        print(r.data)
+    else:
+        ui = chat(**agent_options)
+        ui.launch(**launch_options)
 
 
 @main.command()
@@ -316,7 +331,6 @@ def chemistry(**kwargs):
 
 @main.command()
 @model_option
-@workdir_option
 @share_option
 @server_port_option
 def literature(**kwargs):
@@ -359,7 +373,6 @@ def monarch(query, **kwargs):
 
 @main.command()
 @model_option
-@workdir_option
 @share_option
 @server_port_option
 @click.argument("query", nargs=-1)
