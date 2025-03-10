@@ -364,12 +364,30 @@ def fulltext(pmid):
 @model_option
 @share_option
 @server_port_option
-def datasheets(**kwargs):
-    """Start the Data Sheets Metadata Agent."""
-    import aurelian.agents.d4d_agent as datasheets_agent
+@click.argument("url", required=False)
+def datasheets(url, **kwargs):
+    """Start the Datasheets for Datasets Agent.
+    
+    The D4D Agent (Datasheets for Datasets) extracts structured metadata from dataset 
+    documentation according to the Datasheets for Datasets schema. It can analyze 
+    both web pages and PDF documents describing datasets and generate standardized 
+    YAML metadata.
+    
+    If a URL is provided, it will be processed directly; otherwise, the chat interface will be launched.
+    """
+    from aurelian.agents.d4d.d4d_gradio import chat
+    from aurelian.agents.d4d.d4d_agent import data_sheets_agent
+    from aurelian.agents.d4d.d4d_config import get_config
+    
     agent_options, launch_options = split_options(kwargs)
-    ui = datasheets_agent.chat(**agent_options)
-    ui.launch(**launch_options)
+    
+    if url:
+        deps = get_config()
+        r = data_sheets_agent.run_sync(url, deps=deps, **agent_options)
+        print(r.data)
+    else:
+        ui = chat(**agent_options)
+        ui.launch(**launch_options)
 
 
 @main.command()
