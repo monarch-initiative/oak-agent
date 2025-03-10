@@ -356,6 +356,39 @@ def monarch(query, **kwargs):
         ui = chat(**agent_options)
         ui.launch(**launch_options)
 
+
+@main.command()
+@model_option
+@workdir_option
+@share_option
+@server_port_option
+@click.argument("query", nargs=-1)
+def ubergraph(query, **kwargs):
+    """Start the UberGraph Agent for SPARQL-based ontology queries.
+    
+    The UberGraph Agent provides a natural language interface to query ontologies 
+    using SPARQL through the UberGraph endpoint. It helps users formulate and execute
+    SPARQL queries without needing to know the full SPARQL syntax.
+    
+    If a query is provided, it will be run directly; otherwise, the chat interface will be launched.
+    """
+    from aurelian.agents.ubergraph.ubergraph_gradio import chat
+    from aurelian.agents.ubergraph.ubergraph_agent import ubergraph_agent
+    from aurelian.agents.ubergraph.ubergraph_config import get_config
+    
+    agent_options, launch_options = split_options(kwargs)
+    
+    if query:
+        deps = get_config()
+        if 'workdir' in agent_options and agent_options['workdir']:
+            deps.workdir.location = agent_options['workdir']
+        r = ubergraph_agent.run_sync(" ".join(query), deps=deps, **{k: v for k, v in agent_options.items() if k != 'workdir'})
+        print(r.data)
+    else:
+        ui = chat(**agent_options)
+        ui.launch(**launch_options)
+
+
 # DO NOT REMOVE THIS LINE
 # added this for mkdocstrings to work
 # see https://github.com/bruce-szalwinski/mkdocs-typer/issues/18
