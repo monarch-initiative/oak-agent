@@ -53,6 +53,12 @@ linkml = ["linkml"]
 chem = ["rdkit"]
 pdfminer = ["pdfminer-six"]
 
+[tool.pytest.ini_options]
+markers = [
+    "integration: marks tests as integration tests that might have external dependencies",
+    "flaky: marks tests that might occasionally fail due to external conditions",
+]
+
 [tool.poetry.group.docs]
 optional = true
 
