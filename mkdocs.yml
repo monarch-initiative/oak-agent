@@ -50,6 +50,7 @@ nav:
       - biblio_agent: agents/biblio_agent.md
       - checklist_agent: agents/checklist_agent.md
       - chemistry_agent: agents/chemistry_agent.md
+      - d4d_agent: agents/d4d_agent.md
       - diagnosis_agent: agents/diagnosis_agent.md
       - gocam_agent: agents/gocam_agent.md
       - linkml_agent: agents/linkml_agent.md
@@ -61,6 +62,5 @@ nav:
       - uniprot_agent: agents/uniprot_agent.md
 
   - Command Line: cli.md
-  - Test Results: test_results.md
   - Examples:
       - Chemistry: examples/Terpenoids.ipynb
