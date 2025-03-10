@@ -121,11 +121,11 @@ def split_options3(kwargs, agent_keys: Optional[List]=None, extra_agent_keys: Op
 
 @main.command()
 def gocam_ui():
-    """Start the GO-CAM Chat UI."""
-    import aurelian.agents.gocam_agent as gocam
-
-    ui = gocam.ui()
-    ui.launch()
+    """Start the GO-CAM UI (non-chat interface)."""
+    from aurelian.agents.gocam.gocam_gradio import ui
+    
+    gocam_ui = ui()
+    gocam_ui.launch()
 
 
 @main.command()
@@ -154,10 +154,11 @@ def search_ontology(ontology: str, term: str, **kwargs):
 @server_port_option
 def gocam(share: bool, server_port: Optional[int] = None, **kwargs):
     """Start the GO-CAM Chat UI."""
-    import aurelian.agents.gocam_agent as gocam
-
-    ui = gocam.chat(**kwargs)
-    ui.launch(share=share, server_port=server_port)
+    from aurelian.agents.gocam.gocam_gradio import chat
+    
+    agent_options, launch_options = split_options(kwargs)
+    ui = chat(**agent_options)
+    ui.launch(**launch_options)
 
 
 @main.command()
