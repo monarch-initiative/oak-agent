@@ -6,12 +6,16 @@ import asyncio
 import tempfile
 import gradio as gr
 import pandas as pd
-from typing import Dict, List, Optional
+from typing import Dict, List, Optional, Tuple
 
 from pydantic_ai.chat import ChatMessage
 
 from aurelian.agents.relation_extraction.relation_extraction_agent import relation_extraction_agent
 from aurelian.agents.relation_extraction.relation_extraction_config import RelationExtractionDependencies
+from aurelian.agents.relation_extraction.relation_extraction_tools import (
+    map_all_relations_to_ontology,
+    export_relations_as_rdf
+)
 
 # Global state for the Gradio app
 class AppState:
@@ -126,8 +130,13 @@ async def process_all_pdfs() -> str:
         return f"Error processing PDFs: {str(e)}"
 
 
-async def get_relations() -> pd.DataFrame:
-    """Get all extracted relations as a DataFrame."""
+async def get_relations(include_ontology: bool = False) -> pd.DataFrame:
+    """
+    Get all extracted relations as a DataFrame.
+    
+    Args:
+        include_ontology: Whether to include ontology mapping information in the DataFrame
+    """
     if not state.dependencies:
         return pd.DataFrame(columns=["Subject", "Predicate", "Object", "Evidence", "Paper"])
     
@@ -139,17 +148,36 @@ async def get_relations() -> pd.DataFrame:
         if not relations:
             return pd.DataFrame(columns=["Subject", "Predicate", "Object", "Evidence", "Paper"])
         
-        # Convert to DataFrame
-        df = pd.DataFrame([
-            {
-                "Subject": r["subject"],
-                "Predicate": r["predicate"],
-                "Object": r["object"],
-                "Evidence": r["evidence"],
-                "Paper": r.get("paper_title", "Unknown")
-            }
-            for r in relations
-        ])
+        # Prepare columns based on whether to include ontology info
+        if include_ontology:
+            # Convert to DataFrame with ontology information
+            df = pd.DataFrame([
+                {
+                    "Subject": r["subject"],
+                    "Subject_Ontology": f"{r.get('subject_ontology_id', '')} ({r.get('subject_ontology_source', '')})" if r.get('subject_ontology_id') else "",
+                    "Predicate": r["predicate"],
+                    "Predicate_Ontology": f"{r.get('predicate_ontology_id', '')} ({r.get('predicate_ontology_source', '')})" if r.get('predicate_ontology_id') else "",
+                    "Object": r["object"],
+                    "Object_Ontology": f"{r.get('object_ontology_id', '')} ({r.get('object_ontology_source', '')})" if r.get('object_ontology_id') else "",
+                    "Evidence": r["evidence"],
+                    "Paper": r.get("paper_title", "Unknown"),
+                    "DOI": r.get("paper_doi", "")
+                }
+                for r in relations
+            ])
+        else:
+            # Simple version without ontology information
+            df = pd.DataFrame([
+                {
+                    "Subject": r["subject"],
+                    "Predicate": r["predicate"],
+                    "Object": r["object"],
+                    "Evidence": r["evidence"],
+                    "Paper": r.get("paper_title", "Unknown"),
+                    "DOI": r.get("paper_doi", "")
+                }
+                for r in relations
+            ])
         
         return df
     
@@ -157,9 +185,23 @@ async def get_relations() -> pd.DataFrame:
         return pd.DataFrame([{"Error": str(e)}])
 
 
-def export_relations(format_type: str) -> Dict:
+async def map_ontologies() -> Dict:
+    """Map all relations to ontology terms."""
+    if not state.dependencies:
+        return {"status": "error", "message": "Please set up the PDF directory first."}
+    
+    try:
+        # Use the agent's tool to map relations to ontology terms
+        result = await map_all_relations_to_ontology(state.dependencies)
+        return result
+    
+    except Exception as e:
+        return {"status": "error", "message": str(e)}
+
+
+async def export_relations(format_type: str) -> Dict:
     """Export relations to a file in the specified format."""
-    if not state.extracted_relations:
+    if not state.dependencies or not state.extracted_relations:
         return {"error": "No relations to export"}
     
     try:
@@ -170,26 +212,46 @@ def export_relations(format_type: str) -> Dict:
         if format_type == "json":
             with open(file_path, 'w') as f:
                 json.dump(state.extracted_relations, f, indent=2)
+                
         elif format_type == "csv":
+            # Include ontology information in the CSV
             df = pd.DataFrame([
                 {
                     "Subject": r["subject"],
+                    "Subject_Ontology_ID": r.get("subject_ontology_id", ""),
+                    "Subject_Ontology_Source": r.get("subject_ontology_source", ""),
+                    
                     "Predicate": r["predicate"],
+                    "Predicate_Ontology_ID": r.get("predicate_ontology_id", ""),
+                    "Predicate_Ontology_Source": r.get("predicate_ontology_source", ""),
+                    
                     "Object": r["object"],
+                    "Object_Ontology_ID": r.get("object_ontology_id", ""),
+                    "Object_Ontology_Source": r.get("object_ontology_source", ""),
+                    
                     "Evidence": r["evidence"],
+                    "Confidence": r.get("confidence", 1.0),
                     "Paper_DOI": r.get("paper_doi", ""),
                     "Paper_Title": r.get("paper_title", ""),
                     "Paper_Year": r.get("paper_year", ""),
-                    "Confidence": r.get("confidence", 1.0)
+                    "Paper_PMID": r.get("paper_pmid", ""),
+                    "Section": r.get("section", ""),
+                    "Extraction_Date": r.get("extraction_date", "")
                 }
                 for r in state.extracted_relations
             ])
             df.to_csv(file_path, index=False)
+            
+        elif format_type == "rdf":
+            # Use the agent's tool to export as RDF
+            result = await export_relations_as_rdf(state.dependencies, file_path)
+            if result.get("status") != "success":
+                return result
         
-        return {"file_path": file_path}
+        return {"status": "success", "file_path": file_path}
     
     except Exception as e:
-        return {"error": str(e)}
+        return {"status": "error", "message": str(e)}
 
 
 def create_demo():
@@ -197,7 +259,7 @@ def create_demo():
     
     with gr.Blocks(title="Relation Extraction Agent") as demo:
         gr.Markdown("# Scientific Paper Relation Extraction Agent")
-        gr.Markdown("Extract meaningful relations from scientific papers in PDF format.")
+        gr.Markdown("Extract meaningful relations from scientific papers in PDF format and map them to ontology terms.")
         
         with gr.Tab("Setup"):
             with gr.Row():
@@ -229,12 +291,39 @@ def create_demo():
             process_button.click(fn=process_all_pdfs, inputs=[], outputs=process_result)
         
         with gr.Tab("Relations"):
-            get_relations_button = gr.Button("Get Extracted Relations")
+            with gr.Row():
+                get_relations_button = gr.Button("Get Extracted Relations")
+                include_ontology = gr.Checkbox(label="Include Ontology Mappings", value=False)
+            
             relations_table = gr.DataFrame()
             
+            get_relations_button.click(
+                fn=get_relations, 
+                inputs=[include_ontology], 
+                outputs=relations_table
+            )
+        
+        with gr.Tab("Ontology Mapping"):
+            map_ontology_button = gr.Button("Map Relations to Ontology Terms")
+            mapping_result = gr.JSON(label="Mapping Result")
+            
+            map_ontology_button.click(fn=map_ontologies, inputs=[], outputs=mapping_result)
+            
+            gr.Markdown("### Ontology Mapping Details")
+            gr.Markdown("""
+            The mapping process connects extracted terms to standard ontologies:
+            - Gene Ontology (GO) for biological processes, cellular components, molecular functions
+            - ChEBI for chemical entities 
+            - Disease Ontology (DOID) for diseases
+            - Protein Ontology (PR) for proteins
+            - Uberon for anatomical entities
+            - Relation Ontology (RO) for relationship types
+            """)
+        
+        with gr.Tab("Export"):
             with gr.Row():
                 export_format = gr.Radio(
-                    choices=["json", "csv"], 
+                    choices=["json", "csv", "rdf"], 
                     label="Export Format", 
                     value="json"
                 )
@@ -242,7 +331,13 @@ def create_demo():
             
             export_result = gr.JSON(label="Export Result")
             
-            get_relations_button.click(fn=get_relations, inputs=[], outputs=relations_table)
+            gr.Markdown("### Export Format Details")
+            gr.Markdown("""
+            - **JSON**: Full relation data including ontology mappings and all metadata
+            - **CSV**: Tabular format with separate columns for entities and their ontology mappings
+            - **RDF**: Semantic web format using standard ontology URIs with full provenance
+            """)
+            
             export_button.click(fn=export_relations, inputs=[export_format], outputs=export_result)
         
         with gr.Tab("Chat"):
