@@ -10,7 +10,7 @@ from aurelian.agents.gocam.gocam_agent import gocam_agent
 
 @pytest.fixture
 def deps():
-    return GOCamDependencies()
+    return GOCAMDependencies()
 
 
 @pytest.mark.parametrize(
