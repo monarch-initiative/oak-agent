@@ -258,20 +258,25 @@ def rag(**kwargs):
 @click.argument("query", nargs=-1)
 def mapper(query, ontologies, **kwargs):
     """Start the Ontology Mapper agent."""
-    import aurelian.agents.ontology_mapper_agent as agent
-    from aurelian.agents.ontology_mapper_agent import OntologyMapperDependencies
+    from aurelian.agents.ontology_mapper.ontology_mapper_agent import ontology_mapper_agent
+    from aurelian.agents.ontology_mapper.ontology_mapper_config import OntologyMapperDependencies, get_config
+    from aurelian.agents.ontology_mapper.ontology_mapper_gradio import chat
+    
+    # Create appropriate dependencies
     if ontologies:
         if isinstance(ontologies, str):
             ontologies = [ontologies]
-        deps = OntologyMapperDependencies(ontologies=ontologies)
+        deps = get_config(ontologies=ontologies)
     else:
-        deps = OntologyMapperDependencies()
+        deps = get_config()
+        
     deps_options, agent_options, launch_options = split_options3(kwargs)
+    
     if query:
-        r = agent.ontology_mapper_agent.run_sync("\n".join(query), deps=deps)
+        r = ontology_mapper_agent.run_sync("\n".join(query), deps=deps)
         print(r.data)
     else:
-        ui = agent.chat(deps, **agent_options)
+        ui = chat(deps, **agent_options)
         ui.launch(**launch_options)
 
 
