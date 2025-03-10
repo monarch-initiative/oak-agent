@@ -6,9 +6,11 @@ from aurelian.agents.gocam.gocam_tools import (
     search_gocams,
     lookup_gocam,
     lookup_uniprot_entry,
-    lookup_pmid,
-    search_web,
-    retrieve_web_page
+)
+from aurelian.agents.literature.literature_tools import (
+    lookup_pmid as literature_lookup_pmid,
+    search_literature_web,
+    retrieve_literature_page
 )
 from aurelian.agents.filesystem.filesystem_tools import inspect_file, list_files
 from pydantic_ai import Agent, Tool
@@ -44,9 +46,35 @@ gocam_agent = Agent(
         Tool(search_gocams),
         Tool(lookup_gocam),
         Tool(lookup_uniprot_entry),
-        Tool(lookup_pmid),
-        Tool(search_web),
-        Tool(retrieve_web_page),
+        Tool(literature_lookup_pmid, 
+             description="""Lookup the text of a PubMed article by its PMID.
+
+Note that assertions in GO-CAMs may reference PMIDs, so this tool
+is useful for validating assertions. A common task is to align
+the text of a PMID with the text of an assertion, or extracting text
+snippets from the publication that support the assertion.
+    
+Args:
+    pmid: The PubMed ID to look up
+        
+Returns:
+    str: Full text if available, otherwise abstract"""),
+        Tool(search_literature_web, name="search_web",
+             description="""Search the web using a text query.
+    
+Args:
+    query: The search query
+        
+Returns:
+    str: Search results with summaries"""),
+        Tool(retrieve_literature_page, name="retrieve_web_page",
+             description="""Fetch the contents of a web page.
+    
+Args:
+    url: The URL to fetch
+        
+Returns:
+    str: The contents of the web page"""),
         Tool(inspect_file),
         Tool(list_files),
     ]

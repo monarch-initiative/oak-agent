@@ -9,6 +9,7 @@ from mcp.server.fastmcp import FastMCP
 import aurelian.agents.filesystem.filesystem_tools as fst
 from aurelian.agents.gocam.gocam_agent import SYSTEM
 import aurelian.agents.gocam.gocam_tools as gt
+from aurelian.agents.literature.literature_tools import lookup_pmid as lit_lookup_pmid, search_literature_web, retrieve_literature_page
 from aurelian.agents.gocam.gocam_config import GOCAMDependencies
 from pydantic_ai import RunContext
 
@@ -117,7 +118,7 @@ async def lookup_pmid(pmid: str) -> str:
     Returns:
         str: Full text if available, otherwise abstract
     """
-    return await gt.lookup_pmid(pmid)
+    return await lit_lookup_pmid(pmid)
 
 
 @mcp.tool()
@@ -131,7 +132,7 @@ async def search_web(query: str) -> str:
     Returns:
         str: Search results with summaries
     """
-    return await gt.search_web(query)
+    return await search_literature_web(query)
 
 
 @mcp.tool()
@@ -145,7 +146,7 @@ async def retrieve_web_page(url: str) -> str:
     Returns:
         str: The contents of the web page
     """
-    return await gt.retrieve_web_page(url)
+    return await retrieve_literature_page(url)
 
 
 @mcp.tool()

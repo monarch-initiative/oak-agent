@@ -14,9 +14,11 @@ from aurelian.agents.gocam.gocam_config import GOCAMDependencies as GOCamDepende
 from aurelian.agents.gocam.gocam_tools import (
     search_gocams as search,
     lookup_gocam,
-    lookup_uniprot_entry,
+    lookup_uniprot_entry
+)
+from aurelian.agents.literature.literature_tools import (
     lookup_pmid,
-    search_web,
-    retrieve_web_page
+    search_literature_web as search_web,
+    retrieve_literature_page as retrieve_web_page
 )
 from aurelian.agents.gocam.gocam_gradio import ui, chat

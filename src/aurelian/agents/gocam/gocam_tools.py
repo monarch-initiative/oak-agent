@@ -8,11 +8,7 @@ from pydantic_ai import RunContext, ModelRetry
 from aurelian.agents.gocam.gocam_config import GOCAMDependencies
 from aurelian.agents.uniprot_agent import normalize_uniprot_id
 from aurelian.utils.data_utils import flatten
-from aurelian.agents.literature.literature_tools import (
-    lookup_pmid as literature_lookup_pmid,
-    search_literature_web,
-    retrieve_literature_page
-)
+from aurelian.agents.literature.literature_tools import search_literature_web, retrieve_literature_page
 
 
 async def search_gocams(ctx: RunContext[GOCAMDependencies], query: str) -> List[Dict]:
@@ -117,48 +113,6 @@ async def lookup_uniprot_entry(ctx: RunContext[GOCAMDependencies], uniprot_acc: 
         raise ModelRetry(f"Error retrieving UniProt entry for {uniprot_acc}: {str(e)}")
 
 
-async def lookup_pmid(pmid: str) -> str:
-    """
-    Lookup the text of a PubMed article by its PMID.
-
-    Note that assertions in GO-CAMs may reference PMIDs, so this tool
-    is useful for validating assertions. A common task is to align
-    the text of a PMID with the text of an assertion, or extracting text
-    snippets from the publication that support the assertion.
-    
-    Args:
-        pmid: The PubMed ID to look up
-        
-    Returns:
-        str: Full text if available, otherwise abstract
-    """
-    print(f"LOOKUP PMID FOR GOCAM: {pmid}")
-    return await literature_lookup_pmid(pmid)
-
-
-async def search_web(query: str) -> str:
-    """
-    Search the web using a text query.
-    
-    Args:
-        query: The search query
-        
-    Returns:
-        str: Search results with summaries
-    """
-    print(f"GOCAM WEB SEARCH: {query}")
-    return await search_literature_web(query)
-
-
-async def retrieve_web_page(url: str) -> str:
-    """
-    Fetch the contents of a web page.
-    
-    Args:
-        url: The URL to fetch
-        
-    Returns:
-        str: The contents of the web page
-    """
-    print(f"FETCH WEB PAGE FOR GOCAM: {url}")
-    return await retrieve_literature_page(url)
+# These functions have been removed and replaced with direct use of 
+# literature_lookup_pmid, search_literature_web, and retrieve_literature_page
+# from aurelian.agents.literature.literature_tools
