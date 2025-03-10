@@ -292,12 +292,34 @@ def amigo(**kwargs):
 @db_path_option
 @collection_name_option
 @server_port_option
-def rag(**kwargs):
-    """Start the AmiGO agent."""
-    import aurelian.agents.rag_agent as agent
+@click.argument("query", nargs=-1)
+def rag(query, db_path, collection_name, **kwargs):
+    """Start the RAG Agent for document retrieval and generation.
+    
+    The RAG (Retrieval-Augmented Generation) Agent provides a natural language 
+    interface for exploring and searching document collections. It uses RAG 
+    techniques to combine search capabilities with generative AI to produce 
+    relevant, context-aware responses based on document content.
+    
+    If a query is provided, it will be run directly; otherwise, the chat interface will be launched.
+    """
+    from aurelian.agents.rag.rag_gradio import chat
+    from aurelian.agents.rag.rag_agent import rag_agent
+    from aurelian.agents.rag.rag_config import get_config
+    
     agent_options, launch_options = split_options(kwargs)
-    ui = agent.chat(**agent_options)
-    ui.launch(**launch_options)
+    
+    if not db_path:
+        click.echo("Error: --db-path is required")
+        return
+    
+    if query:
+        deps = get_config(db_path=db_path, collection_name=collection_name)
+        r = rag_agent.run_sync(" ".join(query), deps=deps, **agent_options)
+        print(r.data)
+    else:
+        ui = chat(db_path=db_path, collection_name=collection_name, **agent_options)
+        ui.launch(**launch_options)
 
 @main.command()
 @model_option
