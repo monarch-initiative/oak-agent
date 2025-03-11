@@ -9,10 +9,10 @@
       
       
       
-        <link rel="prev" href="../agents/uniprot_agent/">
+        <link rel="prev" href="../cli/">
       
       
-        <link rel="next" href="../mcp/">
+        <link rel="next" href="../examples/Terpenoids/">
       
       
       <link rel="icon" href="../assets/images/favicon.png">
@@ -20,7 +20,7 @@
     
     
       
-        <title>Command Line - Aurelian</title>
+        <title>MCP Integration - Aurelian</title>
       
     
     
@@ -80,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#cli-reference" class="md-skip">
+        <a href="#model-context-protocol-mcp-integration" class="md-skip">
           Skip to content
         </a>
       
@@ -116,7 +116,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Command Line
+              MCP Integration
             
           </span>
         </div>
@@ -604,6 +604,27 @@
       
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../cli/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Command Line
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
     
   
   
@@ -616,29 +637,19 @@
         
       
       
-      <a href="./" class="md-nav__link md-nav__link--active">
-        
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
   
   <span class="md-ellipsis">
-    Command Line
+    MCP Integration
     
   </span>
   
 
-      </a>
+          <span class="md-nav__icon md-icon"></span>
+        </label>
       
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../mcp/" class="md-nav__link">
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
@@ -648,6 +659,170 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#what-is-mcp" class="md-nav__link">
+    <span class="md-ellipsis">
+      What is MCP?
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="What is MCP?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#key-benefits" class="md-nav__link">
+    <span class="md-ellipsis">
+      Key benefits:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#setting-up-mcp-servers-for-aurelian" class="md-nav__link">
+    <span class="md-ellipsis">
+      Setting Up MCP Servers for Aurelian
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Setting Up MCP Servers for Aurelian">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#configuration-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuration Options
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#option-1-manual-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Option 1: Manual Configuration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#option-2-generated-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Option 2: Generated Configuration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#available-agent-servers" class="md-nav__link">
+    <span class="md-ellipsis">
+      Available Agent Servers
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuration-parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuration Parameters
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuration Parameters">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#common-parameters-for-agent-servers" class="md-nav__link">
+    <span class="md-ellipsis">
+      Common Parameters for Agent Servers
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#memory-server-parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      Memory Server Parameters
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#custom-server-parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      Custom Server Parameters
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#running-mcp-with-claude" class="md-nav__link">
+    <span class="md-ellipsis">
+      Running MCP with Claude
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example-use-cases" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example Use Cases
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshooting" class="md-nav__link">
+    <span class="md-ellipsis">
+      Troubleshooting
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -758,6 +933,158 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#what-is-mcp" class="md-nav__link">
+    <span class="md-ellipsis">
+      What is MCP?
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="What is MCP?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#key-benefits" class="md-nav__link">
+    <span class="md-ellipsis">
+      Key benefits:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#setting-up-mcp-servers-for-aurelian" class="md-nav__link">
+    <span class="md-ellipsis">
+      Setting Up MCP Servers for Aurelian
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Setting Up MCP Servers for Aurelian">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#configuration-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuration Options
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#option-1-manual-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Option 1: Manual Configuration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#option-2-generated-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Option 2: Generated Configuration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#available-agent-servers" class="md-nav__link">
+    <span class="md-ellipsis">
+      Available Agent Servers
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuration-parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuration Parameters
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuration Parameters">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#common-parameters-for-agent-servers" class="md-nav__link">
+    <span class="md-ellipsis">
+      Common Parameters for Agent Servers
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#memory-server-parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      Memory Server Parameters
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#custom-server-parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      Custom Server Parameters
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#running-mcp-with-claude" class="md-nav__link">
+    <span class="md-ellipsis">
+      Running MCP with Claude
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example-use-cases" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example Use Cases
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshooting" class="md-nav__link">
+    <span class="md-ellipsis">
+      Troubleshooting
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -772,301 +1099,175 @@
 
 
 
-<h1 id="cli-reference">CLI Reference</h1>
-<h1 id="main">main</h1>
-<p>Main command for Aurelian.</p>
-<p>THIS CLI MAY CHANGE.</p>
-<p>Currently there are multiple sub-commands,
-each of which starts a UI for an agent.</p>
-<p>However, there are a few other utility commands,
-e.g. for indexing an ontology or downloading a PMID</p>
-<p>:param verbose: Verbosity while running.
-:param quiet: Boolean to be quiet or verbose.</p>
-<p><strong>Usage:</strong></p>
-<div class="highlight"><pre><span></span><code>main [OPTIONS] COMMAND [ARGS]...
+<h1 id="model-context-protocol-mcp-integration">Model Context Protocol (MCP) Integration</h1>
+<p>This document describes how to set up and use <a href="https://modelcontextprotocol.io/">Model Context Protocol (MCP)</a> with Aurelian agents.</p>
+<h2 id="what-is-mcp">What is MCP?</h2>
+<p>MCP (Model Context Protocol) is an open protocol that standardizes how applications provide context to LLMs. It works like a "USB-C port for AI applications," providing a standardized way to connect AI models to different data sources and tools.</p>
+<h3 id="key-benefits">Key benefits:</h3>
+<ul>
+<li>Connect LLMs to pre-built integrations with a standard protocol</li>
+<li>Flexibility to switch between LLM providers</li>
+<li>Secure your data within your infrastructure</li>
+<li>Enable complex agent workflows</li>
+</ul>
+<h2 id="setting-up-mcp-servers-for-aurelian">Setting Up MCP Servers for Aurelian</h2>
+<p>Aurelian provides MCP server implementations for several of its agents. You can use these servers to expose Aurelian's capabilities to any MCP-compatible client (such as Claude).</p>
+<h3 id="configuration-options">Configuration Options</h3>
+<p>You can configure MCP servers in two ways:</p>
+<ol>
+<li><strong>Manual Configuration</strong>: Create the full JSON configuration directly</li>
+<li><strong>Generated Configuration</strong>: Use the provided config generator script</li>
+</ol>
+<h3 id="option-1-manual-configuration">Option 1: Manual Configuration</h3>
+<p>Create a file named <code>mcp-config.json</code> with your server configurations:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;mcpServers&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;memory&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;command&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;npx&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;args&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="s2">&quot;-y&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;@modelcontextprotocol/server-memory&quot;</span>
+<span class="w">      </span><span class="p">],</span>
+<span class="w">      </span><span class="nt">&quot;env&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;MEMORY_FILE_PATH&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;~/.mcp/memory.json&quot;</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">&quot;linkml&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;command&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;python&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;args&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="s2">&quot;/path/to/aurelian/src/aurelian/agents/linkml/linkml_mcp.py&quot;</span>
+<span class="w">      </span><span class="p">],</span>
+<span class="w">      </span><span class="nt">&quot;env&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;AURELIAN_WORKDIR&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/tmp/linkml&quot;</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
 </code></pre></div>
-<p><strong>Options:</strong></p>
-<div class="highlight"><pre><span></span><code>  -v, --verbose
-  -q, --quiet TEXT
-  --version         Show the version and exit.
-  --help            Show this message and exit.
+<h3 id="option-2-generated-configuration">Option 2: Generated Configuration</h3>
+<ol>
+<li>Create a simplified configuration file (e.g., <code>simple-config.json</code>):</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;memory&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;memory&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;memory_path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;~/.mcp/memory.json&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;linkml&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;linkml&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;workdir&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/tmp/linkml&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;python_path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/usr/bin/python&quot;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
 </code></pre></div>
-<h2 id="amigo">amigo</h2>
-<p>Start the AmiGO agent for working with Gene Ontology.</p>
-<p><strong>Usage:</strong></p>
-<div class="highlight"><pre><span></span><code>main amigo [OPTIONS]
+<ol>
+<li>Generate the full configuration:</li>
+</ol>
+<div class="highlight"><pre><span></span><code>python<span class="w"> </span>src/aurelian/mcp/config_generator.py<span class="w"> </span>--config<span class="w"> </span>simple-config.json<span class="w"> </span>--output<span class="w"> </span>mcp-config.json<span class="w"> </span>--base-dir<span class="w"> </span>/path/to/aurelian
 </code></pre></div>
-<p><strong>Options:</strong></p>
-<div class="highlight"><pre><span></span><code>  -m, --model TEXT           The model to use for the agent.
-  --share / --no-share       Share the agent GradIO chat via URL.  [default:
-                             no-share]
-  -p, --server-port INTEGER  The port to run the gradio server on.  [default:
-                             7860]
-  --help                     Show this message and exit.
+<h3 id="available-agent-servers">Available Agent Servers</h3>
+<p>Aurelian provides the following MCP servers:</p>
+<table>
+<thead>
+<tr>
+<th>Server Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>linkml</td>
+<td>Agent</td>
+<td>LinkML schema validation and data modeling</td>
+</tr>
+<tr>
+<td>gocam</td>
+<td>Agent</td>
+<td>Gene Ontology Causal Activity Models</td>
+</tr>
+<tr>
+<td>phenopackets</td>
+<td>Agent</td>
+<td>Working with phenotype data in Phenopacket format</td>
+</tr>
+<tr>
+<td>robot</td>
+<td>Agent</td>
+<td>Ontology manipulation with ROBOT</td>
+</tr>
+<tr>
+<td>amigo</td>
+<td>Agent</td>
+<td>Gene Ontology and gene associations</td>
+</tr>
+<tr>
+<td>uniprot</td>
+<td>Agent</td>
+<td>UniProt protein information</td>
+</tr>
+<tr>
+<td>memory</td>
+<td>Utility</td>
+<td>Persistent memory for MCP interactions</td>
+</tr>
+</tbody>
+</table>
+<h3 id="configuration-parameters">Configuration Parameters</h3>
+<h4 id="common-parameters-for-agent-servers">Common Parameters for Agent Servers</h4>
+<ul>
+<li><code>type</code>: The agent type (e.g., "linkml", "gocam")</li>
+<li><code>workdir</code>: Directory for the agent to store files (default: <code>/tmp/{agent_type}</code>)</li>
+<li><code>python_path</code>: Path to Python executable (default: <code>/usr/bin/python</code>)</li>
+<li><code>email</code>: Email address for services that require it (optional)</li>
+<li><code>doi_urls</code>: DOI URL pattern for literature-related agents (optional)</li>
+<li><code>env</code>: Additional environment variables (optional)</li>
+</ul>
+<h4 id="memory-server-parameters">Memory Server Parameters</h4>
+<ul>
+<li><code>type</code>: Always "memory"</li>
+<li><code>memory_path</code>: Path to store memory file (default: <code>~/.mcp/memory.json</code>)</li>
+</ul>
+<h4 id="custom-server-parameters">Custom Server Parameters</h4>
+<ul>
+<li><code>type</code>: "custom"</li>
+<li><code>command</code>: Executable command</li>
+<li><code>args</code>: List of command arguments</li>
+<li><code>env</code>: Environment variables dictionary</li>
+</ul>
+<h2 id="running-mcp-with-claude">Running MCP with Claude</h2>
+<ol>
+<li>Install the MCP CLI:</li>
+</ol>
+<div class="highlight"><pre><span></span><code>npm<span class="w"> </span>install<span class="w"> </span>-g<span class="w"> </span>@modelcontextprotocol/cli
 </code></pre></div>
-<h2 id="aria">aria</h2>
-<p>Start the Checklist UI (deprecated, use 'checklist' instead).</p>
-<p><strong>Usage:</strong></p>
-<div class="highlight"><pre><span></span><code>main aria [OPTIONS]
+<ol>
+<li>Start the MCP servers:</li>
+</ol>
+<div class="highlight"><pre><span></span><code>mcp<span class="w"> </span>start<span class="w"> </span>--config<span class="w"> </span>mcp-config.json
 </code></pre></div>
-<p><strong>Options:</strong></p>
-<div class="highlight"><pre><span></span><code>  -m, --model TEXT           The model to use for the agent.
-  --share / --no-share       Share the agent GradIO chat via URL.  [default:
-                             no-share]
-  -p, --server-port INTEGER  The port to run the gradio server on.  [default:
-                             7860]
-  --help                     Show this message and exit.
-</code></pre></div>
-<h2 id="biblio">biblio</h2>
-<p>Start the Biblio Agent for working with bibliographic data.</p>
-<p>The Biblio Agent helps organize and search bibliographic data and citations. 
-It provides tools for searching a bibliography database, retrieving scientific 
-publications, and accessing web content.</p>
-<p>If a query is provided, it will be run directly; otherwise, the chat interface will be launched.</p>
-<p><strong>Usage:</strong></p>
-<div class="highlight"><pre><span></span><code>main biblio [OPTIONS] [QUERY]...
-</code></pre></div>
-<p><strong>Options:</strong></p>
-<div class="highlight"><pre><span></span><code>  -m, --model TEXT           The model to use for the agent.
-  --share / --no-share       Share the agent GradIO chat via URL.  [default:
-                             no-share]
-  -p, --server-port INTEGER  The port to run the gradio server on.  [default:
-                             7860]
-  --help                     Show this message and exit.
-</code></pre></div>
-<h2 id="checklist">checklist</h2>
-<p>Start the Checklist Agent for paper evaluation.</p>
-<p>The Checklist Agent evaluates scientific papers against established checklists 
-such as STREAMS, STORMS, and ARRIVE. It helps ensure that papers conform to 
-relevant reporting guidelines and best practices.</p>
-<p>If a query is provided, it will be run directly; otherwise, the chat interface will be launched.</p>
-<p><strong>Usage:</strong></p>
-<div class="highlight"><pre><span></span><code>main checklist [OPTIONS] [QUERY]...
-</code></pre></div>
-<p><strong>Options:</strong></p>
-<div class="highlight"><pre><span></span><code>  -m, --model TEXT           The model to use for the agent.
-  -w, --workdir TEXT         The working directory for the agent.  [default:
-                             workdir]
-  --share / --no-share       Share the agent GradIO chat via URL.  [default:
-                             no-share]
-  -p, --server-port INTEGER  The port to run the gradio server on.  [default:
-                             7860]
-  --help                     Show this message and exit.
-</code></pre></div>
-<h2 id="chemistry">chemistry</h2>
-<p>Start the Chemistry Agent for working with chemical structures.</p>
-<p><strong>Usage:</strong></p>
-<div class="highlight"><pre><span></span><code>main chemistry [OPTIONS]
-</code></pre></div>
-<p><strong>Options:</strong></p>
-<div class="highlight"><pre><span></span><code>  -m, --model TEXT           The model to use for the agent.
-  -w, --workdir TEXT         The working directory for the agent.  [default:
-                             workdir]
-  --share / --no-share       Share the agent GradIO chat via URL.  [default:
-                             no-share]
-  -p, --server-port INTEGER  The port to run the gradio server on.  [default:
-                             7860]
-  --help                     Show this message and exit.
-</code></pre></div>
-<h2 id="datasheets">datasheets</h2>
-<p>Start the Datasheets for Datasets Agent.</p>
-<p>The D4D Agent (Datasheets for Datasets) extracts structured metadata from dataset 
-documentation according to the Datasheets for Datasets schema. It can analyze 
-both web pages and PDF documents describing datasets and generate standardized 
-YAML metadata.</p>
-<p>If a URL is provided, it will be processed directly; otherwise, the chat interface will be launched.</p>
-<p><strong>Usage:</strong></p>
-<div class="highlight"><pre><span></span><code>main datasheets [OPTIONS] [URL]
-</code></pre></div>
-<p><strong>Options:</strong></p>
-<div class="highlight"><pre><span></span><code>  -m, --model TEXT           The model to use for the agent.
-  --share / --no-share       Share the agent GradIO chat via URL.  [default:
-                             no-share]
-  -p, --server-port INTEGER  The port to run the gradio server on.  [default:
-                             7860]
-  --help                     Show this message and exit.
-</code></pre></div>
-<h2 id="diagnosis">diagnosis</h2>
-<p>Start the Diagnosis agent for rare disease diagnosis.</p>
-<p>The Diagnosis agent assists in diagnosing rare diseases by leveraging the 
-Monarch Knowledge Base. It helps clinical geneticists evaluate potential 
-conditions based on patient phenotypes.</p>
-<p>If a query is provided, it will be run directly; otherwise, the chat interface will be launched.</p>
-<p><strong>Usage:</strong></p>
-<div class="highlight"><pre><span></span><code>main diagnosis [OPTIONS] [QUERY]...
-</code></pre></div>
-<p><strong>Options:</strong></p>
-<div class="highlight"><pre><span></span><code>  -m, --model TEXT           The model to use for the agent.
-  --share / --no-share       Share the agent GradIO chat via URL.  [default:
-                             no-share]
-  -p, --server-port INTEGER  The port to run the gradio server on.  [default:
-                             7860]
-  --help                     Show this message and exit.
-</code></pre></div>
-<h2 id="fulltext">fulltext</h2>
-<p>Download full text.</p>
-<p><strong>Usage:</strong></p>
-<div class="highlight"><pre><span></span><code>main fulltext [OPTIONS] PMID
-</code></pre></div>
-<p><strong>Options:</strong></p>
-<div class="highlight"><pre><span></span><code>  --help  Show this message and exit.
-</code></pre></div>
-<h2 id="gocam">gocam</h2>
-<p>Start the GO-CAM Chat UI.</p>
-<p><strong>Usage:</strong></p>
-<div class="highlight"><pre><span></span><code>main gocam [OPTIONS]
-</code></pre></div>
-<p><strong>Options:</strong></p>
-<div class="highlight"><pre><span></span><code>  -m, --model TEXT           The model to use for the agent.
-  --share / --no-share       Share the agent GradIO chat via URL.  [default:
-                             no-share]
-  -p, --server-port INTEGER  The port to run the gradio server on.  [default:
-                             7860]
-  --help                     Show this message and exit.
-</code></pre></div>
-<h2 id="gocam-ui">gocam-ui</h2>
-<p>Start the GO-CAM UI (non-chat interface).</p>
-<p><strong>Usage:</strong></p>
-<div class="highlight"><pre><span></span><code>main gocam-ui [OPTIONS]
-</code></pre></div>
-<p><strong>Options:</strong></p>
-<div class="highlight"><pre><span></span><code>  --help  Show this message and exit.
-</code></pre></div>
-<h2 id="linkml">linkml</h2>
-<p>Start the LinkML agent.</p>
-<p><strong>Usage:</strong></p>
-<div class="highlight"><pre><span></span><code>main linkml [OPTIONS]
-</code></pre></div>
-<p><strong>Options:</strong></p>
-<div class="highlight"><pre><span></span><code>  -m, --model TEXT           The model to use for the agent.
-  -w, --workdir TEXT         The working directory for the agent.  [default:
-                             workdir]
-  --share / --no-share       Share the agent GradIO chat via URL.  [default:
-                             no-share]
-  -p, --server-port INTEGER  The port to run the gradio server on.  [default:
-                             7860]
-  --help                     Show this message and exit.
-</code></pre></div>
-<h2 id="literature">literature</h2>
-<p>Start the Literature Agent for working with scientific publications.</p>
-<p><strong>Usage:</strong></p>
-<div class="highlight"><pre><span></span><code>main literature [OPTIONS]
-</code></pre></div>
-<p><strong>Options:</strong></p>
-<div class="highlight"><pre><span></span><code>  -m, --model TEXT           The model to use for the agent.
-  --share / --no-share       Share the agent GradIO chat via URL.  [default:
-                             no-share]
-  -p, --server-port INTEGER  The port to run the gradio server on.  [default:
-                             7860]
-  --help                     Show this message and exit.
-</code></pre></div>
-<h2 id="mapper">mapper</h2>
-<p>Start the Ontology Mapper agent.</p>
-<p><strong>Usage:</strong></p>
-<div class="highlight"><pre><span></span><code>main mapper [OPTIONS] [QUERY]...
-</code></pre></div>
-<p><strong>Options:</strong></p>
-<div class="highlight"><pre><span></span><code>  -m, --model TEXT           The model to use for the agent.
-  --share / --no-share       Share the agent GradIO chat via URL.  [default:
-                             no-share]
-  -p, --server-port INTEGER  The port to run the gradio server on.  [default:
-                             7860]
-  -i, --ontologies TEXT      Comma-separated list of ontologies to use for the
-                             agent.
-  --help                     Show this message and exit.
-</code></pre></div>
-<h2 id="monarch">monarch</h2>
-<p>Start the Monarch Agent for biomedical knowledge exploration.</p>
-<p>The Monarch Agent provides access to relationships between genes, diseases, 
-phenotypes, and other biomedical entities through the Monarch Knowledge Base.</p>
-<p>If a query is provided, it will be run directly; otherwise, the chat interface will be launched.</p>
-<p><strong>Usage:</strong></p>
-<div class="highlight"><pre><span></span><code>main monarch [OPTIONS] [QUERY]...
-</code></pre></div>
-<p><strong>Options:</strong></p>
-<div class="highlight"><pre><span></span><code>  -m, --model TEXT           The model to use for the agent.
-  --share / --no-share       Share the agent GradIO chat via URL.  [default:
-                             no-share]
-  -p, --server-port INTEGER  The port to run the gradio server on.  [default:
-                             7860]
-  --help                     Show this message and exit.
-</code></pre></div>
-<h2 id="phenopackets">phenopackets</h2>
-<p>Start the Phenopackets Agent for exploring phenopacket databases.</p>
-<p><strong>Usage:</strong></p>
-<div class="highlight"><pre><span></span><code>main phenopackets [OPTIONS]
-</code></pre></div>
-<p><strong>Options:</strong></p>
-<div class="highlight"><pre><span></span><code>  -m, --model TEXT           The model to use for the agent.
-  --share / --no-share       Share the agent GradIO chat via URL.  [default:
-                             no-share]
-  -p, --server-port INTEGER  The port to run the gradio server on.  [default:
-                             7860]
-  --help                     Show this message and exit.
-</code></pre></div>
-<h2 id="rag">rag</h2>
-<p>Start the RAG Agent for document retrieval and generation.</p>
-<p>The RAG (Retrieval-Augmented Generation) Agent provides a natural language 
-interface for exploring and searching document collections. It uses RAG 
-techniques to combine search capabilities with generative AI to produce 
-relevant, context-aware responses based on document content.</p>
-<p>If a query is provided, it will be run directly; otherwise, the chat interface will be launched.</p>
-<p><strong>Usage:</strong></p>
-<div class="highlight"><pre><span></span><code>main rag [OPTIONS] [QUERY]...
-</code></pre></div>
-<p><strong>Options:</strong></p>
-<div class="highlight"><pre><span></span><code>  -m, --model TEXT            The model to use for the agent.
-  --share / --no-share        Share the agent GradIO chat via URL.  [default:
-                              no-share]
-  -d, --db-path TEXT          The path to the database.
-  -c, --collection-name TEXT  The name of the collection.
-  -p, --server-port INTEGER   The port to run the gradio server on.  [default:
-                              7860]
-  --help                      Show this message and exit.
-</code></pre></div>
-<h2 id="robot">robot</h2>
-<p>Start the robot ontology agent.</p>
-<p><strong>Usage:</strong></p>
-<div class="highlight"><pre><span></span><code>main robot [OPTIONS]
-</code></pre></div>
-<p><strong>Options:</strong></p>
-<div class="highlight"><pre><span></span><code>  -m, --model TEXT           The model to use for the agent.
-  -w, --workdir TEXT         The working directory for the agent.  [default:
-                             workdir]
-  --share / --no-share       Share the agent GradIO chat via URL.  [default:
-                             no-share]
-  -p, --server-port INTEGER  The port to run the gradio server on.  [default:
-                             7860]
-  --help                     Show this message and exit.
-</code></pre></div>
-<h2 id="search-ontology">search-ontology</h2>
-<p>Search the ontology for the given query term.</p>
-<p>Also has side effect of indexing. You may want to pre-index before
-starting an individual UI.</p>
-<p><strong>Usage:</strong></p>
-<div class="highlight"><pre><span></span><code>main search-ontology [OPTIONS] ONTOLOGY TERM
-</code></pre></div>
-<p><strong>Options:</strong></p>
-<div class="highlight"><pre><span></span><code>  -l, --limit INTEGER  Number of results to return.  [default: 10]
-  --help               Show this message and exit.
-</code></pre></div>
-<h2 id="ubergraph">ubergraph</h2>
-<p>Start the UberGraph Agent for SPARQL-based ontology queries.</p>
-<p>The UberGraph Agent provides a natural language interface to query ontologies 
-using SPARQL through the UberGraph endpoint. It helps users formulate and execute
-SPARQL queries without needing to know the full SPARQL syntax.</p>
-<p>If a query is provided, it will be run directly; otherwise, the chat interface will be launched.</p>
-<p><strong>Usage:</strong></p>
-<div class="highlight"><pre><span></span><code>main ubergraph [OPTIONS] [QUERY]...
-</code></pre></div>
-<p><strong>Options:</strong></p>
-<div class="highlight"><pre><span></span><code>  -m, --model TEXT           The model to use for the agent.
-  --share / --no-share       Share the agent GradIO chat via URL.  [default:
-                             no-share]
-  -p, --server-port INTEGER  The port to run the gradio server on.  [default:
-                             7860]
-  --help                     Show this message and exit.
-</code></pre></div>
+<ol>
+<li>
+<p>Open Claude and ensure MCP is enabled in settings</p>
+</li>
+<li>
+<p>In Claude, you can now interact with your Aurelian agents through MCP</p>
+</li>
+</ol>
+<h2 id="example-use-cases">Example Use Cases</h2>
+<ul>
+<li><strong>LinkML Validation</strong>: Use Claude to validate data against LinkML schemas</li>
+<li><strong>Ontology Management</strong>: Create and manipulate ontologies through natural language</li>
+<li><strong>Gene Association Analysis</strong>: Ask questions about gene functions and associations</li>
+<li><strong>Phenotype Analysis</strong>: Work with structured phenotype data</li>
+</ul>
+<h2 id="troubleshooting">Troubleshooting</h2>
+<ul>
+<li>Ensure the correct Python environment is activated for each server</li>
+<li>Check server logs for errors by running <code>mcp logs</code></li>
+<li>Verify paths in your configuration are correct and accessible</li>
+<li>Ensure required environment variables are set properly</li>
+</ul>
 
 
 
