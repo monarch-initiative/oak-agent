@@ -49,7 +49,7 @@ class MCPConfigGenerator:
                 }
             elif server_type in ["linkml", "gocam", "phenopackets", "robot", "amigo", "uniprot"]:
                 # Aurelian agent MCP server
-                agent_script = f"/src/aurelian/agents/{server_type}/{server_type}_mcp.py"
+                agent_script = f"src/aurelian/agents/{server_type}/{server_type}_mcp.py"
                 workdir = server_config.get("workdir", f"/tmp/{server_type}")
 
                 # Construct environment variables
