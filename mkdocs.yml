@@ -62,6 +62,7 @@ nav:
       - uniprot_agent: agents/uniprot_agent.md
 
   - Command Line: cli.md
+  - MCP Integration: mcp.md
   - Test Results: test_results.md
   - Examples:
       - Chemistry: examples/Terpenoids.ipynb
