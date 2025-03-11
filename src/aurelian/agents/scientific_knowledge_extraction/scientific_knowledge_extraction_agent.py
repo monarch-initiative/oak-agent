@@ -1,7 +1,6 @@
 """Scientific Knowledge Extraction Agent for extracting structured knowledge from scientific papers."""
 
-from pydantic_ai import Agent, Tool, RunContext, ModelRetry, ModelRetryAllowed
-from pydantic_ai.models import OpenAI
+from pydantic_ai import Agent, Tool
 
 from aurelian.agents.scientific_knowledge_extraction.scientific_knowledge_extraction_config import ScientificKnowledgeExtractionDependencies
 from aurelian.agents.scientific_knowledge_extraction.scientific_knowledge_extraction_tools import (
@@ -64,10 +63,9 @@ Always maintain complete provenance tracking for all extracted assertions, ensur
 
 # Create the agent
 scientific_knowledge_extraction_agent = Agent(
-    name="Scientific Knowledge Extraction Agent",
-    model=OpenAI(model="gpt-4o"),
+    model="openai:gpt-4o",
+    deps_type=ScientificKnowledgeExtractionDependencies,
     system_prompt=SYSTEM_PROMPT,
-    dependencies=ScientificKnowledgeExtractionDependencies,
     tools=[
         Tool(list_pdf_files),
         Tool(get_pdf_content),
@@ -82,42 +80,11 @@ scientific_knowledge_extraction_agent = Agent(
 )
 
 
-# If this file is run directly, create a simple CLI for the agent
+# Simple test function to verify the agent imports properly
+def test_agent():
+    print("Scientific Knowledge Extraction Agent imported successfully")
+    return scientific_knowledge_extraction_agent
+    
+# If this file is run directly, execute the test function
 if __name__ == "__main__":
-    import asyncio
-    import argparse
-    from pydantic_ai.chat import ChatMessage
-    
-    parser = argparse.ArgumentParser(description="Scientific Knowledge Extraction Agent CLI")
-    parser.add_argument("--pdf_directory", required=True, help="Directory containing PDF files")
-    parser.add_argument("--cache_directory", help="Directory for caching results")
-    parser.add_argument("--max_pdfs", type=int, default=0, help="Maximum number of PDFs to process (0 = no limit)")
-    args = parser.parse_args()
-    
-    async def run_agent():
-        # Create dependencies
-        deps = ScientificKnowledgeExtractionDependencies(
-            pdf_directory=args.pdf_directory,
-            cache_directory=args.cache_directory,
-            max_pdfs=args.max_pdfs
-        )
-        
-        # Run agent in interactive mode
-        print(f"Scientific Knowledge Extraction Agent is ready. PDF directory: {args.pdf_directory}")
-        print("Type 'exit' to quit.")
-        
-        while True:
-            user_input = input("\nYou: ")
-            if user_input.lower() == "exit":
-                break
-            
-            try:
-                response = await scientific_knowledge_extraction_agent.chat(
-                    messages=[ChatMessage(role="user", content=user_input)],
-                    dependencies=deps
-                )
-                print(f"\nAgent: {response.content}")
-            except Exception as e:
-                print(f"\nError: {str(e)}")
-    
-    asyncio.run(run_agent())
+    test_agent()

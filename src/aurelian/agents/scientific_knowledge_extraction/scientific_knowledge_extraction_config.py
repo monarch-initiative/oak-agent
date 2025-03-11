@@ -15,7 +15,7 @@ class ScientificKnowledgeExtractionDependencies(HasWorkdir):
     """Dependencies for the Scientific Knowledge Extraction Agent."""
     
     # Directory containing the PDF files to be processed
-    pdf_directory: str
+    pdf_directory: str = "."
     
     # Directory for caching processed files and results
     cache_directory: Optional[str] = None
@@ -31,11 +31,9 @@ class ScientificKnowledgeExtractionDependencies(HasWorkdir):
     
     def __post_init__(self):
         """Initialize cache if cache_directory is provided."""
-        super().__post_init__()
-        
         # If no cache directory is specified, create a default one
         if not self.cache_directory:
-            self.cache_directory = os.path.join(self.workdir, ".scientific_knowledge_cache")
+            self.cache_directory = os.path.join(str(self.workdir.location), ".scientific_knowledge_cache")
         
         # Ensure cache directory exists
         os.makedirs(self.cache_directory, exist_ok=True)
