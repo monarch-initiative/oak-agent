@@ -44,3 +44,8 @@ def test_agent_direct_query_mode():
     result = runner.invoke(main, ["diagnosis", "--help"])
     assert result.exit_code == 0
     assert "Run with a query for direct mode" in result.output
+    
+    # Test AmiGO specifically since we just fixed it
+    result = runner.invoke(main, ["amigo", "--help"])
+    assert result.exit_code == 0
+    assert "Run with a query for direct mode" in result.output
