@@ -26,6 +26,11 @@
     "workdir": "/tmp/robot",
     "python_path": "/usr/bin/python"
   },
+  "diagnosis": {
+    "type": "diagnosis",
+    "workdir": "/tmp/diagnosis",
+    "python_path": "/usr/bin/python"
+  },
   "custom_server": {
     "type": "custom",
     "command": "/path/to/executable",

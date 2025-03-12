@@ -90,6 +90,7 @@ Aurelian provides the following MCP servers:
 | robot         | Agent         | Ontology manipulation with ROBOT                   |
 | amigo         | Agent         | Gene Ontology and gene associations                |
 | uniprot       | Agent         | UniProt protein information                        |
+| diagnosis     | Agent         | Disease diagnosis with Monarch Knowledge Graph     |
 | memory        | Utility       | Persistent memory for MCP interactions             |
 
 ### Configuration Parameters
