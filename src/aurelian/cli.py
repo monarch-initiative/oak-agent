@@ -554,7 +554,26 @@ def scientific_knowledge(pdf_dir, cache_dir, **kwargs):
 @click.option("--cache-dir", "-c", help="The directory to use for caching extracted knowledge")
 def ske_alias(pdf_dir, cache_dir, **kwargs):
     """Alias for scientific_knowledge - Scientific Knowledge Extraction Agent UI."""
-    return scientific_knowledge(pdf_dir, cache_dir, **kwargs)
+    # Instead of calling scientific_knowledge directly, implement the same functionality here
+    from aurelian.agents.scientific_knowledge_extraction.scientific_knowledge_extraction_gradio import create_demo
+    from aurelian.agents.scientific_knowledge_extraction.scientific_knowledge_extraction_config import ScientificKnowledgeExtractionDependencies
+    
+    agent_options, launch_options = split_options(kwargs)
+    
+    # Create the Gradio demo
+    demo = create_demo()
+    
+    # If PDF directory was provided, set it up first
+    if pdf_dir:
+        # Import setup_directories function for initialization
+        from aurelian.agents.scientific_knowledge_extraction.scientific_knowledge_extraction_gradio import setup_directories
+        
+        # Initialize the PDF directory before starting the UI
+        setup_result = setup_directories(pdf_dir, cache_dir)
+        print(f"Scientific Knowledge Extraction Agent: {setup_result}")
+    
+    # Launch with the appropriate options
+    demo.launch(**launch_options)
 
 
 # DO NOT REMOVE THIS LINE
