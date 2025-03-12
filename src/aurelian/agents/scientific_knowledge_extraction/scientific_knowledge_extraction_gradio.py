@@ -8,13 +8,14 @@ import gradio as gr
 import pandas as pd
 from typing import Dict, List, Optional, Tuple
 
-from pydantic_ai.chat import ChatMessage
-
+# Importing only the agent, will use dict for messages
 from aurelian.agents.scientific_knowledge_extraction.scientific_knowledge_extraction_agent import scientific_knowledge_extraction_agent
 from aurelian.agents.scientific_knowledge_extraction.scientific_knowledge_extraction_config import ScientificKnowledgeExtractionDependencies
 from aurelian.agents.scientific_knowledge_extraction.scientific_knowledge_extraction_tools import (
     map_all_assertions_to_ontology,
-    export_assertions_as_rdf
+    export_assertions_as_rdf,
+    process_all_unprocessed_pdfs,
+    get_extracted_knowledge
 )
 
 # Global state for the Gradio app
@@ -40,22 +41,27 @@ async def chat_with_agent(message: str, history: List[List[str]]) -> List[List[s
     # Process with agent
     try:
         response = await scientific_knowledge_extraction_agent.chat(
-            messages=[ChatMessage(role="user", content=message)],
+            messages=[{"role": "user", "content": message}],
             dependencies=state.dependencies
         )
         
         # Add agent response to history
         state.history.append(["Agent", response.content])
         
-        # Convert history to Gradio format
-        gradio_history = [[user, assistant] for user, assistant in zip(
-            [h[1] for h in state.history if h[0] == "User"],
-            [h[1] for h in state.history if h[0] == "Agent"]
-        )]
+        # Convert history to Gradio messages format
+        gradio_history = []
+        for i in range(0, len(state.history), 2):
+            if i+1 < len(state.history):
+                user_msg = state.history[i][1]
+                agent_msg = state.history[i+1][1]
+                gradio_history.append({"role": "user", "content": user_msg})
+                gradio_history.append({"role": "assistant", "content": agent_msg})
         
         return gradio_history, ""
     except Exception as e:
-        return [[message, f"Error: {str(e)}"] for message, _ in history], str(e)
+        # Format the error as messages
+        error_msg = f"Error: {str(e)}"
+        return [{"role": "user", "content": message}, {"role": "assistant", "content": error_msg}], error_msg
 
 
 def setup_directories(pdf_dir: str, cache_dir: Optional[str] = None) -> str:
@@ -112,8 +118,15 @@ async def process_all_pdfs() -> str:
         return "Please set up the PDF directory first."
     
     try:
+        # Create a RunContext for the tools
+        class RunContext:
+            def __init__(self, deps):
+                self.dependencies = deps
+                
+        ctx = RunContext(state.dependencies)
+        
         # Use the agent's tool to process all PDFs
-        result = await process_all_unprocessed_pdfs(state.dependencies)
+        result = await process_all_unprocessed_pdfs(ctx)
         
         # Update the PDF list
         for pdf in state.current_pdfs:
@@ -141,8 +154,15 @@ async def get_knowledge(include_ontology: bool = False) -> pd.DataFrame:
         return pd.DataFrame(columns=["Subject", "Predicate", "Object", "Evidence", "Paper"])
     
     try:
+        # Create RunContext
+        class RunContext:
+            def __init__(self, deps):
+                self.dependencies = deps
+                
+        ctx = RunContext(state.dependencies)
+        
         # Use the agent's tool to get all knowledge
-        knowledge = await get_extracted_knowledge(state.dependencies)
+        knowledge = await get_extracted_knowledge(ctx)
         state.extracted_knowledge = knowledge
         
         if not knowledge:
@@ -191,8 +211,15 @@ async def map_ontologies() -> Dict:
         return {"status": "error", "message": "Please set up the PDF directory first."}
     
     try:
+        # Create RunContext
+        class RunContext:
+            def __init__(self, deps):
+                self.dependencies = deps
+                
+        ctx = RunContext(state.dependencies)
+        
         # Use the agent's tool to map assertions to ontology terms
-        result = await map_all_assertions_to_ontology(state.dependencies)
+        result = await map_all_assertions_to_ontology(ctx)
         return result
     
     except Exception as e:
@@ -243,8 +270,15 @@ async def export_knowledge(format_type: str) -> Dict:
             df.to_csv(file_path, index=False)
             
         elif format_type == "rdf":
+            # Create RunContext
+            class RunContext:
+                def __init__(self, deps):
+                    self.dependencies = deps
+                    
+            ctx = RunContext(state.dependencies)
+            
             # Use the agent's tool to export as RDF
-            result = await export_assertions_as_rdf(state.dependencies, file_path)
+            result = await export_assertions_as_rdf(ctx, file_path)
             if result.get("status") != "success":
                 return result
         
@@ -341,7 +375,7 @@ def create_demo():
             export_button.click(fn=export_knowledge, inputs=[export_format], outputs=export_result)
         
         with gr.Tab("Chat"):
-            chatbot = gr.Chatbot()
+            chatbot = gr.Chatbot(type="messages")
             msg = gr.Textbox(label="Message")
             clear = gr.Button("Clear")
             chat_error = gr.Textbox(label="Error")
