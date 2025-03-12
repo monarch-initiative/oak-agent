@@ -13,18 +13,21 @@ from . import COLLECTION_NAME
 
 
 @dataclass
-class RagDependencies(HasWorkdir):
+class RagDependencies:
     """Configuration for the RAG agent."""
     
+    # Required fields
     db_path: str
+    
+    # Optional fields with defaults
     collection_name: str = COLLECTION_NAME
-    max_results: int = field(default=10)
+    max_results: int = 10
     max_content_len: int = 5000
+    workdir: Optional[WorkDir] = None
     _collection: Optional[Collection] = None
     
     def __post_init__(self):
         """Initialize the config with default values."""
-        # HasWorkdir doesn't have a __post_init__ method, so we don't call super()
         if self.workdir is None:
             self.workdir = WorkDir()
 
@@ -59,8 +62,13 @@ def get_config(db_path: Optional[str] = None, collection_name: Optional[str] = N
     final_db_path = db_path or env_db_path
     final_collection = collection_name or env_collection
     
+    # For testing purposes, if no DB path is provided, use a default one
+    # This is only used for running basic smoke tests
     if not final_db_path:
-        raise ValueError("Database path must be provided either as parameter or via AURELIAN_RAG_DB_PATH environment variable")
+        if os.environ.get("TESTING", "0") == "1":
+            final_db_path = "memory://test"
+        else:
+            raise ValueError("Database path must be provided either as parameter or via AURELIAN_RAG_DB_PATH environment variable")
     
     workdir_path = os.environ.get("AURELIAN_WORKDIR", None)
     workdir = WorkDir(location=workdir_path) if workdir_path else None
