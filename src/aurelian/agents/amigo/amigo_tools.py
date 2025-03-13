@@ -6,7 +6,7 @@ from typing import List, Dict
 from pydantic_ai import RunContext, ModelRetry
 
 from aurelian.agents.amigo.amigo_config import AmiGODependencies, normalize_pmid
-from aurelian.agents.uniprot_agent import normalize_uniprot_id
+from aurelian.agents.uniprot.uniprot_tools import normalize_uniprot_id
 from aurelian.utils.data_utils import obj_to_dict
 
 from oaklib.datamodels.association import Association, NegatedAssociation

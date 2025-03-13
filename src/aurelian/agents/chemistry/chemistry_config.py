@@ -59,3 +59,13 @@ class ChemistryDependencies(HasWorkdir):
     Configuration for the chemistry agent.
     """
     max_search_results: int = 30
+
+
+def get_config() -> ChemistryDependencies:
+    """
+    Get the Chemistry agent configuration.
+    
+    Returns:
+        ChemistryDependencies: The chemistry dependencies
+    """
+    return ChemistryDependencies()

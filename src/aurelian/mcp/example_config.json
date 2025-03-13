@@ -1,0 +1,43 @@
+{
+  "memory": {
+    "type": "memory",
+    "memory_path": "~/.mcp/memory.json"
+  },
+  "linkml": {
+    "type": "linkml",
+    "workdir": "/tmp/linkml",
+    "python_path": "/usr/bin/python"
+  },
+  "gocam": {
+    "type": "gocam",
+    "workdir": "/tmp/gocam",
+    "email": "user@example.com",
+    "doi_urls": "https://example.com/doi-resolver",
+    "python_path": "/usr/bin/python"
+  },
+  "phenopackets": {
+    "type": "phenopackets",
+    "workdir": "/tmp/phenopackets",
+    "email": "user@example.com",
+    "python_path": "/usr/bin/python"
+  },
+  "robot": {
+    "type": "robot",
+    "workdir": "/tmp/robot",
+    "python_path": "/usr/bin/python"
+  },
+  "diagnosis": {
+    "type": "diagnosis",
+    "workdir": "/tmp/diagnosis",
+    "python_path": "/usr/bin/python"
+  },
+  "custom_server": {
+    "type": "custom",
+    "command": "/path/to/executable",
+    "args": ["arg1", "arg2"],
+    "env": {
+      "ENV_VAR1": "value1",
+      "ENV_VAR2": "value2"
+    }
+  }
+}

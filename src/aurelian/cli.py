@@ -1,4 +1,4 @@
-"""Command line interface for ubergraph-agent."""
+"""Command line interface for Aurelian agents."""
 
 import logging
 from typing import Optional, List
@@ -15,11 +15,13 @@ logger = logging.getLogger(__name__)
 
 
 def parse_multivalued(ctx, param, value: Optional[str]) -> Optional[List]:
+    """Parse a comma-separated string into a list."""
     if not value:
         return None
     return value.split(',') if isinstance(value, str) and ',' in value else [value]
 
 
+# Common CLI options
 model_option = click.option(
     "--model",
     "-m",
@@ -36,7 +38,13 @@ share_option = click.option(
     "--share/--no-share",
     default=False,
     show_default=True,
-    help="Share the agent GradIO chat via URL.",
+    help="Share the agent GradIO UI via URL.",
+)
+ui_option = click.option(
+    "--ui/--no-ui",
+    default=False,
+    show_default=True,
+    help="Start the agent in UI mode instead of direct query mode.",
 )
 ontologies_option = click.option(
     "--ontologies",
@@ -49,7 +57,7 @@ server_port_option = click.option(
     "-p",
     default=7860,
     show_default=True,
-    help="The port to run the gradio server on.",
+    help="The port to run the UI server on.",
 )
 db_path_option = click.option(
     "--db-path",
@@ -70,13 +78,13 @@ collection_name_option = click.option(
 def main(verbose: int, quiet: bool):
     """Main command for Aurelian.
 
-    THIS CLI MAY CHANGE.
-
-    Currently there are multiple sub-commands,
-    each of which starts a UI for an agent.
-
-    However, there are a few other utility commands,
-    e.g. for indexing an ontology or downloading a PMID
+    Aurelian provides a collection of specialized agents for various scientific and biomedical tasks.
+    Each agent can be run in either direct query mode or UI mode:
+    
+    - Direct query mode: Run the agent with a query (e.g., `aurelian diagnosis "patient with hypotonia"`).
+    - UI mode: Run the agent with `--ui` flag to start a chat interface.
+    
+    Some agents also provide utility commands for specific operations.
 
     :param verbose: Verbosity while running.
     :param quiet: Boolean to be quiet or verbose.
@@ -105,18 +113,60 @@ def split_options(kwargs, agent_keys: Optional[List]=None, extra_agent_keys: Opt
     return agent_options, launch_options
 
 
-def split_options3(kwargs, agent_keys: Optional[List]=None, extra_agent_keys: Optional[List] = None, launch_keys: Optional[List] = None):
-    """Split options into deps, agent, and agent options."""
-    if launch_keys is None:
-        launch_keys = ["server_port", "share"]
-    if agent_keys is None:
-        agent_keys = ["model"]
-    if extra_agent_keys is not None:
-        agent_keys += extra_agent_keys
-    agent_options = {k: v for k, v in kwargs.items() if k in agent_keys}
-    launch_options = {k: v for k, v in kwargs.items() if k in launch_keys}
-    deps_options = {k: v for k, v in kwargs.items() if k not in agent_keys and k not in launch_keys}
-    return deps_options, agent_options, launch_options
+def run_agent(
+    agent_name: str, 
+    agent_module: str, 
+    query: Optional[tuple] = None, 
+    ui: bool = False, 
+    agent_func_name: str = "run_sync",
+    join_char: str = " ",
+    **kwargs
+) -> None:
+    """Run an agent in either UI or direct query mode.
+    
+    Args:
+        agent_name: Agent's name for import paths
+        agent_module: Fully qualified module path to the agent
+        query: Text query for direct mode
+        ui: Whether to force UI mode
+        agent_func_name: Name of the function to run the agent
+        join_char: Character to join multi-part queries with
+        kwargs: Additional arguments for the agent
+    """
+    # Import required modules
+    # These are imported dynamically to avoid loading all agents on startup
+    gradio_module = __import__(f"aurelian.agents.{agent_name}.{agent_name}_gradio", fromlist=["chat"])
+    agent_class = __import__(f"aurelian.agents.{agent_name}.{agent_name}_agent", fromlist=[f"{agent_name}_agent"])
+    config_module = __import__(f"aurelian.agents.{agent_name}.{agent_name}_config", fromlist=["get_config"])
+    
+    chat_func = gradio_module.chat
+    agent = getattr(agent_class, f"{agent_name}_agent")
+    get_config = config_module.get_config
+    
+    # Process agent and UI options
+    agent_keys = ["model", "workdir", "ontologies", "db_path", "collection_name"]
+    agent_options, launch_options = split_options(kwargs, agent_keys=agent_keys)
+    
+    # Run in appropriate mode
+    if not ui and query:
+        # Direct query mode
+        deps = get_config()
+        
+        # Set workdir if provided
+        if 'workdir' in agent_options and agent_options['workdir']:
+            if hasattr(deps, 'workdir'):
+                deps.workdir.location = agent_options['workdir']
+        
+        # Remove workdir from agent options to avoid duplicates
+        agent_run_options = {k: v for k, v in agent_options.items() if k != 'workdir'}
+        
+        # Run the agent and print results
+        r = getattr(agent, agent_func_name)(join_char.join(query), deps=deps, **agent_run_options)
+        print(r.data)
+    else:
+        # UI mode
+        gradio_ui = chat_func(**agent_options)
+        gradio_ui.launch(**launch_options)
 
 
 @main.command()
@@ -150,56 +200,21 @@ def search_ontology(ontology: str, term: str, **kwargs):
 
 @main.command()
 @model_option
+@workdir_option
 @share_option
 @server_port_option
-def gocam(share: bool, server_port: Optional[int] = None, **kwargs):
-    """Start the GO-CAM Chat UI."""
-    from aurelian.agents.gocam.gocam_gradio import chat
+@ui_option
+@click.argument("query", nargs=-1, required=False)
+def gocam(ui, query, **kwargs):
+    """Start the GO-CAM Agent for gene ontology causal activity models.
     
-    agent_options, launch_options = split_options(kwargs)
-    ui = chat(**agent_options)
-    ui.launch(**launch_options)
-
-
-@main.command()
-@model_option
-@share_option
-@server_port_option
-def phenopackets(**kwargs):
-    """Start the Phenopackets Agent for exploring phenopacket databases."""
-    from aurelian.agents.phenopackets.phenopackets_gradio import chat
-    agent_options, launch_options = split_options(kwargs)
-    ui = chat(**agent_options)
-    ui.launch(**launch_options)
-
-
-@main.command()
-@model_option
-@share_option
-@server_port_option
-@click.argument("query", nargs=-1)
-def diagnosis(query, **kwargs):
-    """Start the Diagnosis agent for rare disease diagnosis.
+    The GO-CAM Agent helps create and analyze Gene Ontology Causal Activity Models,
+    which describe biological systems as molecular activities connected by causal 
+    relationships. 
     
-    The Diagnosis agent assists in diagnosing rare diseases by leveraging the 
-    Monarch Knowledge Base. It helps clinical geneticists evaluate potential 
-    conditions based on patient phenotypes.
-    
-    If a query is provided, it will be run directly; otherwise, the chat interface will be launched.
+    Run with a query for direct mode or with --ui for interactive chat mode.
     """
-    from aurelian.agents.diagnosis.diagnosis_gradio import chat
-    from aurelian.agents.diagnosis.diagnosis_agent import diagnosis_agent
-    from aurelian.agents.diagnosis.diagnosis_config import get_config
-    
-    agent_options, launch_options = split_options(kwargs)
-    
-    if query:
-        deps = get_config()
-        r = diagnosis_agent.run_sync(" ".join(query), deps=deps, **agent_options)
-        print(r.data)
-    else:
-        ui = chat(**agent_options)
-        ui.launch(**launch_options)
+    run_agent("gocam", "aurelian.agents.gocam", query=query, ui=ui, **kwargs)
 
 
 @main.command()
@@ -207,45 +222,86 @@ def diagnosis(query, **kwargs):
 @workdir_option
 @share_option
 @server_port_option
-@click.argument("query", nargs=-1)
-def checklist(query, **kwargs):
+@ui_option
+@click.argument("query", nargs=-1, required=False)
+def phenopackets(ui, query, **kwargs):
+    """Start the Phenopackets Agent for standardized phenotype data.
+    
+    The Phenopackets Agent helps work with GA4GH Phenopackets, a standard 
+    format for sharing disease and phenotype information for genomic 
+    medicine.
+    
+    Run with a query for direct mode or with --ui for interactive chat mode.
+    """
+    run_agent("phenopackets", "aurelian.agents.phenopackets", query=query, ui=ui, **kwargs)
+
+
+@main.command()
+@model_option
+@workdir_option
+@share_option
+@server_port_option
+@ui_option
+@click.argument("query", nargs=-1, required=False)
+def diagnosis(ui, query, **kwargs):
+    """Start the Diagnosis Agent for rare disease diagnosis.
+    
+    The Diagnosis Agent assists in diagnosing rare diseases by leveraging the 
+    Monarch Knowledge Base. It helps clinical geneticists evaluate potential 
+    conditions based on patient phenotypes.
+    
+    Run with a query for direct mode or with --ui for interactive chat mode.
+    """
+    run_agent("diagnosis", "aurelian.agents.diagnosis", query=query, ui=ui, **kwargs)
+
+
+@main.command()
+@model_option
+@workdir_option
+@share_option
+@server_port_option
+@ui_option
+@click.argument("query", nargs=-1, required=False)
+def checklist(ui, query, **kwargs):
     """Start the Checklist Agent for paper evaluation.
     
     The Checklist Agent evaluates scientific papers against established checklists 
     such as STREAMS, STORMS, and ARRIVE. It helps ensure that papers conform to 
     relevant reporting guidelines and best practices.
     
-    If a query is provided, it will be run directly; otherwise, the chat interface will be launched.
+    Run with a query for direct mode or with --ui for interactive chat mode.
     """
-    from aurelian.agents.checklist.checklist_gradio import chat
-    from aurelian.agents.checklist.checklist_agent import checklist_agent
-    from aurelian.agents.checklist.checklist_config import get_config
-    
-    agent_options, launch_options = split_options(kwargs)
-    
-    if query:
-        deps = get_config()
-        if 'workdir' in agent_options and agent_options['workdir']:
-            deps.workdir.location = agent_options['workdir']
-        r = checklist_agent.run_sync(" ".join(query), deps=deps, **{k: v for k, v in agent_options.items() if k != 'workdir'})
-        print(r.data)
-    else:
-        ui = chat(**agent_options)
-        ui.launch(**launch_options)
+    run_agent("checklist", "aurelian.agents.checklist", query=query, ui=ui, **kwargs)
 
 
 # Keep backward compatibility
 @main.command()
 @model_option
+@workdir_option
 @share_option
 @server_port_option
-def aria(share: bool, server_port: Optional[int] = None, **kwargs):
+def aria(**kwargs):
     """Start the Checklist UI (deprecated, use 'checklist' instead)."""
-    from aurelian.agents.checklist.checklist_gradio import chat
+    run_agent("checklist", "aurelian.agents.checklist", ui=True, **kwargs)
+
+
+@main.command()
+@model_option
+@workdir_option
+@share_option
+@server_port_option
+@ui_option
+@click.argument("query", nargs=-1, required=False)
+def linkml(ui, query, **kwargs):
+    """Start the LinkML Agent for data modeling and schema validation.
     
-    agent_options, launch_options = split_options(kwargs)
-    ui = chat(**agent_options)
-    ui.launch(**launch_options)
+    The LinkML Agent helps create and validate data models and schemas using the 
+    Linked data Modeling Language (LinkML). It can assist in generating schemas,
+    validating data against schemas, and modeling domain knowledge.
+    
+    Run with a query for direct mode or with --ui for interactive chat mode.
+    """
+    run_agent("linkml", "aurelian.agents.linkml", query=query, ui=ui, **kwargs)
 
 
 @main.command()
@@ -253,12 +309,18 @@ def aria(share: bool, server_port: Optional[int] = None, **kwargs):
 @workdir_option
 @share_option
 @server_port_option
-def linkml(**kwargs):
-    """Start the LinkML agent."""
-    import aurelian.agents.linkml.linkml_agent as agent
-    agent_options, launch_options = split_options(kwargs)
-    ui = agent.chat(**agent_options)
-    ui.launch(**launch_options)
+@ui_option
+@click.argument("query", nargs=-1, required=False)
+def robot(ui, query, **kwargs):
+    """Start the ROBOT Agent for ontology operations.
+    
+    The ROBOT Agent provides natural language access to ontology operations 
+    and manipulations using the ROBOT tool. It can create, modify, and analyze
+    ontologies through a chat interface.
+    
+    Run with a query for direct mode or with --ui for interactive chat mode.
+    """
+    run_agent("robot", "aurelian.agents.robot", query=query, ui=ui, agent_func_name="chat", **kwargs)
 
 
 @main.command()
@@ -266,128 +328,101 @@ def linkml(**kwargs):
 @workdir_option
 @share_option
 @server_port_option
-def robot(**kwargs):
-    """Start the robot ontology agent."""
-    import aurelian.agents.robot.robot_ontology_agent as agent
-    agent_options, launch_options = split_options(kwargs)
-    ui = agent.chat(**agent_options)
-    ui.launch(**launch_options)
+@ui_option
+@click.argument("query", nargs=-1, required=False)
+def amigo(ui, query, **kwargs):
+    """Start the AmiGO Agent for Gene Ontology data exploration.
+    
+    The AmiGO Agent provides access to the Gene Ontology (GO) and gene 
+    product annotations. It helps users explore gene functions and 
+    ontology relationships.
+    
+    Run with a query for direct mode or with --ui for interactive chat mode.
+    """
+    run_agent("amigo", "aurelian.agents.amigo", query=query, ui=ui, **kwargs)
 
 
 @main.command()
 @model_option
+@workdir_option
 @share_option
 @server_port_option
-def amigo(**kwargs):
-    """Start the AmiGO agent for working with Gene Ontology."""
-    from aurelian.agents.amigo.amigo_gradio import chat
-    agent_options, launch_options = split_options(kwargs)
-    ui = chat(**agent_options)
-    ui.launch(**launch_options)
-
-
-@main.command()
-@model_option
-@share_option
+@ui_option
 @db_path_option
 @collection_name_option
-@server_port_option
-@click.argument("query", nargs=-1)
-def rag(query, db_path, collection_name, **kwargs):
+@click.argument("query", nargs=-1, required=False)
+def rag(ui, query, db_path, collection_name, **kwargs):
     """Start the RAG Agent for document retrieval and generation.
     
     The RAG (Retrieval-Augmented Generation) Agent provides a natural language 
     interface for exploring and searching document collections. It uses RAG 
-    techniques to combine search capabilities with generative AI to produce 
-    relevant, context-aware responses based on document content.
+    techniques to combine search capabilities with generative AI.
     
-    If a query is provided, it will be run directly; otherwise, the chat interface will be launched.
+    Run with a query for direct mode or with --ui for interactive chat mode.
     """
-    from aurelian.agents.rag.rag_gradio import chat
-    from aurelian.agents.rag.rag_agent import rag_agent
-    from aurelian.agents.rag.rag_config import get_config
-    
-    agent_options, launch_options = split_options(kwargs)
-    
     if not db_path:
         click.echo("Error: --db-path is required")
         return
     
-    if query:
-        deps = get_config(db_path=db_path, collection_name=collection_name)
-        r = rag_agent.run_sync(" ".join(query), deps=deps, **agent_options)
-        print(r.data)
-    else:
-        ui = chat(db_path=db_path, collection_name=collection_name, **agent_options)
-        ui.launch(**launch_options)
+    # Add special parameters to kwargs
+    kwargs["db_path"] = db_path
+    if collection_name:
+        kwargs["collection_name"] = collection_name
+        
+    run_agent("rag", "aurelian.agents.rag", query=query, ui=ui, **kwargs)
+
 
 @main.command()
 @model_option
+@workdir_option
 @share_option
 @server_port_option
+@ui_option
 @ontologies_option
-@click.argument("query", nargs=-1)
-def mapper(query, ontologies, **kwargs):
-    """Start the Ontology Mapper agent."""
-    from aurelian.agents.ontology_mapper.ontology_mapper_agent import ontology_mapper_agent
-    from aurelian.agents.ontology_mapper.ontology_mapper_config import OntologyMapperDependencies, get_config
-    from aurelian.agents.ontology_mapper.ontology_mapper_gradio import chat
+@click.argument("query", nargs=-1, required=False)
+def mapper(ui, query, ontologies, **kwargs):
+    """Start the Ontology Mapper Agent for mapping between ontologies.
     
-    # Create appropriate dependencies
+    The Ontology Mapper Agent helps translate terms between different ontologies
+    and vocabularies. It can find equivalent concepts across ontologies and 
+    explain relationships.
+    
+    Run with a query for direct mode or with --ui for interactive chat mode.
+    """
+    # Special handling for ontologies parameter
     if ontologies:
         if isinstance(ontologies, str):
             ontologies = [ontologies]
-        deps = get_config(ontologies=ontologies)
-    else:
-        deps = get_config()
+        kwargs["ontologies"] = ontologies
         
-    deps_options, agent_options, launch_options = split_options3(kwargs)
-    
-    if query:
-        r = ontology_mapper_agent.run_sync("\n".join(query), deps=deps)
-        print(r.data)
-    else:
-        ui = chat(deps, **agent_options)
-        ui.launch(**launch_options)
+    run_agent("ontology_mapper", "aurelian.agents.ontology_mapper", query=query, ui=ui, join_char="\n", **kwargs)
 
 
 @main.command()
 @click.argument("pmid")
 def fulltext(pmid):
-    """Download full text."""
+    """Download full text for a PubMed article."""
     from aurelian.utils.pubmed_utils import get_pmid_text
     txt = get_pmid_text(pmid)
     print(txt)
 
 
 @main.command()
-@model_option
-@share_option
-@server_port_option
-@click.argument("url", required=False)
-def datasheets(url, **kwargs):
-    """Start the Datasheets for Datasets Agent.
-    
-    The D4D Agent (Datasheets for Datasets) extracts structured metadata from dataset 
-    documentation according to the Datasheets for Datasets schema. It can analyze 
-    both web pages and PDF documents describing datasets and generate standardized 
-    YAML metadata.
-    
-    If a URL is provided, it will be processed directly; otherwise, the chat interface will be launched.
-    """
-    from aurelian.agents.d4d.d4d_gradio import chat
-    from aurelian.agents.d4d.d4d_agent import data_sheets_agent
-    from aurelian.agents.d4d.d4d_config import get_config
-    
-    agent_options, launch_options = split_options(kwargs)
-    
-    if url:
-        deps = get_config()
-        r = data_sheets_agent.run_sync(url, deps=deps, **agent_options)
-        print(r.data)
-    else:
-        ui = chat(**agent_options)
-        ui.launch(**launch_options)
+@click.argument("term")
+def websearch(term):
+    """Search the web for a query term."""
+    from aurelian.utils.search_utils import web_search
+    txt = web_search(term)
+    print(txt)
+
+
+@main.command()
+@click.argument("url")
+def geturl(url):
+    """Retrieve content from a URL."""
+    from aurelian.utils.search_utils import retrieve_web_page
+    txt = retrieve_web_page(url)
+    print(txt)
 
 
 @main.command()
@@ -395,114 +430,110 @@ def datasheets(url, **kwargs):
 @workdir_option
 @share_option
 @server_port_option
-def chemistry(**kwargs):
-    """Start the Chemistry Agent for working with chemical structures."""
-    from aurelian.agents.chemistry.chemistry_gradio import chat
-    agent_options, launch_options = split_options(kwargs)
-    ui = chat(**agent_options)
-    ui.launch(**launch_options)
+@ui_option
+@click.argument("url", required=False)
+def datasheets(ui, url, **kwargs):
+    """Start the Datasheets for Datasets (D4D) Agent.
+    
+    The D4D Agent extracts structured metadata from dataset documentation
+    according to the Datasheets for Datasets schema. It can analyze both 
+    web pages and PDF documents describing datasets.
+    
+    Run with a URL for direct mode or with --ui for interactive chat mode.
+    """
+    run_agent("d4d", "aurelian.agents.d4d", query=(url,) if url else None, ui=ui, **kwargs)
 
 
 @main.command()
 @model_option
+@workdir_option
 @share_option
 @server_port_option
-def literature(**kwargs):
-    """Start the Literature Agent for working with scientific publications."""
-    from aurelian.agents.literature.literature_gradio import chat
-    agent_options, launch_options = split_options(kwargs)
-    ui = chat(**agent_options)
-    ui.launch(**launch_options)
+@ui_option
+@click.argument("query", nargs=-1, required=False)
+def chemistry(ui, query, **kwargs):
+    """Start the Chemistry Agent for chemical structure analysis.
+    
+    The Chemistry Agent helps interpret and work with chemical structures,
+    formulas, and related information.
+    
+    Run with a query for direct mode or with --ui for interactive chat mode.
+    """
+    run_agent("chemistry", "aurelian.agents.chemistry", query=query, ui=ui, **kwargs)
 
 
 @main.command()
 @model_option
+@workdir_option
 @share_option
 @server_port_option
-@click.argument("query", nargs=-1)
-def biblio(query, **kwargs):
-    """Start the Biblio Agent for working with bibliographic data.
+@ui_option
+@click.argument("query", nargs=-1, required=False)
+def literature(ui, query, **kwargs):
+    """Start the Literature Agent for scientific publication analysis.
+    
+    The Literature Agent provides tools for analyzing scientific publications,
+    extracting key information, and answering questions about research articles.
+    
+    Run with a query for direct mode or with --ui for interactive chat mode.
+    """
+    run_agent("literature", "aurelian.agents.literature", query=query, ui=ui, **kwargs)
+
+
+@main.command()
+@model_option
+@workdir_option
+@share_option
+@server_port_option
+@ui_option
+@click.argument("query", nargs=-1, required=False)
+def biblio(ui, query, **kwargs):
+    """Start the Biblio Agent for bibliographic data management.
     
     The Biblio Agent helps organize and search bibliographic data and citations. 
     It provides tools for searching a bibliography database, retrieving scientific 
     publications, and accessing web content.
     
-    If a query is provided, it will be run directly; otherwise, the chat interface will be launched.
+    Run with a query for direct mode or with --ui for interactive chat mode.
     """
-    from aurelian.agents.biblio.biblio_gradio import chat
-    from aurelian.agents.biblio.biblio_agent import biblio_agent
-    from aurelian.agents.biblio.biblio_config import get_config
-    
-    agent_options, launch_options = split_options(kwargs)
-    
-    if query:
-        deps = get_config()
-        r = biblio_agent.run_sync(" ".join(query), deps=deps, **agent_options)
-        print(r.data)
-    else:
-        ui = chat(**agent_options)
-        ui.launch(**launch_options)
+    run_agent("biblio", "aurelian.agents.biblio", query=query, ui=ui, **kwargs)
 
 
 @main.command()
 @model_option
+@workdir_option
 @share_option
 @server_port_option
-@click.argument("query", nargs=-1)
-def monarch(query, **kwargs):
+@ui_option
+@click.argument("query", nargs=-1, required=False)
+def monarch(ui, query, **kwargs):
     """Start the Monarch Agent for biomedical knowledge exploration.
     
     The Monarch Agent provides access to relationships between genes, diseases, 
     phenotypes, and other biomedical entities through the Monarch Knowledge Base.
     
-    If a query is provided, it will be run directly; otherwise, the chat interface will be launched.
+    Run with a query for direct mode or with --ui for interactive chat mode.
     """
-    from aurelian.agents.monarch.monarch_gradio import chat
-    from aurelian.agents.monarch.monarch_agent import monarch_agent
-    from aurelian.agents.monarch.monarch_config import get_config
-    
-    agent_options, launch_options = split_options(kwargs)
-    
-    if query:
-        deps = get_config()
-        if 'workdir' in agent_options and agent_options['workdir']:
-            deps.workdir.location = agent_options['workdir']
-        r = monarch_agent.run_sync(" ".join(query), deps=deps, **{k: v for k, v in agent_options.items() if k != 'workdir'})
-        print(r.data)
-    else:
-        ui = chat(**agent_options)
-        ui.launch(**launch_options)
+    run_agent("monarch", "aurelian.agents.monarch", query=query, ui=ui, **kwargs)
 
 
 @main.command()
 @model_option
+@workdir_option
 @share_option
 @server_port_option
-@click.argument("query", nargs=-1)
-def ubergraph(query, **kwargs):
+@ui_option
+@click.argument("query", nargs=-1, required=False)
+def ubergraph(ui, query, **kwargs):
     """Start the UberGraph Agent for SPARQL-based ontology queries.
     
     The UberGraph Agent provides a natural language interface to query ontologies 
     using SPARQL through the UberGraph endpoint. It helps users formulate and execute
     SPARQL queries without needing to know the full SPARQL syntax.
     
-    If a query is provided, it will be run directly; otherwise, the chat interface will be launched.
+    Run with a query for direct mode or with --ui for interactive chat mode.
     """
-    from aurelian.agents.ubergraph.ubergraph_gradio import chat
-    from aurelian.agents.ubergraph.ubergraph_agent import ubergraph_agent
-    from aurelian.agents.ubergraph.ubergraph_config import get_config
-    
-    agent_options, launch_options = split_options(kwargs)
-    
-    if query:
-        deps = get_config()
-        if 'workdir' in agent_options and agent_options['workdir']:
-            deps.workdir.location = agent_options['workdir']
-        r = ubergraph_agent.run_sync(" ".join(query), deps=deps, **{k: v for k, v in agent_options.items() if k != 'workdir'})
-        print(r.data)
-    else:
-        ui = chat(**agent_options)
-        ui.launch(**launch_options)
+    run_agent("ubergraph", "aurelian.agents.ubergraph", query=query, ui=ui, **kwargs)
 
 
 @main.command(name="scientific_knowledge")
