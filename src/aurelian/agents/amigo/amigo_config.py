@@ -70,3 +70,16 @@ def normalize_pmid(pmid: str) -> str:
     if not pmid.startswith("PMID:"):
         pmid = f"PMID:{pmid}"
     return pmid
+
+
+def get_config(taxon: str = "9606") -> AmiGODependencies:
+    """
+    Get the AmiGO configuration.
+    
+    Args:
+        taxon: NCBI Taxonomy ID, defaults to human (9606)
+        
+    Returns:
+        AmiGODependencies: The AmiGO dependencies
+    """
+    return AmiGODependencies(taxon=taxon)

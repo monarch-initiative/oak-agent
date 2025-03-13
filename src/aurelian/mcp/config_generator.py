@@ -47,7 +47,7 @@ class MCPConfigGenerator:
                     "args": ["-y", "@modelcontextprotocol/server-memory"],
                     "env": {"MEMORY_FILE_PATH": memory_path},
                 }
-            elif server_type in ["linkml", "gocam", "phenopackets", "robot", "amigo", "uniprot"]:
+            elif server_type in ["linkml", "gocam", "phenopackets", "robot", "amigo", "uniprot", "diagnosis"]:
                 # Aurelian agent MCP server
                 agent_script = f"src/aurelian/agents/{server_type}/{server_type}_mcp.py"
                 workdir = server_config.get("workdir", f"/tmp/{server_type}")
