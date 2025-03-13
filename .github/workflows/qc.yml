@@ -38,5 +38,5 @@ jobs:
 
       - name: Run tests (excluding test_agents)
         run: |
-          pytest --maxfail=0 --continue-on-collection-errors || true
+          poetry run pytest --maxfail=0 --continue-on-collection-errors || true
 
