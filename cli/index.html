@@ -80,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#cli-reference" class="md-skip">
+        <a href="#command-line-interface" class="md-skip">
           Skip to content
         </a>
       
@@ -616,6 +616,18 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Command Line
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -626,6 +638,94 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#usage-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      Usage Patterns
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Usage Patterns">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ui-mode" class="md-nav__link">
+    <span class="md-ellipsis">
+      UI Mode
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#direct-query-mode" class="md-nav__link">
+    <span class="md-ellipsis">
+      Direct Query Mode
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#common-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      Common Options
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#available-agents" class="md-nav__link">
+    <span class="md-ellipsis">
+      Available Agents
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#utility-commands" class="md-nav__link">
+    <span class="md-ellipsis">
+      Utility Commands
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#full-command-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      Full Command Reference
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -758,6 +858,83 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#usage-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      Usage Patterns
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Usage Patterns">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ui-mode" class="md-nav__link">
+    <span class="md-ellipsis">
+      UI Mode
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#direct-query-mode" class="md-nav__link">
+    <span class="md-ellipsis">
+      Direct Query Mode
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#common-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      Common Options
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#available-agents" class="md-nav__link">
+    <span class="md-ellipsis">
+      Available Agents
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#utility-commands" class="md-nav__link">
+    <span class="md-ellipsis">
+      Utility Commands
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#full-command-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      Full Command Reference
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -772,14 +949,144 @@
 
 
 
-<h1 id="cli-reference">CLI Reference</h1>
+<h1 id="command-line-interface">Command Line Interface</h1>
+<p>Aurelian provides a powerful command-line interface (CLI) for accessing its various agents and utilities. The CLI follows a consistent pattern that allows running agents in either direct query mode or interactive UI mode.</p>
+<h2 id="usage-patterns">Usage Patterns</h2>
+<h3 id="ui-mode">UI Mode</h3>
+<p>To start an agent in UI mode (interactive chat interface):</p>
+<div class="highlight"><pre><span></span><code>aurelian<span class="w"> </span>&lt;agent-name&gt;<span class="w"> </span>--ui
+</code></pre></div>
+<p>Example:
+<div class="highlight"><pre><span></span><code>aurelian<span class="w"> </span>diagnosis<span class="w"> </span>--ui
+</code></pre></div></p>
+<p>This starts the Diagnosis agent with a chat interface where you can interactively ask questions.</p>
+<h3 id="direct-query-mode">Direct Query Mode</h3>
+<p>To run an agent with a direct query and get the response immediately:</p>
+<div class="highlight"><pre><span></span><code>aurelian<span class="w"> </span>&lt;agent-name&gt;<span class="w"> </span><span class="s2">&quot;your query here&quot;</span>
+</code></pre></div>
+<p>Example:
+<div class="highlight"><pre><span></span><code>aurelian<span class="w"> </span>diagnosis<span class="w"> </span><span class="s2">&quot;Patient with hypotonia, seizures, and developmental delay&quot;</span>
+</code></pre></div></p>
+<p>This processes the query directly and prints the result to the console.</p>
+<h2 id="common-options">Common Options</h2>
+<p>All agent commands support these common options:</p>
+<ul>
+<li><code>--model</code>, <code>-m</code>: Specify the model to use for the agent</li>
+<li><code>--workdir</code>, <code>-w</code>: Set the working directory (default: "workdir")</li>
+<li><code>--share/--no-share</code>: Share the agent UI via public URL (default: no-share)</li>
+<li><code>--server-port</code>, <code>-p</code>: Set the server port for UI mode (default: 7860)</li>
+<li><code>--ui/--no-ui</code>: Force UI mode even with a query (default: no-ui)</li>
+</ul>
+<h2 id="available-agents">Available Agents</h2>
+<p>Aurelian provides specialized agents for various scientific and biomedical tasks. Each agent can be accessed via its dedicated subcommand:</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>amigo</code></td>
+<td>Gene Ontology and gene product annotations</td>
+</tr>
+<tr>
+<td><code>biblio</code></td>
+<td>Bibliographic data and citations management</td>
+</tr>
+<tr>
+<td><code>checklist</code></td>
+<td>Paper evaluation against established checklists</td>
+</tr>
+<tr>
+<td><code>chemistry</code></td>
+<td>Chemical structure analysis</td>
+</tr>
+<tr>
+<td><code>datasheets</code></td>
+<td>Extract dataset metadata according to Datasheets for Datasets schema</td>
+</tr>
+<tr>
+<td><code>diagnosis</code></td>
+<td>Rare disease diagnosis using the Monarch Knowledge Base</td>
+</tr>
+<tr>
+<td><code>gocam</code></td>
+<td>Gene Ontology Causal Activity Models</td>
+</tr>
+<tr>
+<td><code>linkml</code></td>
+<td>Data modeling and schema validation</td>
+</tr>
+<tr>
+<td><code>literature</code></td>
+<td>Scientific publication analysis</td>
+</tr>
+<tr>
+<td><code>mapper</code></td>
+<td>Ontology mapping and term translation</td>
+</tr>
+<tr>
+<td><code>monarch</code></td>
+<td>Biomedical knowledge graph exploration</td>
+</tr>
+<tr>
+<td><code>phenopackets</code></td>
+<td>Standardized phenotype data in GA4GH format</td>
+</tr>
+<tr>
+<td><code>rag</code></td>
+<td>Retrieval-augmented generation for document collections</td>
+</tr>
+<tr>
+<td><code>robot</code></td>
+<td>Ontology operations and manipulations</td>
+</tr>
+<tr>
+<td><code>ubergraph</code></td>
+<td>SPARQL-based ontology queries</td>
+</tr>
+</tbody>
+</table>
+<h2 id="utility-commands">Utility Commands</h2>
+<p>The CLI also provides several utility commands:</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>fulltext &lt;pmid&gt;</code></td>
+<td>Download full text for a PubMed article</td>
+</tr>
+<tr>
+<td><code>websearch &lt;term&gt;</code></td>
+<td>Search the web for a query term</td>
+</tr>
+<tr>
+<td><code>geturl &lt;url&gt;</code></td>
+<td>Retrieve content from a URL</td>
+</tr>
+<tr>
+<td><code>search-ontology &lt;ontology&gt; &lt;term&gt;</code></td>
+<td>Search an ontology for a term</td>
+</tr>
+</tbody>
+</table>
+<h2 id="full-command-reference">Full Command Reference</h2>
 <h1 id="main">main</h1>
 <p>Main command for Aurelian.</p>
-<p>THIS CLI MAY CHANGE.</p>
-<p>Currently there are multiple sub-commands,
-each of which starts a UI for an agent.</p>
-<p>However, there are a few other utility commands,
-e.g. for indexing an ontology or downloading a PMID</p>
+<p>Aurelian provides a collection of specialized agents for various scientific and biomedical tasks.
+Each agent can be run in either direct query mode or UI mode:</p>
+<ul>
+<li>Direct query mode: Run the agent with a query (e.g., <code>aurelian diagnosis "patient with hypotonia"</code>).</li>
+<li>UI mode: Run the agent with <code>--ui</code> flag to start a chat interface.</li>
+</ul>
+<p>Some agents also provide utility commands for specific operations.</p>
 <p>:param verbose: Verbosity while running.
 :param quiet: Boolean to be quiet or verbose.</p>
 <p><strong>Usage:</strong></p>
@@ -792,16 +1099,24 @@ e.g. for indexing an ontology or downloading a PMID</p>
   --help            Show this message and exit.
 </code></pre></div>
 <h2 id="amigo">amigo</h2>
-<p>Start the AmiGO agent for working with Gene Ontology.</p>
+<p>Start the AmiGO Agent for Gene Ontology data exploration.</p>
+<p>The AmiGO Agent provides access to the Gene Ontology (GO) and gene 
+product annotations. It helps users explore gene functions and 
+ontology relationships.</p>
+<p>Run with a query for direct mode or with --ui for interactive chat mode.</p>
 <p><strong>Usage:</strong></p>
-<div class="highlight"><pre><span></span><code>main amigo [OPTIONS]
+<div class="highlight"><pre><span></span><code>main amigo [OPTIONS] [QUERY]...
 </code></pre></div>
 <p><strong>Options:</strong></p>
 <div class="highlight"><pre><span></span><code>  -m, --model TEXT           The model to use for the agent.
-  --share / --no-share       Share the agent GradIO chat via URL.  [default:
-                             no-share]
-  -p, --server-port INTEGER  The port to run the gradio server on.  [default:
+  -w, --workdir TEXT         The working directory for the agent.  [default:
+                             workdir]
+  --share / --no-share       Share the agent GradIO UI via URL.  [default: no-
+                             share]
+  -p, --server-port INTEGER  The port to run the UI server on.  [default:
                              7860]
+  --ui / --no-ui             Start the agent in UI mode instead of direct
+                             query mode.  [default: no-ui]
   --help                     Show this message and exit.
 </code></pre></div>
 <h2 id="aria">aria</h2>
@@ -811,27 +1126,33 @@ e.g. for indexing an ontology or downloading a PMID</p>
 </code></pre></div>
 <p><strong>Options:</strong></p>
 <div class="highlight"><pre><span></span><code>  -m, --model TEXT           The model to use for the agent.
-  --share / --no-share       Share the agent GradIO chat via URL.  [default:
-                             no-share]
-  -p, --server-port INTEGER  The port to run the gradio server on.  [default:
+  -w, --workdir TEXT         The working directory for the agent.  [default:
+                             workdir]
+  --share / --no-share       Share the agent GradIO UI via URL.  [default: no-
+                             share]
+  -p, --server-port INTEGER  The port to run the UI server on.  [default:
                              7860]
   --help                     Show this message and exit.
 </code></pre></div>
 <h2 id="biblio">biblio</h2>
-<p>Start the Biblio Agent for working with bibliographic data.</p>
+<p>Start the Biblio Agent for bibliographic data management.</p>
 <p>The Biblio Agent helps organize and search bibliographic data and citations. 
 It provides tools for searching a bibliography database, retrieving scientific 
 publications, and accessing web content.</p>
-<p>If a query is provided, it will be run directly; otherwise, the chat interface will be launched.</p>
+<p>Run with a query for direct mode or with --ui for interactive chat mode.</p>
 <p><strong>Usage:</strong></p>
 <div class="highlight"><pre><span></span><code>main biblio [OPTIONS] [QUERY]...
 </code></pre></div>
 <p><strong>Options:</strong></p>
 <div class="highlight"><pre><span></span><code>  -m, --model TEXT           The model to use for the agent.
-  --share / --no-share       Share the agent GradIO chat via URL.  [default:
-                             no-share]
-  -p, --server-port INTEGER  The port to run the gradio server on.  [default:
+  -w, --workdir TEXT         The working directory for the agent.  [default:
+                             workdir]
+  --share / --no-share       Share the agent GradIO UI via URL.  [default: no-
+                             share]
+  -p, --server-port INTEGER  The port to run the UI server on.  [default:
                              7860]
+  --ui / --no-ui             Start the agent in UI mode instead of direct
+                             query mode.  [default: no-ui]
   --help                     Show this message and exit.
 </code></pre></div>
 <h2 id="checklist">checklist</h2>
@@ -839,7 +1160,7 @@ publications, and accessing web content.</p>
 <p>The Checklist Agent evaluates scientific papers against established checklists 
 such as STREAMS, STORMS, and ARRIVE. It helps ensure that papers conform to 
 relevant reporting guidelines and best practices.</p>
-<p>If a query is provided, it will be run directly; otherwise, the chat interface will be launched.</p>
+<p>Run with a query for direct mode or with --ui for interactive chat mode.</p>
 <p><strong>Usage:</strong></p>
 <div class="highlight"><pre><span></span><code>main checklist [OPTIONS] [QUERY]...
 </code></pre></div>
@@ -847,81 +1168,111 @@ relevant reporting guidelines and best practices.</p>
 <div class="highlight"><pre><span></span><code>  -m, --model TEXT           The model to use for the agent.
   -w, --workdir TEXT         The working directory for the agent.  [default:
                              workdir]
-  --share / --no-share       Share the agent GradIO chat via URL.  [default:
-                             no-share]
-  -p, --server-port INTEGER  The port to run the gradio server on.  [default:
+  --share / --no-share       Share the agent GradIO UI via URL.  [default: no-
+                             share]
+  -p, --server-port INTEGER  The port to run the UI server on.  [default:
                              7860]
+  --ui / --no-ui             Start the agent in UI mode instead of direct
+                             query mode.  [default: no-ui]
   --help                     Show this message and exit.
 </code></pre></div>
 <h2 id="chemistry">chemistry</h2>
-<p>Start the Chemistry Agent for working with chemical structures.</p>
+<p>Start the Chemistry Agent for chemical structure analysis.</p>
+<p>The Chemistry Agent helps interpret and work with chemical structures,
+formulas, and related information.</p>
+<p>Run with a query for direct mode or with --ui for interactive chat mode.</p>
 <p><strong>Usage:</strong></p>
-<div class="highlight"><pre><span></span><code>main chemistry [OPTIONS]
+<div class="highlight"><pre><span></span><code>main chemistry [OPTIONS] [QUERY]...
 </code></pre></div>
 <p><strong>Options:</strong></p>
 <div class="highlight"><pre><span></span><code>  -m, --model TEXT           The model to use for the agent.
   -w, --workdir TEXT         The working directory for the agent.  [default:
                              workdir]
-  --share / --no-share       Share the agent GradIO chat via URL.  [default:
-                             no-share]
-  -p, --server-port INTEGER  The port to run the gradio server on.  [default:
+  --share / --no-share       Share the agent GradIO UI via URL.  [default: no-
+                             share]
+  -p, --server-port INTEGER  The port to run the UI server on.  [default:
                              7860]
+  --ui / --no-ui             Start the agent in UI mode instead of direct
+                             query mode.  [default: no-ui]
   --help                     Show this message and exit.
 </code></pre></div>
 <h2 id="datasheets">datasheets</h2>
-<p>Start the Datasheets for Datasets Agent.</p>
-<p>The D4D Agent (Datasheets for Datasets) extracts structured metadata from dataset 
-documentation according to the Datasheets for Datasets schema. It can analyze 
-both web pages and PDF documents describing datasets and generate standardized 
-YAML metadata.</p>
-<p>If a URL is provided, it will be processed directly; otherwise, the chat interface will be launched.</p>
+<p>Start the Datasheets for Datasets (D4D) Agent.</p>
+<p>The D4D Agent extracts structured metadata from dataset documentation
+according to the Datasheets for Datasets schema. It can analyze both 
+web pages and PDF documents describing datasets.</p>
+<p>Run with a URL for direct mode or with --ui for interactive chat mode.</p>
 <p><strong>Usage:</strong></p>
 <div class="highlight"><pre><span></span><code>main datasheets [OPTIONS] [URL]
 </code></pre></div>
 <p><strong>Options:</strong></p>
 <div class="highlight"><pre><span></span><code>  -m, --model TEXT           The model to use for the agent.
-  --share / --no-share       Share the agent GradIO chat via URL.  [default:
-                             no-share]
-  -p, --server-port INTEGER  The port to run the gradio server on.  [default:
+  -w, --workdir TEXT         The working directory for the agent.  [default:
+                             workdir]
+  --share / --no-share       Share the agent GradIO UI via URL.  [default: no-
+                             share]
+  -p, --server-port INTEGER  The port to run the UI server on.  [default:
                              7860]
+  --ui / --no-ui             Start the agent in UI mode instead of direct
+                             query mode.  [default: no-ui]
   --help                     Show this message and exit.
 </code></pre></div>
 <h2 id="diagnosis">diagnosis</h2>
-<p>Start the Diagnosis agent for rare disease diagnosis.</p>
-<p>The Diagnosis agent assists in diagnosing rare diseases by leveraging the 
+<p>Start the Diagnosis Agent for rare disease diagnosis.</p>
+<p>The Diagnosis Agent assists in diagnosing rare diseases by leveraging the 
 Monarch Knowledge Base. It helps clinical geneticists evaluate potential 
 conditions based on patient phenotypes.</p>
-<p>If a query is provided, it will be run directly; otherwise, the chat interface will be launched.</p>
+<p>Run with a query for direct mode or with --ui for interactive chat mode.</p>
 <p><strong>Usage:</strong></p>
 <div class="highlight"><pre><span></span><code>main diagnosis [OPTIONS] [QUERY]...
 </code></pre></div>
 <p><strong>Options:</strong></p>
 <div class="highlight"><pre><span></span><code>  -m, --model TEXT           The model to use for the agent.
-  --share / --no-share       Share the agent GradIO chat via URL.  [default:
-                             no-share]
-  -p, --server-port INTEGER  The port to run the gradio server on.  [default:
+  -w, --workdir TEXT         The working directory for the agent.  [default:
+                             workdir]
+  --share / --no-share       Share the agent GradIO UI via URL.  [default: no-
+                             share]
+  -p, --server-port INTEGER  The port to run the UI server on.  [default:
                              7860]
+  --ui / --no-ui             Start the agent in UI mode instead of direct
+                             query mode.  [default: no-ui]
   --help                     Show this message and exit.
 </code></pre></div>
 <h2 id="fulltext">fulltext</h2>
-<p>Download full text.</p>
+<p>Download full text for a PubMed article.</p>
 <p><strong>Usage:</strong></p>
 <div class="highlight"><pre><span></span><code>main fulltext [OPTIONS] PMID
 </code></pre></div>
 <p><strong>Options:</strong></p>
 <div class="highlight"><pre><span></span><code>  --help  Show this message and exit.
 </code></pre></div>
-<h2 id="gocam">gocam</h2>
-<p>Start the GO-CAM Chat UI.</p>
+<h2 id="geturl">geturl</h2>
+<p>Retrieve content from a URL.</p>
 <p><strong>Usage:</strong></p>
-<div class="highlight"><pre><span></span><code>main gocam [OPTIONS]
+<div class="highlight"><pre><span></span><code>main geturl [OPTIONS] URL
+</code></pre></div>
+<p><strong>Options:</strong></p>
+<div class="highlight"><pre><span></span><code>  --help  Show this message and exit.
+</code></pre></div>
+<h2 id="gocam">gocam</h2>
+<p>Start the GO-CAM Agent for gene ontology causal activity models.</p>
+<p>The GO-CAM Agent helps create and analyze Gene Ontology Causal Activity Models,
+which describe biological systems as molecular activities connected by causal 
+relationships. </p>
+<p>Run with a query for direct mode or with --ui for interactive chat mode.</p>
+<p><strong>Usage:</strong></p>
+<div class="highlight"><pre><span></span><code>main gocam [OPTIONS] [QUERY]...
 </code></pre></div>
 <p><strong>Options:</strong></p>
 <div class="highlight"><pre><span></span><code>  -m, --model TEXT           The model to use for the agent.
-  --share / --no-share       Share the agent GradIO chat via URL.  [default:
-                             no-share]
-  -p, --server-port INTEGER  The port to run the gradio server on.  [default:
+  -w, --workdir TEXT         The working directory for the agent.  [default:
+                             workdir]
+  --share / --no-share       Share the agent GradIO UI via URL.  [default: no-
+                             share]
+  -p, --server-port INTEGER  The port to run the UI server on.  [default:
                              7860]
+  --ui / --no-ui             Start the agent in UI mode instead of direct
+                             query mode.  [default: no-ui]
   --help                     Show this message and exit.
 </code></pre></div>
 <h2 id="gocam-ui">gocam-ui</h2>
@@ -933,44 +1284,65 @@ conditions based on patient phenotypes.</p>
 <div class="highlight"><pre><span></span><code>  --help  Show this message and exit.
 </code></pre></div>
 <h2 id="linkml">linkml</h2>
-<p>Start the LinkML agent.</p>
+<p>Start the LinkML Agent for data modeling and schema validation.</p>
+<p>The LinkML Agent helps create and validate data models and schemas using the 
+Linked data Modeling Language (LinkML). It can assist in generating schemas,
+validating data against schemas, and modeling domain knowledge.</p>
+<p>Run with a query for direct mode or with --ui for interactive chat mode.</p>
 <p><strong>Usage:</strong></p>
-<div class="highlight"><pre><span></span><code>main linkml [OPTIONS]
+<div class="highlight"><pre><span></span><code>main linkml [OPTIONS] [QUERY]...
 </code></pre></div>
 <p><strong>Options:</strong></p>
 <div class="highlight"><pre><span></span><code>  -m, --model TEXT           The model to use for the agent.
   -w, --workdir TEXT         The working directory for the agent.  [default:
                              workdir]
-  --share / --no-share       Share the agent GradIO chat via URL.  [default:
-                             no-share]
-  -p, --server-port INTEGER  The port to run the gradio server on.  [default:
+  --share / --no-share       Share the agent GradIO UI via URL.  [default: no-
+                             share]
+  -p, --server-port INTEGER  The port to run the UI server on.  [default:
                              7860]
+  --ui / --no-ui             Start the agent in UI mode instead of direct
+                             query mode.  [default: no-ui]
   --help                     Show this message and exit.
 </code></pre></div>
 <h2 id="literature">literature</h2>
-<p>Start the Literature Agent for working with scientific publications.</p>
+<p>Start the Literature Agent for scientific publication analysis.</p>
+<p>The Literature Agent provides tools for analyzing scientific publications,
+extracting key information, and answering questions about research articles.</p>
+<p>Run with a query for direct mode or with --ui for interactive chat mode.</p>
 <p><strong>Usage:</strong></p>
-<div class="highlight"><pre><span></span><code>main literature [OPTIONS]
+<div class="highlight"><pre><span></span><code>main literature [OPTIONS] [QUERY]...
 </code></pre></div>
 <p><strong>Options:</strong></p>
 <div class="highlight"><pre><span></span><code>  -m, --model TEXT           The model to use for the agent.
-  --share / --no-share       Share the agent GradIO chat via URL.  [default:
-                             no-share]
-  -p, --server-port INTEGER  The port to run the gradio server on.  [default:
+  -w, --workdir TEXT         The working directory for the agent.  [default:
+                             workdir]
+  --share / --no-share       Share the agent GradIO UI via URL.  [default: no-
+                             share]
+  -p, --server-port INTEGER  The port to run the UI server on.  [default:
                              7860]
+  --ui / --no-ui             Start the agent in UI mode instead of direct
+                             query mode.  [default: no-ui]
   --help                     Show this message and exit.
 </code></pre></div>
 <h2 id="mapper">mapper</h2>
-<p>Start the Ontology Mapper agent.</p>
+<p>Start the Ontology Mapper Agent for mapping between ontologies.</p>
+<p>The Ontology Mapper Agent helps translate terms between different ontologies
+and vocabularies. It can find equivalent concepts across ontologies and 
+explain relationships.</p>
+<p>Run with a query for direct mode or with --ui for interactive chat mode.</p>
 <p><strong>Usage:</strong></p>
 <div class="highlight"><pre><span></span><code>main mapper [OPTIONS] [QUERY]...
 </code></pre></div>
 <p><strong>Options:</strong></p>
 <div class="highlight"><pre><span></span><code>  -m, --model TEXT           The model to use for the agent.
-  --share / --no-share       Share the agent GradIO chat via URL.  [default:
-                             no-share]
-  -p, --server-port INTEGER  The port to run the gradio server on.  [default:
+  -w, --workdir TEXT         The working directory for the agent.  [default:
+                             workdir]
+  --share / --no-share       Share the agent GradIO UI via URL.  [default: no-
+                             share]
+  -p, --server-port INTEGER  The port to run the UI server on.  [default:
                              7860]
+  --ui / --no-ui             Start the agent in UI mode instead of direct
+                             query mode.  [default: no-ui]
   -i, --ontologies TEXT      Comma-separated list of ontologies to use for the
                              agent.
   --help                     Show this message and exit.
@@ -979,64 +1351,85 @@ conditions based on patient phenotypes.</p>
 <p>Start the Monarch Agent for biomedical knowledge exploration.</p>
 <p>The Monarch Agent provides access to relationships between genes, diseases, 
 phenotypes, and other biomedical entities through the Monarch Knowledge Base.</p>
-<p>If a query is provided, it will be run directly; otherwise, the chat interface will be launched.</p>
+<p>Run with a query for direct mode or with --ui for interactive chat mode.</p>
 <p><strong>Usage:</strong></p>
 <div class="highlight"><pre><span></span><code>main monarch [OPTIONS] [QUERY]...
 </code></pre></div>
 <p><strong>Options:</strong></p>
 <div class="highlight"><pre><span></span><code>  -m, --model TEXT           The model to use for the agent.
-  --share / --no-share       Share the agent GradIO chat via URL.  [default:
-                             no-share]
-  -p, --server-port INTEGER  The port to run the gradio server on.  [default:
+  -w, --workdir TEXT         The working directory for the agent.  [default:
+                             workdir]
+  --share / --no-share       Share the agent GradIO UI via URL.  [default: no-
+                             share]
+  -p, --server-port INTEGER  The port to run the UI server on.  [default:
                              7860]
+  --ui / --no-ui             Start the agent in UI mode instead of direct
+                             query mode.  [default: no-ui]
   --help                     Show this message and exit.
 </code></pre></div>
 <h2 id="phenopackets">phenopackets</h2>
-<p>Start the Phenopackets Agent for exploring phenopacket databases.</p>
+<p>Start the Phenopackets Agent for standardized phenotype data.</p>
+<p>The Phenopackets Agent helps work with GA4GH Phenopackets, a standard 
+format for sharing disease and phenotype information for genomic 
+medicine.</p>
+<p>Run with a query for direct mode or with --ui for interactive chat mode.</p>
 <p><strong>Usage:</strong></p>
-<div class="highlight"><pre><span></span><code>main phenopackets [OPTIONS]
+<div class="highlight"><pre><span></span><code>main phenopackets [OPTIONS] [QUERY]...
 </code></pre></div>
 <p><strong>Options:</strong></p>
 <div class="highlight"><pre><span></span><code>  -m, --model TEXT           The model to use for the agent.
-  --share / --no-share       Share the agent GradIO chat via URL.  [default:
-                             no-share]
-  -p, --server-port INTEGER  The port to run the gradio server on.  [default:
+  -w, --workdir TEXT         The working directory for the agent.  [default:
+                             workdir]
+  --share / --no-share       Share the agent GradIO UI via URL.  [default: no-
+                             share]
+  -p, --server-port INTEGER  The port to run the UI server on.  [default:
                              7860]
+  --ui / --no-ui             Start the agent in UI mode instead of direct
+                             query mode.  [default: no-ui]
   --help                     Show this message and exit.
 </code></pre></div>
 <h2 id="rag">rag</h2>
 <p>Start the RAG Agent for document retrieval and generation.</p>
 <p>The RAG (Retrieval-Augmented Generation) Agent provides a natural language 
 interface for exploring and searching document collections. It uses RAG 
-techniques to combine search capabilities with generative AI to produce 
-relevant, context-aware responses based on document content.</p>
-<p>If a query is provided, it will be run directly; otherwise, the chat interface will be launched.</p>
+techniques to combine search capabilities with generative AI.</p>
+<p>Run with a query for direct mode or with --ui for interactive chat mode.</p>
 <p><strong>Usage:</strong></p>
 <div class="highlight"><pre><span></span><code>main rag [OPTIONS] [QUERY]...
 </code></pre></div>
 <p><strong>Options:</strong></p>
 <div class="highlight"><pre><span></span><code>  -m, --model TEXT            The model to use for the agent.
-  --share / --no-share        Share the agent GradIO chat via URL.  [default:
+  -w, --workdir TEXT          The working directory for the agent.  [default:
+                              workdir]
+  --share / --no-share        Share the agent GradIO UI via URL.  [default:
                               no-share]
+  -p, --server-port INTEGER   The port to run the UI server on.  [default:
+                              7860]
+  --ui / --no-ui              Start the agent in UI mode instead of direct
+                              query mode.  [default: no-ui]
   -d, --db-path TEXT          The path to the database.
   -c, --collection-name TEXT  The name of the collection.
-  -p, --server-port INTEGER   The port to run the gradio server on.  [default:
-                              7860]
   --help                      Show this message and exit.
 </code></pre></div>
 <h2 id="robot">robot</h2>
-<p>Start the robot ontology agent.</p>
+<p>Start the ROBOT Agent for ontology operations.</p>
+<p>The ROBOT Agent provides natural language access to ontology operations 
+and manipulations using the ROBOT tool. It can create, modify, and analyze
+ontologies through a chat interface.</p>
+<p>Run with a query for direct mode or with --ui for interactive chat mode.</p>
 <p><strong>Usage:</strong></p>
-<div class="highlight"><pre><span></span><code>main robot [OPTIONS]
+<div class="highlight"><pre><span></span><code>main robot [OPTIONS] [QUERY]...
 </code></pre></div>
 <p><strong>Options:</strong></p>
 <div class="highlight"><pre><span></span><code>  -m, --model TEXT           The model to use for the agent.
   -w, --workdir TEXT         The working directory for the agent.  [default:
                              workdir]
-  --share / --no-share       Share the agent GradIO chat via URL.  [default:
-                             no-share]
-  -p, --server-port INTEGER  The port to run the gradio server on.  [default:
+  --share / --no-share       Share the agent GradIO UI via URL.  [default: no-
+                             share]
+  -p, --server-port INTEGER  The port to run the UI server on.  [default:
                              7860]
+  --ui / --no-ui             Start the agent in UI mode instead of direct
+                             query mode.  [default: no-ui]
   --help                     Show this message and exit.
 </code></pre></div>
 <h2 id="search-ontology">search-ontology</h2>
@@ -1055,17 +1448,29 @@ starting an individual UI.</p>
 <p>The UberGraph Agent provides a natural language interface to query ontologies 
 using SPARQL through the UberGraph endpoint. It helps users formulate and execute
 SPARQL queries without needing to know the full SPARQL syntax.</p>
-<p>If a query is provided, it will be run directly; otherwise, the chat interface will be launched.</p>
+<p>Run with a query for direct mode or with --ui for interactive chat mode.</p>
 <p><strong>Usage:</strong></p>
 <div class="highlight"><pre><span></span><code>main ubergraph [OPTIONS] [QUERY]...
 </code></pre></div>
 <p><strong>Options:</strong></p>
 <div class="highlight"><pre><span></span><code>  -m, --model TEXT           The model to use for the agent.
-  --share / --no-share       Share the agent GradIO chat via URL.  [default:
-                             no-share]
-  -p, --server-port INTEGER  The port to run the gradio server on.  [default:
+  -w, --workdir TEXT         The working directory for the agent.  [default:
+                             workdir]
+  --share / --no-share       Share the agent GradIO UI via URL.  [default: no-
+                             share]
+  -p, --server-port INTEGER  The port to run the UI server on.  [default:
                              7860]
+  --ui / --no-ui             Start the agent in UI mode instead of direct
+                             query mode.  [default: no-ui]
   --help                     Show this message and exit.
+</code></pre></div>
+<h2 id="websearch">websearch</h2>
+<p>Search the web for a query term.</p>
+<p><strong>Usage:</strong></p>
+<div class="highlight"><pre><span></span><code>main websearch [OPTIONS] TERM
+</code></pre></div>
+<p><strong>Options:</strong></p>
+<div class="highlight"><pre><span></span><code>  --help  Show this message and exit.
 </code></pre></div>
 
 
