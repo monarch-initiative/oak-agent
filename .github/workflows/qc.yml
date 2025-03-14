@@ -30,7 +30,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          poetry install --no-interaction --with gradio
+          poetry install --no-interaction --extras gradio
           poetry run pip uninstall -y numpy pandas
           poetry run pip install --no-cache-dir numpy pandas
           poetry run pip uninstall bioservices -y || true
