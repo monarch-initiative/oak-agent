@@ -607,6 +607,50 @@ def ske_alias(pdf_dir, cache_dir, **kwargs):
     demo.launch(**launch_options)
 
 
+@main.command(name="ske_clear_cache")
+@click.option("--pdf-dir", "-p", required=True, help="The directory containing PDF files whose cache should be cleared")
+@click.option("--cache-dir", "-c", help="The directory used for caching extracted knowledge")
+@click.option("--file", "-f", help="Specific PDF file to clear from the cache. If not provided, clears all cached files.")
+def clear_scientific_knowledge_cache(pdf_dir, cache_dir, file):
+    """Clear the Scientific Knowledge Extraction Agent's cache.
+    
+    This command clears the extracted knowledge cache for the Scientific Knowledge Extraction Agent.
+    You can clear the cache for a specific file or for all processed files.
+    
+    Args:
+        pdf_dir: The directory containing the PDF files (required)
+        cache_dir: Optional custom cache directory
+        file: Optional specific PDF file to clear from cache
+    """
+    from aurelian.agents.scientific_knowledge_extraction.scientific_knowledge_extraction_config import ScientificKnowledgeExtractionDependencies
+    
+    # Create dependencies with the specified directories
+    deps = ScientificKnowledgeExtractionDependencies(
+        pdf_directory=pdf_dir,
+        cache_directory=cache_dir
+    )
+    
+    if file:
+        # Clear specific file
+        file_path = os.path.join(pdf_dir, file) if not os.path.isabs(file) else file
+        if not os.path.exists(file_path):
+            print(f"Error: File '{file_path}' does not exist.")
+            return
+            
+        entries = deps.clear_cache(file_path)
+        if entries > 0:
+            print(f"Successfully cleared cache for '{os.path.basename(file_path)}'.")
+        else:
+            print(f"File '{os.path.basename(file_path)}' was not in the cache.")
+    else:
+        # Clear all
+        entries = deps.clear_cache()
+        if entries > 0:
+            print(f"Successfully cleared the entire cache ({entries} entries).")
+        else:
+            print("Cache was already empty.")
+
+
 # DO NOT REMOVE THIS LINE
 # added this for mkdocstrings to work
 # see https://github.com/bruce-szalwinski/mkdocs-typer/issues/18

@@ -118,6 +118,39 @@ class ScientificKnowledgeExtractionDependencies(HasWorkdir):
             pdf_files = pdf_files[:self.max_pdfs]
 
         return pdf_files
+        
+    def clear_cache(self, specific_file: Optional[str] = None) -> int:
+        """
+        Clear the extracted knowledge cache.
+        
+        Args:
+            specific_file: Optional path to a specific file to clear from cache.
+                          If None, clears the entire cache.
+                          
+        Returns:
+            Number of entries cleared from the cache
+        """
+        entries_cleared = 0
+        
+        if specific_file:
+            # Clear just the specific file from cache
+            file_hash = self.get_file_hash(specific_file)
+            if file_hash in self._processed_hashes:
+                self._processed_hashes.remove(file_hash)
+                entries_cleared += 1
+                
+            if file_hash in self._knowledge_cache:
+                del self._knowledge_cache[file_hash]
+        else:
+            # Clear the entire cache
+            entries_cleared = len(self._processed_hashes)
+            self._processed_hashes.clear()
+            self._knowledge_cache.clear()
+        
+        # Save the updated (cleared) cache
+        self.save_cache()
+        
+        return entries_cleared
 
 # write get_config function to return an instance of ScientificKnowledgeExtractionDependencies
 def get_config() -> ScientificKnowledgeExtractionDependencies:

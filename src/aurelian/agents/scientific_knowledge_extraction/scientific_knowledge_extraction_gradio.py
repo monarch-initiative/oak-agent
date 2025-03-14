@@ -288,6 +288,61 @@ async def export_knowledge(format_type: str) -> Dict:
         return {"status": "error", "message": str(e)}
 
 
+def clear_cache(file_path: Optional[str] = None) -> str:
+    """
+    Clear the extracted knowledge cache.
+    
+    Args:
+        file_path: Optional path to a specific PDF file to clear from cache.
+                  If None, clears the entire cache.
+    
+    Returns:
+        Message about the operation result
+    """
+    if not state.dependencies:
+        return "Error: No cache to clear. Please set up the PDF directory first."
+    
+    try:
+        if file_path:
+            # Verify the file exists
+            if not os.path.exists(file_path):
+                return f"Error: File '{file_path}' does not exist."
+            
+            # Clear the specific file from cache
+            entries_cleared = state.dependencies.clear_cache(file_path)
+            
+            if entries_cleared > 0:
+                return f"Successfully cleared cache for '{os.path.basename(file_path)}'."
+            else:
+                return f"File '{os.path.basename(file_path)}' was not in the cache."
+        else:
+            # Clear the entire cache
+            entries_cleared = state.dependencies.clear_cache()
+            
+            if entries_cleared > 0:
+                return f"Successfully cleared the entire cache ({entries_cleared} entries)."
+            else:
+                return "Cache was already empty."
+                
+        # Update the current PDF list (processed status may have changed)
+        pdf_files = []
+        if os.path.exists(state.pdf_directory):
+            for filename in os.listdir(state.pdf_directory):
+                if filename.lower().endswith('.pdf'):
+                    file_path = os.path.join(state.pdf_directory, filename)
+                    is_processed = state.dependencies.is_processed(file_path)
+                    pdf_files.append({
+                        "file_path": file_path,
+                        "filename": filename,
+                        "is_processed": is_processed
+                    })
+        
+        state.current_pdfs = pdf_files
+        
+    except Exception as e:
+        return f"Error clearing cache: {str(e)}"
+
+
 def create_demo():
     """Create the Gradio demo interface."""
     
@@ -318,11 +373,17 @@ def create_demo():
         with gr.Tab("PDF Files"):
             pdf_refresh_button = gr.Button("Refresh PDF List")
             pdf_list = gr.DataFrame(headers=["Filename", "Processed"])
-            process_button = gr.Button("Process All Unprocessed PDFs")
+            
+            with gr.Row():
+                process_button = gr.Button("Process All Unprocessed PDFs")
+                clear_cache_button = gr.Button("Clear Cache", variant="secondary")
+                
             process_result = gr.Textbox(label="Processing Result")
+            cache_result = gr.Textbox(label="Cache Operation Result")
             
             pdf_refresh_button.click(fn=get_pdf_list, inputs=[], outputs=pdf_list)
             process_button.click(fn=process_all_pdfs, inputs=[], outputs=process_result)
+            clear_cache_button.click(fn=clear_cache, inputs=[], outputs=[cache_result, pdf_list])
         
         with gr.Tab("Knowledge"):
             with gr.Row():
