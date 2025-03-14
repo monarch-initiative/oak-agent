@@ -24,8 +24,8 @@ ONTOLOGY_SOURCES = {
     # Chemical Entities of Biological Interest
     "CHEBI": "http://purl.obolibrary.org/obo/chebi.owl",
     
-    # Disease Ontology
-    "DOID": "http://purl.obolibrary.org/obo/doid.owl",
+    # Mondo Disease Ontology
+    "MONDO": "http://purl.obolibrary.org/obo/mondo.owl",
     
     # Human Phenotype Ontology
     "HP": "http://purl.obolibrary.org/obo/hp.owl",

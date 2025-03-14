@@ -348,7 +348,7 @@ def create_demo():
             The mapping process connects extracted terms to standard ontologies:
             - Gene Ontology (GO) for biological processes, cellular components, molecular functions
             - ChEBI for chemical entities 
-            - Disease Ontology (DOID) for diseases
+            - Mondo Disease Ontology (MONDO) for diseases
             - Protein Ontology (PR) for proteins
             - Uberon for anatomical entities
             - Relation Ontology (RO) for relationship types

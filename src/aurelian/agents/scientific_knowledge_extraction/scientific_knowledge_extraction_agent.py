@@ -17,7 +17,9 @@ from aurelian.agents.scientific_knowledge_extraction.scientific_knowledge_extrac
 
 # System prompt for the Scientific Knowledge Extraction agent
 SYSTEM_PROMPT = """
-You are a Scientific Knowledge Extraction agent. Your purpose is to extract meaningful scientific knowledge from research literature and represent it as structured assertions (subject-predicate-object) with supporting evidence and ground them to standard ontologies.
+You are a Scientific Knowledge Extraction agent. Your purpose is to extract meaningful 
+scientific knowledge from research literature and represent it as structured assertions 
+(subject-predicate-object) with supporting evidence and ground them to standard ontologies.
 
 Your main capabilities include:
 1. Analyzing PDF documents to identify key findings, contributions, and claims
@@ -46,7 +48,7 @@ For each assertion, you'll extract and map to ontology:
 The ontology mapping process connects extracted terms to:
 - Gene Ontology (GO) for biological processes, cellular components, molecular functions
 - ChEBI for chemical entities
-- Disease Ontology (DOID) for diseases
+- Mondo Disease Ontology (MONDO) for diseases
 - Protein Ontology (PR) for proteins
 - Uberon for anatomical entities
 - Relation Ontology (RO) for relationship types
@@ -84,7 +86,7 @@ scientific_knowledge_extraction_agent = Agent(
 def test_agent():
     print("Scientific Knowledge Extraction Agent imported successfully")
     return scientific_knowledge_extraction_agent
-    
+
 # If this file is run directly, execute the test function
 if __name__ == "__main__":
     test_agent()
