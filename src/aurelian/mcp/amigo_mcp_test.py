@@ -5,7 +5,13 @@ import os
 import tempfile
 from typing import List, Optional, Dict
 
-from mcp import Client
+# try to import, don't die if import fails
+try:
+    from mcp import Client
+except ImportError:
+    print("mcp package not found. Please install it to run this test.")
+    Client = None
+
 from pydantic import BaseModel
 
 
@@ -59,7 +65,7 @@ async def test_amigo_mcp():
             print(f"First result: {tool_result[:200]}...")  # Just show first 200 chars
         except Exception as e:
             print(f"find_gene_associations failed (expected in test): {e}")
-    
+
     # Test PMID lookup
     lookup_pmid_tool = next((t for t in tool_choices if t["id"] == "lookup_pmid"), None)
     if lookup_pmid_tool:
@@ -71,7 +77,7 @@ async def test_amigo_mcp():
             print(f"First part of result: {tool_result[:200]}...")
         except Exception as e:
             print(f"lookup_pmid failed (expected in test): {e}")
-    
+
     await client.close()
 
 

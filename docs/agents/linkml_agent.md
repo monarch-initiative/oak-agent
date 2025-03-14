@@ -1,5 +1,7 @@
 # LinkML Agent
 
+::: aurelian.agents.linkml.linkml_agent
+
 The LinkML Agent assists with creating, validating, and working with LinkML schemas. It provides tools for schema development, validation, code generation, and data transformation using the LinkML (Linked Data Modeling Language) framework.
 
 ## Features

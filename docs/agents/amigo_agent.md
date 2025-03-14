@@ -1,5 +1,7 @@
 # AmiGO Agent
 
+::: aurelian.agents.amigo.amigo_agent
+
 The AmiGO Agent provides a natural language interface to the Gene Ontology (GO) through the AmiGO service. It helps users search for GO terms, retrieve information about genes and their functions, and explore relationships between biological processes, molecular functions, and cellular components.
 
 ## Features

@@ -1,5 +1,7 @@
 # Phenopacket Agent
 
+::: aurelian.agents.phenopackets.phenopackets_agent
+
 The Phenopacket Agent provides a natural language interface for working with GA4GH Phenopackets, a standard format for sharing disease and phenotype information for genomic medicine. It helps users create, analyze, and interpret phenopackets for rare disease diagnosis and research.
 
 ## Features

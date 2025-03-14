@@ -1,0 +1,1 @@
+"""Tests for the Scientific Knowledge Extraction Agent."""

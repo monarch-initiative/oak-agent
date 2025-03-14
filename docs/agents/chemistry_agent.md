@@ -1,5 +1,7 @@
 # Chemistry Agent
 
+::: aurelian.agents.chemistry.chemistry_agent
+
 The Chemistry Agent provides a natural language interface for working with chemical structures, reactions, and molecular properties. It can process SMILES strings, render chemical structures, calculate molecular properties, and assist with chemical analysis tasks.
 
 ## Features

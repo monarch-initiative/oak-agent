@@ -28,9 +28,19 @@ jobs:
           echo "$HOME/.local/bin" >> $GITHUB_PATH
           echo "export PATH=$HOME/.local/bin:$PATH" >> ~/.bashrc
 
+      - name: Install ROBOT CLI
+        run: |
+          wget https://github.com/ontodev/robot/releases/latest/download/robot.jar -O /usr/local/bin/robot.jar
+          echo '#!/bin/bash' | sudo tee /usr/local/bin/robot > /dev/null
+          echo 'exec java -jar /usr/local/bin/robot.jar "$@"' | sudo tee -a /usr/local/bin/robot > /dev/null
+          sudo chmod +x /usr/local/bin/robot
+
+      - name: Verify ROBOT Installation
+        run: robot --version
+
       - name: Install dependencies
         run: |
-          poetry install --no-interaction
+          poetry install --no-interaction --extras gradio
           poetry run pip uninstall -y numpy pandas
           poetry run pip install --no-cache-dir numpy pandas
           poetry run pip uninstall bioservices -y || true
@@ -38,5 +48,4 @@ jobs:
 
       - name: Run tests (excluding test_agents)
         run: |
-          poetry run pytest --maxfail=0 --continue-on-collection-errors || true
-
+          poetry run pytest

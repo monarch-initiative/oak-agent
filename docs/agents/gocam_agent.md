@@ -1,5 +1,7 @@
 # GO-CAM Agent
 
+::: aurelian.agents.gocam.gocam_agent
+
 The GO-CAM Agent assists with creating, editing, and understanding Gene Ontology Causal Activity Models (GO-CAMs). It provides tools for working with GO terms, genes, and modeling biological pathways using the GO-CAM framework.
 
 ## Features

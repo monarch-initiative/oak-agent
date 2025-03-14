@@ -5,7 +5,13 @@ import os
 import tempfile
 from typing import List, Optional, Dict
 
-from mcp import Client
+# try to import, don't die if import fails
+try:
+    from mcp import Client
+except ImportError:
+    print("mcp package not found. Please install it to run this test.")
+    Client = None
+
 from pydantic import BaseModel
 
 
@@ -57,7 +63,7 @@ async def test_gocam_mcp():
         tool_input_schema = await client.get_tool_input_schema(tool_id=list_files_tool["id"])
         tool_result = await client.execute_tool(tool_id=list_files_tool["id"], tool_input='{}')
         print(f"list_files result: {tool_result}")
-    
+
     # Create a test file
     write_file_tool = next((t for t in tool_choices if t["id"] == "write_to_file"), None)
     if write_file_tool:
@@ -65,12 +71,12 @@ async def test_gocam_mcp():
         tool_input = '{"file_name": "gocam_test.txt", "data": "This is a test file for GOCAM MCP"}'
         tool_result = await client.execute_tool(tool_id=write_file_tool["id"], tool_input=tool_input)
         print(f"write_to_file result: {tool_result}")
-    
+
     # Check if the file was created
     if list_files_tool:
         tool_result = await client.execute_tool(tool_id=list_files_tool["id"], tool_input='{}')
         print(f"list_files after writing: {tool_result}")
-    
+
     # Read the file
     inspect_file_tool = next((t for t in tool_choices if t["id"] == "inspect_file"), None)
     if inspect_file_tool:
@@ -78,7 +84,7 @@ async def test_gocam_mcp():
         tool_input = '{"data_file": "gocam_test.txt"}'
         tool_result = await client.execute_tool(tool_id=inspect_file_tool["id"], tool_input=tool_input)
         print(f"inspect_file result: {tool_result}")
-    
+
     # Try search function
     search_tool = next((t for t in tool_choices if t["id"] == "search_gocams"), None)
     if search_tool:
@@ -89,7 +95,7 @@ async def test_gocam_mcp():
             print(f"search_gocams result: {tool_result[:200]}...")  # Just show first 200 chars
         except Exception as e:
             print(f"search_gocams failed (expected in test): {e}")
-    
+
     await client.close()
 
 
