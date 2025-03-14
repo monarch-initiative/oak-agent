@@ -5,7 +5,6 @@ import os
 import hashlib
 import json
 from typing import Dict, List, Optional, Set
-from pathlib import Path
 
 from aurelian.dependencies.workdir import HasWorkdir
 
