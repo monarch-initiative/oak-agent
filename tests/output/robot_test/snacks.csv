@@ -1,0 +1,5 @@
+identifier,name,parent,main_ingredient
+ID,LABEL,SC %,SC 'main ingredient' some %
+SNK:0,snack,,
+SNK:1,chips,snack,potato
+SNK:2,potato,,

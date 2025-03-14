@@ -6,7 +6,7 @@ from typing import List, Dict, Optional
 from pydantic_ai import RunContext, ModelRetry
 
 from aurelian.agents.gocam.gocam_config import GOCAMDependencies
-from aurelian.agents.uniprot_agent import normalize_uniprot_id
+from aurelian.agents.uniprot.uniprot_tools import normalize_uniprot_id
 from aurelian.utils.data_utils import flatten
 from aurelian.agents.literature.literature_tools import search_literature_web, retrieve_literature_page
 
@@ -24,11 +24,11 @@ async def search_gocams(ctx: RunContext[GOCAMDependencies], query: str) -> List[
     This tool uses a retrieval method that is not guaranteed to always return
     complete results, and some results may be less relevant than others.
     You MAY use your judgment in filtering these.
-    
+
     Args:
         ctx: The run context
         query: The search query text
-        
+
     Returns:
         List[Dict]: List of GOCAM models matching the query
     """
@@ -41,10 +41,10 @@ async def search_gocams(ctx: RunContext[GOCAMDependencies], query: str) -> List[
             obj["relevancy_score"] = score
             objs.append(obj)
             print(f"RESULT: {obj}")
-            
+
         if not objs:
             raise ModelRetry(f"No GOCAM models found matching the query: {query}. Try a different search term.")
-            
+
         return objs
     except Exception as e:
         if "ModelRetry" in str(type(e)):
@@ -55,11 +55,11 @@ async def search_gocams(ctx: RunContext[GOCAMDependencies], query: str) -> List[
 async def lookup_gocam(ctx: RunContext[GOCAMDependencies], model_id: str) -> Dict:
     """
     Performs a lookup of a GO-CAM model by its ID, and returns the model.
-    
+
     Args:
         ctx: The run context
         model_id: The ID of the GO-CAM model to look up
-        
+
     Returns:
         Dict: The GO-CAM model data
     """
@@ -72,7 +72,7 @@ async def lookup_gocam(ctx: RunContext[GOCAMDependencies], model_id: str) -> Dic
                 model_id = f"gomodel:{parts[1]}"
         else:
             model_id = f"gomodel:{model_id}"
-            
+
         qr = ctx.deps.collection.find({"id": model_id})
         if not qr.rows:
             raise ModelRetry(f"Could not find GO-CAM model with ID {model_id}. The ID may be incorrect.")
@@ -93,7 +93,7 @@ async def lookup_uniprot_entry(ctx: RunContext[GOCAMDependencies], uniprot_acc: 
     Args:
         ctx: The run context
         uniprot_acc: The Uniprot accession
-        
+
     Returns:
         str: Detailed functional and other info about the protein
     """
@@ -102,10 +102,10 @@ async def lookup_uniprot_entry(ctx: RunContext[GOCAMDependencies], uniprot_acc: 
         normalized_acc = normalize_uniprot_id(uniprot_acc)
         uniprot_service = ctx.deps.get_uniprot_service()
         result = uniprot_service.retrieve(normalized_acc, frmt="txt")
-        
+
         if not result or "Error" in result or "Entry not found" in result:
             raise ModelRetry(f"Could not find UniProt entry for {uniprot_acc}. The accession may be incorrect.")
-            
+
         return result
     except Exception as e:
         if "ModelRetry" in str(type(e)):
@@ -113,6 +113,6 @@ async def lookup_uniprot_entry(ctx: RunContext[GOCAMDependencies], uniprot_acc: 
         raise ModelRetry(f"Error retrieving UniProt entry for {uniprot_acc}: {str(e)}")
 
 
-# These functions have been removed and replaced with direct use of 
+# These functions have been removed and replaced with direct use of
 # literature_lookup_pmid, search_literature_web, and retrieve_literature_page
 # from aurelian.agents.literature.literature_tools

@@ -22,7 +22,7 @@ def deps():
             Onset was in infancy.
             Return diagnosis with MONDO ID""",
             "MONDO:0008310",
-            "openai:o3-mini",
+            "openai:gpt-4o",
         ),
         ("All eye phenotypes for Marfan syndrome (include HPO IDs)", "HP:0000518", None),
     ],
