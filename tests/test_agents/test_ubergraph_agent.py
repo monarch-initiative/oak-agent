@@ -4,8 +4,7 @@ import os
 if os.getenv("GITHUB_ACTIONS") == "true":
     pytest.skip("Skipping in GitHub Actions", allow_module_level=True)
 
-from aurelian.agents.ubergraph_agent import Dependencies, ubergraph_agent
-
+from aurelian.agents.ubergraph.ubergraph_agent import Dependencies, ubergraph_agent
 
 @pytest.fixture
 def deps():
